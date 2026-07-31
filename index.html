@@ -6297,6 +6297,10 @@
       font-weight: 750;
     }
 
+    .pre-insight-head .ask-trigger {
+      margin-left: auto;
+    }
+
     .pre-insight-grid {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
@@ -6869,7 +6873,7 @@
             <div class="avatar">AI</div>
             <div class="owner-copy">
               <strong>策略增长团队</strong>
-              <span>内部原型环境</span>
+              <span>业务协作环境</span>
             </div>
           </div>
         </div>
@@ -7754,7 +7758,7 @@
                 </div>
                 <div class="case-chat-actions">
                   <button class="case-header-icon case-mobile-report" id="preOpenCaseReport" aria-label="查看促前渐进式报告">查看报告</button>
-                  <button class="case-header-icon" id="preBackToDashboard" aria-label="回到促中调优工作台">←</button>
+                  <button class="case-header-icon" id="preBackToDashboard" aria-label="回到促前规划工作台">←</button>
                 </div>
               </header>
 
@@ -8002,7 +8006,7 @@
       id: "CMP_26M06_A",
       title: "促前券档位设计",
       question: "请结合历史复盘、近期大盘水位、类目需求、实验钱效和竞对变化，设计 3+X / 4+X 券档、人群、渠道、发放节奏与预算方案。",
-      mockLabel: "脱敏 Mock，仅用于原型演示",
+      mockLabel: "数据已脱敏",
       profile: {
         campaignId: "CMP_26M06_A",
         siteCode: "SITE_****",
@@ -8012,13 +8016,13 @@
         budgetCap: 12800,
         cacCap: 20,
         subsidyCap: 50,
-        confidentiality: "L4-MOCK"
+        confidentiality: "L4"
       },
       sources: [
-        { label: "近期大盘水位", detail: "ECOP Mock · 近 20 天", type: "ECOP Mock" },
-        { label: "历史领取核销", detail: "历史复盘 Mock · 人群/渠道/面额", type: "历史复盘 Mock" },
-        { label: "券组实验", detail: "EXP_G01—G03 · 脱敏快照", type: "ECOP Mock" },
-        { label: "竞对档位", detail: "竞对调研 Mock · A/B/C", type: "竞对调研 Mock" },
+        { label: "近期大盘水位", detail: "ECOP · 近 20 天", type: "ECOP" },
+        { label: "历史领取核销", detail: "历史复盘 · 人群/渠道/面额", type: "历史复盘" },
+        { label: "券组实验", detail: "EXP_G01—G03 · 脱敏数据", type: "ECOP" },
+        { label: "竞对档位", detail: "竞对调研 · A/B/C", type: "竞对调研" },
         { label: "目标与预算上限", detail: "用户输入 · 可调整", type: "用户输入" },
         { label: "优先级与方案推荐", detail: "指标规则计算", type: "AI 推导" }
       ],
@@ -8118,7 +8122,7 @@
         { role: "策略角色", item: "券档、人群、渠道、节奏与活动立项确认", status: "待确认" },
         { role: "财务角色", item: "主预算申请、专项子预算和结算率确认", status: "待确认" },
         { role: "业务角色", item: "类目目标与资源位确认", status: "待确认" },
-        { role: "安全角色", item: "L4-MOCK 同步范围与保密协议签署确认", status: "待确认" }
+        { role: "安全角色", item: "L4 同步范围与保密协议签署确认", status: "待确认" }
       ],
       questions: {
         goal: ["为什么先确认 ROI 下限？", "预算上限变化会影响哪些步骤？", "当前还缺哪些业务输入？"],
@@ -8130,13 +8134,13 @@
         governance: ["还缺哪些团队确认？", "专项子预算为什么单独申请？", "生成待审批策略包"]
       },
       answers: {
-        goal: "目标门禁避免在预算、ROI 和治理边界不清时过早定档。当前 Mock 约束为预算上限 1.28 亿、ROI 下限 6.2、CAC 上限 20 元、人均补贴上限 50 元。",
+        goal: "目标门禁避免在预算、ROI 和治理边界不清时过早定档。当前约束为预算上限 1.28 亿、ROI 下限 6.2、CAC 上限 20 元、人均补贴上限 50 元。",
         baseline: "近 20 天 GMV 为 93.6 亿，同比 +7.8%；DAC 为 2,860 万，同比 +7.1%；客单仅 +0.6%。因此增长约 88% 由支付用户规模贡献，促前应优先扩大有效 DAC，而不是普遍抬高高门槛券。",
         category: "数码家电历史活动日均 GMV 放大到 162，DAC +48%、客单 +9.5%，并贡献 31% 增量，因此列为 S 级；其高客单结构适合 1500-180 / 3000-420 与搜索渠道 X 券。",
         funnel: "1500-180 和 3000-420 的领取后核销率仅 26.6% / 21.0%，ROI 为 5.2 / 4.4，低于 300-40 的 44.0% 与 6.4。问题是门槛适配而非单纯触达，应限制泛发并绑定高客单类目与高意向人群。",
         experiment: "EXP_G03 的人均 GMV 69.1 元、增量 GMV 5,390 万、ROI 6.65，且 p=0.009。竞对 A/B/C 仅作为压力信号，不能替代自身类目需求和实验钱效。",
         plan: "B-4+X 申请预算 1.15 亿、结算率 88%、结算预算 1.012 亿、增量 GMV 6.60 亿、ROI 6.52，在高于 6.2 下限的同时兼顾规模和预算弹性。",
-        governance: "策略、财务、业务、安全四类角色需完成确认；专项 X 投放单列子预算；核心策略仅在 L4-MOCK 范围同步并记录保密协议状态。"
+        governance: "策略、财务、业务、安全四类角色需完成确认；专项 X 投放单列子预算；核心策略仅在 L4 范围同步并记录保密协议状态。"
       }
     };
 
@@ -8285,7 +8289,7 @@
       },
       drills: {
         audience: {
-          context: "领取时间 06.01—06.18 · 主端 + 独立端 · 脱敏 Mock",
+          context: "领取时间 06.01—06.18 · 主端 + 独立端",
           headers: ["人群", "发放 UV", "领取率", "领后核销", "增量 GMV", "ROI", "预算占比", "本期动作"],
           rows: [
             ["高价值高潜", "920 万", "77.0%", "50.0%", "3.12 亿", "6.9", "26%", "优先放量"],
@@ -8296,7 +8300,7 @@
           summary: "<strong>人群结论：</strong>高价值/中价值高潜贡献主要增量；新用户保留低门槛拉新，低价值低潜停止高门槛泛发。"
         },
         channel: {
-          context: "场域分析 · 领券资源位聚合 · 脱敏 Mock",
+          context: "场域分析 · 领券资源位聚合",
           headers: ["场域", "发放 UV", "领取率", "领后核销", "增量 GMV", "ROI", "预算占比", "本期动作"],
           rows: [
             ["活动会场", "2,100 万", "74.0%", "44.0%", "3.68 亿", "6.6", "31%", "核心承接"],
@@ -8308,7 +8312,7 @@
           summary: "<strong>场域结论：</strong>会场负责规模、搜索负责高意图钱效、商城券包保持稳定承接；Push 改为高潜召回，独立端仅保留实验流量。"
         },
         tier: {
-          context: "券属性分析 · 固定档 + X 定向档 · 脱敏 Mock",
+          context: "券属性分析 · 固定档 + X 定向档",
           headers: ["券档", "发放 UV", "领取率", "领后核销", "增量 GMV", "ROI", "预算占比", "本期动作"],
           rows: [
             ["300-40", "2,400 万", "70.0%", "44.0%", "4.08 亿", "6.4", "28%", "普惠承接"],
@@ -8665,6 +8669,9 @@
       });
       preDashboard.classList.toggle("is-hidden", activeDashboardMode !== "pre");
       dashboard.classList.toggle("is-hidden", activeDashboardMode !== "mid");
+      document.title = activeDashboardMode === "pre"
+        ? "消费券策略调优 Agent · 促前规划"
+        : "消费券策略调优 Agent · 促中盯盘";
       if (activeDashboardMode === "pre") preRenderPlanningDashboard();
       if (announce) showToast(activeDashboardMode === "pre" ? "已切换至促前规划工作台" : "已回到促中调优工作台");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -9643,7 +9650,6 @@
                   { id: "edit-question", label: "修改问题" }
                 ]
               });
-              addCaseMessage(createCaseMessage("system", "system", "本案例仅生成分析与灰度候选，不读取实时预算，也不执行真实发券或人群配置。"));
               updateComposerState();
             };
             setTimeout(revealNextStep, DEMO_TIMING.introStep);
@@ -9910,7 +9916,7 @@
           <div class="report-cover-eyebrow">Mid-campaign strategy report</div>
           <h2>${escapeHTML(budgetCaseState.reportTitle)}</h2>
           <p>最后一波次 X 覆盖人群决策 · 累计两天案例数据</p>
-          <div class="report-meta"><span>${completeCount} / 6 章节完成</span><span>只读分析</span><span>未触发真实配置</span></div>
+          <div class="report-meta"><span>${completeCount} / 6 章节完成</span><span>累计两天案例数据</span></div>
         </header>${sections}`;
       reportCanvasWrap.scrollTop = previousScrollTop;
     }
@@ -10456,7 +10462,7 @@
               "assistant",
               "text",
               `<p>我已完成需求拆解。促前券档不能直接从面额开始，需要沿着<strong>目标约束 → 大盘水位 → 类目爆发 → 历史核销 → 实验与竞对 → 方案预算 → 治理审批</strong>逐步收敛。</p>
-               <div class="message-callout">已定位 ECOP 风格脱敏 Mock：活动 <b>${preCaseData.profile.campaignId}</b>、站点 <b>${preCaseData.profile.siteCode}</b>。所有金额按统一比例缩放，竞对和角色均使用别名。</div>`,
+               <div class="message-callout">数据口径：活动 <b>${preCaseData.profile.campaignId}</b>、站点 <b>${preCaseData.profile.siteCode}</b>；数据已脱敏，正式决策前需复核 ECOP 与财务口径。</div>`,
               [],
               "goal"
             ));
@@ -10479,7 +10485,6 @@
                   { id: "ask-pre-goal", label: "追问数据口径" }
                 ]
               });
-              preAddMessage(preCreateMessage("system", "system", `${preCaseData.mockLabel}；不读取真实线上数据，不提交预算、立项或策略配置。`));
               preUpdateComposer();
             };
             setTimeout(revealNextStep, DEMO_TIMING.introStep);
@@ -10524,7 +10529,7 @@
       if (message.type === "artifact" && preCaseState.artifact) {
         body = `<p>待审批策略包和七章 HTML 报告已生成，可在右侧预览或下载。</p>
           <div class="artifact-card">
-            <div class="artifact-main"><span class="artifact-icon">HTML</span><div class="artifact-copy"><strong>${escapeHTML(preCaseState.artifact.name)}</strong><span>${escapeHTML(preCaseState.artifact.sizeLabel)} · 脱敏 Mock · ${escapeHTML(preCaseState.artifact.createdAt)}</span></div></div>
+            <div class="artifact-main"><span class="artifact-icon">HTML</span><div class="artifact-copy"><strong>${escapeHTML(preCaseState.artifact.name)}</strong><span>${escapeHTML(preCaseState.artifact.sizeLabel)} · 数据已脱敏 · ${escapeHTML(preCaseState.artifact.createdAt)}</span></div></div>
             <div class="artifact-actions"><button data-pre-action="view-pre-artifact">查看报告</button><button data-pre-action="download-pre-artifact">下载</button></div>
           </div>`;
       }
@@ -10596,7 +10601,7 @@
       preCaseComposerSend.disabled = preCaseState.isResponding;
       preCaseComposerStatus.textContent = preCaseState.introStatus === "thinking"
         ? "Agent 正在理解需求并编排执行步骤…"
-        : preCaseState.isResponding ? "Agent 正在分析脱敏 Mock 数据…" : "Enter 发送 · Shift+Enter 换行";
+        : preCaseState.isResponding ? "Agent 正在分析数据…" : "Enter 发送 · Shift+Enter 换行";
     }
 
     function preAutoResizeComposer() {
@@ -10623,7 +10628,7 @@
         </button></li>`).join("");
     }
 
-    function preRenderInsight(title, conclusion, evidence, mechanism, limitation, next) {
+    function preRenderInsight(title, conclusion, evidence, mechanism, limitation, next, type) {
       const items = [
         ["结论", conclusion],
         ["证据", evidence],
@@ -10631,7 +10636,10 @@
         ["限制", limitation],
         ["下一步", next]
       ];
-      return `<aside class="pre-insight"><div class="pre-insight-head"><span class="spark">AI</span>${escapeHTML(title)}</div>
+      return `<aside class="pre-insight" data-ai-context="${escapeHTML(type)}" data-context-summary="${escapeHTML(title)}">
+        <div class="pre-insight-head"><span class="spark">AI</span>${escapeHTML(title)}
+          <button class="ask-trigger" data-pre-ask-type="${escapeHTML(type)}" data-ask-context="${escapeHTML(title)}" data-ask-summary="${escapeHTML(conclusion)}">✦ 追问</button>
+        </div>
         <div class="pre-insight-grid">${items.map(([label, value]) => `<div class="pre-insight-item"><b>${label}</b><span>${value}</span></div>`).join("")}</div>
       </aside>`;
     }
@@ -10640,14 +10648,14 @@
       const profile = [
         ["活动 ID", preCaseData.profile.campaignId],
         ["站点", preCaseData.profile.siteCode],
-        ["演示周期", preCaseData.profile.period],
+        ["分析周期", preCaseData.profile.period],
         ["核心目标", preCaseData.profile.target],
         ["ROI 下限", preCaseData.profile.roiFloor],
         ["CAC 上限", `¥${preCaseData.profile.cacCap}`],
         ["人均补贴上限", `¥${preCaseData.profile.subsidyCap}`],
         ["保密等级", preCaseData.profile.confidentiality]
       ];
-      return `<div class="pre-mock-banner"><b>MOCK</b>${preCaseData.mockLabel}。金额按统一比例缩放，日期整体平移，无法反推真实主体与内部值。</div>
+      return `<div class="pre-mock-banner"><b>数据口径</b>数据已脱敏；金额按统一比例缩放、日期整体平移，正式决策前需回读业务口径。</div>
         <div class="pre-profile-grid">${profile.map(([label, value]) => `<div class="pre-profile-cell"><span>${label}</span><strong>${escapeHTML(value)}</strong></div>`).join("")}</div>
         <div class="pre-budget-editor">
           <label for="preBudgetCapInput">预算申请上限</label>
@@ -10663,8 +10671,9 @@
           "先锁定增长目标、钱效底线、预算上限和治理范围，再进入券档设计。",
           `目标增量 GMV 7.5 亿；预算上限 ${(preCaseState.budgetCap / 10000).toFixed(2)} 亿；ROI ≥ 6.2；CAC ≤ ¥20；人均补贴 ≤ ¥50。`,
           "约束门禁决定候选方案可行域，避免先定券档再被预算或安全规则推翻。",
-          "当前均为缩放后的脱敏 Mock，真实申请前必须回读 ECOP 和财务口径。",
-          "确认计划后先判断活动前 20 天自然水位。"
+          "当前数据已脱敏，正式申请前必须回读 ECOP 和财务口径。",
+          "确认计划后先判断活动前 20 天自然水位。",
+          "goal"
         )}`;
     }
 
@@ -10676,8 +10685,9 @@
           "近期自然水位高于去年同期，但增长主要来自 DAC 扩大。",
           "GMV 93.6 亿，同比 +7.8%；DAC +7.1%；客单仅 +0.6%。",
           "DAC 贡献约 88%，订单量与 DAC 同向；客单不是主要矛盾。",
-          "当前为统一缩放后的 Mock 快照，需在真实立项前复核口径。",
-          "识别历史活动期中需求放大最强的类目。"
+          "当前数据按统一口径缩放，正式立项前需复核。",
+          "识别历史活动期中需求放大最强的类目。",
+          "baseline"
         )}`;
     }
 
@@ -10692,8 +10702,9 @@
           "数码家电与食品生鲜列为 S 级，但发券逻辑不同。",
           "数码家电指数 162、贡献 31%；食品生鲜指数 145、贡献 24%。",
           "前者由高客单与 DAC 双拉动，后者以高频刚需 DAC 扩大为主。",
-          "类目指数来自历史活动 Mock，不能直接替代本期实时需求。",
-          "复盘面额、人群与渠道是否能承接这些需求。"
+          "类目指数来自历史活动，不能直接替代本期实时需求。",
+          "复盘面额、人群与渠道是否能承接这些需求。",
+          "category"
         )}`;
     }
 
@@ -10713,7 +10724,8 @@
           "300-40 领后核销 44%、ROI 6.4；X 券 47%、6.8；3000-420 仅 21%、4.4。",
           "高门槛券的主要问题是需求与人群不匹配，而非单纯曝光不足。",
           "历史核销受活动强度和入口变化影响，需结合实验验证。",
-          "合并券组实验和竞对压力，验证 4+X 分层。"
+          "合并券组实验和竞对压力，验证 4+X 分层。",
+          "funnel"
         )}`;
     }
 
@@ -10727,7 +10739,8 @@
           "EXP_G03 人均 GMV ¥69.1、增量 5,390 万、ROI 6.65、p=0.009。",
           "类目 × 高潜分层减少自然转化污染，同时保留高客单需求承接。",
           "竞对折扣深度已脱敏，不能据此机械跟随。",
-          "生成三套 3+X / 4+X 方案并测算结算预算。"
+          "生成三套 3+X / 4+X 方案并测算结算预算。",
+          "experiment"
         )}`;
     }
 
@@ -10755,7 +10768,8 @@
           "B 申请 1.15 亿，结算率 88%，结算预算 1.012 亿，增量 6.60 亿，ROI 6.52。",
           "4 个固定档承接普惠与高客单需求，X 券按类目 × 人群 × 渠道弹性分配。",
           "结算率和类目需求仍需日级校准，C 方案准备金压力更大。",
-          "完成多团队确认、预算申请、立项与保密治理。"
+          "完成多团队确认、预算申请、立项与保密治理。",
+          "plan"
         )}`;
     }
 
@@ -10765,14 +10779,15 @@
         return `<div class="pre-governance-item ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.role}</strong><span>${item.item}</span></div><button data-pre-confirm-role="${index}" ${confirmed ? "disabled" : ""}>${confirmed ? "已确认" : "标记确认"}</button></div>`;
       }).join("");
       const final = preCaseState.packageGenerated ? `<div class="pre-final"><h3>推荐：B-4+X 均衡增长 · 待审批策略包</h3><p>固定档：300-40 / 600-80 / 1500-180 / 3000-420；X 券按 S/A 类目 × 高潜人群 × 搜索/会场定向。主预算、专项子预算和风险准备金已拆分，状态仅为待审批。</p></div>` : "";
-      return `<div class="pre-mock-banner"><b>L4-MOCK</b>核心策略仅在角色范围内同步；保密协议状态为脱敏演示字段。</div><div class="pre-governance-list">${items}</div>${final}
+      return `<div class="pre-mock-banner"><b>L4</b>核心策略仅在角色范围内同步，并记录保密协议状态。</div><div class="pre-governance-list">${items}</div>${final}
         ${preRenderInsight(
           "治理与落地洞察",
-          "策略包必须在四类角色确认后进入待审批，不执行真实配置。",
+          "策略包必须在四类角色确认后进入待审批。",
           `当前已确认 ${preCaseState.governanceConfirmed.size} / ${preCaseData.governance.length}；专项 X 投放单列子预算。`,
           "预算申请、立项、资源位和保密范围必须同步闭环，避免策略先行、治理滞后。",
-          "当前仅为原型审计状态，不代表任何真实审批完成。",
-          "完成全部确认后生成自包含 HTML 策略包。"
+          "待审批状态不代表真实审批已经完成。",
+          "完成全部确认后生成自包含 HTML 策略包。",
+          "governance"
         )}`;
     }
 
@@ -10812,13 +10827,13 @@
         }
         let content = "";
         if (["complete", "needs-input"].includes(section.status)) content = preSectionContent(section.id);
-        else if (section.status === "generating") content = `<div class="report-placeholder generating"><div><i></i>正在读取脱敏 Mock 数据并生成本章节…</div></div>`;
+        else if (section.status === "generating") content = `<div class="report-placeholder generating"><div><i></i>正在读取数据并生成本章节…</div></div>`;
         else if (section.status === "queued") content = `<div class="report-placeholder">章节已进入队列，等待数据计算。</div>`;
         const isEntering = !renderedPreReportSectionIds.has(section.id);
         renderedPreReportSectionIds.add(section.id);
         return `<section class="report-section${isEntering ? " is-entering" : ""}" id="pre-report-section-${section.id}"><div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-pre-hide-section="${section.id}" aria-label="从促前报告中隐藏${escapeHTML(section.title)}">×</button></div><p class="report-section-lead">${leads[section.id]}</p>${content}</section>`;
       }).join("");
-      preReportDocument.innerHTML = `<header class="report-cover"><div class="report-cover-eyebrow">Pre-campaign strategy report · anonymized mock</div><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignId} · ${preCaseData.profile.period} · ${preCaseData.mockLabel}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>${preCaseData.profile.siteCode}</span><span>${total} 步分析</span><span>未触发真实配置</span></div></header>${sections}`;
+      preReportDocument.innerHTML = `<header class="report-cover"><div class="report-cover-eyebrow">Pre-campaign strategy report</div><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignId} · ${preCaseData.profile.period}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>${preCaseData.profile.siteCode}</span><span>${total} 步分析</span></div></header>${sections}`;
       preReportCanvasWrap.scrollTop = previousScrollTop;
     }
 
@@ -11493,7 +11508,7 @@
 
       if (type === "case-adopt") {
         modalTitle.textContent = "确认灰度候选";
-        modalBody.innerHTML = '<div class="risk">本 Demo 只记录候选决策与审计状态，不会调用线上发券、预算或人群配置接口。真实执行仍需业务 Owner、预算审批、灰度对照与止损监控。</div>';
+        modalBody.innerHTML = '<div class="risk">该操作只记录候选决策与审计状态，不会调用线上发券、预算或人群配置接口。真实执行仍需业务 Owner、预算审批、灰度对照与止损监控。</div>';
         modalActions.append(
           actionButton("取消", "ghost", closeModal),
           actionButton("确认记录为待审批", "primary", () => {
@@ -11508,7 +11523,7 @@
         );
       } else if (type === "adopt") {
         modalTitle.textContent = "写入灰度候选";
-        modalBody.innerHTML = '<div class="risk">本 Demo 仅模拟“采纳”并生成审计记录；不会调用线上发券、预算或人群配置接口。真实执行仍需业务 Owner、预算审批与灰度验证。</div>';
+        modalBody.innerHTML = '<div class="risk">该操作仅记录“采纳”状态并生成审计记录，不会调用线上发券、预算或人群配置接口。真实执行仍需业务 Owner、预算审批与灰度验证。</div>';
         modalActions.append(
           actionButton("取消", "ghost", closeModal),
           actionButton("确认写入候选", "primary", () => {
@@ -11609,7 +11624,7 @@
       newChatComposerInput.focus();
     });
     document.getElementById("newChatComposerAttach").addEventListener("click", () => {
-      showToast("原型不上传真实附件，请在输入框补充脱敏数据口径");
+      showToast("当前暂不支持上传附件，请在输入框补充数据口径");
     });
 
     document.getElementById("modalClose").addEventListener("click", closeModal);
@@ -11806,7 +11821,7 @@
       preAutoResizeComposer();
       preCaseComposerInput.focus();
     });
-    document.getElementById("preCaseComposerAttach").addEventListener("click", () => showToast("原型不上传真实附件，可在输入框补充脱敏口径"));
+    document.getElementById("preCaseComposerAttach").addEventListener("click", () => showToast("当前暂不支持上传附件，可在输入框补充数据口径"));
 
     preReportQueueList.addEventListener("click", event => {
       const item = event.target.closest("[data-pre-report-section]");
@@ -11842,7 +11857,7 @@
         }
         preCaseState.budgetCap = Math.round(value);
         preRenderWorkspace();
-        preAddMessage(preCreateMessage("assistant", "insight", `<p>预算申请上限已更新为 ${preCaseState.budgetCap.toLocaleString()} 万元。候选方案仍按脱敏 Mock 比例测算，真实申请前需重新拉取财务口径。</p>`, [], "goal"));
+        preAddMessage(preCreateMessage("assistant", "insight", `<p>预算申请上限已更新为 ${preCaseState.budgetCap.toLocaleString()} 万元。候选方案已按当前脱敏口径更新，正式申请前需重新拉取财务口径。</p>`, [], "goal"));
         return;
       }
       if (event.target.closest("[data-pre-toggle-category]")) {
@@ -11969,7 +11984,7 @@
       autoResizeComposer();
       caseComposerInput.focus();
     });
-    document.getElementById("caseComposerAttach").addEventListener("click", () => showToast("Demo 模式不上传真实附件，可在输入框补充数据口径"));
+    document.getElementById("caseComposerAttach").addEventListener("click", () => showToast("当前暂不支持上传附件，可在输入框补充数据口径"));
 
     reportQueueList.addEventListener("click", event => {
       const item = event.target.closest("[data-report-section]");
