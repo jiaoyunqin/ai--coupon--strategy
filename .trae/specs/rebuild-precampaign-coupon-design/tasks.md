@@ -103,3 +103,13 @@
 - Task 12 depends on Task 11.
 - Task 13 depends on Task 11 and Task 12.
 - Task 14 depends on Task 11 through Task 13.
+
+- [ ] Task 15: 修复参考促算法、洞察重算与旧首页残留。
+  - [ ] SubTask 15.1: 前序四次算法纳入所选活动之前的全部已结束活动，不因活动日历分组遗漏。
+  - [ ] SubTask 15.2: 参考促增删后重算样本覆盖、证据指标和 AI 小结，不只更新样本数量。
+  - [ ] SubTask 15.3: 补齐类目客单、完整券档趋势、持续期波次、回流人群和竞对具体券档信息。
+  - [ ] SubTask 15.4: 删除 `#preDashboardLegacy` 及仅服务旧默认首页的样式、数据和事件引用。
+  - [ ] SubTask 15.5: 消除 `coverageResult`、`finalDecision` 静态重复 ID，同时保持促中运行时行为不变。
+  - [ ] SubTask 15.6: 重新执行 Task 14 全量静态与浏览器验收。
+
+- Task 15 depends on Task 11 through Task 13.

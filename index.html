@@ -893,23 +893,6 @@
       margin-top: 4px;
     }
 
-    .mid-wave-status {
-      padding: 5px 8px;
-      border: 1px solid #ecd29f;
-      border-radius: 999px;
-      color: #9b681d;
-      background: #fff8e9;
-      font-size: 8px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .mid-wave-status.ready {
-      color: #287b63;
-      border-color: #b9dfd2;
-      background: #edf9f5;
-    }
-
     .mid-wave-plan-tabs {
       padding: 3px;
       border-radius: 8px;
@@ -1125,8 +1108,7 @@
     }
 
     .mid-wave-channel-list,
-    .mid-wave-experiment-list,
-    .mid-wave-check-list {
+    .mid-wave-experiment-list {
       display: grid;
       gap: 7px;
     }
@@ -1136,8 +1118,7 @@
     }
 
     .mid-wave-channel-row,
-    .mid-wave-experiment-arm,
-    .mid-wave-check-item {
+    .mid-wave-experiment-arm {
       display: grid;
       align-items: center;
       gap: 9px;
@@ -1153,15 +1134,13 @@
     }
 
     .mid-wave-channel-row b,
-    .mid-wave-experiment-arm b,
-    .mid-wave-check-item strong {
+    .mid-wave-experiment-arm b {
       color: #424c5e;
       font-size: 9px;
     }
 
     .mid-wave-channel-row span,
-    .mid-wave-experiment-arm span,
-    .mid-wave-check-item span {
+    .mid-wave-experiment-arm span {
       color: #818a99;
       font-size: 8px;
       line-height: 1.45;
@@ -1205,8 +1184,7 @@
       margin-top: 9px;
     }
 
-    .mid-wave-matrix-panel,
-    .mid-wave-check-panel {
+    .mid-wave-matrix-panel {
       margin-top: 11px;
     }
 
@@ -1253,138 +1231,6 @@
       background: #f9edef;
     }
 
-    .mid-wave-check-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
-      gap: 11px;
-    }
-
-    .mid-wave-check-item {
-      grid-template-columns: 24px minmax(0, 1fr) auto;
-    }
-
-    .mid-wave-check-icon {
-      display: grid;
-      width: 24px;
-      height: 24px;
-      place-items: center;
-      border-radius: 6px;
-      color: #a76822;
-      background: #fff1dd;
-      font-size: 9px;
-      font-style: normal;
-      font-weight: 800;
-    }
-
-    .mid-wave-check-item.pass .mid-wave-check-icon {
-      color: #fff;
-      background: #3eac88;
-    }
-
-    .mid-wave-check-item button {
-      min-height: 27px;
-      padding: 0 8px;
-      border: 1px solid #d7dce5;
-      border-radius: 6px;
-      color: #566478;
-      background: #fff;
-      font-size: 8px;
-    }
-
-    .mid-wave-check-item.pass button {
-      color: #39866e;
-      border-color: transparent;
-      background: transparent;
-      pointer-events: none;
-    }
-
-    .mid-wave-gate {
-      display: flex;
-      min-height: 100%;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 14px;
-      border: 1px solid #d9e1ef;
-      border-radius: 9px;
-      background: linear-gradient(145deg, #f6f8fd, #fff);
-    }
-
-    .mid-wave-readiness {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr);
-      gap: 10px;
-      align-items: center;
-    }
-
-    .mid-wave-readiness strong {
-      color: #30447b;
-      font-size: 26px;
-    }
-
-    .mid-wave-readiness b,
-    .mid-wave-readiness span {
-      display: block;
-    }
-
-    .mid-wave-readiness b {
-      color: #465269;
-      font-size: 9px;
-    }
-
-    .mid-wave-readiness span {
-      margin-top: 3px;
-      color: #8d95a4;
-      font-size: 8px;
-      line-height: 1.45;
-    }
-
-    .mid-wave-readiness-track {
-      height: 6px;
-      margin-top: 12px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #e3e7ef;
-    }
-
-    .mid-wave-readiness-track i {
-      display: block;
-      height: 100%;
-      border-radius: inherit;
-      background: linear-gradient(90deg, #5874dc, #3db28d);
-      transition: width .28s ease;
-    }
-
-    .mid-wave-gate-note {
-      margin: 12px 0;
-      padding: 9px 10px;
-      border-left: 3px solid #d99a3e;
-      color: #76674e;
-      background: #fff8eb;
-      font-size: 8px;
-      line-height: 1.55;
-    }
-
-    .mid-wave-gate .primary {
-      width: 100%;
-      min-height: 36px;
-    }
-
-    .mid-wave-audit-banner {
-      display: none;
-      margin-top: 10px;
-      padding: 10px 12px;
-      border: 1px solid #a9ddcb;
-      border-radius: 7px;
-      color: #26765f;
-      background: #eaf8f3;
-      font-size: 9px;
-      font-weight: 650;
-    }
-
-    .mid-wave-audit-banner.show {
-      display: block;
-    }
-
     @media (max-width: 1440px) {
       .mid-wave-summary {
         grid-template-columns: 112px minmax(0, 1fr);
@@ -1396,8 +1242,7 @@
         border-left: 0;
       }
 
-      .mid-wave-content-grid,
-      .mid-wave-check-layout {
+      .mid-wave-content-grid {
         grid-template-columns: 1fr;
       }
 
@@ -3798,132 +3643,248 @@
       line-height: 1.6;
     }
 
-    .pre-calendar-grid {
+    .pre-calendar-bar {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 9px;
+      grid-template-columns: minmax(260px, .72fr) minmax(0, 1.28fr);
+      gap: 12px;
+      align-items: stretch;
       padding: 0 22px 22px;
     }
 
-    .pre-activity-card {
-      display: grid;
-      min-height: 120px;
-      grid-template-columns: 42px minmax(0, 1fr);
-      gap: 11px;
-      padding: 13px;
+    .pre-calendar-select {
+      display: flex;
+      min-width: 0;
+      min-height: 72px;
+      flex-direction: column;
+      justify-content: center;
+      gap: 7px;
+      padding: 12px 14px;
       border: 1px solid #e2e6ed;
       border-radius: 9px;
-      color: #4f5b70;
-      background: #fbfcfd;
-      text-align: left;
-      transition: border-color .18s, background .18s, transform .18s;
+      background: #fbfcfe;
     }
 
-    .pre-activity-card:hover,
-    .pre-activity-card.active {
-      border-color: #91a5df;
-      background: #f5f7ff;
-      transform: translateY(-2px);
+    .pre-calendar-select > span {
+      color: #7c8799;
+      font-size: 8px;
+      font-weight: 720;
+      letter-spacing: .08em;
+      text-transform: uppercase;
     }
 
-    .pre-activity-date {
-      display: grid;
-      width: 42px;
-      height: 48px;
-      align-content: center;
-      border-radius: 8px;
-      color: #fff;
-      background: #4563c3;
-      text-align: center;
-    }
-
-    .pre-activity-date b,
-    .pre-activity-date span {
-      display: block;
-    }
-
-    .pre-activity-date b {
-      font-size: 15px;
-    }
-
-    .pre-activity-date span {
-      margin-top: 1px;
-      font-size: 7px;
-      opacity: .82;
-    }
-
-    .pre-activity-copy strong,
-    .pre-activity-copy span,
-    .pre-activity-copy em {
-      display: block;
-    }
-
-    .pre-activity-copy strong {
-      color: #364157;
+    .pre-calendar-select select,
+    .pre-reference-add select {
+      min-width: 0;
+      height: 34px;
+      padding: 0 34px 0 10px;
+      border: 1px solid #d7deea;
+      border-radius: 7px;
+      outline: 0;
+      color: #354159;
+      background: #fff;
       font-size: 10px;
     }
 
-    .pre-activity-copy span {
-      margin-top: 5px;
-      color: #8a93a2;
-      font-size: 8px;
-    }
-
-    .pre-activity-copy em {
-      margin-top: 10px;
-      color: #2d8067;
-      font-size: 7px;
-      font-style: normal;
+    .pre-calendar-select select:focus-visible,
+    .pre-reference-add select:focus-visible {
+      border-color: #728bd1;
+      box-shadow: 0 0 0 3px rgba(70, 99, 195, .12);
     }
 
     .pre-current-activity {
-      align-self: center;
-      padding: 8px 10px;
+      display: grid;
+      min-width: 0;
+      grid-template-columns: minmax(130px, 1.25fr) repeat(3, minmax(82px, .55fr));
+      align-items: center;
+      gap: 7px;
+      padding: 11px 12px;
+      border: 1px solid #dfe4ec;
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .pre-activity-summary-main,
+    .pre-activity-summary-fact {
+      min-width: 0;
+    }
+
+    .pre-activity-summary-main strong,
+    .pre-activity-summary-main span,
+    .pre-activity-summary-fact b,
+    .pre-activity-summary-fact span {
+      display: block;
+    }
+
+    .pre-activity-summary-main strong {
+      overflow: hidden;
+      color: #2f3b52;
+      font-size: 12px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pre-activity-summary-main span {
+      margin-top: 5px;
+      color: #8791a2;
+      font-size: 8px;
+    }
+
+    .pre-activity-summary-fact {
+      padding-left: 9px;
+      border-left: 1px solid #edf0f4;
+    }
+
+    .pre-activity-summary-fact b {
+      overflow: hidden;
+      color: #46536a;
+      font-size: 9px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pre-activity-summary-fact span {
+      margin-top: 4px;
+      color: #969eab;
+      font-size: 7px;
+    }
+
+    .pre-reference-count {
+      flex: 0 0 auto;
+      padding: 7px 9px;
+      border: 1px solid #dce3ef;
       border-radius: 7px;
-      color: #657187;
-      background: #f3f5f8;
+      color: #4f629b;
+      background: #f5f7fc;
       font-size: 8px;
       white-space: nowrap;
     }
 
-    .pre-promo-types {
+    .pre-reference-body {
       display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 9px;
+      gap: 11px;
       padding: 0 22px 22px;
     }
 
-    .pre-promo-type {
-      min-height: 72px;
-      padding: 12px;
-      border: 1px solid #e3e7ee;
+    .pre-reference-tags {
+      display: flex;
+      min-height: 42px;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .pre-reference-tag {
+      display: inline-flex;
+      max-width: 100%;
+      min-height: 31px;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 6px 5px 9px;
+      border: 1px solid #dee4ed;
+      border-radius: 7px;
+      color: #4d586d;
+      background: #fafbfd;
+    }
+
+    .pre-reference-tag > b {
+      overflow: hidden;
+      max-width: 180px;
+      font-size: 8px;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pre-reference-tag > span {
+      padding: 3px 5px;
+      border-radius: 4px;
+      color: #6073aa;
+      background: #edf1fb;
+      font-size: 7px;
+      white-space: nowrap;
+    }
+
+    .pre-reference-tag button {
+      display: grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      border: 0;
+      border-radius: 5px;
+      color: #9098a7;
+      background: transparent;
+      font-size: 12px;
+    }
+
+    .pre-reference-tag button:hover,
+    .pre-reference-tag button:focus-visible {
+      color: #a34343;
+      background: #faeeee;
+    }
+
+    .pre-reference-empty {
+      color: #8d96a5;
+      font-size: 9px;
+    }
+
+    .pre-reference-add {
+      display: grid;
+      grid-template-columns: auto minmax(220px, 360px) auto;
+      align-items: center;
+      gap: 9px;
+      padding: 10px 11px;
       border-radius: 8px;
-      color: #697386;
+      background: #f6f8fb;
+    }
+
+    .pre-reference-add label {
+      color: #69758a;
+      font-size: 8px;
+      font-weight: 680;
+    }
+
+    .pre-reference-add button {
+      height: 34px;
+      padding: 0 12px;
+      border: 1px solid #cfd8e9;
+      border-radius: 7px;
+      color: #425b9e;
       background: #fff;
-      text-align: left;
+      font-size: 8px;
     }
 
-    .pre-promo-type:hover,
-    .pre-promo-type.active {
-      color: #3657b3;
-      border-color: #9caee1;
-      background: #f5f7ff;
+    .pre-reference-add button:disabled {
+      cursor: not-allowed;
+      opacity: .48;
     }
 
-    .pre-promo-type b,
-    .pre-promo-type span {
+    .pre-reference-coverage {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .pre-reference-coverage div {
+      min-width: 0;
+      padding: 8px 9px;
+      border: 1px solid #e4e8ef;
+      border-radius: 7px;
+      background: #fff;
+    }
+
+    .pre-reference-coverage b,
+    .pre-reference-coverage span {
       display: block;
     }
 
-    .pre-promo-type b {
-      font-size: 10px;
+    .pre-reference-coverage b {
+      color: #445168;
+      font-size: 9px;
     }
 
-    .pre-promo-type span {
-      margin-top: 5px;
-      color: #929aaa;
-      font-size: 8px;
-      line-height: 1.45;
+    .pre-reference-coverage span {
+      margin-top: 4px;
+      color: #929aa8;
+      font-size: 7px;
     }
 
     .pre-insight-body {
@@ -3978,10 +3939,18 @@
     }
 
     .pre-history-insight {
+      display: flex;
+      min-width: 0;
+      flex-direction: column;
       padding: 14px;
       border: 1px solid #e1e6ee;
       border-radius: 9px;
       background: #fff;
+    }
+
+    .pre-history-insight.featured {
+      grid-column: 1 / -1;
+      background: linear-gradient(135deg, #fbfcff, #fff 58%);
     }
 
     .pre-history-insight-head {
@@ -4009,6 +3978,102 @@
       color: #6d7788;
       font-size: 9px;
       line-height: 1.6;
+    }
+
+    .pre-insight-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .pre-insight-metrics div {
+      min-width: 0;
+      padding: 8px;
+      border-left: 2px solid #a8b7de;
+      border-radius: 0 6px 6px 0;
+      background: #f6f8fb;
+    }
+
+    .pre-insight-metrics b,
+    .pre-insight-metrics span {
+      display: block;
+    }
+
+    .pre-insight-metrics b {
+      color: #3e4b62;
+      font-size: 10px;
+    }
+
+    .pre-insight-metrics span {
+      margin-top: 3px;
+      color: #929aa7;
+      font-size: 7px;
+      line-height: 1.35;
+    }
+
+    .pre-insight-summary {
+      margin-top: 9px;
+      padding: 8px 9px;
+      border-radius: 6px;
+      color: #56647d;
+      background: #edf2fc;
+      font-size: 8px;
+      line-height: 1.55;
+    }
+
+    .pre-insight-summary b {
+      color: #3f5ba5;
+    }
+
+    .pre-insight-drill-tabs {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-top: 10px;
+    }
+
+    .pre-insight-drill-tabs button {
+      height: 25px;
+      padding: 0 8px;
+      border: 1px solid #dce2eb;
+      border-radius: 6px;
+      color: #738096;
+      background: #fff;
+      font-size: 7px;
+    }
+
+    .pre-insight-drill-tabs button.active {
+      color: #3e5cb0;
+      border-color: #a9b8df;
+      background: #f2f5fd;
+    }
+
+    .pre-insight-drill-table {
+      display: grid;
+      gap: 5px;
+      margin-top: 7px;
+    }
+
+    .pre-insight-drill-row {
+      display: grid;
+      grid-template-columns: minmax(100px, 1.2fr) repeat(3, minmax(70px, .8fr));
+      gap: 7px;
+      padding: 7px 8px;
+      border-radius: 6px;
+      background: #f8f9fb;
+      font-size: 7px;
+    }
+
+    .pre-insight-drill-row b {
+      color: #4c596f;
+    }
+
+    .pre-insight-drill-row span {
+      overflow: hidden;
+      color: #7f899a;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .pre-insight-facts {
@@ -4092,6 +4157,40 @@
       line-height: 1.45;
     }
 
+    @media (max-width: 1320px) {
+      .pre-calendar-bar {
+        grid-template-columns: minmax(220px, .68fr) minmax(0, 1.32fr);
+      }
+
+      .pre-current-activity {
+        grid-template-columns: minmax(120px, 1.2fr) repeat(3, minmax(70px, .55fr));
+      }
+
+      .pre-reference-coverage,
+      .pre-source-note {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 1100px) {
+      .pre-calendar-bar,
+      .pre-history-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .pre-history-insight.featured {
+        grid-column: auto;
+      }
+
+      .pre-reference-add {
+        grid-template-columns: minmax(0, 1fr) auto;
+      }
+
+      .pre-reference-add label {
+        grid-column: 1 / -1;
+      }
+    }
+
     @media (max-width: 1380px) {
       .pre-dashboard-hero {
         grid-template-columns: minmax(0, 1.35fr) minmax(360px, .75fr);
@@ -4156,15 +4255,32 @@
       }
 
       .pre-current-activity {
-        display: inline-flex;
-        margin-top: 10px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        margin-top: 0;
       }
 
-      .pre-calendar-grid,
-      .pre-promo-types,
+      .pre-activity-summary-main {
+        grid-column: 1 / -1;
+      }
+
+      .pre-reference-add,
+      .pre-reference-coverage,
       .pre-history-grid,
       .pre-source-note {
         grid-template-columns: minmax(0, 1fr);
+      }
+
+      .pre-reference-add label {
+        grid-column: auto;
+      }
+
+      .pre-insight-metrics {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .pre-insight-drill-row {
+        grid-template-columns: minmax(85px, 1.2fr) repeat(3, minmax(58px, .8fr));
       }
 
       .pre-dashboard-hero-main {
@@ -7838,8 +7954,7 @@
       .chat-plan-row,
       .report-section,
       .report-queue-item.generating .queue-index,
-      .case-report-pane,
-      .mid-wave-readiness-track i {
+      .case-report-pane {
         animation: none !important;
         transition: none !important;
       }
@@ -8061,30 +8176,44 @@
                 <div>
                   <span class="pre-home-step">STEP 01 · 活动日历</span>
                   <h2 id="preCalendarTitle">选择本次要规划的活动</h2>
-                  <p>先确定活动时间与阶段；切换活动后，需要重新确认促类型。</p>
+                  <p>从 26 年活动日历选择规划促，系统会自动识别活动级别与历史关系。</p>
                 </div>
-                <span class="pre-current-activity" id="preCurrentActivity">当前：618 年中大促</span>
               </header>
-              <div class="pre-calendar-grid" id="preActivityCalendar"></div>
+              <div class="pre-calendar-bar">
+                <label class="pre-calendar-select" for="preActivitySelect">
+                  <span>26 年活动日历</span>
+                  <select id="preActivitySelect" aria-describedby="preCurrentActivitySummary"></select>
+                </label>
+                <div class="pre-current-activity" id="preCurrentActivitySummary" aria-live="polite"></div>
+              </div>
             </section>
 
-            <section class="pre-home-card" aria-labelledby="prePromoTypeTitle">
+            <section class="pre-home-card" aria-labelledby="preReferenceTitle">
               <header class="pre-home-head">
                 <div>
-                  <span class="pre-home-step">STEP 02 · 促类型</span>
-                  <h3 id="prePromoTypeTitle">这个活动属于哪一类促？</h3>
-                  <p>类型只用于匹配历史样本，不会在这里生成本期具体券方案。</p>
+                  <span class="pre-home-step">STEP 02 · 参考促集合</span>
+                  <h3 id="preReferenceTitle">确认本次分析使用的历史样本</h3>
+                  <p>自动合并前序四次、同级别促与同名历史促；可以删除或补充样本。</p>
                 </div>
+                <span class="pre-reference-count" id="preReferenceCount">0 场参考促</span>
               </header>
-              <div class="pre-promo-types" id="prePromoTypes"></div>
+              <div class="pre-reference-body">
+                <div class="pre-reference-tags" id="preReferenceTags" aria-live="polite"></div>
+                <div class="pre-reference-add">
+                  <label for="preReferenceSelect">添加其他历史活动</label>
+                  <select id="preReferenceSelect"></select>
+                  <button id="preReferenceAdd" type="button">加入参考集合</button>
+                </div>
+                <div class="pre-reference-coverage" id="preReferenceCoverage"></div>
+              </div>
             </section>
 
             <section class="pre-home-card" aria-labelledby="preHistoryTitle">
               <header class="pre-home-head">
                 <div>
                   <span class="pre-home-step">STEP 03 · 历史洞察</span>
-                  <h3 id="preHistoryTitle">查看同类型活动的消费券实验洞察</h3>
-                  <p id="preHistorySubtitle">选择促类型后，展示历史实验规律、证据与适用边界。</p>
+                  <h3 id="preHistoryTitle">查看参考促集合的消费券实验洞察</h3>
+                  <p id="preHistorySubtitle">洞察仅描述历史规律，并标注证据、适用边界与来源。</p>
                 </div>
               </header>
               <div class="pre-insight-body" id="preHistoricalInsights" aria-live="polite"></div>
@@ -8874,7 +9003,6 @@
                 <p>W05 · 3/9 返场补量 · 38 节脱敏 Mock</p>
               </div>
               <div class="mid-wave-head-actions">
-                <span class="mid-wave-status" id="midNextWaveStatus">草案 · 3 项待处理</span>
                 <div class="mid-wave-plan-tabs" id="midNextWavePlanTabs" role="tablist" aria-label="下一券波次候选方案"></div>
               </div>
             </header>
@@ -8945,31 +9073,6 @@
                   >✦ 追问</button>
                 </header>
                 <div class="mid-wave-panel-body" id="midNextWaveExperiment"></div>
-              </section>
-
-              <section class="mid-wave-panel mid-wave-check-panel" aria-labelledby="midNextWaveCheckTitle">
-                <header class="mid-wave-panel-head">
-                  <div>
-                    <h4 id="midNextWaveCheckTitle">配置一致性巡检与确认门禁</h4>
-                    <p>上线前核对黑名单、批次时间、实验参数与跨系统映射</p>
-                  </div>
-                  <button
-                    class="workbench-ask"
-                    data-workbench-ask="mid"
-                    data-ask-context="下一波次配置巡检"
-                    data-ask-summary="黑名单、券批次时间和算法策略参数仍待处理"
-                    data-ask-questions="哪项巡检风险最高？|为什么时间错配会污染实验？|生成上线前最终检查清单"
-                  >✦ 追问</button>
-                </header>
-                <div class="mid-wave-panel-body">
-                  <div class="mid-wave-check-layout">
-                    <div class="mid-wave-check-list" id="midNextWaveChecks"></div>
-                    <aside class="mid-wave-gate" id="midNextWaveGate" aria-live="polite"></aside>
-                  </div>
-                  <div class="mid-wave-audit-banner" id="midNextWaveAuditBanner" role="status">
-                    ✓ W05 下一券波次草案已写入灰度候选，等待业务 Owner、预算与实验负责人审批；未触发真实投放。
-                  </div>
-                </div>
               </section>
             </div>
           </section>
@@ -9339,18 +9442,6 @@
         { label: "核销归因", title: "高门槛低核销 · 催用有效", action: "收缩泛发，前置已领未用催用" },
         { label: "实验依据", title: "兑换比 6.71 · 增量 +22.12%", action: "高价值人群定向扩量并保留对照" },
         { label: "竞对压力", title: "人群分层 · 低门槛频次加密", action: "跟进分层与节奏，不机械加深折扣" }
-      ],
-      requiredChecks: [
-        { id: "blacklist", title: "业务黑名单 + 通用黑名单", detail: "3 个脱敏券批次仍缺少双黑名单绑定", action: "补齐绑定" },
-        { id: "time", title: "券批次发放 / 使用时间", detail: "补量批次的使用结束时间需与 W05 排期对齐", action: "对齐时间" },
-        { id: "algorithm", title: "算法策略参数与实验 VID", detail: "T1 / T2 需补充策略参数并校验 VID 映射", action: "补齐参数" }
-      ],
-      passedChecks: [
-        { id: "limit", title: "券批次限领", detail: "同一用户每档限领 1 张，跨批次去重已开启" },
-        { id: "tier", title: "面额候选集", detail: "固定档与高门槛定向档均在脱敏候选集内" },
-        { id: "reverse", title: "容器实验与大促反转参数", detail: "对照组不发 X 券，反转参数符合预期" },
-        { id: "mapping", title: "投放计划与券批次映射", detail: "场域计划、券批次和投放活动映射一致" },
-        { id: "cross-system", title: "跨系统配置一致性", detail: "白盒化、券包、供给和客服侧 Mock 配置一致" }
       ],
       plans: {
         balanced: {
@@ -9842,59 +9933,105 @@
 
     const preInsightHomeData = {
       activities: [
-        { id: "midyear", month: "06", day: "01", name: "618 年中大促", period: "06.01—06.18", stage: "规划中", dataStatus: "5 场同类活动已复盘" },
-        { id: "summer", month: "07", day: "15", name: "夏日焕新季", period: "07.15—08.04", stage: "待规划", dataStatus: "8 场主题活动可参考" },
-        { id: "qixi", month: "08", day: "18", name: "七夕礼遇", period: "08.18—08.25", stage: "待规划", dataStatus: "4 场节日活动已沉淀" },
-        { id: "weekend", month: "08", day: "08", name: "周末超级日", period: "08.08—08.10", stage: "待规划", dataStatus: "12 个日销节点可参考" }
+        { id: "spring26", start: "2026-03-01", name: "春季焕新", period: "03.01—03.16", level: "A", levelName: "行业主题促", series: "spring", stage: "已结束", dataStatus: "复盘口径已冻结" },
+        { id: "midyear26", start: "2026-06-01", name: "618 年中大促", period: "06.01—06.18", level: "S", levelName: "平台大促", series: "midyear", stage: "规划中", dataStatus: "历史样本可用" },
+        { id: "summer26", start: "2026-07-15", name: "夏日焕新季", period: "07.15—08.04", level: "A", levelName: "行业主题促", series: "summer", stage: "待规划", dataStatus: "历史样本可用" },
+        { id: "qixi26", start: "2026-08-18", name: "七夕礼遇", period: "08.18—08.25", level: "B", levelName: "节日营销促", series: "qixi", stage: "待规划", dataStatus: "历史样本可用" },
+        { id: "double1126", start: "2026-10-20", name: "双 11 大促", period: "10.20—11.11", level: "S", levelName: "平台大促", series: "double11", stage: "待规划", dataStatus: "历史样本可用" },
+        { id: "yearend26", start: "2026-12-01", name: "年终好物节", period: "12.01—12.20", level: "S", levelName: "平台大促", series: "yearend", stage: "待规划", dataStatus: "历史样本可用" }
       ],
-      promoTypes: [
-        { id: "platform", name: "平台大促", description: "全平台流量集中，多波段爆发" },
-        { id: "category", name: "行业主题促", description: "类目需求集中，价格带差异明显" },
-        { id: "festival", name: "节日营销促", description: "礼赠心智突出，短周期高峰" },
-        { id: "daily", name: "日销节点促", description: "短周期、稳定承接与复购" }
+      historicalCampaigns: [
+        { id: "h26superday", start: "2026-02-14", name: "周末超级日", period: "2026.02.14—02.16", level: "C", levelName: "日销节点促", series: "superday" },
+        { id: "h26newyear", start: "2026-01-08", name: "新年焕新季", period: "2026.01.08—01.20", level: "A", levelName: "行业主题促", series: "newyear" },
+        { id: "h25yearend", start: "2025-12-01", name: "年终好物节", period: "2025.12.01—12.20", level: "S", levelName: "平台大促", series: "yearend" },
+        { id: "h25double11", start: "2025-10-20", name: "双 11 大促", period: "2025.10.20—11.11", level: "S", levelName: "平台大促", series: "double11" },
+        { id: "h25autumn", start: "2025-09-10", name: "秋日焕新", period: "2025.09.10—09.22", level: "A", levelName: "行业主题促", series: "autumn" },
+        { id: "h25qixi", start: "2025-08-18", name: "七夕礼遇", period: "2025.08.18—08.25", level: "B", levelName: "节日营销促", series: "qixi" },
+        { id: "h25summer", start: "2025-07-15", name: "夏日焕新季", period: "2025.07.15—08.04", level: "A", levelName: "行业主题促", series: "summer" },
+        { id: "h25midyear", start: "2025-06-01", name: "618 年中大促", period: "2025.06.01—06.18", level: "S", levelName: "平台大促", series: "midyear" },
+        { id: "h25home", start: "2025-05-08", name: "家居生活节", period: "2025.05.08—05.20", level: "A", levelName: "行业主题促", series: "home" },
+        { id: "h25spring", start: "2025-03-01", name: "春季焕新", period: "2025.03.01—03.16", level: "A", levelName: "行业主题促", series: "spring" },
+        { id: "h24yearend", start: "2024-12-01", name: "年终好物节", period: "2024.12.01—12.20", level: "S", levelName: "平台大促", series: "yearend" },
+        { id: "h24double11", start: "2024-10-20", name: "双 11 大促", period: "2024.10.20—11.11", level: "S", levelName: "平台大促", series: "double11" },
+        { id: "h24midyear", start: "2024-06-01", name: "618 年中大促", period: "2024.06.01—06.18", level: "S", levelName: "平台大促", series: "midyear" },
+        { id: "h24spring", start: "2024-03-01", name: "春季焕新", period: "2024.03.01—03.16", level: "A", levelName: "行业主题促", series: "spring" }
       ],
-      histories: {
-        platform: {
-          sample: "近 3 年 5 场平台大促 · 18 个实验波段",
-          dimensions: "券档、人群、渠道、领取/核销、分波段表现",
-          insights: [
-            { key: "tier", label: "券档表现", title: "历史上，低门槛档承担规模，高门槛档更依赖需求匹配", copy: "同类活动中，高门槛券的领取后核销明显低于普惠档，不能仅靠加大曝光改善。", evidence: "普惠档领后核销 44%；高门槛档 21%—27%", boundary: "适用于全平台流量集中、价格带跨度大的活动", source: "消费券数据看板 · 券属性分析" },
-            { key: "audience", label: "人群差异", title: "高潜人群的核销稳定性高于全量泛发", copy: "历史实验显示，消费能力和类目意向同时较高的人群，更能消化中高门槛券。", evidence: "高潜人群领后核销 50%，较全量样本高 18pp", boundary: "人群容量不足时，不宜外推到全量用户", source: "消费券实验框架 · 实验人群对比" },
-            { key: "channel", label: "渠道承接", title: "搜索承接高意图，会场承担规模，Push 更适合召回", copy: "不同渠道解决的问题不同，历史上单纯扩大 Push 触达并未带来同等核销增长。", evidence: "搜索领后核销 48%；会场 44%；Push 26.1%", boundary: "需结合当期资源位流量和搜索需求复核", source: "渠道投放策略 · 资源位效率" },
-            { key: "cadence", label: "发放节奏", title: "爆发期重领取，收官前转向已领未用人群", copy: "同类活动中，末段继续催领的边际收益下降，临期催用对核销提升更稳定。", evidence: "收官催用后核销率较前一日提升 15pp", boundary: "仅适用于存在多波段和明确券有效期的活动", source: "批次及投放计划 · 波段复盘" }
-          ]
+      insights: [
+        {
+          key: "baseline", label: "P0 · 大盘水位", featured: true,
+          title: "活动前 20 天的历史增长主要来自支付用户扩张",
+          copy: "参考促中，GMV 同比抬升与 DAC 变化方向一致，客单贡献相对有限；该结果用于判断自然水位，不等于本期目标。",
+          metrics: [{ value: "+7.8%", label: "GMV 同比" }, { value: "+7.1%", label: "DAC 同比" }, { value: "+0.6%", label: "客单同比" }],
+          evidence: "历史窗口中 DAC 解释约 88% 的 GMV 同比增幅",
+          summary: "AI 小结：自然水位抬升更多来自用户规模，需继续按日、周末/工作日和渠道校验。",
+          boundary: "采用活动前 15—20 天同口径窗口；异常流量日需剔除",
+          source: "消费券数据看板 · 大盘 GMV / DAC / 客单"
         },
-        category: {
-          sample: "近 2 年 8 场行业主题促 · 21 组类目实验",
-          dimensions: "类目价格带、客单、券门槛、人群意向、场域",
-          insights: [
-            { key: "tier", label: "券档表现", title: "券门槛与类目客单贴合时，领取后的核销损耗更低", copy: "历史上按类目价格带拆分后，中高门槛券的使用效率优于跨类目统一发放。", evidence: "门槛贴合组领后核销高 11pp", boundary: "类目客单分布变化较大时需重新校准", source: "消费券数据看板 · 货品与券属性分析" },
-            { key: "audience", label: "人群差异", title: "类目高意向比单纯高消费力更能解释增量", copy: "同类活动中，同时具备类目浏览和加购信号的人群表现更稳定。", evidence: "类目高意向组人均增量高 17%", boundary: "需保证意向标签覆盖和更新频率", source: "消费券实验框架 · 人群实验" },
-            { key: "channel", label: "渠道承接", title: "搜索与类目会场承担主要承接，通用入口负责补量", copy: "历史上垂直场域的领取规模不一定最大，但券后支付质量更高。", evidence: "垂直场域用券客单高 13%", boundary: "资源位样式和货盘一致性会影响结果", source: "渠道投放策略 · 场域分析" },
-            { key: "cadence", label: "发放节奏", title: "类目需求峰值前置时，提前一轮触达更有效", copy: "主题促的需求窗口较短，历史批次中峰值前的预领有助于首日承接。", evidence: "峰值前一轮领取贡献首日核销 36%", boundary: "仅作为节奏参考，不代表本期批次安排", source: "批次及投放计划 · 券批次复盘" }
-          ]
+        {
+          key: "category", label: "P1 · 类目爆发", featured: true,
+          title: "历史活动期的类目爆发由 DAC 与客单共同决定",
+          copy: "数码家电呈现高客单拉升，食品生鲜更偏刚需扩量；同为高增长类目，也不能使用相同门槛解释。",
+          metrics: [{ value: "1.62×", label: "数码家电 GMV 放大" }, { value: "+48%", label: "数码家电 DAC" }, { value: "24%", label: "食品生鲜增量贡献" }],
+          evidence: "活动期日均 / 活动前日均：数码 162，食品生鲜 145",
+          summary: "AI 小结：先区分 DAC 驱动和客单驱动，再讨论券门槛适配。",
+          boundary: "类目货盘、履约能力和价格带变化会影响跨期可比性",
+          source: "消费券数据看板 · 一级/二级类目趋势"
         },
-        festival: {
-          sample: "近 2 年 4 场节日营销促 · 12 组实验",
-          dimensions: "礼赠类目、短周期人群、领取时点、渠道触达",
-          insights: [
-            { key: "tier", label: "券档表现", title: "节日促的有效门槛更集中，档位过多会分散领取", copy: "历史上核心价格带附近的券档贡献更集中，长尾档位领取后流失较高。", evidence: "核心两档贡献 72% 核销 UV", boundary: "礼赠货盘和价格带变化时需重新观察", source: "消费券数据看板 · 券批次表现" },
-            { key: "audience", label: "人群差异", title: "近期礼赠行为比长期消费等级更敏感", copy: "浏览礼赠类目或有送礼场景信号的人群，对短期优惠响应更强。", evidence: "礼赠意向组核销率高 9pp", boundary: "场景信号有效期较短，需控制圈选窗口", source: "消费券实验框架 · 场景人群实验" },
-            { key: "channel", label: "渠道承接", title: "内容场与搜索形成种草到承接的组合", copy: "历史上单一渠道难以覆盖完整链路，内容触达后的搜索承接质量更高。", evidence: "跨场域承接组用券客单高 8%", boundary: "需确保跨场域归因口径一致", source: "渠道投放策略 · 跨场域分析" },
-            { key: "cadence", label: "发放节奏", title: "短周期活动应把触达集中在决策窗口", copy: "同类活动中，过早发券容易造成遗忘，临近节日前的集中触达更有效。", evidence: "T-3 至 T-1 贡献 64% 核销", boundary: "物流履约截止时间会改变有效窗口", source: "批次及投放计划 · 分时复盘" }
-          ]
+        {
+          key: "tier", label: "券档 × 行业价格带",
+          title: "历史上，高门槛券的主要问题是适配，不是曝光不足",
+          copy: "普惠档领取后核销更稳定；中高门槛券只有在行业客单与价格带贴合时，核销损耗才会收窄。",
+          metrics: [{ value: "44.0%", label: "300-40 领后核销" }, { value: "26.6%", label: "1500-180 领后核销" }, { value: "21.0%", label: "3000-420 领后核销" }],
+          evidence: "高门槛档领后核销较普惠档低 17.4—23.0pp",
+          summary: "AI 小结：应继续下钻行业和价格带，不能把低核销简单归因为触达不足。",
+          boundary: "仅适用于门槛、有效期和核销口径一致的券批次",
+          source: "消费券数据看板 · 券属性 / 行业价格带",
+          drills: {
+            industry: [["数码家电", "客单 ¥2,680", "3000-420", "核销 34%"], ["食品生鲜", "客单 ¥326", "300-40", "核销 49%"], ["服饰鞋包", "客单 ¥718", "600-80", "核销 42%"]],
+            price: [["¥0—399", "领取 71%", "核销 46%", "低门槛更稳"], ["¥400—999", "领取 66%", "核销 39%", "中档承接"], ["¥1,000+", "领取 53%", "核销 25%", "依赖高意向"]]
+          }
         },
-        daily: {
-          sample: "近 12 个日销节点 · 26 组轻量实验",
-          dimensions: "复购周期、低门槛券、稳定渠道、短时批次",
-          insights: [
-            { key: "tier", label: "券档表现", title: "日销节点中，简单券档比复杂组合更利于理解和核销", copy: "历史上低门槛单档或双档更稳定，档位增加未带来同比例增量。", evidence: "核心档贡献 81% 领取与 78% 核销", boundary: "不适用于高客单集中爆发的节点", source: "消费券数据看板 · 券属性趋势" },
-            { key: "audience", label: "人群差异", title: "临近复购周期的人群对短时优惠更敏感", copy: "历史节点中，近期购买间隔接近复购周期的用户响应最稳定。", evidence: "复购窗口组领后核销高 12pp", boundary: "需按类目复购周期分别计算", source: "消费券实验框架 · 复购人群实验" },
-            { key: "channel", label: "渠道承接", title: "固定入口保持稳定，消息渠道只做轻量召回", copy: "日销节点的自然访问占比较高，历史上高频消息触达存在边际递减。", evidence: "固定入口核销贡献 69%；消息渠道 14%", boundary: "新品或临时热点可能改变渠道结构", source: "渠道投放策略 · 日销渠道表现" },
-            { key: "cadence", label: "发放节奏", title: "短时节点适合少批次、明确有效期的节奏", copy: "历史上批次过密会造成重复领取和理解成本，固定时点表现更稳定。", evidence: "两批次方案重复领取低 7pp", boundary: "高并发秒杀类活动需单独评估", source: "批次及投放计划 · 日销批次复盘" }
-          ]
+        {
+          key: "wave", label: "分波次券档",
+          title: "历史波次从扩领取逐步转向促核销，目标并不相同",
+          copy: "预热负责建立持券量，爆发波次承接需求峰值，收官阶段继续催领的边际收益低于已领未用催用。",
+          metrics: [{ value: "32%", label: "预热领取贡献" }, { value: "47%", label: "爆发核销贡献" }, { value: "+15pp", label: "收官催用提升" }],
+          evidence: "末段催用组核销率较继续发券组高 15pp",
+          summary: "AI 小结：波次差异是历史节奏规律，不直接代表本期批次安排。",
+          boundary: "需存在多波段和明确有效期；单日促不适用",
+          source: "批次及投放计划 · 预热 / 爆发 / 持续 / 收官"
+        },
+        {
+          key: "audience", label: "人群分层实验",
+          title: "价值与类目潜力共同分层，比单一消费等级更稳定",
+          copy: "高价值高潜人群对中高门槛券的消化更稳定；新客在低门槛档更有效，低价值低潜的泛发损耗最高。",
+          metrics: [{ value: "50.0%", label: "高价值高潜核销" }, { value: "32.0%", label: "新客核销" }, { value: "20.0%", label: "低价值低潜核销" }],
+          evidence: "高价值高潜较新客领后核销高 18pp",
+          summary: "AI 小结：历史差异可用于提出验证假设，仍需校验当期人群容量。",
+          boundary: "标签覆盖、更新时间和实验随机性必须一致",
+          source: "消费券实验框架 · 价值 / 潜力 / 新客 / 回流"
+        },
+        {
+          key: "channel", label: "渠道承接",
+          title: "会场承担规模，搜索承接高意图，Push 更适合召回",
+          copy: "渠道角色不同，不能用单一领取率评价；历史上搜索规模较小但领后核销更高，Push 泛触达损耗明显。",
+          metrics: [{ value: "48.0%", label: "搜索领后核销" }, { value: "44.0%", label: "会场领后核销" }, { value: "26.1%", label: "Push 领后核销" }],
+          evidence: "搜索较 Push 领后核销高 21.9pp",
+          summary: "AI 小结：需要结合资源位流量、意图强度和归因窗口判断渠道作用。",
+          boundary: "资源位样式、货盘和流量结构变化时需重新评估",
+          source: "渠道投放策略 · 搜索 / 会场 / 券包 / Push"
+        },
+        {
+          key: "competitor", label: "竞对信息聚合",
+          title: "竞对补贴深度只作为压力信号，不能替代自身实验",
+          copy: "脱敏竞对 A/B/C 在主档、会员加码和发券频次上方向不同，历史上盲目跟随更深折扣并未稳定改善钱效。",
+          metrics: [{ value: "3 轮/日", label: "竞对 A 频次" }, { value: "双券包", label: "竞对 B 会员加码" }, { value: "每 2 小时", label: "竞对 C 拉新频次" }],
+          evidence: "竞对主档约 85—90 折，张数 1—3 张，变化方向分化",
+          summary: "AI 小结：竞对信息用于识别外部压力，方案仍需由自身需求与实验验证。",
+          boundary: "竞对数据为脱敏调研快照，可能存在采集时滞",
+          source: "竞对调研 Mock · 券档 / 折扣 / 张数 / 频次"
         }
-      },
+      ],
       sources: [
         { name: "消费券数据看板", detail: "券属性、人群、场域、领取与核销" },
         { name: "消费券实验框架", detail: "实验样本、分组和增量表现" },
@@ -9917,18 +10054,16 @@
     };
 
     const preDashboardState = {
-      selectedActivity: "midyear",
-      selectedType: null
+      selectedActivity: "midyear26",
+      excludedReferenceIds: new Set(),
+      userAddedReferenceIds: new Set(),
+      selectedTierDrill: "industry"
     };
     let activeDashboardMode = "mid";
 
     const midNextWaveState = {
       selectedPlan: "balanced",
-      selectedView: "venue",
-      resolvedChecks: new Set(),
-      candidateStatus: "draft",
-      detailExpanded: true,
-      returnFocus: null
+      selectedView: "venue"
     };
 
     const preCaseState = {
@@ -10027,7 +10162,6 @@
     const dashboard = document.getElementById("dashboard");
     const midNextWaveSummary = document.getElementById("midNextWaveSummary");
     const midNextWavePlanner = document.getElementById("midNextWavePlanner");
-    const midNextWaveStatus = document.getElementById("midNextWaveStatus");
     const midNextWavePlanTabs = document.getElementById("midNextWavePlanTabs");
     const midNextWaveViewTabs = document.getElementById("midNextWaveViewTabs");
     const midNextWaveEvidence = document.getElementById("midNextWaveEvidence");
@@ -10036,9 +10170,6 @@
     const midNextWaveChannels = document.getElementById("midNextWaveChannels");
     const midNextWaveMatrix = document.getElementById("midNextWaveMatrix");
     const midNextWaveExperiment = document.getElementById("midNextWaveExperiment");
-    const midNextWaveChecks = document.getElementById("midNextWaveChecks");
-    const midNextWaveGate = document.getElementById("midNextWaveGate");
-    const midNextWaveAuditBanner = document.getElementById("midNextWaveAuditBanner");
     const preDashboard = document.getElementById("preDashboard");
     const newChatButton = document.getElementById("newChatButton");
     const newChatView = document.getElementById("newChatView");
@@ -10265,55 +10396,6 @@
         <div class="mid-wave-guardrails">${experiment.guardrails.map(item => `<span>${escapeHTML(item)}</span>`).join("")}</div>`;
     }
 
-    function renderMidNextWaveChecks() {
-      const resolvedCount = midNextWaveState.resolvedChecks.size;
-      const remaining = Math.max(0, midNextWaveData.requiredChecks.length - resolvedCount);
-      const readiness = [76, 88, 94, 100][Math.min(resolvedCount, 3)];
-      const candidateRecorded = midNextWaveState.candidateStatus === "pending";
-
-      midNextWaveChecks.innerHTML = [
-        ...midNextWaveData.requiredChecks.map(item => {
-          const resolved = midNextWaveState.resolvedChecks.has(item.id);
-          return `<div class="mid-wave-check-item ${resolved ? "pass" : ""}">
-            <i class="mid-wave-check-icon">${resolved ? "✓" : "!"}</i>
-            <div><strong>${escapeHTML(item.title)}</strong><br><span>${escapeHTML(resolved ? "已按脱敏 Mock 规则完成修正" : item.detail)}</span></div>
-            <button ${resolved ? "disabled" : ""} data-mid-wave-check="${item.id}">${resolved ? "已通过" : escapeHTML(item.action)}</button>
-          </div>`;
-        }),
-        ...midNextWaveData.passedChecks.map(item => `<div class="mid-wave-check-item pass">
-          <i class="mid-wave-check-icon">✓</i>
-          <div><strong>${escapeHTML(item.title)}</strong><br><span>${escapeHTML(item.detail)}</span></div>
-          <button disabled>已通过</button>
-        </div>`)
-      ].join("");
-
-      midNextWaveGate.innerHTML = `
-        <div>
-          <div class="mid-wave-readiness">
-            <strong>${readiness}%</strong>
-            <div><b>上线就绪度</b><span>${remaining ? `仍有 ${remaining} 项必须修正` : "基础配置与实验参数已完成对齐"}</span></div>
-          </div>
-          <div class="mid-wave-readiness-track"><i style="width:${readiness}%"></i></div>
-          <div class="mid-wave-gate-note">${candidateRecorded
-            ? "草案已写入灰度候选，等待业务 Owner、预算与实验负责人审批。"
-            : remaining
-              ? "完成黑名单、批次时间和算法参数巡检后，才可写入下一波次灰度候选。"
-              : "巡检已通过。确认后仅记录候选与审计状态，不触发真实投放。"
-          }</div>
-        </div>
-        <button
-          class="primary"
-          data-mid-wave-action="adopt"
-          ${remaining || candidateRecorded ? "disabled" : ""}
-        >${candidateRecorded ? "已写入灰度候选" : "写入下一波次灰度候选"}</button>`;
-
-      midNextWaveStatus.textContent = candidateRecorded
-        ? "待审批"
-        : remaining ? `草案 · ${remaining} 项待处理` : "巡检已通过";
-      midNextWaveStatus.classList.toggle("ready", remaining === 0 || candidateRecorded);
-      midNextWaveAuditBanner.classList.toggle("show", candidateRecorded);
-    }
-
     function renderMidNextWavePlanner() {
       renderMidNextWaveSummary();
       renderMidNextWavePlanTabs();
@@ -10322,13 +10404,11 @@
       renderMidNextWaveChannels();
       renderMidNextWaveMatrix();
       renderMidNextWaveExperiment();
-      renderMidNextWaveChecks();
     }
 
     function setMidNextWavePlan(planKey) {
       if (!midNextWaveData.plans[planKey] || planKey === midNextWaveState.selectedPlan) return;
       midNextWaveState.selectedPlan = planKey;
-      midNextWaveState.candidateStatus = "draft";
       renderMidNextWavePlanner();
       showToast(`已切换为“${getMidNextWavePlan().label}”方案`);
     }
@@ -10339,70 +10419,147 @@
       renderMidNextWaveBatches();
     }
 
-    function resolveMidNextWaveCheck(checkId) {
-      if (!midNextWaveData.requiredChecks.some(item => item.id === checkId) || midNextWaveState.resolvedChecks.has(checkId)) return;
-      midNextWaveState.resolvedChecks.add(checkId);
-      renderMidNextWaveChecks();
-      const remaining = midNextWaveData.requiredChecks.length - midNextWaveState.resolvedChecks.size;
-      showToast(remaining ? `巡检项已修正，仍有 ${remaining} 项待处理` : "三项必要巡检已完成，可写入灰度候选");
-    }
-
     function scrollToMidNextWavePlanner() {
       midNextWavePlanner.scrollIntoView({ behavior: "smooth", block: "start" });
       midNextWavePlanner.classList.add("context-highlight");
       setTimeout(() => midNextWavePlanner.classList.remove("context-highlight"), 1300);
     }
 
-    function openMidNextWaveCandidateModal(trigger) {
-      if (midNextWaveState.resolvedChecks.size < midNextWaveData.requiredChecks.length) {
-        showToast("请先完成三项必要巡检");
-        return;
-      }
-      midNextWaveState.returnFocus = trigger || document.activeElement;
-      openModal("mid-wave-adopt", trigger);
+    function preGetPlanningActivity() {
+      return preInsightHomeData.activities.find(item => item.id === preDashboardState.selectedActivity)
+        || preInsightHomeData.activities[0];
+    }
+
+    function preBuildAutoReferenceMap(activity) {
+      const eligible = preInsightHomeData.historicalCampaigns
+        .filter(item => item.start < activity.start)
+        .sort((a, b) => b.start.localeCompare(a.start));
+      const referenceMap = new Map();
+      const addReason = (campaign, reason) => {
+        if (!referenceMap.has(campaign.id)) referenceMap.set(campaign.id, { campaign, reasons: new Set() });
+        referenceMap.get(campaign.id).reasons.add(reason);
+      };
+
+      eligible.slice(0, 4).forEach(item => addReason(item, "前序四次"));
+      eligible.filter(item => item.level === activity.level).forEach(item => addReason(item, "同级别"));
+      eligible.filter(item => item.series === activity.series).forEach(item => addReason(item, "同名历史"));
+      return referenceMap;
+    }
+
+    function preGetReferenceCampaigns() {
+      const activity = preGetPlanningActivity();
+      const autoReferences = preBuildAutoReferenceMap(activity);
+      const selected = new Map();
+
+      autoReferences.forEach((entry, id) => {
+        if (!preDashboardState.excludedReferenceIds.has(id)) {
+          selected.set(id, { campaign: entry.campaign, reasons: new Set(entry.reasons) });
+        }
+      });
+      preDashboardState.userAddedReferenceIds.forEach(id => {
+        const campaign = preInsightHomeData.historicalCampaigns.find(item => item.id === id);
+        if (campaign) selected.set(id, { campaign, reasons: new Set(["用户添加"]) });
+      });
+      return Array.from(selected.values()).sort((a, b) => b.campaign.start.localeCompare(a.campaign.start));
+    }
+
+    function preReferenceContext(references) {
+      if (!references.length) return "当前未选择参考促";
+      return references.map(item => `${item.campaign.name}（${item.campaign.period}，${Array.from(item.reasons).join("/")}）`).join("；");
+    }
+
+    function preRenderTierDrill(insight) {
+      if (!insight.drills) return "";
+      const drillKey = preDashboardState.selectedTierDrill;
+      const rows = insight.drills[drillKey] || insight.drills.industry;
+      const headers = drillKey === "industry"
+        ? ["行业", "历史客单", "适配券档", "领后核销"]
+        : ["价格带", "领取率", "领后核销", "历史表现"];
+      return `
+        <div class="pre-insight-drill-tabs" role="tablist" aria-label="券档历史下钻维度">
+          <button class="${drillKey === "industry" ? "active" : ""}" role="tab" aria-selected="${drillKey === "industry"}" data-pre-tier-drill="industry">行业下钻</button>
+          <button class="${drillKey === "price" ? "active" : ""}" role="tab" aria-selected="${drillKey === "price"}" data-pre-tier-drill="price">价格带下钻</button>
+        </div>
+        <div class="pre-insight-drill-table" role="table" aria-label="${drillKey === "industry" ? "行业券档表现" : "价格带券档表现"}">
+          <div class="pre-insight-drill-row" role="row">${headers.map(header => `<b role="columnheader">${escapeHTML(header)}</b>`).join("")}</div>
+          ${rows.map(row => `<div class="pre-insight-drill-row" role="row">${row.map((cell, index) => `<span role="cell"${index === 0 ? ` title="${escapeHTML(cell)}"` : ""}>${escapeHTML(cell)}</span>`).join("")}</div>`).join("")}
+        </div>`;
     }
 
     function preRenderPlanningDashboard() {
-      const activity = preInsightHomeData.activities.find(item => item.id === preDashboardState.selectedActivity)
-        || preInsightHomeData.activities[0];
-      const selectedType = preInsightHomeData.promoTypes.find(item => item.id === preDashboardState.selectedType);
+      const activity = preGetPlanningActivity();
+      const references = preGetReferenceCampaigns();
+      const selectedIds = new Set(references.map(item => item.campaign.id));
+      const availableReferences = preInsightHomeData.historicalCampaigns
+        .filter(item => !selectedIds.has(item.id))
+        .sort((a, b) => b.start.localeCompare(a.start));
+      const activitySelect = document.getElementById("preActivitySelect");
+      const referenceSelect = document.getElementById("preReferenceSelect");
 
-      document.getElementById("preCurrentActivity").textContent = `当前：${activity.name} · ${activity.period}`;
-      document.getElementById("preActivityCalendar").innerHTML = preInsightHomeData.activities.map(item => `
-        <button class="pre-activity-card ${item.id === activity.id ? "active" : ""}" data-pre-activity="${item.id}" aria-pressed="${item.id === activity.id}">
-          <span class="pre-activity-date"><b>${item.day}</b><span>${item.month} 月</span></span>
-          <span class="pre-activity-copy"><strong>${escapeHTML(item.name)}</strong><span>${escapeHTML(item.period)} · ${escapeHTML(item.stage)}</span><em>${escapeHTML(item.dataStatus)}</em></span>
-        </button>`).join("");
+      activitySelect.innerHTML = preInsightHomeData.activities.map(item => `
+        <option value="${item.id}" ${item.id === activity.id ? "selected" : ""}>${escapeHTML(item.period)} · ${escapeHTML(item.name)}</option>`).join("");
+      document.getElementById("preCurrentActivitySummary").innerHTML = `
+        <div class="pre-activity-summary-main"><strong>${escapeHTML(activity.name)}</strong><span>${escapeHTML(activity.period)} · ${escapeHTML(activity.dataStatus)}</span></div>
+        <div class="pre-activity-summary-fact"><b>${escapeHTML(activity.level)} 级</b><span>活动级别</span></div>
+        <div class="pre-activity-summary-fact"><b>${escapeHTML(activity.levelName)}</b><span>系统识别</span></div>
+        <div class="pre-activity-summary-fact"><b>${escapeHTML(activity.stage)}</b><span>当前阶段</span></div>`;
 
-      document.getElementById("prePromoTypes").innerHTML = preInsightHomeData.promoTypes.map(item => `
-        <button class="pre-promo-type ${item.id === preDashboardState.selectedType ? "active" : ""}" data-pre-promo-type="${item.id}" aria-pressed="${item.id === preDashboardState.selectedType}">
-          <b>${escapeHTML(item.name)}</b><span>${escapeHTML(item.description)}</span>
-        </button>`).join("");
+      document.getElementById("preReferenceCount").textContent = `${references.length} 场参考促`;
+      document.getElementById("preReferenceTags").innerHTML = references.length
+        ? references.map(item => `
+          <div class="pre-reference-tag">
+            <b title="${escapeHTML(item.campaign.period)}">${escapeHTML(item.campaign.name)}</b>
+            <span>${escapeHTML(Array.from(item.reasons).join(" / "))}</span>
+            <button type="button" data-pre-remove-reference="${item.campaign.id}" aria-label="移除${escapeHTML(item.campaign.name)}">×</button>
+          </div>`).join("")
+        : `<span class="pre-reference-empty">参考促集合为空，请从下方历史活动中添加样本。</span>`;
+
+      referenceSelect.innerHTML = availableReferences.length
+        ? availableReferences.map(item => `<option value="${item.id}">${escapeHTML(item.period)} · ${escapeHTML(item.name)} · ${escapeHTML(item.level)} 级</option>`).join("")
+        : `<option value="">没有更多历史活动</option>`;
+      document.getElementById("preReferenceAdd").disabled = !availableReferences.length;
+
+      const years = references.map(item => item.campaign.start.slice(0, 4));
+      const yearRange = years.length ? `${Math.min(...years)}—${Math.max(...years)}` : "待补充";
+      const levels = Array.from(new Set(references.map(item => item.campaign.level))).sort().join(" / ") || "待补充";
+      const sameSeriesCount = references.filter(item => item.reasons.has("同名历史")).length;
+      document.getElementById("preReferenceCoverage").innerHTML = `
+        <div><b>${references.length} 场</b><span>去重后历史样本</span></div>
+        <div><b>${escapeHTML(yearRange)}</b><span>样本年份覆盖</span></div>
+        <div><b>${escapeHTML(levels)} 级</b><span>活动级别覆盖</span></div>
+        <div><b>${sameSeriesCount} 场</b><span>同名历史活动</span></div>`;
 
       const insightRoot = document.getElementById("preHistoricalInsights");
-      if (!selectedType) {
-        document.getElementById("preHistorySubtitle").textContent = `${activity.name}已选定，请继续选择促类型。`;
-        insightRoot.innerHTML = `<div class="pre-insight-empty"><div><b>还差一步：选择促类型</b><span>系统会据此匹配同类历史实验，只展示可参考的券洞察。</span></div></div>`;
+      document.getElementById("preHistorySubtitle").textContent = references.length
+        ? `${activity.name} · 基于 ${references.length} 场参考促 · 历史规律仅供本期分析参考`
+        : `${activity.name} · 暂无参考样本，洞察已暂停`;
+      if (!references.length) {
+        insightRoot.innerHTML = `<div class="pre-insight-empty"><div><b>没有可计算的历史样本</b><span>添加至少一场参考促后，系统会重新生成历史实验洞察。</span></div></div>`;
         return;
       }
 
-      const history = preInsightHomeData.histories[selectedType.id];
-      document.getElementById("preHistorySubtitle").textContent = `${activity.name} · ${selectedType.name} · ${history.sample}`;
       insightRoot.innerHTML = `
-        <div class="pre-history-meta"><span>${escapeHTML(history.sample)}</span><span>分析维度：${escapeHTML(history.dimensions)}</span><span>结论性质：历史规律，仅供参考</span></div>
-        <div class="pre-history-grid">${history.insights.map((insight, index) => `
-          <article class="pre-history-insight">
+        <div class="pre-history-meta">
+          <span>${references.length} 场历史活动 · ${escapeHTML(yearRange)}</span>
+          <span>自动匹配：前序四次 + 同级别 + 同名历史</span>
+          <span>结论性质：脱敏 Mock 历史规律，不是本期方案</span>
+        </div>
+        <div class="pre-history-grid">${preInsightHomeData.insights.map((insight, index) => `
+          <article class="pre-history-insight ${insight.featured ? "featured" : ""}">
             <div class="pre-history-insight-head"><span>${String(index + 1).padStart(2, "0")} · ${escapeHTML(insight.label)}</span></div>
             <h4>${escapeHTML(insight.title)}</h4>
             <p>${escapeHTML(insight.copy)}</p>
+            <div class="pre-insight-metrics">${insight.metrics.map(metric => `<div><b>${escapeHTML(metric.value)}</b><span>${escapeHTML(metric.label)}</span></div>`).join("")}</div>
+            ${preRenderTierDrill(insight)}
+            <div class="pre-insight-summary"><b>AI</b> ${escapeHTML(insight.summary.replace(/^AI 小结：/, ""))}</div>
             <div class="pre-insight-facts">
-              <div><b>${escapeHTML(insight.evidence)}</b><span>历史证据</span></div>
+              <div><b>${escapeHTML(insight.evidence)}</b><span>历史证据 · 当前 ${references.length} 场样本</span></div>
               <div><b>${escapeHTML(insight.boundary)}</b><span>适用条件 / 限制</span></div>
             </div>
-            <div class="pre-insight-source"><span>来源：${escapeHTML(insight.source)}</span><button data-pre-insight-ask="${insight.key}">追问这条洞察</button></div>
+            <div class="pre-insight-source"><span>来源：${escapeHTML(insight.source)}</span><button type="button" data-pre-insight-ask="${insight.key}">追问这条洞察</button></div>
           </article>`).join("")}
         </div>
-        <div class="pre-source-note">${preInsightHomeData.sources.map(source => `<div><b>${escapeHTML(source.name)}</b><span>${escapeHTML(source.detail)}</span></div>`).join("")}</div>`;
+        <div class="pre-source-note">${preInsightHomeData.sources.map(source => `<div><b>${escapeHTML(source.name)}</b><span>${escapeHTML(source.detail)} · 当前 ${references.length} 场样本</span></div>`).join("")}</div>`;
     }
 
     function setDashboardMode(mode, announce = true) {
@@ -13269,25 +13426,6 @@
             showToast("灰度候选已记录，等待业务与预算审批");
           })
         );
-      } else if (type === "mid-wave-adopt") {
-        const plan = getMidNextWavePlan();
-        modalTitle.textContent = "确认写入下一波次灰度候选";
-        modalBody.innerHTML = `
-          <p class="modal-copy"><strong>${escapeHTML(midNextWaveData.wave)} · ${escapeHTML(midNextWaveData.waveName)}</strong></p>
-          <p class="modal-copy" style="margin-top:8px">${escapeHTML(plan.summary)}</p>
-          <div class="mid-wave-summary-metrics" style="margin-top:14px">${plan.metrics.map(metric => `
-            <div class="mid-wave-summary-metric"><b>${escapeHTML(metric.value)}</b><span>${escapeHTML(metric.label)}</span></div>`).join("")}
-          </div>
-          <div class="risk" style="margin-top:14px">三项必要巡检已完成。该操作只记录候选方案与审计状态，不会调用线上发券、预算、人群或实验配置接口；真实执行仍需业务 Owner、预算与实验负责人审批。</div>`;
-        modalActions.append(
-          actionButton("取消", "ghost", closeModal),
-          actionButton("确认写入候选", "primary", () => {
-            closeModal();
-            midNextWaveState.candidateStatus = "pending";
-            renderMidNextWaveChecks();
-            showToast("W05 草案已写入灰度候选，等待三方审批");
-          })
-        );
       } else if (type === "adopt") {
         modalTitle.textContent = "写入灰度候选";
         modalBody.innerHTML = '<div class="risk">该操作仅记录“采纳”状态并生成审计记录，不会调用线上发券、预算或人群配置接口。真实执行仍需业务 Owner、预算审批与灰度验证。</div>';
@@ -13483,33 +13621,55 @@
       button.addEventListener("click", () => setDashboardMode(button.dataset.mode));
     });
 
+    preDashboard.addEventListener("change", event => {
+      if (event.target.id !== "preActivitySelect") return;
+      const activity = preInsightHomeData.activities.find(item => item.id === event.target.value);
+      if (!activity) return;
+      preDashboardState.selectedActivity = activity.id;
+      preDashboardState.excludedReferenceIds.clear();
+      preDashboardState.userAddedReferenceIds.clear();
+      preDashboardState.selectedTierDrill = "industry";
+      preRenderPlanningDashboard();
+      showToast(`已切换至${activity.name}，参考促集合与历史洞察已重算`);
+    });
+
     preDashboard.addEventListener("click", event => {
-      const activityButton = event.target.closest("[data-pre-activity]");
-      if (activityButton) {
-        preDashboardState.selectedActivity = activityButton.dataset.preActivity;
-        preDashboardState.selectedType = null;
+      const removeButton = event.target.closest("[data-pre-remove-reference]");
+      if (removeButton) {
+        const referenceId = removeButton.dataset.preRemoveReference;
+        const campaign = preInsightHomeData.historicalCampaigns.find(item => item.id === referenceId);
+        preDashboardState.userAddedReferenceIds.delete(referenceId);
+        preDashboardState.excludedReferenceIds.add(referenceId);
         preRenderPlanningDashboard();
-        showToast("活动已切换，请重新选择促类型");
+        showToast(`已移除${campaign?.name || "参考促"}，样本覆盖与洞察已更新`);
         return;
       }
 
-      const typeButton = event.target.closest("[data-pre-promo-type]");
-      if (typeButton) {
-        preDashboardState.selectedType = typeButton.dataset.prePromoType;
+      if (event.target.closest("#preReferenceAdd")) {
+        const referenceId = document.getElementById("preReferenceSelect").value;
+        const campaign = preInsightHomeData.historicalCampaigns.find(item => item.id === referenceId);
+        if (!campaign) return;
+        preDashboardState.excludedReferenceIds.add(referenceId);
+        preDashboardState.userAddedReferenceIds.add(referenceId);
         preRenderPlanningDashboard();
-        const type = preInsightHomeData.promoTypes.find(item => item.id === preDashboardState.selectedType);
-        showToast(`已加载${type?.name || "同类活动"}历史洞察`);
+        showToast(`已将${campaign.name}作为用户添加样本，洞察已更新`);
+        return;
+      }
+
+      const drillButton = event.target.closest("[data-pre-tier-drill]");
+      if (drillButton) {
+        preDashboardState.selectedTierDrill = drillButton.dataset.preTierDrill;
+        preRenderPlanningDashboard();
         return;
       }
 
       const insightButton = event.target.closest("[data-pre-insight-ask]");
-      if (insightButton && preDashboardState.selectedType) {
-        const activity = preInsightHomeData.activities.find(item => item.id === preDashboardState.selectedActivity);
-        const type = preInsightHomeData.promoTypes.find(item => item.id === preDashboardState.selectedType);
-        const insight = preInsightHomeData.histories[preDashboardState.selectedType]?.insights
-          .find(item => item.key === insightButton.dataset.preInsightAsk);
-        if (activity && type && insight) {
-          preOpenDashboardQuestion(`活动：${activity.name}（${activity.period}）；促类型：${type.name}。请基于“${insight.source}”解释历史洞察“${insight.title}”。历史证据：${insight.evidence}；适用边界：${insight.boundary}。`);
+      if (insightButton) {
+        const activity = preGetPlanningActivity();
+        const references = preGetReferenceCampaigns();
+        const insight = preInsightHomeData.insights.find(item => item.key === insightButton.dataset.preInsightAsk);
+        if (activity && references.length && insight) {
+          preOpenDashboardQuestion(`规划活动：${activity.name}（${activity.period}，${activity.level} 级 ${activity.levelName}）；参考促集合：${preReferenceContext(references)}。请基于“${insight.source}”解释历史洞察“${insight.title}”。历史证据：${insight.evidence}；AI 小结：${insight.summary}；适用边界：${insight.boundary}。仅解释历史规律，不生成本期具体券方案。`);
         }
       }
     });
@@ -13536,15 +13696,9 @@
         setMidNextWaveView(view.dataset.midWaveView);
         return;
       }
-      const check = event.target.closest("[data-mid-wave-check]");
-      if (check) {
-        resolveMidNextWaveCheck(check.dataset.midWaveCheck);
-        return;
-      }
       const action = event.target.closest("[data-mid-wave-action]");
       if (action) {
         if (action.dataset.midWaveAction === "scroll") scrollToMidNextWavePlanner();
-        if (action.dataset.midWaveAction === "adopt") openMidNextWaveCandidateModal(action);
         return;
       }
       const ask = event.target.closest('[data-workbench-ask="mid"]');
