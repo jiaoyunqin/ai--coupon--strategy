@@ -1593,77 +1593,129 @@
       position: relative;
       display: grid;
       grid-template-columns: minmax(0, 1.55fr) minmax(420px, .85fr);
-      min-height: 244px;
+      min-height: 238px;
       margin-top: 18px;
       overflow: hidden;
-      border: 1px solid #dfe5f1;
+      border: 1px solid #e1e6ef;
       border-radius: 14px;
       background:
-        radial-gradient(circle at 83% 16%, rgba(57, 100, 215, .18), transparent 28%),
-        linear-gradient(128deg, #f7f9ff 0%, #fff 58%, #f3f8ff 100%);
-      box-shadow: 0 12px 36px rgba(36, 57, 102, .07);
+        linear-gradient(90deg, rgba(49, 87, 230, .025) 1px, transparent 1px),
+        linear-gradient(rgba(49, 87, 230, .025) 1px, transparent 1px),
+        radial-gradient(circle at 88% 5%, rgba(58, 92, 190, .12), transparent 25%),
+        #fbfcff;
+      background-size: 32px 32px, 32px 32px, auto, auto;
+      box-shadow: 0 12px 36px rgba(36, 57, 102, .055);
     }
 
     .pre-dashboard-hero::before {
       position: absolute;
-      top: -85px;
-      right: -60px;
-      width: 260px;
-      height: 260px;
-      border: 1px solid rgba(54, 93, 214, .1);
-      border-radius: 50%;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 4px;
+      background: linear-gradient(180deg, #355ac5, #6d86d5 70%, #b8c5e9);
       content: "";
     }
 
     .pre-dashboard-hero-main {
       position: relative;
       z-index: 1;
-      padding: 30px 32px;
+      padding: 27px 32px 25px 34px;
     }
 
     .pre-hero-kicker {
-      display: flex;
+      display: inline-flex;
       align-items: center;
-      gap: 9px;
-      color: #667899;
-      font-size: 10px;
-      font-weight: 750;
-      letter-spacing: .13em;
-      text-transform: uppercase;
+      gap: 8px;
+      min-height: 25px;
+      padding: 0 9px;
+      border: 1px solid #dbe2f0;
+      border-radius: 999px;
+      color: #536078;
+      background: rgba(255, 255, 255, .84);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: .04em;
     }
 
     .pre-hero-kicker i {
-      width: 28px;
-      height: 1px;
-      background: #7690db;
+      width: 4px;
+      height: 4px;
+      border-radius: 50%;
+      background: #8c9ab2;
+    }
+
+    .pre-hero-kicker b {
+      color: #238568;
+      font-size: 9px;
+      font-weight: 700;
     }
 
     .pre-dashboard-hero h2 {
-      max-width: 760px;
-      margin-top: 12px;
-      font-size: clamp(25px, 2.1vw, 34px);
-      line-height: 1.3;
+      max-width: 680px;
+      margin-top: 15px;
+      line-height: 1.2;
+    }
+
+    .pre-dashboard-hero h2 span,
+    .pre-dashboard-hero h2 strong {
+      display: block;
+    }
+
+    .pre-dashboard-hero h2 span {
+      color: #7b879a;
+      font-size: 12px;
+      font-weight: 650;
+      letter-spacing: .08em;
+    }
+
+    .pre-dashboard-hero h2 strong {
+      margin-top: 7px;
+      color: #1c2940;
+      font-size: clamp(25px, 2.05vw, 32px);
+      font-weight: 720;
       letter-spacing: -.035em;
     }
 
-    .pre-dashboard-hero h2 em {
-      color: var(--pre-blue);
-      font-style: normal;
+    .pre-dashboard-hero-main > p {
+      max-width: 680px;
+      margin-top: 12px;
+      color: var(--pre-muted);
+      font-size: 11px;
+      line-height: 1.7;
     }
 
-    .pre-dashboard-hero-main > p {
-      max-width: 760px;
-      margin-top: 13px;
-      color: var(--pre-muted);
-      font-size: 13px;
-      line-height: 1.75;
+    .pre-hero-focus {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 14px;
+    }
+
+    .pre-hero-focus span {
+      display: inline-flex;
+      height: 27px;
+      align-items: center;
+      gap: 6px;
+      padding: 0 9px;
+      border: 1px solid #e0e5ed;
+      border-radius: 6px;
+      color: #5f6b7e;
+      background: rgba(255, 255, 255, .76);
+      font-size: 9px;
+    }
+
+    .pre-hero-focus b {
+      color: #3f5fae;
+      font-size: 8px;
+      letter-spacing: .04em;
     }
 
     .pre-hero-actions {
       display: flex;
       flex-wrap: wrap;
       gap: 9px;
-      margin-top: 22px;
+      margin-top: 16px;
     }
 
     .pre-hero-actions button {
@@ -6896,9 +6948,17 @@
         <section class="panel pre-dashboard is-hidden" id="preDashboard" aria-label="促前消费券策略工作台">
           <header class="pre-dashboard-hero">
             <div class="pre-dashboard-hero-main">
-              <div class="pre-hero-kicker"><i></i>AI 促前策略结论 · 数据已脱敏</div>
-              <h2>从历史实验证据出发，收敛本期<em>券波次、4+X 档位与投放策略</em></h2>
-              <p>先复盘过去波次的增量与钱效，再按人群、渠道、券批次、类目下钻问题，最后把结论写入波次、批次、实验和巡检配置。竞对只作为压力信号，不替代自身实验结果。</p>
+              <div class="pre-hero-kicker"><span>促前策略摘要</span><i></i><b>历史实验已就绪</b></div>
+              <h2>
+                <span>历史实验已验证策略方向</span>
+                <strong>现在，把它变成本期投放方案</strong>
+              </h2>
+              <p>沿用有效的钱效结论，重新编排券档、波次与分层投放；竞对只作为压力信号，不替代自身实验结果。</p>
+              <div class="pre-hero-focus" aria-label="本期规划重点">
+                <span><b>01</b> 4+X 券档</span>
+                <span><b>02</b> 四波次节奏</span>
+                <span><b>03</b> 人群 × 渠道定向</span>
+              </div>
               <div class="pre-hero-actions">
                 <button class="primary" id="preStartCollaboration">进入策略共创</button>
                 <button
@@ -8006,7 +8066,7 @@
       id: "CMP_26M06_A",
       title: "促前券档位设计",
       question: "请结合历史复盘、近期大盘水位、类目需求、实验钱效和竞对变化，设计 3+X / 4+X 券档、人群、渠道、发放节奏与预算方案。",
-      mockLabel: "数据已脱敏",
+      mockLabel: "脱敏 Mock，仅用于原型演示",
       profile: {
         campaignId: "CMP_26M06_A",
         siteCode: "SITE_****",
@@ -8016,13 +8076,13 @@
         budgetCap: 12800,
         cacCap: 20,
         subsidyCap: 50,
-        confidentiality: "L4"
+        confidentiality: "L4-MOCK"
       },
       sources: [
-        { label: "近期大盘水位", detail: "ECOP · 近 20 天", type: "ECOP" },
-        { label: "历史领取核销", detail: "历史复盘 · 人群/渠道/面额", type: "历史复盘" },
-        { label: "券组实验", detail: "EXP_G01—G03 · 脱敏数据", type: "ECOP" },
-        { label: "竞对档位", detail: "竞对调研 · A/B/C", type: "竞对调研" },
+        { label: "近期大盘水位", detail: "ECOP Mock · 近 20 天", type: "ECOP Mock" },
+        { label: "历史领取核销", detail: "历史复盘 Mock · 人群/渠道/面额", type: "历史复盘 Mock" },
+        { label: "券组实验", detail: "EXP_G01—G03 · 脱敏快照", type: "ECOP Mock" },
+        { label: "竞对档位", detail: "竞对调研 Mock · A/B/C", type: "竞对调研 Mock" },
         { label: "目标与预算上限", detail: "用户输入 · 可调整", type: "用户输入" },
         { label: "优先级与方案推荐", detail: "指标规则计算", type: "AI 推导" }
       ],
@@ -8122,7 +8182,7 @@
         { role: "策略角色", item: "券档、人群、渠道、节奏与活动立项确认", status: "待确认" },
         { role: "财务角色", item: "主预算申请、专项子预算和结算率确认", status: "待确认" },
         { role: "业务角色", item: "类目目标与资源位确认", status: "待确认" },
-        { role: "安全角色", item: "L4 同步范围与保密协议签署确认", status: "待确认" }
+        { role: "安全角色", item: "L4-MOCK 同步范围与保密协议签署确认", status: "待确认" }
       ],
       questions: {
         goal: ["为什么先确认 ROI 下限？", "预算上限变化会影响哪些步骤？", "当前还缺哪些业务输入？"],
@@ -8134,13 +8194,13 @@
         governance: ["还缺哪些团队确认？", "专项子预算为什么单独申请？", "生成待审批策略包"]
       },
       answers: {
-        goal: "目标门禁避免在预算、ROI 和治理边界不清时过早定档。当前约束为预算上限 1.28 亿、ROI 下限 6.2、CAC 上限 20 元、人均补贴上限 50 元。",
+        goal: "目标门禁避免在预算、ROI 和治理边界不清时过早定档。当前 Mock 约束为预算上限 1.28 亿、ROI 下限 6.2、CAC 上限 20 元、人均补贴上限 50 元。",
         baseline: "近 20 天 GMV 为 93.6 亿，同比 +7.8%；DAC 为 2,860 万，同比 +7.1%；客单仅 +0.6%。因此增长约 88% 由支付用户规模贡献，促前应优先扩大有效 DAC，而不是普遍抬高高门槛券。",
         category: "数码家电历史活动日均 GMV 放大到 162，DAC +48%、客单 +9.5%，并贡献 31% 增量，因此列为 S 级；其高客单结构适合 1500-180 / 3000-420 与搜索渠道 X 券。",
         funnel: "1500-180 和 3000-420 的领取后核销率仅 26.6% / 21.0%，ROI 为 5.2 / 4.4，低于 300-40 的 44.0% 与 6.4。问题是门槛适配而非单纯触达，应限制泛发并绑定高客单类目与高意向人群。",
         experiment: "EXP_G03 的人均 GMV 69.1 元、增量 GMV 5,390 万、ROI 6.65，且 p=0.009。竞对 A/B/C 仅作为压力信号，不能替代自身类目需求和实验钱效。",
         plan: "B-4+X 申请预算 1.15 亿、结算率 88%、结算预算 1.012 亿、增量 GMV 6.60 亿、ROI 6.52，在高于 6.2 下限的同时兼顾规模和预算弹性。",
-        governance: "策略、财务、业务、安全四类角色需完成确认；专项 X 投放单列子预算；核心策略仅在 L4 范围同步并记录保密协议状态。"
+        governance: "策略、财务、业务、安全四类角色需完成确认；专项 X 投放单列子预算；核心策略仅在 L4-MOCK 范围同步并记录保密协议状态。"
       }
     };
 
@@ -10462,7 +10522,7 @@
               "assistant",
               "text",
               `<p>我已完成需求拆解。促前券档不能直接从面额开始，需要沿着<strong>目标约束 → 大盘水位 → 类目爆发 → 历史核销 → 实验与竞对 → 方案预算 → 治理审批</strong>逐步收敛。</p>
-               <div class="message-callout">数据口径：活动 <b>${preCaseData.profile.campaignId}</b>、站点 <b>${preCaseData.profile.siteCode}</b>；数据已脱敏，正式决策前需复核 ECOP 与财务口径。</div>`,
+               <div class="message-callout">已定位 ECOP 风格脱敏 Mock：活动 <b>${preCaseData.profile.campaignId}</b>、站点 <b>${preCaseData.profile.siteCode}</b>。所有金额按统一比例缩放，竞对和角色均使用别名。</div>`,
               [],
               "goal"
             ));
@@ -10485,6 +10545,7 @@
                   { id: "ask-pre-goal", label: "追问数据口径" }
                 ]
               });
+              preAddMessage(preCreateMessage("system", "system", `${preCaseData.mockLabel}；不读取真实线上数据，不提交预算、立项或策略配置。`));
               preUpdateComposer();
             };
             setTimeout(revealNextStep, DEMO_TIMING.introStep);
@@ -10529,7 +10590,7 @@
       if (message.type === "artifact" && preCaseState.artifact) {
         body = `<p>待审批策略包和七章 HTML 报告已生成，可在右侧预览或下载。</p>
           <div class="artifact-card">
-            <div class="artifact-main"><span class="artifact-icon">HTML</span><div class="artifact-copy"><strong>${escapeHTML(preCaseState.artifact.name)}</strong><span>${escapeHTML(preCaseState.artifact.sizeLabel)} · 数据已脱敏 · ${escapeHTML(preCaseState.artifact.createdAt)}</span></div></div>
+            <div class="artifact-main"><span class="artifact-icon">HTML</span><div class="artifact-copy"><strong>${escapeHTML(preCaseState.artifact.name)}</strong><span>${escapeHTML(preCaseState.artifact.sizeLabel)} · 脱敏 Mock · ${escapeHTML(preCaseState.artifact.createdAt)}</span></div></div>
             <div class="artifact-actions"><button data-pre-action="view-pre-artifact">查看报告</button><button data-pre-action="download-pre-artifact">下载</button></div>
           </div>`;
       }
@@ -10601,7 +10662,7 @@
       preCaseComposerSend.disabled = preCaseState.isResponding;
       preCaseComposerStatus.textContent = preCaseState.introStatus === "thinking"
         ? "Agent 正在理解需求并编排执行步骤…"
-        : preCaseState.isResponding ? "Agent 正在分析数据…" : "Enter 发送 · Shift+Enter 换行";
+        : preCaseState.isResponding ? "Agent 正在分析脱敏 Mock 数据…" : "Enter 发送 · Shift+Enter 换行";
     }
 
     function preAutoResizeComposer() {
@@ -10655,7 +10716,7 @@
         ["人均补贴上限", `¥${preCaseData.profile.subsidyCap}`],
         ["保密等级", preCaseData.profile.confidentiality]
       ];
-      return `<div class="pre-mock-banner"><b>数据口径</b>数据已脱敏；金额按统一比例缩放、日期整体平移，正式决策前需回读业务口径。</div>
+      return `<div class="pre-mock-banner"><b>MOCK</b>${preCaseData.mockLabel}。金额按统一比例缩放、日期整体平移，无法反推真实主体与内部值。</div>
         <div class="pre-profile-grid">${profile.map(([label, value]) => `<div class="pre-profile-cell"><span>${label}</span><strong>${escapeHTML(value)}</strong></div>`).join("")}</div>
         <div class="pre-budget-editor">
           <label for="preBudgetCapInput">预算申请上限</label>
@@ -10779,13 +10840,13 @@
         return `<div class="pre-governance-item ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.role}</strong><span>${item.item}</span></div><button data-pre-confirm-role="${index}" ${confirmed ? "disabled" : ""}>${confirmed ? "已确认" : "标记确认"}</button></div>`;
       }).join("");
       const final = preCaseState.packageGenerated ? `<div class="pre-final"><h3>推荐：B-4+X 均衡增长 · 待审批策略包</h3><p>固定档：300-40 / 600-80 / 1500-180 / 3000-420；X 券按 S/A 类目 × 高潜人群 × 搜索/会场定向。主预算、专项子预算和风险准备金已拆分，状态仅为待审批。</p></div>` : "";
-      return `<div class="pre-mock-banner"><b>L4</b>核心策略仅在角色范围内同步，并记录保密协议状态。</div><div class="pre-governance-list">${items}</div>${final}
+      return `<div class="pre-mock-banner"><b>L4-MOCK</b>核心策略仅在角色范围内同步；保密协议状态为脱敏演示字段。</div><div class="pre-governance-list">${items}</div>${final}
         ${preRenderInsight(
           "治理与落地洞察",
-          "策略包必须在四类角色确认后进入待审批。",
+          "策略包必须在四类角色确认后进入待审批，不执行真实配置。",
           `当前已确认 ${preCaseState.governanceConfirmed.size} / ${preCaseData.governance.length}；专项 X 投放单列子预算。`,
           "预算申请、立项、资源位和保密范围必须同步闭环，避免策略先行、治理滞后。",
-          "待审批状态不代表真实审批已经完成。",
+          "当前仅为原型审计状态，不代表任何真实审批完成。",
           "完成全部确认后生成自包含 HTML 策略包。",
           "governance"
         )}`;
@@ -10833,7 +10894,7 @@
         renderedPreReportSectionIds.add(section.id);
         return `<section class="report-section${isEntering ? " is-entering" : ""}" id="pre-report-section-${section.id}"><div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-pre-hide-section="${section.id}" aria-label="从促前报告中隐藏${escapeHTML(section.title)}">×</button></div><p class="report-section-lead">${leads[section.id]}</p>${content}</section>`;
       }).join("");
-      preReportDocument.innerHTML = `<header class="report-cover"><div class="report-cover-eyebrow">Pre-campaign strategy report</div><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignId} · ${preCaseData.profile.period}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>${preCaseData.profile.siteCode}</span><span>${total} 步分析</span></div></header>${sections}`;
+      preReportDocument.innerHTML = `<header class="report-cover"><div class="report-cover-eyebrow">Pre-campaign strategy report · anonymized mock</div><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignId} · ${preCaseData.profile.period} · ${preCaseData.mockLabel}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>${preCaseData.profile.siteCode}</span><span>${total} 步分析</span><span>未触发真实配置</span></div></header>${sections}`;
       preReportCanvasWrap.scrollTop = previousScrollTop;
     }
 
