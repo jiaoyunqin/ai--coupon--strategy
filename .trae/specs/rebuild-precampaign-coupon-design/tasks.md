@@ -57,11 +57,11 @@
 - Task 7 depends on Task 2 through Task 6.
 - Task 8 depends on all previous tasks.
 
-- [ ] Task 9: 发布到 GitHub：将已验收的 Demo 与规格文档提交并推送到 `https://github.com/jiaoyunqin/ai--coupon--strategy`。
-  - [ ] SubTask 9.1: 初始化本地 Git 仓库并使用 `main` 分支，不覆盖或回滚现有文件。
-  - [ ] SubTask 9.2: 提交前扫描凭证、Token、真实 ECOP 站点参数和不应发布的临时文件。
-  - [ ] SubTask 9.3: 提交 `index.html` 与 `.trae/specs` 规格记录，生成清晰的首次提交。
-  - [ ] SubTask 9.4: 配置指定 GitHub 远端并执行非强制推送。
-  - [ ] SubTask 9.5: 验证远端 `main` 与本地 HEAD commit 一致，且远端可见 `index.html`。
+- [x] Task 9: 发布到 GitHub：将已验收的 Demo 与规格文档提交并推送到 `https://github.com/jiaoyunqin/ai--coupon--strategy`。
+  - [x] SubTask 9.1: 初始化本地 Git 仓库并使用 `main` 分支，不覆盖或回滚现有文件。
+  - [x] SubTask 9.2: 提交前扫描凭证、Token、真实 ECOP 站点参数和不应发布的临时文件。
+  - [x] SubTask 9.3: 提交 `index.html` 与 `.trae/specs` 规格记录，生成清晰的首次提交。
+  - [x] SubTask 9.4: 配置指定 GitHub 远端并执行非强制推送。
+  - [x] SubTask 9.5: 验证远端 `main` 与本地 HEAD commit 一致，且远端可见 `index.html`。
 
 - Task 9 depends on Task 8.
