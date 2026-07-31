@@ -80,9 +80,9 @@
 
 ## GitHub 发布
 
-- [ ] 本地仓库默认分支为 `main`。
-- [ ] 提交内容不包含访问凭证、Token、真实 ECOP 查询参数或临时下载文件。
-- [ ] GitHub 远端为 `https://github.com/jiaoyunqin/ai--coupon--strategy`。
-- [ ] 推送过程未使用 `--force`，未覆盖未知远端历史。
+- [x] 本地仓库默认分支为 `main`。
+- [x] 提交内容不包含访问凭证、Token、真实 ECOP 查询参数或临时下载文件。
+- [x] GitHub 远端为 `https://github.com/jiaoyunqin/ai--coupon--strategy`。
+- [x] 推送过程未使用 `--force`，未覆盖未知远端历史。
 - [ ] 远端 `main` commit 与本地 HEAD 一致。
-- [ ] 远端仓库包含可直接打开的 `index.html` 和本次规格文档。
+- [ ] 远端仓库包含可直接打开的完整七步 `index.html` 和本次规格文档。

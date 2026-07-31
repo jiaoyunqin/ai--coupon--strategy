@@ -65,3 +65,7 @@
   - [x] SubTask 9.5: 验证远端 `main` 与本地 HEAD commit 一致，且远端可见 `index.html`。
 
 - Task 9 depends on Task 8.
+
+- [ ] Task 10: 同步最终验收状态：保留 locked 章节紧凑折叠，恢复被错误删除的促前七步治理链路，提交并推送最终规格状态，同时通过 `.gitignore` 排除未跟踪 `.trae/documents/`，确保本地与远端一致。
+
+- Task 10 depends on Task 9.
