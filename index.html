@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="color-scheme" content="light">
-  <title>消费券策略调优 Agent · 促中盯盘</title>
+  <title>券策略 Agent · 促中盯盘</title>
   <style>
     :root {
       --navy: #151a28;
@@ -161,8 +161,7 @@
 
     .history-item {
       display: grid;
-      grid-template-columns: 27px minmax(0, 1fr);
-      gap: 10px;
+      grid-template-columns: minmax(0, 1fr);
       align-items: center;
       width: 100%;
       min-height: 53px;
@@ -179,18 +178,6 @@
     .history-item.active {
       color: #fff;
       background: #202738;
-    }
-
-    .history-icon {
-      display: grid;
-      width: 27px;
-      height: 27px;
-      place-items: center;
-      border-radius: 7px;
-      color: #dce2f2;
-      background: #343e58;
-      font-size: 12px;
-      font-weight: 700;
     }
 
     .history-copy {
@@ -212,27 +199,43 @@
 
     .infra-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr;
       gap: 5px;
       margin-bottom: 12px;
     }
 
     .infra-btn {
       display: flex;
-      height: 35px;
+      height: 38px;
       align-items: center;
-      justify-content: center;
-      gap: 6px;
+      justify-content: flex-start;
+      gap: 9px;
+      padding: 0 12px;
       border: 1px solid #30384c;
       border-radius: 6px;
       color: #aab2c5;
       background: #202638;
       font-size: 10px;
+      text-align: left;
+      transition: color .18s, border-color .18s, background .18s;
     }
 
-    .infra-btn:hover {
+    .infra-btn b {
+      display: grid;
+      width: 17px;
+      place-items: center;
+      color: #8490aa;
+    }
+
+    .infra-btn:hover,
+    .infra-btn.active {
       color: #fff;
       border-color: #46516e;
+      background: #2a334c;
+    }
+
+    .infra-btn.active b {
+      color: #8ea8ff;
     }
 
     .sidebar-foot {
@@ -1585,8 +1588,7 @@
     }
 
     .breakdown-actions,
-    .card-head-actions,
-    .pre-guardrail-head {
+    .card-head-actions {
       display: flex;
       align-items: center;
       gap: 8px;
@@ -2154,1439 +2156,6 @@
       color: var(--pre-ink);
     }
 
-    .pre-dashboard-hero {
-      position: relative;
-      display: grid;
-      grid-template-columns: minmax(0, 1.55fr) minmax(420px, .85fr);
-      min-height: 238px;
-      margin-top: 18px;
-      overflow: hidden;
-      border: 1px solid #e1e6ef;
-      border-radius: 14px;
-      background:
-        linear-gradient(90deg, rgba(49, 87, 230, .025) 1px, transparent 1px),
-        linear-gradient(rgba(49, 87, 230, .025) 1px, transparent 1px),
-        radial-gradient(circle at 88% 5%, rgba(58, 92, 190, .12), transparent 25%),
-        #fbfcff;
-      background-size: 32px 32px, 32px 32px, auto, auto;
-      box-shadow: 0 12px 36px rgba(36, 57, 102, .055);
-    }
-
-    .pre-dashboard-hero::before {
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      left: 0;
-      width: 4px;
-      background: linear-gradient(180deg, #355ac5, #6d86d5 70%, #b8c5e9);
-      content: "";
-    }
-
-    .pre-dashboard-hero-main {
-      position: relative;
-      z-index: 1;
-      padding: 27px 32px 25px 34px;
-    }
-
-    .pre-hero-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      min-height: 25px;
-      padding: 0 9px;
-      border: 1px solid #dbe2f0;
-      border-radius: 999px;
-      color: #536078;
-      background: rgba(255, 255, 255, .84);
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .04em;
-    }
-
-    .pre-hero-kicker i {
-      width: 4px;
-      height: 4px;
-      border-radius: 50%;
-      background: #8c9ab2;
-    }
-
-    .pre-hero-kicker b {
-      color: #238568;
-      font-size: 9px;
-      font-weight: 700;
-    }
-
-    .pre-dashboard-hero h2 {
-      max-width: 680px;
-      margin-top: 15px;
-      line-height: 1.2;
-    }
-
-    .pre-dashboard-hero h2 span,
-    .pre-dashboard-hero h2 strong {
-      display: block;
-    }
-
-    .pre-dashboard-hero h2 span {
-      color: #7b879a;
-      font-size: 12px;
-      font-weight: 650;
-      letter-spacing: .08em;
-    }
-
-    .pre-dashboard-hero h2 strong {
-      margin-top: 7px;
-      color: #1c2940;
-      font-size: clamp(25px, 2.05vw, 32px);
-      font-weight: 720;
-      letter-spacing: -.035em;
-    }
-
-    .pre-dashboard-hero-main > p {
-      max-width: 680px;
-      margin-top: 12px;
-      color: var(--pre-muted);
-      font-size: 11px;
-      line-height: 1.7;
-    }
-
-    .pre-hero-focus {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 7px;
-      margin-top: 14px;
-    }
-
-    .pre-hero-focus span {
-      display: inline-flex;
-      height: 27px;
-      align-items: center;
-      gap: 6px;
-      padding: 0 9px;
-      border: 1px solid #e0e5ed;
-      border-radius: 6px;
-      color: #5f6b7e;
-      background: rgba(255, 255, 255, .76);
-      font-size: 9px;
-    }
-
-    .pre-hero-focus b {
-      color: #3f5fae;
-      font-size: 8px;
-      letter-spacing: .04em;
-    }
-
-    .pre-hero-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 9px;
-      margin-top: 16px;
-    }
-
-    .pre-hero-actions button {
-      height: 39px;
-      padding: 0 14px;
-      border-radius: 7px;
-      font-size: 11px;
-      font-weight: 650;
-    }
-
-    .pre-hero-actions .primary {
-      height: 39px;
-    }
-
-    .pre-hero-ask {
-      border: 1px solid #cdd7ef;
-      color: #4b62a8;
-      background: rgba(255, 255, 255, .84);
-    }
-
-    .pre-dashboard-hero-side {
-      position: relative;
-      z-index: 1;
-      display: grid;
-      align-content: center;
-      gap: 9px;
-      padding: 25px 28px 25px 0;
-    }
-
-    .pre-hero-decision {
-      padding: 17px 18px;
-      border: 1px solid rgba(82, 110, 184, .18);
-      border-radius: 11px;
-      background: rgba(255, 255, 255, .78);
-      box-shadow: 0 12px 28px rgba(38, 57, 101, .07);
-      backdrop-filter: blur(8px);
-    }
-
-    .pre-hero-decision-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .pre-hero-decision-head span {
-      color: #7b879b;
-      font-size: 9px;
-      font-weight: 700;
-      letter-spacing: .08em;
-    }
-
-    .pre-confidence {
-      display: inline-flex;
-      height: 23px;
-      align-items: center;
-      gap: 5px;
-      padding: 0 8px;
-      border-radius: 999px;
-      color: var(--pre-green) !important;
-      background: var(--pre-green-soft);
-      letter-spacing: 0 !important;
-    }
-
-    .pre-confidence i {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: #2bb78f;
-      box-shadow: 0 0 0 3px rgba(43, 183, 143, .12);
-    }
-
-    .pre-hero-decision strong {
-      display: block;
-      margin-top: 10px;
-      color: #263d79;
-      font-size: 20px;
-      letter-spacing: -.02em;
-    }
-
-    .pre-hero-decision p {
-      margin-top: 7px;
-      color: #69758a;
-      font-size: 10px;
-      line-height: 1.65;
-    }
-
-    .pre-decision-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 7px;
-      margin-top: 12px;
-    }
-
-    .pre-decision-metric {
-      padding: 8px 9px;
-      border-radius: 7px;
-      background: #f4f6fa;
-    }
-
-    .pre-decision-metric b,
-    .pre-decision-metric span {
-      display: block;
-    }
-
-    .pre-decision-metric b {
-      color: #384864;
-      font-size: 13px;
-    }
-
-    .pre-decision-metric span {
-      margin-top: 2px;
-      color: #8b94a5;
-      font-size: 8px;
-    }
-
-    .pre-source-strip {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 8px;
-      margin-top: 14px;
-    }
-
-    .pre-source-link {
-      position: relative;
-      min-height: 66px;
-      padding: 11px 28px 10px 12px;
-      border: 1px solid #e2e7f0;
-      border-radius: 9px;
-      color: inherit;
-      background: #fff;
-      box-shadow: 0 4px 14px rgba(32, 49, 87, .025);
-      text-decoration: none;
-      transition: border-color .18s, box-shadow .18s, transform .18s;
-    }
-
-    .pre-source-link:hover,
-    .pre-source-link:focus-visible {
-      border-color: #b9c7ec;
-      box-shadow: 0 9px 22px rgba(54, 93, 214, .08);
-      outline: none;
-      transform: translateY(-2px);
-    }
-
-    .pre-source-link::after {
-      position: absolute;
-      top: 12px;
-      right: 11px;
-      color: #9ca7ba;
-      content: "↗";
-      font-size: 11px;
-    }
-
-    .pre-source-link b,
-    .pre-source-link span {
-      display: block;
-    }
-
-    .pre-source-link b {
-      font-size: 10px;
-    }
-
-    .pre-source-link span {
-      margin-top: 6px;
-      color: #8a93a3;
-      font-size: 8px;
-      line-height: 1.45;
-    }
-
-    .pre-decision-path {
-      display: grid;
-      grid-template-columns: repeat(6, 1fr);
-      gap: 0;
-      margin-top: 14px;
-      overflow: hidden;
-      border: 1px solid #e1e6ef;
-      border-radius: 10px;
-      background: #fff;
-    }
-
-    .pre-path-step {
-      position: relative;
-      display: grid;
-      min-height: 72px;
-      grid-template-columns: 28px minmax(0, 1fr);
-      gap: 9px;
-      align-items: center;
-      padding: 10px 12px;
-      border: 0;
-      border-right: 1px solid #edf0f4;
-      color: #566276;
-      background: transparent;
-      text-align: left;
-    }
-
-    .pre-path-step:last-child {
-      border-right: 0;
-    }
-
-    .pre-path-step:hover,
-    .pre-path-step:focus-visible {
-      color: #2f4b9a;
-      background: #f7f9ff;
-      outline: none;
-    }
-
-    .pre-path-step b {
-      display: grid;
-      width: 28px;
-      height: 28px;
-      place-items: center;
-      border-radius: 8px;
-      color: #60739f;
-      background: #edf1f8;
-      font-size: 9px;
-    }
-
-    .pre-path-step.done b {
-      color: #fff;
-      background: #4c69c5;
-    }
-
-    .pre-path-step.warn b {
-      color: #fff;
-      background: #d0913c;
-    }
-
-    .pre-path-step span,
-    .pre-path-step small {
-      display: block;
-    }
-
-    .pre-path-step span {
-      font-size: 10px;
-      font-weight: 650;
-    }
-
-    .pre-path-step small {
-      margin-top: 3px;
-      color: #98a0ae;
-      font-size: 8px;
-    }
-
-    .pre-dashboard-grid {
-      display: grid;
-      grid-template-columns: minmax(0, 1.58fr) minmax(340px, .72fr);
-      gap: 14px;
-      margin-top: 14px;
-      align-items: start;
-    }
-
-    .pre-work-card {
-      overflow: hidden;
-      border: 1px solid #e1e5ed;
-      border-radius: 11px;
-      background: #fff;
-      box-shadow: var(--shadow);
-    }
-
-    .pre-work-card + .pre-work-card {
-      margin-top: 14px;
-    }
-
-    .pre-work-card-head {
-      display: flex;
-      min-height: 68px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-      padding: 0 18px;
-      border-bottom: 1px solid #edf0f4;
-    }
-
-    .pre-work-card-head h3 {
-      color: #2a3448;
-      font-size: 14px;
-    }
-
-    .pre-work-card-head p {
-      margin-top: 4px;
-      color: #9299a7;
-      font-size: 9px;
-    }
-
-    .pre-work-card-body {
-      padding: 17px 18px;
-    }
-
-    .pre-head-actions {
-      display: flex;
-      align-items: center;
-      gap: 7px;
-    }
-
-    .pre-mini-button,
-    .pre-segmented button {
-      height: 30px;
-      border-radius: 6px;
-      font-size: 9px;
-    }
-
-    .pre-mini-button {
-      padding: 0 9px;
-      border: 1px solid #d7deeb;
-      color: #5c6a82;
-      background: #fff;
-    }
-
-    .pre-mini-button:hover {
-      color: var(--pre-blue);
-      border-color: #bcc9eb;
-    }
-
-    .pre-segmented {
-      display: inline-flex;
-      padding: 2px;
-      border-radius: 7px;
-      background: #eef1f6;
-    }
-
-    .pre-segmented button {
-      padding: 0 10px;
-      border: 0;
-      color: #7c8494;
-      background: transparent;
-    }
-
-    .pre-segmented button.active {
-      color: #3456bd;
-      background: #fff;
-      box-shadow: 0 1px 4px rgba(31, 42, 68, .08);
-      font-weight: 700;
-    }
-
-    .pre-experiment-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.18fr) minmax(260px, .82fr);
-      gap: 14px;
-    }
-
-    .pre-experiment-list {
-      display: grid;
-      gap: 8px;
-    }
-
-    .pre-experiment-option {
-      display: grid;
-      grid-template-columns: 34px minmax(0, 1fr) repeat(3, 70px);
-      gap: 10px;
-      align-items: center;
-      min-height: 70px;
-      padding: 10px 12px;
-      border: 1px solid #e3e7ee;
-      border-radius: 8px;
-      color: inherit;
-      background: #fbfcfd;
-      text-align: left;
-      transition: border-color .18s, background .18s, transform .18s;
-    }
-
-    .pre-experiment-option:hover,
-    .pre-experiment-option.active {
-      border-color: #aebfe9;
-      background: #f6f8ff;
-      transform: translateX(2px);
-    }
-
-    .pre-experiment-option > b {
-      display: grid;
-      width: 31px;
-      height: 31px;
-      place-items: center;
-      border-radius: 8px;
-      color: #5870b5;
-      background: #eaf0ff;
-      font-size: 9px;
-    }
-
-    .pre-experiment-option.active > b {
-      color: #fff;
-      background: #4968ce;
-    }
-
-    .pre-experiment-name strong,
-    .pre-experiment-name span {
-      display: block;
-    }
-
-    .pre-experiment-name strong {
-      color: #3d485b;
-      font-size: 10px;
-    }
-
-    .pre-experiment-name span {
-      margin-top: 4px;
-      color: #929aa8;
-      font-size: 8px;
-    }
-
-    .pre-experiment-stat {
-      text-align: right;
-    }
-
-    .pre-experiment-stat b,
-    .pre-experiment-stat span {
-      display: block;
-    }
-
-    .pre-experiment-stat b {
-      color: #3c4a63;
-      font-size: 11px;
-    }
-
-    .pre-experiment-stat span {
-      margin-top: 3px;
-      color: #99a0ae;
-      font-size: 7px;
-    }
-
-    .pre-experiment-detail {
-      padding: 16px;
-      border: 1px solid #cae6dc;
-      border-radius: 9px;
-      background:
-        radial-gradient(circle at 90% 10%, rgba(35, 162, 126, .1), transparent 28%),
-        #f5fbf8;
-    }
-
-    .pre-experiment-detail-kicker {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      color: #43816e;
-      font-size: 8px;
-      font-weight: 700;
-      letter-spacing: .08em;
-    }
-
-    .pre-experiment-detail h4 {
-      margin-top: 9px;
-      color: #235f4e;
-      font-size: 14px;
-    }
-
-    .pre-experiment-detail > p {
-      margin-top: 8px;
-      color: #5d736c;
-      font-size: 9px;
-      line-height: 1.65;
-    }
-
-    .pre-adjustment-list {
-      display: grid;
-      gap: 7px;
-      margin-top: 13px;
-    }
-
-    .pre-adjustment-row {
-      display: grid;
-      grid-template-columns: 72px 16px minmax(0, 1fr);
-      gap: 7px;
-      align-items: center;
-      padding: 7px 8px;
-      border-radius: 6px;
-      color: #60716c;
-      background: rgba(255, 255, 255, .72);
-      font-size: 8px;
-    }
-
-    .pre-adjustment-row b {
-      color: #48645b;
-    }
-
-    .pre-adjustment-row i {
-      color: #31a17f;
-      font-style: normal;
-      text-align: center;
-    }
-
-    .pre-drill-toolbar {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 11px;
-    }
-
-    .pre-drill-context {
-      color: #8d95a4;
-      font-size: 9px;
-    }
-
-    .pre-dashboard-table-wrap {
-      overflow: auto;
-      border: 1px solid #e6e9ef;
-      border-radius: 8px;
-    }
-
-    .pre-dashboard-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 9px;
-    }
-
-    .pre-dashboard-table th,
-    .pre-dashboard-table td {
-      min-width: 82px;
-      height: 40px;
-      padding: 0 10px;
-      border-bottom: 1px solid #edf0f4;
-      color: #657084;
-      text-align: right;
-      white-space: nowrap;
-    }
-
-    .pre-dashboard-table th {
-      color: #9098a7;
-      background: #f9fafc;
-      font-size: 8px;
-      font-weight: 650;
-    }
-
-    .pre-dashboard-table th:first-child,
-    .pre-dashboard-table td:first-child {
-      min-width: 140px;
-      text-align: left;
-    }
-
-    .pre-dashboard-table tr:last-child td {
-      border-bottom: 0;
-    }
-
-    .pre-dashboard-table tr.is-priority td {
-      background: #f6f8ff;
-    }
-
-    .pre-table-action {
-      display: inline-flex;
-      padding: 3px 7px;
-      border-radius: 5px;
-      color: #3558bc;
-      background: #edf2ff;
-      font-size: 8px;
-    }
-
-    .pre-table-action.reduce {
-      color: #ad6c20;
-      background: #fff4e6;
-    }
-
-    .pre-ai-summary {
-      display: grid;
-      grid-template-columns: auto minmax(0, 1fr) auto;
-      gap: 10px;
-      align-items: center;
-      margin-top: 11px;
-      padding: 10px 12px;
-      border: 1px solid #d7e0f5;
-      border-radius: 8px;
-      color: #53617b;
-      background: linear-gradient(90deg, #f4f7ff, #fafcff);
-      font-size: 9px;
-      line-height: 1.55;
-    }
-
-    .pre-ai-summary .spark {
-      width: 23px;
-      height: 23px;
-    }
-
-    .pre-ai-summary button {
-      padding: 4px 0;
-      border: 0;
-      color: #4563bd;
-      background: transparent;
-      font-size: 8px;
-    }
-
-    .pre-side-stack {
-      display: grid;
-      gap: 14px;
-    }
-
-    .pre-architecture-card {
-      padding: 17px;
-      border: 1px solid #dfe5ef;
-      border-radius: 11px;
-      background:
-        linear-gradient(180deg, #fbfcff 0%, #fff 100%);
-      box-shadow: var(--shadow);
-    }
-
-    .pre-architecture-head {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 12px;
-    }
-
-    .pre-architecture-head h3 {
-      font-size: 14px;
-    }
-
-    .pre-architecture-head p {
-      margin-top: 4px;
-      color: #929aa8;
-      font-size: 9px;
-    }
-
-    .pre-architecture-status {
-      padding: 4px 7px;
-      border-radius: 5px;
-      color: #247b61;
-      background: #eaf8f2;
-      font-size: 8px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .pre-architecture-switch {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 7px;
-      margin-top: 14px;
-    }
-
-    .pre-architecture-switch button {
-      min-height: 48px;
-      padding: 8px;
-      border: 1px solid #e0e5ed;
-      border-radius: 7px;
-      color: #697386;
-      background: #fff;
-      font-size: 9px;
-    }
-
-    .pre-architecture-switch button b,
-    .pre-architecture-switch button span {
-      display: block;
-    }
-
-    .pre-architecture-switch button b {
-      color: #3d495e;
-      font-size: 11px;
-    }
-
-    .pre-architecture-switch button span {
-      margin-top: 3px;
-      color: #939baa;
-      font-size: 7px;
-    }
-
-    .pre-architecture-switch button.active {
-      border-color: #8298df;
-      background: #f3f6ff;
-      box-shadow: inset 0 2px 0 #526fd1;
-    }
-
-    .pre-tier-stack {
-      display: grid;
-      gap: 6px;
-      margin-top: 13px;
-    }
-
-    .pre-tier-row {
-      display: grid;
-      grid-template-columns: 66px minmax(0, 1fr) auto;
-      gap: 9px;
-      align-items: center;
-      min-height: 43px;
-      padding: 7px 9px;
-      border: 1px solid #e6e9ef;
-      border-radius: 7px;
-      background: #fff;
-    }
-
-    .pre-tier-row.is-optional {
-      border-style: dashed;
-    }
-
-    .pre-tier-row.is-hidden-tier {
-      display: none;
-    }
-
-    .pre-tier-value {
-      color: #3856aa;
-      font-size: 10px;
-      font-weight: 750;
-    }
-
-    .pre-tier-row div strong,
-    .pre-tier-row div span {
-      display: block;
-    }
-
-    .pre-tier-row div strong {
-      color: #596477;
-      font-size: 8px;
-    }
-
-    .pre-tier-row div span {
-      margin-top: 2px;
-      color: #9aa1ae;
-      font-size: 7px;
-    }
-
-    .pre-tier-row em {
-      color: #34806b;
-      font-size: 7px;
-      font-style: normal;
-    }
-
-    .pre-architecture-total {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 6px;
-      margin-top: 11px;
-    }
-
-    .pre-architecture-total div {
-      padding: 8px;
-      border-radius: 6px;
-      background: #f2f4f8;
-    }
-
-    .pre-architecture-total b,
-    .pre-architecture-total span {
-      display: block;
-    }
-
-    .pre-architecture-total b {
-      color: #3f4e69;
-      font-size: 11px;
-    }
-
-    .pre-architecture-total span {
-      margin-top: 2px;
-      color: #979eab;
-      font-size: 7px;
-    }
-
-    .pre-guardrail {
-      padding: 14px 15px;
-      border: 1px solid #efddc0;
-      border-radius: 10px;
-      background: #fffaf1;
-    }
-
-    .pre-guardrail-head {
-      justify-content: space-between;
-    }
-
-    .pre-guardrail h3 {
-      color: #73572f;
-      font-size: 12px;
-    }
-
-    .pre-guardrail-list {
-      display: grid;
-      gap: 8px;
-      margin-top: 10px;
-    }
-
-    .pre-guardrail-row {
-      display: grid;
-      grid-template-columns: 7px minmax(0, 1fr) auto;
-      gap: 8px;
-      align-items: center;
-      color: #786a55;
-      font-size: 8px;
-    }
-
-    .pre-guardrail-row i {
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: #d79b47;
-    }
-
-    .pre-guardrail-row b {
-      color: #5b4a31;
-      font-size: 8px;
-    }
-
-    .pre-full-card {
-      margin-top: 14px;
-    }
-
-    .pre-wave-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.35fr) minmax(300px, .65fr);
-      gap: 14px;
-    }
-
-    .pre-wave-timeline {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 8px;
-    }
-
-    .pre-wave-button {
-      position: relative;
-      min-height: 116px;
-      padding: 13px 12px;
-      overflow: hidden;
-      border: 1px solid #e1e6ee;
-      border-radius: 9px;
-      color: inherit;
-      background: #fbfcfd;
-      text-align: left;
-    }
-
-    .pre-wave-button::after {
-      position: absolute;
-      right: -21px;
-      bottom: -29px;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      background: #eef2fb;
-      content: "";
-    }
-
-    .pre-wave-button:hover,
-    .pre-wave-button.active {
-      border-color: #91a7e4;
-      background: #f5f7ff;
-    }
-
-    .pre-wave-button.active {
-      box-shadow: inset 0 3px 0 #4d6bd0;
-    }
-
-    .pre-wave-button b,
-    .pre-wave-button span,
-    .pre-wave-button strong,
-    .pre-wave-button em {
-      position: relative;
-      z-index: 1;
-      display: block;
-    }
-
-    .pre-wave-button b {
-      color: #66738a;
-      font-size: 8px;
-      letter-spacing: .06em;
-    }
-
-    .pre-wave-button strong {
-      margin-top: 8px;
-      font-size: 11px;
-    }
-
-    .pre-wave-button span {
-      margin-top: 4px;
-      color: #939ba9;
-      font-size: 8px;
-    }
-
-    .pre-wave-button em {
-      margin-top: 12px;
-      color: #3959b6;
-      font-size: 13px;
-      font-style: normal;
-      font-weight: 750;
-    }
-
-    .pre-wave-detail {
-      min-height: 116px;
-      padding: 14px;
-      border: 1px solid #dbe2f2;
-      border-radius: 9px;
-      background: #f7f9ff;
-    }
-
-    .pre-wave-detail-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .pre-wave-detail-head strong {
-      font-size: 11px;
-    }
-
-    .pre-wave-detail-head span {
-      padding: 3px 6px;
-      border-radius: 4px;
-      color: #3d60bd;
-      background: #e9efff;
-      font-size: 7px;
-    }
-
-    .pre-wave-detail-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 7px;
-      margin-top: 10px;
-    }
-
-    .pre-wave-detail-grid div {
-      padding: 7px 8px;
-      border-radius: 6px;
-      background: #fff;
-    }
-
-    .pre-wave-detail-grid b,
-    .pre-wave-detail-grid span {
-      display: block;
-    }
-
-    .pre-wave-detail-grid b {
-      color: #9098a8;
-      font-size: 7px;
-    }
-
-    .pre-wave-detail-grid span {
-      margin-top: 3px;
-      color: #536079;
-      font-size: 8px;
-    }
-
-    .pre-wave-budget-bar {
-      display: flex;
-      height: 15px;
-      margin-top: 13px;
-      overflow: hidden;
-      border-radius: 999px;
-      background: #edf0f5;
-    }
-
-    .pre-wave-budget-bar i {
-      display: block;
-      height: 100%;
-    }
-
-    .pre-wave-budget-bar i:nth-child(1) { width: 12%; background: #91a7e6; }
-    .pre-wave-budget-bar i:nth-child(2) { width: 31%; background: #4b69ce; }
-    .pre-wave-budget-bar i:nth-child(3) { width: 27%; background: #36a17f; }
-    .pre-wave-budget-bar i:nth-child(4) { width: 16%; background: #d99545; }
-    .pre-wave-budget-bar i:nth-child(5) { width: 9%; background: #876cc6; }
-    .pre-wave-budget-bar i:nth-child(6) { width: 5%; background: #c7ced9; }
-
-    .pre-wave-budget-legend {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 11px;
-      margin-top: 8px;
-      color: #8d95a4;
-      font-size: 8px;
-    }
-
-    .pre-wave-budget-legend span::before {
-      display: inline-block;
-      width: 6px;
-      height: 6px;
-      margin-right: 5px;
-      border-radius: 2px;
-      background: #6f87d7;
-      content: "";
-    }
-
-    .pre-matrix-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(300px, .55fr);
-      gap: 14px;
-    }
-
-    .pre-channel-matrix {
-      display: grid;
-      grid-template-columns: 145px repeat(5, minmax(82px, 1fr));
-      border: 1px solid #e4e8ef;
-      border-radius: 8px;
-      overflow: hidden;
-    }
-
-    .pre-matrix-cell {
-      display: grid;
-      min-height: 54px;
-      place-items: center;
-      padding: 7px;
-      border-right: 1px solid #edf0f4;
-      border-bottom: 1px solid #edf0f4;
-      color: #687386;
-      background: #fff;
-      font-size: 8px;
-      text-align: center;
-    }
-
-    .pre-matrix-cell:nth-child(6n) {
-      border-right: 0;
-    }
-
-    .pre-matrix-cell.head {
-      min-height: 42px;
-      color: #8c95a5;
-      background: #f8f9fb;
-      font-weight: 650;
-    }
-
-    .pre-matrix-cell.row-head {
-      place-items: center start;
-      color: #4b576b;
-      background: #fafbfc;
-      font-weight: 650;
-      text-align: left;
-    }
-
-    .pre-matrix-cell:last-child,
-    .pre-matrix-cell:nth-last-child(2),
-    .pre-matrix-cell:nth-last-child(3),
-    .pre-matrix-cell:nth-last-child(4),
-    .pre-matrix-cell:nth-last-child(5),
-    .pre-matrix-cell:nth-last-child(6) {
-      border-bottom: 0;
-    }
-
-    .pre-matrix-pill {
-      display: inline-flex;
-      min-width: 44px;
-      min-height: 24px;
-      align-items: center;
-      justify-content: center;
-      padding: 3px 6px;
-      border-radius: 5px;
-      color: #667286;
-      background: #f0f2f6;
-    }
-
-    .pre-matrix-pill.high {
-      color: #fff;
-      background: #4e6dce;
-    }
-
-    .pre-matrix-pill.mid {
-      color: #24765f;
-      background: #e2f4ed;
-    }
-
-    .pre-matrix-pill.low {
-      color: #a26823;
-      background: #fff1dd;
-    }
-
-    .pre-channel-playbook {
-      display: grid;
-      gap: 7px;
-    }
-
-    .pre-channel-row {
-      display: grid;
-      grid-template-columns: 65px minmax(0, 1fr) auto;
-      gap: 9px;
-      align-items: center;
-      min-height: 48px;
-      padding: 8px 9px;
-      border: 1px solid #e4e8ee;
-      border-radius: 7px;
-      background: #fbfcfd;
-    }
-
-    .pre-channel-row > b {
-      color: #41506a;
-      font-size: 9px;
-    }
-
-    .pre-channel-row strong,
-    .pre-channel-row span {
-      display: block;
-    }
-
-    .pre-channel-row strong {
-      color: #657084;
-      font-size: 8px;
-    }
-
-    .pre-channel-row span {
-      margin-top: 3px;
-      color: #969dab;
-      font-size: 7px;
-    }
-
-    .pre-channel-row em {
-      color: #2c8067;
-      font-size: 8px;
-      font-style: normal;
-      font-weight: 650;
-    }
-
-    .pre-check-layout {
-      display: grid;
-      grid-template-columns: minmax(0, 1.1fr) minmax(330px, .9fr);
-      gap: 14px;
-    }
-
-    .pre-experiment-config {
-      display: grid;
-      gap: 8px;
-    }
-
-    .pre-config-arm {
-      display: grid;
-      grid-template-columns: 92px minmax(0, 1fr) 58px;
-      gap: 10px;
-      align-items: center;
-      min-height: 58px;
-      padding: 9px 11px;
-      border: 1px solid #e3e7ee;
-      border-radius: 8px;
-      background: #fbfcfd;
-    }
-
-    .pre-config-arm.control {
-      border-style: dashed;
-      background: #fffaf2;
-    }
-
-    .pre-config-arm > b {
-      color: #4e5a70;
-      font-size: 9px;
-    }
-
-    .pre-config-arm strong,
-    .pre-config-arm span {
-      display: block;
-    }
-
-    .pre-config-arm strong {
-      color: #5c687d;
-      font-size: 9px;
-    }
-
-    .pre-config-arm span {
-      margin-top: 3px;
-      color: #959dab;
-      font-size: 7px;
-    }
-
-    .pre-config-arm em {
-      color: #3759b5;
-      font-size: 13px;
-      font-style: normal;
-      font-weight: 750;
-      text-align: right;
-    }
-
-    .pre-config-metrics {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-      margin-top: 10px;
-    }
-
-    .pre-config-metrics span {
-      padding: 5px 8px;
-      border-radius: 5px;
-      color: #60708b;
-      background: #f0f3f8;
-      font-size: 8px;
-    }
-
-    .pre-check-panel {
-      padding: 13px;
-      border: 1px solid #e1e6ee;
-      border-radius: 9px;
-      background: #fafbfc;
-    }
-
-    .pre-check-panel-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-    }
-
-    .pre-check-panel-head strong {
-      font-size: 11px;
-    }
-
-    .pre-readiness {
-      display: inline-flex;
-      height: 25px;
-      align-items: center;
-      padding: 0 8px;
-      border-radius: 999px;
-      color: #9d6622;
-      background: #fff1dd;
-      font-size: 8px;
-      font-weight: 700;
-    }
-
-    .pre-readiness.ready {
-      color: #247b61;
-      background: #e4f6ef;
-    }
-
-    .pre-check-list {
-      display: grid;
-      gap: 7px;
-      margin-top: 11px;
-    }
-
-    .pre-check-item {
-      display: grid;
-      grid-template-columns: 22px minmax(0, 1fr) auto;
-      gap: 9px;
-      align-items: center;
-      min-height: 48px;
-      padding: 8px 9px;
-      border: 1px solid #e5e8ee;
-      border-radius: 7px;
-      background: #fff;
-    }
-
-    .pre-check-icon {
-      display: grid;
-      width: 22px;
-      height: 22px;
-      place-items: center;
-      border-radius: 6px;
-      color: #a16a26;
-      background: #fff2df;
-      font-size: 8px;
-      font-weight: 800;
-    }
-
-    .pre-check-item.resolved .pre-check-icon,
-    .pre-check-item.pass .pre-check-icon {
-      color: #fff;
-      background: #39a27f;
-    }
-
-    .pre-check-item strong,
-    .pre-check-item span {
-      display: block;
-    }
-
-    .pre-check-item strong {
-      color: #586377;
-      font-size: 8px;
-    }
-
-    .pre-check-item span {
-      margin-top: 3px;
-      color: #959dab;
-      font-size: 7px;
-    }
-
-    .pre-check-item button {
-      height: 27px;
-      padding: 0 8px;
-      border: 1px solid #dbc399;
-      border-radius: 5px;
-      color: #986524;
-      background: #fff9ef;
-      font-size: 7px;
-    }
-
-    .pre-check-item button:disabled {
-      border-color: #dfe4e9;
-      color: #87918f;
-      background: #f1f5f3;
-    }
-
-    .pre-final-cta {
-      display: flex;
-      min-height: 86px;
-      align-items: center;
-      justify-content: space-between;
-      gap: 22px;
-      margin-top: 14px;
-      padding: 17px 20px;
-      border: 1px solid #b8c8ef;
-      border-radius: 11px;
-      background:
-        radial-gradient(circle at 90% 5%, rgba(62, 98, 208, .11), transparent 30%),
-        linear-gradient(90deg, #f5f7ff, #fff);
-    }
-
-    .pre-final-cta strong {
-      display: block;
-      color: #314888;
-      font-size: 13px;
-    }
-
-    .pre-final-cta p {
-      margin-top: 5px;
-      color: #71809b;
-      font-size: 9px;
-      line-height: 1.55;
-    }
-
-    .pre-final-actions {
-      display: flex;
-      flex: 0 0 auto;
-      gap: 8px;
-    }
-
-    .pre-final-actions button {
-      height: 38px;
-      padding: 0 13px;
-      border-radius: 7px;
-      font-size: 9px;
-    }
-
     .pre-home-shell {
       display: grid;
       gap: 14px;
@@ -4126,6 +2695,40 @@
       font-size: 8px;
     }
 
+    .pre-insight-detail {
+      margin-top: 9px;
+      overflow: auto;
+      border: 1px solid #e5e9f0;
+      border-radius: 7px;
+    }
+
+    .pre-insight-detail table {
+      width: 100%;
+      min-width: 620px;
+      border-collapse: collapse;
+      font-size: 7px;
+    }
+
+    .pre-insight-detail th,
+    .pre-insight-detail td {
+      height: 30px;
+      padding: 0 8px;
+      border-bottom: 1px solid #edf0f4;
+      color: #737e90;
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .pre-insight-detail th {
+      color: #4c596f;
+      background: #f8f9fb;
+      font-weight: 700;
+    }
+
+    .pre-insight-detail tr:last-child td {
+      border-bottom: 0;
+    }
+
     .pre-source-note {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
@@ -4191,61 +2794,9 @@
       }
     }
 
-    @media (max-width: 1380px) {
-      .pre-dashboard-hero {
-        grid-template-columns: minmax(0, 1.35fr) minmax(360px, .75fr);
-      }
-
-      .pre-dashboard-grid,
-      .pre-matrix-layout {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .pre-side-stack {
-        grid-template-columns: repeat(2, 1fr);
-      }
-
-      .pre-architecture-card,
-      .pre-guardrail {
-        min-width: 0;
-      }
-    }
-
     @media (max-width: 1120px) {
-      .pre-calendar-grid,
-      .pre-promo-types,
       .pre-source-note {
         grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-
-      .pre-dashboard-hero {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .pre-dashboard-hero-side {
-        padding: 0 28px 28px;
-      }
-
-      .pre-source-strip {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .pre-decision-path {
-        grid-template-columns: repeat(3, 1fr);
-      }
-
-      .pre-path-step:nth-child(3) {
-        border-right: 0;
-      }
-
-      .pre-path-step:nth-child(-n+3) {
-        border-bottom: 1px solid #edf0f4;
-      }
-
-      .pre-experiment-layout,
-      .pre-wave-layout,
-      .pre-check-layout {
-        grid-template-columns: minmax(0, 1fr);
       }
     }
 
@@ -4283,38 +2834,6 @@
         grid-template-columns: minmax(85px, 1.2fr) repeat(3, minmax(58px, .8fr));
       }
 
-      .pre-dashboard-hero-main {
-        padding: 24px 20px;
-      }
-
-      .pre-dashboard-hero-side {
-        padding: 0 20px 20px;
-      }
-
-      .pre-source-strip,
-      .pre-decision-path,
-      .pre-side-stack,
-      .pre-wave-timeline {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
-      .pre-path-step {
-        border-right: 0;
-        border-bottom: 1px solid #edf0f4;
-      }
-
-      .pre-experiment-option {
-        grid-template-columns: 32px minmax(0, 1fr);
-      }
-
-      .pre-experiment-stat {
-        display: none;
-      }
-
-      .pre-channel-matrix {
-        grid-template-columns: 120px repeat(5, 82px);
-        overflow: auto;
-      }
     }
 
     .case-view {
@@ -5755,22 +4274,13 @@
 
     /* Aime-inspired case workspace: conversation drives a progressive report. */
     .workspace.case-workspace-active {
-      height: calc(100vh - 68px);
+      height: 100vh;
       padding: 0;
       overflow: hidden;
     }
 
     .topbar.case-topbar-simple {
-      padding: 0 22px;
-    }
-
-    .topbar.case-topbar-simple .titleline {
-      margin: 0;
-    }
-
-    .topbar.case-topbar-simple h1 {
-      font-size: 16px;
-      font-weight: 700;
+      display: none;
     }
 
     .workspace.case-workspace-active .case-view {
@@ -7960,6 +6470,676 @@
       }
     }
 
+    .infra-management {
+      display: none;
+      min-height: calc(100vh - 68px);
+      margin: -22px -28px -36px;
+      color: #252a33;
+      background: #f5f6f8;
+    }
+
+    .infra-management.active {
+      display: block;
+    }
+
+    .resource-shell {
+      min-height: calc(100vh - 68px);
+    }
+
+    .resource-head {
+      display: flex;
+      min-height: 78px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      padding: 14px 24px;
+      border-bottom: 1px solid #e4e6ea;
+      background: #fff;
+    }
+
+    .resource-title h2 {
+      color: #1d222c;
+      font-size: 18px;
+    }
+
+    .resource-title p {
+      margin-top: 5px;
+      color: #8b909b;
+      font-size: 10px;
+    }
+
+    .resource-primary,
+    .resource-secondary,
+    .resource-filter,
+    .resource-action {
+      border: 1px solid #dfe2e7;
+      border-radius: 6px;
+      color: #4d5564;
+      background: #fff;
+      font-size: 10px;
+      font-weight: 600;
+    }
+
+    .resource-primary {
+      min-height: 34px;
+      padding: 0 13px;
+      border-color: #22261e;
+      color: #fff;
+      background: #22261e;
+    }
+
+    .resource-primary.blue {
+      border-color: #2f73e8;
+      background: #2f73e8;
+    }
+
+    .resource-content {
+      padding: 18px 24px 32px;
+    }
+
+    .resource-summary-tabs {
+      display: flex;
+      min-height: 30px;
+      align-items: flex-end;
+      gap: 25px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+
+    .resource-summary-tab {
+      position: relative;
+      height: 30px;
+      padding: 0;
+      border: 0;
+      color: #8c929d;
+      background: transparent;
+      font-size: 10px;
+    }
+
+    .resource-summary-tab b {
+      margin-left: 4px;
+      color: #3e4551;
+    }
+
+    .resource-summary-tab.active {
+      color: #292f39;
+      font-weight: 650;
+    }
+
+    .resource-summary-tab.active::after {
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 2px;
+      background: #2f73e8;
+      content: "";
+    }
+
+    .resource-toolbar {
+      display: flex;
+      min-height: 50px;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .resource-search {
+      position: relative;
+      display: block;
+      width: 210px;
+    }
+
+    .resource-search::before {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      color: #a1a6af;
+      content: "⌕";
+      transform: translateY(-50%);
+    }
+
+    .resource-search input,
+    .resource-form input,
+    .resource-form textarea,
+    .resource-form select {
+      width: 100%;
+      border: 1px solid #dfe2e7;
+      border-radius: 6px;
+      color: #363d49;
+      background: #fff;
+      font: inherit;
+      font-size: 10px;
+    }
+
+    .resource-search input {
+      height: 32px;
+      padding: 0 10px 0 29px;
+    }
+
+    .resource-filter {
+      min-height: 30px;
+      padding: 0 10px;
+      font-weight: 500;
+    }
+
+    .resource-filter:hover,
+    .resource-filter.active {
+      color: #246ce0;
+      border-color: #b9cdf3;
+      background: #edf4ff;
+    }
+
+    .resource-toolbar-spacer {
+      flex: 1;
+    }
+
+    .resource-view-toggle {
+      display: flex;
+      gap: 3px;
+      padding: 3px;
+      border: 1px solid #e1e4e9;
+      border-radius: 6px;
+      background: #fff;
+    }
+
+    .resource-view-toggle button {
+      width: 24px;
+      height: 22px;
+      border: 0;
+      border-radius: 4px;
+      color: #9a9faa;
+      background: transparent;
+    }
+
+    .resource-view-toggle button.active {
+      color: #2f73e8;
+      background: #edf4ff;
+    }
+
+    .resource-empty {
+      display: grid;
+      min-height: 280px;
+      place-items: center;
+      border: 1px dashed #dadee4;
+      border-radius: 8px;
+      color: #989eaa;
+      background: rgba(255,255,255,.6);
+      font-size: 11px;
+    }
+
+    .resource-table-card {
+      overflow: hidden;
+      border: 1px solid #e4e6ea;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .resource-table-title {
+      height: 38px;
+      padding: 11px 14px;
+      border-bottom: 1px solid #eceef1;
+      color: #303640;
+      font-size: 10px;
+      font-weight: 700;
+    }
+
+    .resource-table {
+      width: 100%;
+      border-collapse: collapse;
+      table-layout: fixed;
+    }
+
+    .resource-table th,
+    .resource-table td {
+      height: 46px;
+      padding: 0 12px;
+      border-bottom: 1px solid #eff0f2;
+      color: #5c6370;
+      font-size: 9px;
+      text-align: left;
+    }
+
+    .resource-table th {
+      height: 34px;
+      color: #989da7;
+      background: #fbfbfc;
+      font-weight: 500;
+    }
+
+    .resource-name {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .resource-name-icon,
+    .resource-card-icon {
+      display: grid;
+      width: 23px;
+      height: 23px;
+      flex: 0 0 23px;
+      place-items: center;
+      border-radius: 5px;
+      color: #318a64;
+      background: #eaf7f0;
+      font-size: 10px;
+    }
+
+    .resource-name > span {
+      min-width: 0;
+    }
+
+    .resource-name strong,
+    .resource-name small {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .resource-name strong {
+      color: #343a45;
+      font-size: 9px;
+    }
+
+    .resource-name small {
+      color: #a1a6af;
+      font-size: 8px;
+    }
+
+    .resource-status {
+      display: inline-flex;
+      height: 20px;
+      align-items: center;
+      gap: 5px;
+      padding: 0 7px;
+      border: 0;
+      border-radius: 999px;
+      color: #47845f;
+      background: #edf8ef;
+      font-size: 8px;
+    }
+
+    .resource-status::before {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: #50aa6b;
+      content: "";
+    }
+
+    .resource-status.off {
+      color: #8d929b;
+      background: #f1f2f4;
+    }
+
+    .resource-status.off::before {
+      background: #a7abb2;
+    }
+
+    .resource-row-action {
+      width: 26px;
+      height: 26px;
+      border: 0;
+      color: #858b96;
+      background: transparent;
+    }
+
+    .resource-card-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .resource-card-grid.compact {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+
+    .resource-card {
+      display: flex;
+      min-width: 0;
+      min-height: 142px;
+      flex-direction: column;
+      padding: 12px;
+      border: 1px solid #e3e6ea;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .resource-card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    .resource-card-icon {
+      color: #2f73e8;
+      background: #edf4ff;
+    }
+
+    .resource-card-title {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .resource-card-title strong,
+    .resource-card-title span {
+      display: block;
+    }
+
+    .resource-card-title strong {
+      overflow: hidden;
+      color: #2e3540;
+      font-size: 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .resource-card-title span {
+      color: #5aa477;
+      font-size: 8px;
+    }
+
+    .resource-switch {
+      position: relative;
+      width: 28px;
+      height: 16px;
+      border: 0;
+      border-radius: 999px;
+      background: #cad1da;
+    }
+
+    .resource-switch::after {
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+      background: #fff;
+      content: "";
+      transition: transform .18s;
+    }
+
+    .resource-switch.on {
+      background: #3785ee;
+    }
+
+    .resource-switch.on::after {
+      transform: translateX(12px);
+    }
+
+    .resource-card-copy {
+      min-height: 32px;
+      margin: 10px 0;
+      overflow: hidden;
+      color: #69717f;
+      font-size: 9px;
+      line-height: 1.65;
+    }
+
+    .resource-card-meta {
+      display: flex;
+      gap: 5px;
+      margin: -2px 0 9px;
+      overflow: hidden;
+    }
+
+    .resource-card-meta span {
+      padding: 3px 6px;
+      border-radius: 4px;
+      color: #737b89;
+      background: #f2f4f7;
+      font-size: 8px;
+      white-space: nowrap;
+    }
+
+    .resource-card-actions {
+      display: flex;
+      gap: 5px;
+      margin-top: auto;
+    }
+
+    .resource-action {
+      min-height: 25px;
+      padding: 0 8px;
+      font-size: 8px;
+    }
+
+    .resource-action.primary-action {
+      border-color: #2f7fe9;
+      color: #fff;
+      background: #2f7fe9;
+    }
+
+    .resource-filter-stack {
+      display: grid;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .resource-filter-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      overflow: hidden;
+    }
+
+    .resource-filter-row > b {
+      width: 56px;
+      flex: 0 0 56px;
+      color: #8c929d;
+      font-size: 9px;
+      font-weight: 500;
+    }
+
+    .resource-tag {
+      min-height: 23px;
+      padding: 0 8px;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      color: #79818f;
+      background: transparent;
+      font-size: 8px;
+    }
+
+    .resource-tag.active {
+      color: #2a70d8;
+      border-color: #bad1f4;
+      background: #edf5ff;
+    }
+
+    .resource-source-card {
+      min-height: 150px;
+    }
+
+    .resource-source-type {
+      color: #9a9fa9;
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+
+    .resource-source-card h3 {
+      margin-top: 7px;
+      overflow: hidden;
+      color: #2f3540;
+      font-size: 10px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .resource-source-card p {
+      min-height: 28px;
+      margin-top: 5px;
+      overflow: hidden;
+      color: #777e8a;
+      font-size: 8px;
+      line-height: 1.55;
+    }
+
+    .resource-code {
+      display: flex;
+      height: 30px;
+      align-items: center;
+      margin-top: 9px;
+      padding: 0 8px;
+      overflow: hidden;
+      border: 1px solid #e4e6ea;
+      border-radius: 5px;
+      color: #5e6672;
+      background: #fbfbfc;
+      font: 8px/1.2 ui-monospace, Menlo, monospace;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .resource-source-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: auto;
+      padding-top: 9px;
+      color: #888f9b;
+      font-size: 8px;
+    }
+
+    .resource-source-foot > button:not(.resource-status) {
+      border: 0;
+      color: #848b97;
+      background: transparent;
+      font-size: 8px;
+    }
+
+    .resource-form {
+      display: grid;
+      gap: 14px;
+    }
+
+    .resource-form-note {
+      color: #8c929d;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .resource-field {
+      display: grid;
+      gap: 6px;
+    }
+
+    .resource-field > label {
+      color: #444b57;
+      font-size: 10px;
+      font-weight: 650;
+    }
+
+    .resource-field > small {
+      color: #9aa0aa;
+      font-size: 8px;
+    }
+
+    .resource-form input,
+    .resource-form select {
+      height: 36px;
+      padding: 0 10px;
+    }
+
+    .resource-form textarea {
+      min-height: 76px;
+      padding: 10px;
+    }
+
+    .resource-inline-field {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 8px;
+    }
+
+    .resource-type-tabs {
+      display: flex;
+      gap: 7px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid #eceef1;
+    }
+
+    .resource-type-tab {
+      min-height: 30px;
+      padding: 0 11px;
+      border: 1px solid #dfe3e8;
+      border-radius: 6px;
+      color: #67707d;
+      background: #fff;
+      font-size: 9px;
+    }
+
+    .resource-type-tab.active {
+      color: #2c6fd5;
+      border-color: #aec8ef;
+      background: #edf5ff;
+    }
+
+    .resource-picker-list {
+      display: grid;
+      max-height: 230px;
+      gap: 6px;
+      margin-top: 10px;
+      overflow: auto;
+    }
+
+    .resource-picker-item {
+      display: flex;
+      min-height: 38px;
+      align-items: center;
+      gap: 9px;
+      padding: 7px 9px;
+      border: 1px solid #e5e7eb;
+      border-radius: 6px;
+      color: #505866;
+      background: #fff;
+      text-align: left;
+      font-size: 9px;
+    }
+
+    .resource-picker-item.selected {
+      color: #285fae;
+      border-color: #abc6ed;
+      background: #f3f8ff;
+    }
+
+    .resource-parse-result {
+      display: none;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 7px;
+      padding: 10px;
+      border: 1px solid #cae7d6;
+      border-radius: 7px;
+      background: #f3fbf6;
+    }
+
+    .resource-parse-result.show {
+      display: grid;
+    }
+
+    .resource-parse-result b,
+    .resource-parse-result span {
+      display: block;
+      font-size: 8px;
+    }
+
+    .resource-parse-result b {
+      color: #397052;
+    }
+
+    .modal.resource-modal {
+      width: min(680px, 92vw);
+    }
+
+    .modal.resource-modal .modal-body {
+      max-height: 68vh;
+      overflow: auto;
+    }
+
     @media (max-width: 1280px) {
       html {
         min-width: 960px;
@@ -7976,7 +7156,6 @@
 
       .agent-copy,
       .nav-label,
-      .history-copy,
       .infra-btn span,
       .owner-copy,
       .service,
@@ -8006,10 +7185,6 @@
 
       .infra-grid {
         grid-template-columns: 1fr;
-      }
-
-      .infra-btn:nth-child(n + 4) {
-        display: none;
       }
 
       .owner {
@@ -8063,6 +7238,10 @@
       .decision-points {
         grid-template-columns: 1fr;
       }
+
+      .resource-card-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
     }
 
     @media print {
@@ -8110,7 +7289,7 @@
         <div class="agent-icon">券</div>
         <div class="agent-copy">
           <strong>消费券策略调优</strong>
-          <span>大促策略 Agent</span>
+          <span>券策略 Agent</span>
         </div>
       </div>
 
@@ -8120,13 +7299,11 @@
       <div class="nav-label">历史对话 · 2</div>
       <div class="history-list">
         <button class="history-item" data-history="促前券档位设计">
-          <span class="history-icon">前</span>
           <span class="history-copy">
             <strong>促前券档位设计</strong>
           </span>
         </button>
         <button class="history-item" data-history="促中预算紧张">
-          <span class="history-icon">中</span>
           <span class="history-copy">
             <strong>促中预算紧张</strong>
           </span>
@@ -8136,12 +7313,12 @@
       <div class="sidebar-lower">
         <div class="nav-label">AGENT 基础架构</div>
         <div class="infra-grid">
-          <button class="infra-btn"><b>▤</b><span>Knowledge</span></button>
-          <button class="infra-btn"><b>◫</b><span>Datasource</span></button>
-          <button class="infra-btn"><b>⌘</b><span>MCP</span></button>
-          <button class="infra-btn"><b>✦</b><span>Skill</span></button>
-          <button class="infra-btn"><b>◷</b><span>任务</span></button>
-          <button class="infra-btn"><b>♙</b><span>飞书机器人</span></button>
+          <button class="infra-btn" data-infra-view="knowledge"><b>▤</b><span>Knowledge</span></button>
+          <button class="infra-btn" data-infra-view="datasource"><b>◫</b><span>Datasource</span></button>
+          <button class="infra-btn" data-infra-view="mcp"><b>⌘</b><span>MCP</span></button>
+          <button class="infra-btn" data-infra-view="skill"><b>✦</b><span>Skill</span></button>
+          <button class="infra-btn" data-infra-toast="任务中心正在接入 Agent 执行记录"><b>◷</b><span>任务</span></button>
+          <button class="infra-btn" data-infra-toast="飞书机器人连接正常，可在任务中心配置触发规则"><b>♙</b><span>飞书机器人</span></button>
         </div>
         <div class="sidebar-foot">
           <div class="service"><i class="live-dot"></i>Agent 服务正常</div>
@@ -8168,6 +7345,8 @@
           <button class="mode-tab" role="tab" aria-selected="false" tabindex="-1" data-mode="pre">促前规划</button>
           <button class="mode-tab active" role="tab" aria-selected="true" tabindex="0" data-mode="mid">促中调优</button>
         </div>
+
+        <section class="infra-management" id="infraManagement" aria-live="polite"></section>
 
         <section class="panel pre-dashboard is-hidden" id="preDashboard" aria-label="促前活动与历史券洞察">
           <div class="pre-home-shell">
@@ -8219,407 +7398,6 @@
               <div class="pre-insight-body" id="preHistoricalInsights" aria-live="polite"></div>
             </section>
           </div>
-        </section>
-
-        <section class="panel pre-dashboard is-hidden" id="preDashboardLegacy" aria-hidden="true">
-          <header class="pre-dashboard-hero">
-            <div class="pre-dashboard-hero-main">
-              <div class="pre-hero-kicker"><span>促前策略摘要</span><i></i><b>历史实验已就绪</b></div>
-              <h2>
-                <span>历史实验已验证策略方向</span>
-                <strong>现在，把它变成本期投放方案</strong>
-              </h2>
-              <p>沿用有效的钱效结论，重新编排券档、波次与分层投放；竞对只作为压力信号，不替代自身实验结果。</p>
-              <div class="pre-hero-focus" aria-label="本期规划重点">
-                <span><b>01</b> 4+X 券档</span>
-                <span><b>02</b> 四波次节奏</span>
-                <span><b>03</b> 人群 × 渠道定向</span>
-              </div>
-              <div class="pre-hero-actions">
-                <button class="primary" id="preStartCollaboration">进入策略共创</button>
-                <button
-                  class="workbench-ask"
-                  data-workbench-ask="pre"
-                  data-pre-dashboard-ask="结合历史实验，为什么本期推荐 4+X 分层，而不是沿用 3+X 普惠？"
-                  data-ask-context="促前整体策略结论"
-                  data-ask-summary="推荐 B · 4+X 均衡增长，申请预算 1.15 亿，预估 ROI 6.52"
-                >✦ 追问推荐依据</button>
-                <button class="pre-hero-ask" data-pre-scroll-target="preCheckSection">查看配置巡检</button>
-              </div>
-            </div>
-            <div class="pre-dashboard-hero-side">
-              <article class="pre-hero-decision">
-                <div class="pre-hero-decision-head">
-                  <span>本期策略结论</span>
-                  <span class="pre-confidence"><i></i>证据置信度 86%</span>
-                </div>
-                <strong id="preHeroArchitecture">推荐 B · 4+X 均衡增长</strong>
-                <p id="preHeroDecisionCopy">4 个固定档承接普惠与高客单需求，X 券按类目 × 高潜人群 × 高意图渠道动态分配；高门槛券停止泛发。</p>
-                <div class="pre-decision-metrics">
-                  <div class="pre-decision-metric"><b id="preHeroBudget">1.15 亿</b><span>申请预算</span></div>
-                  <div class="pre-decision-metric"><b id="preHeroRoi">6.52</b><span>预估 ROI</span></div>
-                  <div class="pre-decision-metric"><b>10%</b><span>实验对照</span></div>
-                </div>
-              </article>
-            </div>
-          </header>
-
-          <div class="pre-source-strip" aria-label="促前能力数据源">
-            <a class="pre-source-link" href="#preDashboard" aria-label="查看消费券数据看板来源说明">
-              <b>消费券数据看板</b><span>效果、核销、实验、秒级打点</span>
-            </a>
-            <a class="pre-source-link" href="#preDashboard" aria-label="查看消费券实验框架来源说明">
-              <b>消费券实验框架</b><span>状态、实验 ID、波次与周期</span>
-            </a>
-            <a class="pre-source-link" href="#preDashboard" aria-label="查看批次及投放计划来源说明">
-              <b>批次及投放计划</b><span>场域、券批次、投放活动</span>
-            </a>
-            <a class="pre-source-link" href="#preDashboard" aria-label="查看渠道投放策略来源说明">
-              <b>渠道投放策略</b><span>主端 / 独立端与资源位编排</span>
-            </a>
-            <a class="pre-source-link" href="#preDashboard" aria-label="查看实验配置巡检来源说明">
-              <b>实验配置巡检</b><span>人群、券批次、波次一致性</span>
-            </a>
-          </div>
-
-          <nav class="pre-decision-path" aria-label="促前策略编排">
-            <button class="pre-path-step done" data-pre-scroll-target="preEvidenceSection"><b>01</b><span>历史实验<small>找到有效调整</small></span></button>
-            <button class="pre-path-step done" data-pre-scroll-target="preDrillSection"><b>02</b><span>多维下钻<small>定位增量来源</small></span></button>
-            <button class="pre-path-step done" data-pre-scroll-target="preArchitectureCard"><b>03</b><span>券档架构<small>3+X / 4+X</small></span></button>
-            <button class="pre-path-step done" data-pre-scroll-target="preWaveSection"><b>04</b><span>波次批次<small>节奏与预算</small></span></button>
-            <button class="pre-path-step done" data-pre-scroll-target="preChannelSection"><b>05</b><span>人群渠道<small>投放矩阵</small></span></button>
-            <button class="pre-path-step warn" data-pre-scroll-target="preCheckSection"><b>06</b><span>实验巡检<small id="prePathCheckState">2 项待确认</small></span></button>
-          </nav>
-
-          <div class="pre-dashboard-grid">
-            <div>
-              <section class="pre-work-card" id="preEvidenceSection">
-                <header class="pre-work-card-head">
-                  <div>
-                    <h3>历史实验复盘 · 哪些结论应该进入本期配置</h3>
-                    <p>按 ECOP 实验对象组织：状态、实验 ID、波次周期、增量与钱效</p>
-                  </div>
-                  <div class="pre-head-actions">
-                    <span class="sig">3 组正向显著</span>
-                    <button
-                      class="workbench-ask"
-                      data-workbench-ask="pre"
-                      data-pre-dashboard-ask="三组历史实验的差异来自券档数量，还是人群与渠道分层？"
-                      data-ask-context="促前历史实验复盘"
-                      data-ask-summary="G01/G02/G03 的 ROI 依次为 6.21/6.48/6.65，分层越细钱效越高"
-                    >✦ 追问归因</button>
-                  </div>
-                </header>
-                <div class="pre-work-card-body">
-                  <div class="pre-experiment-layout">
-                    <div class="pre-experiment-list" role="tablist" aria-label="历史实验方案">
-                      <button class="pre-experiment-option" role="tab" aria-selected="false" tabindex="-1" data-pre-experiment="EXP_G01">
-                        <b>G01</b>
-                        <span class="pre-experiment-name"><strong>3+X 普惠券组</strong><span>全量可触达 · 两个波次</span></span>
-                        <span class="pre-experiment-stat"><b>6.21</b><span>ROI</span></span>
-                        <span class="pre-experiment-stat"><b>+4.72</b><span>增量 GMV 千万</span></span>
-                        <span class="pre-experiment-stat"><b>0.031</b><span>p-value</span></span>
-                      </button>
-                      <button class="pre-experiment-option" role="tab" aria-selected="false" tabindex="-1" data-pre-experiment="EXP_G02">
-                        <b>G02</b>
-                        <span class="pre-experiment-name"><strong>4+X 类目券组</strong><span>S / A 类目 · 新增波次</span></span>
-                        <span class="pre-experiment-stat"><b>6.48</b><span>ROI</span></span>
-                        <span class="pre-experiment-stat"><b>+5.18</b><span>增量 GMV 千万</span></span>
-                        <span class="pre-experiment-stat"><b>0.018</b><span>p-value</span></span>
-                      </button>
-                      <button class="pre-experiment-option active" role="tab" aria-selected="true" tabindex="0" data-pre-experiment="EXP_G03">
-                        <b>G03</b>
-                        <span class="pre-experiment-name"><strong>4+X 类目 × 高潜分层</strong><span>高潜定向 · 第 7 / 8 波次</span></span>
-                        <span class="pre-experiment-stat"><b>6.65</b><span>ROI</span></span>
-                        <span class="pre-experiment-stat"><b>+5.39</b><span>增量 GMV 千万</span></span>
-                        <span class="pre-experiment-stat"><b>0.009</b><span>p-value</span></span>
-                      </button>
-                    </div>
-                    <aside class="pre-experiment-detail" id="preExperimentDetail">
-                      <div class="pre-experiment-detail-kicker"><span>当前选中 · EXP_G03</span><span>正向显著</span></div>
-                      <h4>本期沿用“4+X 分层”，调整投放而非加深折扣</h4>
-                      <p>类目 × 高潜分层降低了自然转化污染。收益来自更准确的门槛适配和渠道承接，不是简单增加一档券。</p>
-                      <div class="pre-adjustment-list">
-                        <div class="pre-adjustment-row"><b>高门槛泛发</b><i>→</i><span>仅绑定高客单类目与高价值高潜</span></div>
-                        <div class="pre-adjustment-row"><b>搜索渠道</b><i>→</i><span>预算占比 +4pp，承接强购买意图</span></div>
-                        <div class="pre-adjustment-row"><b>X 定向券</b><i>→</i><span>从 11% 提至 13.5%，保留 10% 对照</span></div>
-                      </div>
-                    </aside>
-                  </div>
-                </div>
-              </section>
-
-              <section class="pre-work-card" id="preDrillSection">
-                <header class="pre-work-card-head">
-                  <div>
-                    <h3>数据下钻 · 从总体钱效定位到可配置动作</h3>
-                    <p>复用数据看板中的人群、场域、券属性、货品与体裁分析维度</p>
-                  </div>
-                  <button
-                    class="workbench-ask"
-                    data-workbench-ask="pre"
-                    data-pre-dashboard-ask="请做类目 × 人群 × 面额 × 渠道四维交叉下钻，并给出优先级。"
-                    data-ask-context="促前多维下钻"
-                    data-ask-summary="按人群、场域、券属性和货品定位增量来源与低效组合"
-                  >✦ 四维交叉下钻</button>
-                </header>
-                <div class="pre-work-card-body">
-                  <div class="pre-drill-toolbar">
-                    <div class="pre-segmented" role="tablist" aria-label="促前下钻维度">
-                      <button class="active" role="tab" aria-selected="true" data-pre-drill="audience">人群分析</button>
-                      <button role="tab" aria-selected="false" data-pre-drill="channel">场域分析</button>
-                      <button role="tab" aria-selected="false" data-pre-drill="tier">券属性分析</button>
-                      <button role="tab" aria-selected="false" data-pre-drill="category">货品分析</button>
-                    </div>
-                    <span class="pre-drill-context" id="preDrillContext">领取时间 06.01—06.18 · 主端 + 独立端</span>
-                  </div>
-                  <div class="pre-dashboard-table-wrap">
-                    <table class="pre-dashboard-table">
-                      <thead id="preDrillTableHead"></thead>
-                      <tbody id="preDrillTableBody"></tbody>
-                    </table>
-                  </div>
-                  <div class="pre-ai-summary">
-                    <span class="spark">AI</span>
-                    <span id="preDrillSummary"><strong>人群结论：</strong>高价值/中价值高潜贡献主要增量；新用户保留低门槛拉新，低价值低潜停止高门槛泛发。</span>
-                    <button
-                      class="workbench-ask"
-                      data-workbench-ask="pre"
-                      data-pre-dashboard-ask="人群下钻结果如何具体映射到每个固定档与 X 券？"
-                      data-ask-context="人群下钻结论"
-                      data-ask-summary="高价值和中价值高潜贡献主要增量，低价值低潜应停止高门槛泛发"
-                    >✦ 追问映射</button>
-                  </div>
-                </div>
-              </section>
-            </div>
-
-            <aside class="pre-side-stack">
-              <section class="pre-architecture-card" id="preArchitectureCard">
-                <div class="pre-architecture-head">
-                  <div><h3>基本券档架构</h3><p>按历史钱效动态选择 3+X / 4+X</p></div>
-                  <div class="card-head-actions">
-                    <span class="pre-architecture-status">推荐方案</span>
-                    <button
-                      class="workbench-ask"
-                      data-workbench-ask="pre"
-                      data-pre-dashboard-ask="3+X 与 4+X 在预算、覆盖和钱效上如何权衡？"
-                      data-ask-context="促前券档架构"
-                      data-ask-summary="当前推荐 4+X，兼顾固定档承接和 X 券动态定向"
-                    >✦ 追问</button>
-                  </div>
-                </div>
-                <div class="pre-architecture-switch" role="tablist" aria-label="券档架构">
-                  <button role="tab" aria-selected="false" tabindex="-1" data-pre-architecture="3+X"><b>3+X</b><span>钱效优先 · 预算承压</span></button>
-                  <button class="active" role="tab" aria-selected="true" tabindex="0" data-pre-architecture="4+X"><b>4+X</b><span>均衡增长 · 本期推荐</span></button>
-                </div>
-                <div class="pre-tier-stack">
-                  <div class="pre-tier-row"><span class="pre-tier-value">300-40</span><div><strong>普惠扩量</strong><span>新用户 / 高频刚需</span></div><em>主档</em></div>
-                  <div class="pre-tier-row"><span class="pre-tier-value">600-80</span><div><strong>中档承接</strong><span>中价值高潜</span></div><em>保持</em></div>
-                  <div class="pre-tier-row"><span class="pre-tier-value">1500-180</span><div><strong>高客单分层</strong><span>高价值 × S/A 类目</span></div><em>限量</em></div>
-                  <div class="pre-tier-row" id="preFourthTier"><span class="pre-tier-value">3000-420</span><div><strong>峰值需求</strong><span>数码家电 × 搜索</span></div><em>定向</em></div>
-                  <div class="pre-tier-row is-optional"><span class="pre-tier-value">X</span><div><strong>动态定向档</strong><span>类目 × 人群 × 渠道</span></div><em>13.5%</em></div>
-                </div>
-                <div class="pre-architecture-total">
-                  <div><b id="preArchitectureBudget">1.15 亿</b><span>申请预算</span></div>
-                  <div><b id="preArchitectureRoi">6.52</b><span>预估 ROI</span></div>
-                  <div><b id="preArchitectureCoverage">1,680 万</b><span>预计覆盖</span></div>
-                </div>
-              </section>
-
-              <section class="pre-guardrail">
-                <div class="pre-guardrail-head">
-                  <h3>策略护栏 · 不因竞对机械跟价</h3>
-                  <button
-                    class="workbench-ask"
-                    data-workbench-ask="pre"
-                    data-pre-dashboard-ask="这些护栏如何影响券档和预算调整？"
-                    data-ask-context="促前策略护栏"
-                    data-ask-summary="ROI、人均补贴、高门槛泛发、实验对照和准备金共同约束方案"
-                  >✦ 追问</button>
-                </div>
-                <div class="pre-guardrail-list">
-                  <div class="pre-guardrail-row"><i></i><span>ROI 下限</span><b>≥ 6.2</b></div>
-                  <div class="pre-guardrail-row"><i></i><span>人均补贴上限</span><b>≤ ¥50</b></div>
-                  <div class="pre-guardrail-row"><i></i><span>高门槛泛发占比</span><b>≤ 8%</b></div>
-                  <div class="pre-guardrail-row"><i></i><span>实验对照保留</span><b>≥ 10%</b></div>
-                  <div class="pre-guardrail-row"><i></i><span>风险准备金</span><b>5%</b></div>
-                </div>
-              </section>
-            </aside>
-          </div>
-
-          <section class="pre-work-card pre-full-card" id="preWaveSection">
-            <header class="pre-work-card-head">
-              <div>
-                <h3>波次与券批次 · 把历史洞察写进发放节奏</h3>
-                <p>对齐 ECOP 的“主端 / 独立端波次 → 场域计划 → 券批次计划 → 投放活动”结构</p>
-              </div>
-              <div class="pre-head-actions">
-                <span class="tag">4 主波次 + 2 子预算</span>
-                <button
-                  class="workbench-ask"
-                  data-workbench-ask="pre"
-                  data-pre-dashboard-ask="为什么首爆分配 31% 预算，收官只分配 16%？"
-                  data-ask-context="促前波次预算"
-                  data-ask-summary="首爆 31%、持续 27%、收官 16%，另含 X 专项与风险准备金"
-                >✦ 追问节奏</button>
-              </div>
-            </header>
-            <div class="pre-work-card-body">
-              <div class="pre-wave-layout">
-                <div class="pre-wave-timeline" role="tablist" aria-label="券波次">
-                  <button class="pre-wave-button active" role="tab" aria-selected="true" data-pre-wave="warmup"><b>W01 · 预热期</b><strong>种草与首领</strong><span>06.01—06.03</span><em>12%</em></button>
-                  <button class="pre-wave-button" role="tab" aria-selected="false" data-pre-wave="burst"><b>W02 · 第一波爆发</b><strong>S 类目放量</strong><span>06.04—06.07</span><em>31%</em></button>
-                  <button class="pre-wave-button" role="tab" aria-selected="false" data-pre-wave="sustain"><b>W03 · 第二波持续</b><strong>人群分层扩量</strong><span>06.08—06.14</span><em>27%</em></button>
-                  <button class="pre-wave-button" role="tab" aria-selected="false" data-pre-wave="closing"><b>W04 · 收官期</b><strong>催用与预算回收</strong><span>06.15—06.18</span><em>16%</em></button>
-                </div>
-                <aside class="pre-wave-detail" id="preWaveDetail">
-                  <div class="pre-wave-detail-head"><strong>W01 · 预热期</strong><span>主端 + 独立端</span></div>
-                  <div class="pre-wave-detail-grid">
-                    <div><b>批次节奏</b><span>每日 10:00 / 20:00</span></div>
-                    <div><b>主投券档</b><span>300-40 / 600-80</span></div>
-                    <div><b>目标人群</b><span>新用户 / 中价值高潜</span></div>
-                    <div><b>投放场域</b><span>会场 + 商城券包</span></div>
-                  </div>
-                </aside>
-              </div>
-              <div class="pre-wave-budget-bar" aria-label="波次预算分配"><i></i><i></i><i></i><i></i><i></i><i></i></div>
-              <div class="pre-wave-budget-legend">
-                <span>预热 12%</span><span>首爆 31%</span><span>持续 27%</span><span>收官 16%</span><span>X 专项 9%</span><span>准备金 5%</span>
-              </div>
-              <div class="pre-ai-summary">
-                <span class="spark">AI</span>
-                <span><strong>节奏结论：</strong>首爆承担类目需求峰值，持续期根据实验实时数据调 X 券；收官由“催领”切为“催领 + 催用”，并回收低效批次库存。</span>
-                <button
-                  class="workbench-ask"
-                  data-workbench-ask="pre"
-                  data-pre-dashboard-ask="每个波次应该如何设置预算流速、券流速和止损阈值？"
-                  data-ask-context="促前波次节奏结论"
-                  data-ask-summary="首爆承接需求峰值，持续期动态调整 X 券，收官转向催用和库存回收"
-                >✦ 追问阈值</button>
-              </div>
-            </div>
-          </section>
-
-          <section class="pre-work-card pre-full-card" id="preChannelSection">
-            <header class="pre-work-card-head">
-              <div>
-                <h3>人群 × 渠道投放矩阵</h3>
-                <p>先决定“谁在什么场域承接哪一档券”，再生成资源位与批次计划</p>
-              </div>
-              <button
-                class="workbench-ask"
-                data-workbench-ask="pre"
-                data-pre-dashboard-ask="搜索、活动会场、商城券包、Push 和独立端分别承担什么策略角色？"
-                data-ask-context="促前人群渠道矩阵"
-                data-ask-summary="会场承接规模、搜索承接高意图、券包稳定领取、Push 负责召回"
-              >✦ 解释渠道分工</button>
-            </header>
-            <div class="pre-work-card-body">
-              <div class="pre-matrix-layout">
-                <div class="pre-channel-matrix" role="table" aria-label="人群渠道投放优先级">
-                  <div class="pre-matrix-cell head">目标人群</div>
-                  <div class="pre-matrix-cell head">活动会场</div>
-                  <div class="pre-matrix-cell head">商城券包</div>
-                  <div class="pre-matrix-cell head">搜索</div>
-                  <div class="pre-matrix-cell head">Push</div>
-                  <div class="pre-matrix-cell head">独立端</div>
-
-                  <div class="pre-matrix-cell row-head">高价值高潜</div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill high">主投</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill mid">保量</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill high">增配</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill mid">召回</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">验证</span></div>
-
-                  <div class="pre-matrix-cell row-head">中价值高潜</div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill high">主投</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill high">主投</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill mid">承接</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill mid">催用</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">小流量</span></div>
-
-                  <div class="pre-matrix-cell row-head">新用户</div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill high">普惠</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill mid">首领</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">意图承接</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill mid">拉新</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">验证</span></div>
-
-                  <div class="pre-matrix-cell row-head">低价值低潜</div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">降权</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">限频</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill">自然承接</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">停投</span></div>
-                  <div class="pre-matrix-cell"><span class="pre-matrix-pill low">停投</span></div>
-                </div>
-                <aside class="pre-channel-playbook">
-                  <div class="pre-channel-row"><b>活动会场</b><div><strong>规模承接主场</strong><span>300-40 / 600-80 · 首爆增配</span></div><em>31%</em></div>
-                  <div class="pre-channel-row"><b>商城券包</b><div><strong>稳定领取入口</strong><span>普惠档 + 临期催用</span></div><em>25%</em></div>
-                  <div class="pre-channel-row"><b>搜索</b><div><strong>高意图高客单</strong><span>1500-180 / 3000-420 / X</span></div><em>22%</em></div>
-                  <div class="pre-channel-row"><b>Push</b><div><strong>召回而非泛触达</strong><span>高潜人群 · 每日限频</span></div><em>12%</em></div>
-                  <div class="pre-channel-row"><b>独立端</b><div><strong>保留增量验证</strong><span>低频回流 · 独立对照</span></div><em>5%</em></div>
-                </aside>
-              </div>
-            </div>
-          </section>
-
-          <section class="pre-work-card pre-full-card" id="preCheckSection">
-            <header class="pre-work-card-head">
-              <div>
-                <h3>实验配置与上线巡检</h3>
-                <p>实验框架负责可归因，配置巡检负责确保策略、波次、券批次和人群真正一致</p>
-              </div>
-              <span class="tag" id="preCheckHeaderStatus">2 项待确认</span>
-            </header>
-            <div class="pre-work-card-body">
-              <div class="pre-check-layout">
-                <div>
-                  <div class="pre-experiment-config">
-                    <div class="pre-config-arm control"><b>对照组 · C</b><div><strong>不新增 X 券，固定档按历史稳态</strong><span>用于识别自然转化与活动基础增量</span></div><em>10%</em></div>
-                    <div class="pre-config-arm"><b>实验组 · T1</b><div><strong>4+X 类目分层</strong><span>S/A 类目 × 高价值/中价值高潜</span></div><em>45%</em></div>
-                    <div class="pre-config-arm"><b>实验组 · T2</b><div><strong>4+X 类目 × 渠道分层</strong><span>T1 基础上增加搜索/会场差异投放</span></div><em>45%</em></div>
-                  </div>
-                  <div class="pre-config-metrics">
-                    <span>主指标 · 增量 GMV</span><span>主指标 · ROI</span><span>护栏 · 人均补贴</span><span>护栏 · 核销率</span><span>护栏 · 预算流速</span>
-                  </div>
-                  <div class="pre-ai-summary">
-                    <span class="spark">AI</span>
-                    <span><strong>实验建议：</strong>对照组必须跨完整波次保留，T1/T2 只改变一个关键变量，避免券档、人群和渠道同时变化导致无法归因。</span>
-                    <button
-                      class="workbench-ask"
-                      data-workbench-ask="pre"
-                      data-pre-dashboard-ask="如何避免波次切换、实验分流和券批次变更导致归因污染？"
-                      data-ask-context="促前实验配置"
-                      data-ask-summary="对照组跨完整波次保留，T1/T2 每次只改变一个关键变量"
-                    >✦ 追问归因</button>
-                  </div>
-                </div>
-                <aside class="pre-check-panel">
-                  <div class="pre-check-panel-head"><strong>配置一致性巡检</strong><span class="pre-readiness" id="preReadiness">上线就绪度 86%</span></div>
-                  <div class="pre-check-list" id="preCheckList">
-                    <div class="pre-check-item pass"><i class="pre-check-icon">✓</i><div><strong>波次时间与券批次有效期</strong><span>4 个主波次均在批次有效期内</span></div><button disabled>已通过</button></div>
-                    <div class="pre-check-item" data-pre-check="overlap"><i class="pre-check-icon">!</i><div><strong>实验人群交叉 0.7%</strong><span>T1 / T2 存在可清理的名单重叠</span></div><button data-pre-resolve-check="overlap">修正交叉</button></div>
-                    <div class="pre-check-item pass"><i class="pre-check-icon">✓</i><div><strong>券门槛与类目客单匹配</strong><span>3000-420 仅绑定高客单类目</span></div><button disabled>已通过</button></div>
-                    <div class="pre-check-item" data-pre-check="holdout"><i class="pre-check-icon">!</i><div><strong>对照组跨波次保留</strong><span>收官波次仍需确认 10% holdout</span></div><button data-pre-resolve-check="holdout">确认保留</button></div>
-                    <div class="pre-check-item pass"><i class="pre-check-icon">✓</i><div><strong>预算上限与券库存</strong><span>基准结算率 88%，准备金 5%</span></div><button disabled>已通过</button></div>
-                  </div>
-                </aside>
-              </div>
-            </div>
-          </section>
-
-          <footer class="pre-final-cta">
-            <div>
-              <strong id="preFinalTitle">规划草案已形成，待完成 2 项巡检后进入策略共创</strong>
-              <p>完成实验人群与对照组巡检后，进入策略对话确认券档、波次、人群和渠道方案。</p>
-            </div>
-            <div class="pre-final-actions">
-              <button class="ghost" id="preExportDraft">导出规划草案</button>
-              <button class="primary" id="preContinueToCase">进入促前策略对话</button>
-            </div>
-          </footer>
         </section>
 
         <section class="panel" id="dashboard">
@@ -9828,109 +8606,6 @@
       }
     };
 
-    const prePlanningDashboardData = {
-      experiments: {
-        EXP_G01: {
-          title: "3+X 可作为预算承压时的效率底盘",
-          copy: "普惠券组能稳定扩量，但全量触达稀释了高客单类目的补贴效率。本期不直接复刻，只保留为预算缩减场景的备选。",
-          adjustments: [
-            ["普惠固定档", "保留 300-40 / 600-80 承接基础规模"],
-            ["高门槛券", "移出泛发，仅对高意图人群开放"],
-            ["X 定向券", "以 9% 专项预算做小流量验证"]
-          ]
-        },
-        EXP_G02: {
-          title: "4+X 证明增加类目适配可提升钱效",
-          copy: "S/A 类目定向将 ROI 从 6.21 提升至 6.48，但只按类目仍会混入低潜用户。本期继续增加人群和渠道约束。",
-          adjustments: [
-            ["S/A 类目", "固定档按需求强度分配，不平均铺券"],
-            ["高客单档", "绑定数码家电与搜索高意图场域"],
-            ["实验设计", "保留同类目内的人群分层对照"]
-          ]
-        },
-        EXP_G03: {
-          title: "本期沿用“4+X 分层”，调整投放而非加深折扣",
-          copy: "类目 × 高潜分层降低了自然转化污染。收益来自更准确的门槛适配和渠道承接，不是简单增加一档券。",
-          adjustments: [
-            ["高门槛泛发", "仅绑定高客单类目与高价值高潜"],
-            ["搜索渠道", "预算占比 +4pp，承接强购买意图"],
-            ["X 定向券", "从 11% 提至 13.5%，保留 10% 对照"]
-          ]
-        }
-      },
-      drills: {
-        audience: {
-          context: "领取时间 06.01—06.18 · 主端 + 独立端",
-          headers: ["人群", "发放 UV", "领取率", "领后核销", "增量 GMV", "ROI", "预算占比", "本期动作"],
-          rows: [
-            ["高价值高潜", "920 万", "77.0%", "50.0%", "3.12 亿", "6.9", "26%", "优先放量"],
-            ["中价值高潜", "1,480 万", "68.0%", "42.9%", "2.69 亿", "6.4", "24%", "主力扩量"],
-            ["新用户", "1,900 万", "64.0%", "32.0%", "1.71 亿", "5.8", "21%", "低门槛拉新"],
-            ["低价值低潜", "1,260 万", "52.0%", "20.0%", "0.49 亿", "4.1", "12%", "降权"]
-          ],
-          summary: "<strong>人群结论：</strong>高价值/中价值高潜贡献主要增量；新用户保留低门槛拉新，低价值低潜停止高门槛泛发。"
-        },
-        channel: {
-          context: "场域分析 · 领券资源位聚合",
-          headers: ["场域", "发放 UV", "领取率", "领后核销", "增量 GMV", "ROI", "预算占比", "本期动作"],
-          rows: [
-            ["活动会场", "2,100 万", "74.0%", "44.0%", "3.68 亿", "6.6", "31%", "核心承接"],
-            ["商城券包", "1,780 万", "65.0%", "38.0%", "2.31 亿", "6.1", "25%", "保持"],
-            ["搜索", "960 万", "74.0%", "48.0%", "2.17 亿", "6.8", "18%", "高意图放量"],
-            ["Push", "1,350 万", "50.0%", "26.1%", "0.73 亿", "4.7", "14%", "收缩泛触达"],
-            ["独立端", "720 万", "46.0%", "21.1%", "0.25 亿", "3.9", "7%", "轻量验证"]
-          ],
-          summary: "<strong>场域结论：</strong>会场负责规模、搜索负责高意图钱效、商城券包保持稳定承接；Push 改为高潜召回，独立端仅保留实验流量。"
-        },
-        tier: {
-          context: "券属性分析 · 固定档 + X 定向档",
-          headers: ["券档", "发放 UV", "领取率", "领后核销", "增量 GMV", "ROI", "预算占比", "本期动作"],
-          rows: [
-            ["300-40", "2,400 万", "70.0%", "44.0%", "4.08 亿", "6.4", "28%", "普惠承接"],
-            ["600-80", "1,800 万", "66.0%", "38.7%", "3.35 亿", "6.0", "24%", "保持"],
-            ["1500-180", "1,100 万", "58.0%", "26.6%", "1.82 亿", "5.2", "20%", "限制泛发"],
-            ["3000-420", "580 万", "50.0%", "21.0%", "0.94 亿", "4.4", "17%", "仅高客单定向"],
-            ["X-定向", "760 万", "73.9%", "47.0%", "2.76 亿", "6.8", "11%", "扩至 13.5%"]
-          ],
-          summary: "<strong>券属性结论：</strong>300-40 与 X 定向券兼顾规模和钱效；1500-180 / 3000-420 的问题是门槛适配，不是曝光不足。"
-        },
-        category: {
-          context: "货品分析 · 活动期日均 / 活动前日均，基准=100",
-          headers: ["类目", "GMV 指数", "DAC 拉动", "客单拉动", "增量贡献", "优先级", "建议券档", "本期动作"],
-          rows: [
-            ["数码家电", "162", "+48%", "+9.5%", "31%", "S", "1500-180 / 3000-420 + X", "高客单放量"],
-            ["食品生鲜", "145", "+39%", "+4.2%", "24%", "S", "300-40 / 600-80", "普惠扩量"],
-            ["服饰鞋包", "132", "+28%", "+3.1%", "19%", "A", "600-80 + X", "分层放量"],
-            ["家居日用", "118", "+18%", "+1.6%", "13%", "B", "300-40", "稳态承接"],
-            ["美妆个护", "109", "+11%", "-1.8%", "7%", "C", "X 小流量", "降权"]
-          ],
-          summary: "<strong>货品结论：</strong>数码家电和食品生鲜都是 S 级，但前者依赖高客单与搜索承接，后者依赖低门槛普惠扩量，不能使用同一套券档。"
-        }
-      },
-      waves: {
-        warmup: {
-          title: "W01 · 预热期",
-          endpoint: "主端 + 独立端",
-          facts: [["批次节奏", "每日 10:00 / 20:00"], ["主投券档", "300-40 / 600-80"], ["目标人群", "新用户 / 中价值高潜"], ["投放场域", "会场 + 商城券包"]]
-        },
-        burst: {
-          title: "W02 · 第一波爆发",
-          endpoint: "主端 · 重点放量",
-          facts: [["批次节奏", "00:00 首发 / 12:00 补量"], ["主投券档", "4 固定档 + X"], ["目标人群", "S 类目 × 高潜"], ["投放场域", "会场 + 搜索"]]
-        },
-        sustain: {
-          title: "W03 · 第二波持续",
-          endpoint: "主端 + 实验框架",
-          facts: [["批次节奏", "按实验实时数据日调"], ["主投券档", "300-40 / 600-80 / X"], ["目标人群", "中价值高潜 / 回流"], ["投放场域", "商城券包 + 搜索"]]
-        },
-        closing: {
-          title: "W04 · 收官期",
-          endpoint: "主端 + 独立端",
-          facts: [["批次节奏", "T-2 / T-1 临期触达"], ["主投券档", "未核销券优先催用"], ["目标人群", "已领未用 / 高潜回流"], ["投放场域", "券包 + Push"]]
-        }
-      }
-    };
-
     const preInsightHomeData = {
       activities: [
         { id: "spring26", start: "2026-03-01", name: "春季焕新", period: "03.01—03.16", level: "A", levelName: "行业主题促", series: "spring", stage: "已结束", dataStatus: "复盘口径已冻结" },
@@ -9958,7 +8633,7 @@
       ],
       insights: [
         {
-          key: "baseline", label: "P0 · 大盘水位", featured: true,
+          key: "baseline", label: "大盘水位", featured: true,
           title: "活动前 20 天的历史增长主要来自支付用户扩张",
           copy: "参考促中，GMV 同比抬升与 DAC 变化方向一致，客单贡献相对有限；该结果用于判断自然水位，不等于本期目标。",
           metrics: [{ value: "+7.8%", label: "GMV 同比" }, { value: "+7.1%", label: "DAC 同比" }, { value: "+0.6%", label: "客单同比" }],
@@ -9968,7 +8643,7 @@
           source: "消费券数据看板 · 大盘 GMV / DAC / 客单"
         },
         {
-          key: "category", label: "P1 · 类目爆发", featured: true,
+          key: "category", label: "类目爆发", featured: true,
           title: "历史活动期的类目爆发由 DAC 与客单共同决定",
           copy: "数码家电呈现高客单拉升，食品生鲜更偏刚需扩量；同为高增长类目，也不能使用相同门槛解释。",
           metrics: [{ value: "1.62×", label: "数码家电 GMV 放大" }, { value: "+48%", label: "数码家电 DAC" }, { value: "24%", label: "食品生鲜增量贡献" }],
@@ -10057,7 +8732,8 @@
       selectedActivity: "midyear26",
       excludedReferenceIds: new Set(),
       userAddedReferenceIds: new Set(),
-      selectedTierDrill: "industry"
+      selectedTierDrill: "industry",
+      currentInsights: []
     };
     let activeDashboardMode = "mid";
 
@@ -10074,8 +8750,8 @@
       messages: [],
       reportSections: [
         { id: "goal", title: "目标、预算与约束", status: "needs-input", dependency: "等待确认目标与计划" },
-        { id: "baseline", title: "P0 · 近 20 天大盘水位", status: "locked", dependency: "依赖目标门禁" },
-        { id: "category", title: "P1 · 类目需求爆发", status: "locked", dependency: "依赖大盘水位" },
+        { id: "baseline", title: "近 20 天大盘水位", status: "locked", dependency: "依赖目标门禁" },
+        { id: "category", title: "类目需求爆发", status: "locked", dependency: "依赖大盘水位" },
         { id: "funnel", title: "历史领取核销链路", status: "locked", dependency: "依赖类目优先级" },
         { id: "experiment", title: "实验钱效与竞对压力", status: "locked", dependency: "依赖历史核销" },
         { id: "plan", title: "3+X / 4+X 候选与预算", status: "locked", dependency: "依赖实验与竞对" },
@@ -10171,6 +8847,7 @@
     const midNextWaveMatrix = document.getElementById("midNextWaveMatrix");
     const midNextWaveExperiment = document.getElementById("midNextWaveExperiment");
     const preDashboard = document.getElementById("preDashboard");
+    const infraManagement = document.getElementById("infraManagement");
     const newChatButton = document.getElementById("newChatButton");
     const newChatView = document.getElementById("newChatView");
     const newChatScroll = document.getElementById("newChatScroll");
@@ -10232,6 +8909,115 @@
     let activeAskContext = null;
     let activeAskTrigger = null;
     let modalReturnFocus = null;
+
+    const infrastructureData = {
+      knowledge: [
+        { id: "kn-01", name: "历史活动策略", type: "飞书文档", owner: "消费券运营", updatedAt: "2026-07-16 16:38", enabled: true, references: 1 },
+        { id: "kn-02", name: "全域能力地图", type: "飞书文档", owner: "消费券中台", updatedAt: "2026-07-20 15:26", enabled: true, references: 1 },
+        { id: "kn-03", name: "渠道投放策略", type: "飞书表格", owner: "渠道运营", updatedAt: "2026-07-18 10:12", enabled: true, references: 0 },
+        { id: "kn-04", name: "批次及投放计划", type: "飞书表格", owner: "策略运营", updatedAt: "2026-07-18 11:26", enabled: true, references: 0 },
+        { id: "kn-05", name: "全域实时巡检", type: "飞书表格", owner: "巡检平台", updatedAt: "2026-07-18 14:05", enabled: true, references: 0 },
+        { id: "kn-06", name: "消费券数据看板", type: "飞书表格", owner: "数据产品", updatedAt: "2026-07-18 15:42", enabled: true, references: 0 },
+        { id: "kn-07", name: "消费券实验框架", type: "飞书文档", owner: "实验平台", updatedAt: "2026-07-19 09:18", enabled: true, references: 0 },
+        { id: "kn-08", name: "实验配置巡检", type: "飞书表格", owner: "实验平台", updatedAt: "2026-07-19 10:36", enabled: true, references: 0 },
+        { id: "kn-09", name: "消费券工具平台", type: "飞书文档", owner: "消费券中台", updatedAt: "2026-07-19 13:44", enabled: true, references: 0 },
+        { id: "kn-10", name: "大促消费券复盘归档", type: "本地文件", owner: "策略运营", updatedAt: "2026-07-20 10:09", enabled: true, references: 0 }
+      ],
+      skills: [
+        { id: "sk-01", name: "budget-attribution-analysis", source: "system", description: "查询预算数据，并做归因分析。支持补贴率、费率、税后平台补贴等指标的维度下钻归因。", enabled: true, tags: ["大促", "资管", "目标测算"], content: "基于统一钱效口径查询预算与补贴数据，并按类目、人群、渠道、券档执行多维归因。" },
+        { id: "sk-02", name: "budget-enum-query", source: "system", description: "查询钱效预算分析各维度字段的枚举值，用于正式归因分析前确认取值。", enabled: true, tags: ["大促", "资管"], content: "在归因查询前校验维度字段、枚举范围和业务口径。" },
+        { id: "sk-03", name: "metric-definition-query", source: "system", description: "查询预算/补贴分析中的指标口径、分子分母以及维度字段定义。", enabled: true, tags: ["大促", "目标测算"], content: "读取指标目录中的标准定义、计算公式与更新周期。" },
+        { id: "sk-04", name: "sensight", source: "user", description: "舆情搜索与趋势洞察，支持社交媒体内容提取与近期发文动态分析。", enabled: true, tags: ["大促", "其他"], content: "检索公开舆情信息，聚合趋势并输出可验证的信号摘要。" },
+        { id: "sk-05", name: "big-promotion-broadcast", source: "user", description: "电商大促或实验效果数据飞书卡片播报，可置入用户自然语言模板。", enabled: false, tags: ["大促", "业务"], content: "将大促或实验效果结构化为飞书卡片。" },
+        { id: "sk-06", name: "budget-anomaly-detect", source: "user", description: "通用化预算/补贴异常扫描，支持指标任意指定与多维归因下钻。", enabled: false, tags: ["大促", "异动归因"], content: "按阈值和趋势规则扫描预算异常。" },
+        { id: "sk-07", name: "markdown-to-html", source: "user", description: "Convert Markdown files to HTML with configurable styles.", enabled: false, tags: ["其他"], content: "Convert Markdown documents into portable HTML artifacts." }
+      ],
+      datasources: [
+        { id: "ds-01", name: "AEOLUS_MOCK_01", type: "Aeolus", description: "Aeolus Mock URL: analytics.mock.invalid", uri: "mock:aeolus:AEOLUS_MOCK_01", enabled: true, references: 1 },
+        { id: "ds-02", name: "AEOLUS_MOCK_02 · 消费券钱效分析看板", type: "Aeolus", description: "Dataset: COUPON_EFFICIENCY_MOCK", uri: "mock:aeolus:AEOLUS_MOCK_02", enabled: true, references: 1 }
+      ],
+      mcps: [
+        { id: "mcp-01", name: "ECOP 指标元数据", transport: "Streamable HTTP", description: "查询消费券、预算、实验与投放计划的标准指标和维度。", endpoint: "https://mcp.example.net/ecop/metadata", enabled: true, tools: 12 },
+        { id: "mcp-02", name: "预算归因查询", transport: "SSE", description: "提供预算消耗、补贴率和核销链路的脱敏查询工具。", endpoint: "https://mcp.example.net/budget/query", enabled: true, tools: 8 },
+        { id: "mcp-03", name: "飞书策略文档", transport: "Streamable HTTP", description: "读取已授权的策略文档与表格。", endpoint: "https://mcp.example.net/lark/resource", enabled: false, tools: 6 }
+      ]
+    };
+
+    const infrastructureState = { activeView: null, query: "", status: "all", type: "all", viewMode: "table", skillSource: "all", skillTags: new Set(), modalSelection: null };
+
+    function infrastructureHeader(title, description, actionLabel, actionType, tone = "") {
+      return `<header class="resource-head"><div class="resource-title"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(description)}</p></div><button class="resource-primary ${tone}" data-infra-new="${actionType}">＋ ${escapeHTML(actionLabel)}</button></header>`;
+    }
+
+    function infrastructureStatusTabs(items) {
+      const enabled = items.filter(item => item.enabled).length;
+      return `<div class="resource-summary-tabs"><button class="resource-summary-tab ${infrastructureState.status === "all" ? "active" : ""}" data-infra-status="all">全部 <b>${items.length}</b></button><button class="resource-summary-tab ${infrastructureState.status === "enabled" ? "active" : ""}" data-infra-status="enabled">已启用 <b>${enabled}</b></button><button class="resource-summary-tab ${infrastructureState.status === "disabled" ? "active" : ""}" data-infra-status="disabled">已停用 <b>${items.length - enabled}</b></button></div>`;
+    }
+
+    function infrastructureMatches(item) {
+      const status = infrastructureState.status === "all" || (infrastructureState.status === "enabled") === item.enabled;
+      const query = infrastructureState.query.trim().toLowerCase();
+      return status && (!query || Object.values(item).some(value => String(value).toLowerCase().includes(query)));
+    }
+
+    function renderKnowledgeView() {
+      const items = infrastructureData.knowledge;
+      const filtered = items.filter(item => infrastructureMatches(item) && (infrastructureState.type === "all" || item.type === infrastructureState.type));
+      const table = `<div class="resource-table-card"><div class="resource-table-title">▱ Knowledge</div><table class="resource-table"><thead><tr><th style="width:40%">名称</th><th>添加者</th><th>修改时间</th><th>状态</th><th>引用</th><th></th></tr></thead><tbody>${filtered.map(item => `<tr><td><div class="resource-name"><span class="resource-name-icon">${item.type === "飞书表格" ? "▦" : item.type === "本地文件" ? "↥" : "▱"}</span><span><strong>${escapeHTML(item.name)}</strong><small>${escapeHTML(item.type)}</small></span></div></td><td>${escapeHTML(item.owner)}</td><td>${escapeHTML(item.updatedAt)}</td><td><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button></td><td>${item.references} 处引用</td><td><button class="resource-row-action" data-infra-detail="knowledge" data-resource-id="${item.id}">›</button></td></tr>`).join("")}</tbody></table></div>`;
+      const cards = `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card"><div class="resource-source-type">${item.type}</div><h3>${escapeHTML(item.name)}</h3><p>${escapeHTML(item.owner)} · ${item.updatedAt}</p><div class="resource-code">▱ knowledge:${item.id}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button><button data-infra-detail="knowledge" data-resource-id="${item.id}">${item.references} 处引用 ›</button></div></article>`).join("")}</div>`;
+      return `<div class="resource-shell">${infrastructureHeader("Knowledge", "统一维护可复用的文档、文件和知识库资源，启用后即可被策略 Agent 引用。", "新建知识资源", "knowledge")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索资源..."></label>${["all","飞书文档","飞书表格","本地文件"].map(type => `<button class="resource-filter ${infrastructureState.type === type ? "active" : ""}" data-infra-type="${type}">${type === "all" ? "全部类型" : type}</button>`).join("")}<span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>← 返回工作台</button><div class="resource-view-toggle"><button class="${infrastructureState.viewMode === "table" ? "active" : ""}" data-infra-layout="table">▤</button><button class="${infrastructureState.viewMode === "grid" ? "active" : ""}" data-infra-layout="grid">▦</button></div></div>${filtered.length ? infrastructureState.viewMode === "table" ? table : cards : '<div class="resource-empty">没有符合条件的知识资源</div>'}</div></div>`;
+    }
+
+    function renderSkillView() {
+      const items = infrastructureData.skills;
+      const rows = [["适用业务","C侧","大促","其他"],["适用角色","管理者","业务","资管","其他"],["场景","异动归因","预算消耗预估","预算分配","钱效健康度分析","目标测算","历史参照日","大盘目标","行业目标"]];
+      const filtered = items.filter(item => (infrastructureState.skillSource === "all" || item.source === infrastructureState.skillSource) && (!infrastructureState.skillTags.size || item.tags.some(tag => infrastructureState.skillTags.has(tag))) && infrastructureMatches(item));
+      return `<div class="resource-shell">${infrastructureHeader("技能管理", "管理所有 Agent Skill 的配置、启停和内容。", "新建 / 上传技能", "skill", "blue")}<div class="resource-content"><div class="resource-summary-tabs">${["all","user","system"].map(source => `<button class="resource-summary-tab ${infrastructureState.skillSource === source ? "active" : ""}" data-skill-source="${source}">${source === "all" ? "全部" : source === "user" ? "用户技能" : "系统内置"}</button>`).join("")}</div><div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索技能..."></label><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>← 返回工作台</button></div><div class="resource-filter-stack">${rows.map(row => `<div class="resource-filter-row"><b>${row[0]}</b>${row.slice(1).map(tag => `<button class="resource-tag ${infrastructureState.skillTags.has(tag) ? "active" : ""}" data-skill-tag="${tag}">${infrastructureState.skillTags.has(tag) ? "✓ " : ""}${tag}</button>`).join("")}</div>`).join("")}</div>${filtered.length ? `<div class="resource-card-grid">${filtered.map(item => `<article class="resource-card"><div class="resource-card-head"><span class="resource-card-icon">⌁</span><div class="resource-card-title"><strong>${escapeHTML(item.name)}</strong><span>${item.source === "system" ? "系统内置" : "公开"}</span></div><button class="resource-switch ${item.enabled ? "on" : ""}" data-infra-toggle="skill" data-resource-id="${item.id}"></button></div><p class="resource-card-copy">${escapeHTML(item.description)}</p><div class="resource-card-meta">${item.tags.map(tag => `<span>${tag}</span>`).join("")}</div><div class="resource-card-actions"><button class="resource-action primary-action" data-skill-action="use" data-resource-id="${item.id}">▷ 使用</button><button class="resource-action" data-skill-action="download" data-resource-id="${item.id}">⇩ 下载</button><button class="resource-action" data-infra-detail="skill" data-resource-id="${item.id}">⊙ 查看</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有符合条件的技能</div>'}</div></div>`;
+    }
+
+    function renderSourceCards(kind, title, description, action) {
+      const items = infrastructureData[kind];
+      const filtered = items.filter(infrastructureMatches);
+      const isMcp = kind === "mcps";
+      return `<div class="resource-shell">${infrastructureHeader(title, description, action, isMcp ? "mcp" : "datasource")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索${isMcp ? " MCP" : "资源"}..."></label><button class="resource-filter active">全部类型</button><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>← 返回工作台</button></div>${filtered.length ? `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card">${isMcp ? `<div class="resource-card-head"><span class="resource-card-icon">⌘</span><div class="resource-card-title"><strong>${escapeHTML(item.name)}</strong><span>${item.transport}</span></div><button class="resource-switch ${item.enabled ? "on" : ""}" data-infra-toggle="mcp" data-resource-id="${item.id}"></button></div>` : `<div class="resource-source-type">${item.type}</div><h3>${escapeHTML(item.name)}</h3>`}<p>${escapeHTML(item.description)}</p><div class="resource-code">⌁ ${escapeHTML(isMcp ? item.endpoint : item.uri)}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${item.enabled ? isMcp ? "已连接" : "已启用" : "已停用"}</button><button data-infra-detail="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${isMcp ? `${item.tools} 个工具` : `${item.references} 处引用`} ›</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有符合条件的资源</div>'}</div></div>`;
+    }
+
+    function renderInfrastructureView() {
+      if (!infrastructureState.activeView) return;
+      infraManagement.innerHTML = infrastructureState.activeView === "knowledge" ? renderKnowledgeView() : infrastructureState.activeView === "skill" ? renderSkillView() : infrastructureState.activeView === "datasource" ? renderSourceCards("datasources", "DataSource", "统一维护结构化数据源，帮助 Agent 稳定获取业务数据上下文。", "新建数据源") : renderSourceCards("mcps", "MCP", "管理 Agent 可调用的 MCP Server、传输协议和工具授权。", "新建 MCP");
+    }
+
+    function hideInfrastructureView() {
+      infrastructureState.activeView = null;
+      infraManagement.classList.remove("active");
+      infraManagement.innerHTML = "";
+      document.querySelectorAll("[data-infra-view]").forEach(button => button.classList.remove("active"));
+    }
+
+    function openInfrastructureView(view) {
+      newChatView.classList.remove("active");
+      budgetCaseView.classList.remove("active");
+      preCaseView.classList.remove("active");
+      dashboard.classList.add("is-hidden");
+      preDashboard.classList.add("is-hidden");
+      modeTabs.classList.add("is-hidden");
+      workspace.classList.remove("case-workspace-active");
+      topbar.classList.remove("case-topbar-simple");
+      document.querySelectorAll("[data-infra-view]").forEach(button => button.classList.toggle("active", button.dataset.infraView === view));
+      Object.assign(infrastructureState, { activeView: view, query: "", status: "all", type: "all", skillSource: "all" });
+      infrastructureState.skillTags.clear();
+      infraManagement.classList.add("active");
+      topbarTitle.textContent = { knowledge: "Knowledge 管理", datasource: "DataSource 管理", mcp: "MCP 管理", skill: "Skill 管理" }[view];
+      renderInfrastructureView();
+      window.scrollTo({ top: 0 });
+    }
+
+    function exitInfrastructureView() {
+      hideInfrastructureView();
+      modeTabs.classList.remove("is-hidden");
+      setDashboardMode(activeDashboardMode, false);
+      topbarTitle.textContent = "大促消费券策略调优";
+    }
 
     function getMidNextWavePlan() {
       return midNextWaveData.plans[midNextWaveState.selectedPlan] || midNextWaveData.plans.balanced;
@@ -10430,10 +9216,23 @@
         || preInsightHomeData.activities[0];
     }
 
+    function preGetHistoricalPool(activity = preGetPlanningActivity()) {
+      const endedCalendarActivities = preInsightHomeData.activities
+        .filter(item => item.stage === "已结束" && item.start < activity.start)
+        .map(item => ({ ...item, period: `2026.${item.period}`, fromCalendar: true }));
+      const pool = new Map();
+      [...preInsightHomeData.historicalCampaigns, ...endedCalendarActivities].forEach(item => {
+        if (item.start < activity.start) pool.set(item.id, item);
+      });
+      return Array.from(pool.values()).sort((a, b) => b.start.localeCompare(a.start));
+    }
+
+    function preFindHistoricalCampaign(id, activity = preGetPlanningActivity()) {
+      return preGetHistoricalPool(activity).find(item => item.id === id);
+    }
+
     function preBuildAutoReferenceMap(activity) {
-      const eligible = preInsightHomeData.historicalCampaigns
-        .filter(item => item.start < activity.start)
-        .sort((a, b) => b.start.localeCompare(a.start));
+      const eligible = preGetHistoricalPool(activity);
       const referenceMap = new Map();
       const addReason = (campaign, reason) => {
         if (!referenceMap.has(campaign.id)) referenceMap.set(campaign.id, { campaign, reasons: new Set() });
@@ -10457,7 +9256,7 @@
         }
       });
       preDashboardState.userAddedReferenceIds.forEach(id => {
-        const campaign = preInsightHomeData.historicalCampaigns.find(item => item.id === id);
+        const campaign = preFindHistoricalCampaign(id, activity);
         if (campaign) selected.set(id, { campaign, reasons: new Set(["用户添加"]) });
       });
       return Array.from(selected.values()).sort((a, b) => b.campaign.start.localeCompare(a.campaign.start));
@@ -10466,6 +9265,181 @@
     function preReferenceContext(references) {
       if (!references.length) return "当前未选择参考促";
       return references.map(item => `${item.campaign.name}（${item.campaign.period}，${Array.from(item.reasons).join("/")}）`).join("；");
+    }
+
+    function preStableCampaignFactors(campaign) {
+      const seed = Array.from(`${campaign.id}:${campaign.level}:${campaign.series}`)
+        .reduce((hash, character) => ((hash * 33) ^ character.charCodeAt(0)) >>> 0, 2166136261);
+      const normalized = offset => ((seed >>> offset) & 255) / 255;
+      const levelLift = { S: .12, A: .07, B: .03, C: 0 }[campaign.level] || 0;
+      return {
+        baseline: normalized(0) + levelLift,
+        category: normalized(4) + levelLift * 1.2,
+        tier: normalized(8) + levelLift * .8,
+        wave: normalized(12) + levelLift,
+        audience: normalized(16) + levelLift * .9,
+        channel: normalized(20) + levelLift * .7,
+        competitor: normalized(24) + levelLift * .6
+      };
+    }
+
+    function preReferenceWeight(reference, activity, index) {
+      const yearsApart = Math.max(0, Number(activity.start.slice(0, 4)) - Number(reference.campaign.start.slice(0, 4)));
+      const recencyWeight = Math.max(.55, 1.12 - yearsApart * .16 - index * .015);
+      const relationWeight = 1
+        + (reference.reasons.has("同级别") ? .22 : 0)
+        + (reference.reasons.has("同名历史") ? .34 : 0)
+        + (reference.reasons.has("前序四次") ? .12 : 0)
+        + (reference.reasons.has("用户添加") ? .08 : 0);
+      return recencyWeight * relationWeight;
+    }
+
+    function preWeightedFactor(weightedSamples, key) {
+      const totalWeight = weightedSamples.reduce((sum, item) => sum + item.weight, 0);
+      return weightedSamples.reduce((sum, item) => sum + item.factors[key] * item.weight, 0) / Math.max(totalWeight, .001);
+    }
+
+    function preComputePlanningInsights(references, activity) {
+      const sampleCount = references.length;
+      if (!sampleCount) return [];
+      const weightedSamples = references.map((reference, index) => ({
+        factors: preStableCampaignFactors(reference.campaign),
+        weight: preReferenceWeight(reference, activity, index)
+      }));
+      const recency = references.filter(item => item.campaign.start >= "2025-01-01").length;
+      const sameLevel = references.filter(item => item.reasons.has("同级别")).length;
+      const sameSeries = references.filter(item => item.reasons.has("同名历史")).length;
+      const activityFactor = preStableCampaignFactors(activity);
+      const factor = key => preWeightedFactor(weightedSamples, key) * .86 + activityFactor[key] * .14;
+      const baselineVariation = (factor("baseline") - .5) * 1.6 + (sampleCount - 5) * .03;
+      const categoryVariation = (factor("category") - .5) * 1.8 + sameSeries * .04;
+      const tierVariation = (factor("tier") - .5) * 1.5 + sameLevel * .025;
+      const waveVariation = (factor("wave") - .5) * 1.4 + recency * .02;
+      const audienceVariation = (factor("audience") - .5) * 1.5 + sameLevel * .02;
+      const channelVariation = (factor("channel") - .5) * 1.4;
+      const competitorVariation = (factor("competitor") - .5) * 1.6;
+      const scale = 1 + categoryVariation / 55 + (sampleCount - 5) / 250;
+      const pct = (value, digits = 1) => `${value.toFixed(digits)}%`;
+      const metric = (value, label) => ({ value, label });
+      const insights = preInsightHomeData.insights.map(item => ({
+        ...item,
+        metrics: item.metrics.map(value => ({ ...value })),
+        drills: item.drills ? {
+          industry: item.drills.industry.map(row => [...row]),
+          price: item.drills.price.map(row => [...row])
+        } : undefined
+      }));
+      const byKey = key => insights.find(item => item.key === key);
+      const factorKeys = ["baseline", "category", "tier", "wave", "audience", "channel", "competitor"];
+      const relevanceScore = factorKeys.reduce((sum, key) => sum + factor(key), 0) / factorKeys.length * 100;
+      const sampleNote = `${sampleCount} 场样本（近两年 ${recency} 场、同级别 ${sameLevel} 场、同名 ${sameSeries} 场、加权相关度 ${relevanceScore.toFixed(2)}）`;
+
+      const baseline = byKey("baseline");
+      const gmvYoy = 7.4 + baselineVariation + sameLevel * .08;
+      const dacYoy = 6.7 + baselineVariation * .8 + recency * .04;
+      const aovYoy = gmvYoy - dacYoy;
+      baseline.metrics = [metric(pct(gmvYoy), "GMV 同比"), metric(pct(dacYoy), "DAC 同比"), metric(pct(aovYoy), "客单同比")];
+      baseline.evidence = `${sampleNote}加权后，DAC 解释约 ${Math.round(dacYoy / Math.max(gmvYoy, .1) * 100)}% 的 GMV 同比增幅`;
+      baseline.summary = `AI 小结：基于当前 ${sampleCount} 场参考促重算，自然水位仍主要由支付用户规模驱动；样本变化后 GMV / DAC / 客单同比已同步更新。`;
+      baseline.detail = {
+        headers: ["窗口", "GMV 同比", "DAC 同比", "客单同比", "样本"],
+        rows: [["活动前 15—20 天", pct(gmvYoy), pct(dacYoy), pct(aovYoy), sampleNote], ["去年同期", "基准 100", "基准 100", "基准 100", "同日历口径"]]
+      };
+
+      const category = byKey("category");
+      const digitalIndex = Math.round(158 * scale + sameSeries);
+      const digitalDac = 45 + categoryVariation + sameLevel * .3;
+      const digitalAov = 8.7 + categoryVariation * .35;
+      const groceryIndex = Math.round(142 * scale);
+      category.metrics = [metric(`${digitalIndex}`, "数码 GMV 指数"), metric(pct(digitalDac), "数码 DAC"), metric(`¥${Math.round(2640 * scale).toLocaleString()}`, "数码活动客单")];
+      category.evidence = `${sampleNote}中，数码 GMV 指数 ${digitalIndex}、客单 ¥${Math.round(2640 * scale).toLocaleString()}；食品生鲜指数 ${groceryIndex}、客单 ¥${Math.round(318 * scale)}`;
+      category.summary = `AI 小结：当前样本下数码 GMV 指数 ${digitalIndex}、客单 ${pct(digitalAov)} 拉动，食品生鲜指数 ${groceryIndex}，两类目的爆发机制不同。`;
+      category.detail = {
+        headers: ["一级类目", "GMV 指数", "DAC 拉动", "活动客单", "客单拉动"],
+        rows: [
+          ["数码家电", digitalIndex, pct(digitalDac), `¥${Math.round(2640 * scale).toLocaleString()}`, pct(digitalAov)],
+          ["食品生鲜", groceryIndex, pct(37 + categoryVariation), `¥${Math.round(318 * scale)}`, pct(4.0 + categoryVariation * .2)],
+          ["服饰鞋包", Math.round(130 * scale), pct(27 + categoryVariation), `¥${Math.round(706 * scale)}`, pct(3.0 + categoryVariation * .2)],
+          ["家居日用", Math.round(117 * scale), pct(17 + categoryVariation), `¥${Math.round(482 * scale)}`, pct(1.5 + categoryVariation * .2)]
+        ]
+      };
+
+      const tier = byKey("tier");
+      const tierRows = [
+        ["300-40", 70, 44, 6.4], ["600-80", 66, 38.7, 6.0], ["1500-180", 58, 26.6, 5.2], ["3000-420", 50, 21, 4.4], ["X-定向", 73.9, 47, 6.8]
+      ].map(([name, claim, redeem, roi], index) => {
+        const issued = Math.round([2400, 1800, 1100, 580, 760][index] * scale * (1 + tierVariation / 100));
+        const adjustedClaim = claim + tierVariation * .45;
+        const adjustedRedeem = redeem + tierVariation * .35;
+        return [name, `${issued.toLocaleString()} 万`, `${Math.round(issued * adjustedClaim / 100).toLocaleString()} 万`, `${Math.round(issued * adjustedClaim / 100 * adjustedRedeem / 100).toLocaleString()} 万`, pct(adjustedClaim), pct(adjustedRedeem), (roi + tierVariation * .03).toFixed(2)];
+      });
+      tier.metrics = [metric(tierRows[0][5], "300-40 领后核销"), metric(tierRows[3][5], "3000-420 领后核销"), metric(tierRows[4][6], "X 券 ROI")];
+      tier.evidence = `${sampleNote}完整券档趋势显示，300-40 与 X 定向的领后核销领先，高门槛两档仍存在明显损耗`;
+      tier.summary = `AI 小结：当前样本下 300-40 领后核销 ${tierRows[0][5]}、X 定向 ROI ${tierRows[4][6]}，高门槛两档仍需结合行业价格带判断。`;
+      tier.detail = { headers: ["券档", "发放 UV", "领取 UV", "核销 UV", "领取率", "领后核销", "ROI"], rows: tierRows };
+      tier.drills.industry[0][1] = `客单 ¥${Math.round(2640 * scale).toLocaleString()}`;
+      tier.drills.industry[1][1] = `客单 ¥${Math.round(318 * scale)}`;
+      tier.drills.industry.forEach((row, index) => {
+        row[3] = `核销 ${pct([34, 49, 42][index] + tierVariation * .28)}`;
+      });
+      tier.drills.price.forEach((row, index) => {
+        row[1] = `领取 ${pct([71, 66, 53][index] + tierVariation * .35)}`;
+        row[2] = `核销 ${pct([46, 39, 25][index] + tierVariation * .3)}`;
+      });
+
+      const wave = byKey("wave");
+      const waveRows = [
+        ["预热期", "300-40 / 600-80", pct(31 + waveVariation), pct(24 + waveVariation * .3), "建立持券量"],
+        ["爆发期", "四固定档 + X", pct(40 + waveVariation), pct(47 + waveVariation * .4), "承接峰值"],
+        ["持续期", "300-40 / 600-80 / X", pct(19 + waveVariation * .4), pct(38 + waveVariation * .35), "按实验日调"],
+        ["收官期", "未核销券催用", pct(10 - waveVariation * .4), pct(43 + waveVariation * .45), "催用与回收"]
+      ];
+      wave.metrics = [metric(waveRows[0][2], "预热领取贡献"), metric(waveRows[1][3], "爆发领后核销"), metric(waveRows[2][3], "持续期领后核销")];
+      wave.evidence = `${sampleNote}分波次重算后，持续期领后核销 ${waveRows[2][3]}，收官催用 ${waveRows[3][3]}`;
+      wave.summary = `AI 小结：持续期领后核销 ${waveRows[2][3]}，收官期 ${waveRows[3][3]}；历史节奏由扩领取逐步切换为促核销。`;
+      wave.detail = { headers: ["波次", "主要券档", "领取贡献", "领后核销", "历史角色"], rows: waveRows };
+
+      const audience = byKey("audience");
+      const audienceRows = [
+        ["高价值高潜", "中高门槛 + X", pct(50 + audienceVariation * .4), (6.9 + audienceVariation * .03).toFixed(2), "稳定放量"],
+        ["中价值高潜", "600-80 + X", pct(42.9 + audienceVariation * .35), (6.4 + audienceVariation * .03).toFixed(2), "主力扩量"],
+        ["新客", "300-40", pct(32 + audienceVariation * .3), (5.8 + audienceVariation * .03).toFixed(2), "低门槛拉新"],
+        ["高潜回流", "600-80 / 未核销催用", pct(41 + audienceVariation * .35), (6.3 + audienceVariation * .03).toFixed(2), "持续期召回"],
+        ["低价值低潜", "低门槛小流量", pct(20 + audienceVariation * .2), (4.1 + audienceVariation * .02).toFixed(2), "限制泛发"]
+      ];
+      audience.metrics = [metric(audienceRows[0][2], "高价值高潜核销"), metric(audienceRows[2][2], "新客核销"), metric(audienceRows[3][2], "高潜回流核销")];
+      audience.evidence = `${sampleNote}人群实验重算后，高潜回流领后核销 ${audienceRows[3][2]}、ROI ${audienceRows[3][3]}`;
+      audience.summary = `AI 小结：高价值高潜核销 ${audienceRows[0][2]}，高潜回流 ${audienceRows[3][2]}；回流应按召回窗口独立评估。`;
+      audience.detail = { headers: ["人群", "历史券档", "领后核销", "ROI", "历史动作"], rows: audienceRows };
+
+      const channel = byKey("channel");
+      const searchRedeem = 48 + channelVariation * .3;
+      const venueRedeem = 44 + channelVariation * .25;
+      const pushRedeem = 26.1 + channelVariation * .2;
+      channel.metrics = [metric(pct(searchRedeem), "搜索领后核销"), metric(pct(venueRedeem), "会场领后核销"), metric(pct(pushRedeem), "Push 领后核销")];
+      channel.evidence = `${sampleNote}渠道重算后，搜索较 Push 领后核销高 ${pct(searchRedeem - pushRedeem)}`;
+      channel.summary = `AI 小结：搜索 ${pct(searchRedeem)} 承接高意图、会场 ${pct(venueRedeem)} 承接规模，Push ${pct(pushRedeem)} 更适合召回。`;
+
+      const competitor = byKey("competitor");
+      const competitorARounds = Math.max(2, Math.min(4, Math.round(3 + competitorVariation)));
+      const competitorBRounds = Math.max(1, Math.min(3, Math.round(2 + competitorVariation * .55)));
+      const competitorCHours = Math.max(1, Math.min(4, Math.round(2 - competitorVariation * .7)));
+      const pressureIndex = Math.round(68 + competitorVariation * 8 + sameLevel);
+      competitor.metrics = [metric(`${competitorARounds} 轮/日`, "竞对 A 频次"), metric(`${competitorBRounds} 轮/日`, "竞对 B 频次"), metric(`每 ${competitorCHours} 小时`, "竞对 C 频次")];
+      competitor.evidence = `${sampleNote}外部快照加权压力指数 ${pressureIndex}；三家具体券档、张数与频次方向分化`;
+      competitor.summary = `AI 小结：当前外部压力指数 ${pressureIndex}，竞对 A/B/C 的频次已按关联样本重算，但仍不能替代自身实验结论。`;
+      competitor.detail = {
+        headers: ["竞对", "具体券档", "折扣", "张数", "频次", "变化方向"],
+        rows: [
+          ["竞对 A", "300-40 / 1500-180", "约 86—88 折", "2 张 + 会员加码", `每日 ${competitorARounds} 轮`, "普惠 + 高客单分层"],
+          ["竞对 B", "200-25 / 2000-200", "约 87—90 折", "2 张会员券包", `每日 ${competitorBRounds} 轮`, "会员纵深"],
+          ["竞对 C", "100-15", "约 85 折", "1 张", `每 ${competitorCHours} 小时`, "低门槛高频拉新"]
+        ]
+      };
+      insights.forEach(insight => {
+        insight.summary = `${insight.summary} 当前样本加权相关度 ${relevanceScore.toFixed(2)}。`;
+      });
+      return insights;
     }
 
     function preRenderTierDrill(insight) {
@@ -10486,11 +9460,19 @@
         </div>`;
     }
 
+    function preRenderInsightDetail(insight) {
+      if (!insight.detail) return "";
+      return `<div class="pre-insight-detail"><table>
+        <thead><tr>${insight.detail.headers.map(header => `<th>${escapeHTML(String(header))}</th>`).join("")}</tr></thead>
+        <tbody>${insight.detail.rows.map(row => `<tr>${row.map(cell => `<td>${escapeHTML(String(cell))}</td>`).join("")}</tr>`).join("")}</tbody>
+      </table></div>`;
+    }
+
     function preRenderPlanningDashboard() {
       const activity = preGetPlanningActivity();
       const references = preGetReferenceCampaigns();
       const selectedIds = new Set(references.map(item => item.campaign.id));
-      const availableReferences = preInsightHomeData.historicalCampaigns
+      const availableReferences = preGetHistoricalPool(activity)
         .filter(item => !selectedIds.has(item.id))
         .sort((a, b) => b.start.localeCompare(a.start));
       const activitySelect = document.getElementById("preActivitySelect");
@@ -10534,23 +9516,28 @@
         ? `${activity.name} · 基于 ${references.length} 场参考促 · 历史规律仅供本期分析参考`
         : `${activity.name} · 暂无参考样本，洞察已暂停`;
       if (!references.length) {
+        preDashboardState.currentInsights = [];
         insightRoot.innerHTML = `<div class="pre-insight-empty"><div><b>没有可计算的历史样本</b><span>添加至少一场参考促后，系统会重新生成历史实验洞察。</span></div></div>`;
         return;
       }
 
+      const currentInsights = preComputePlanningInsights(references, activity);
+      preDashboardState.currentInsights = currentInsights;
       insightRoot.innerHTML = `
         <div class="pre-history-meta">
           <span>${references.length} 场历史活动 · ${escapeHTML(yearRange)}</span>
           <span>自动匹配：前序四次 + 同级别 + 同名历史</span>
+          <span>证据与 AI 小结已按当前样本实时重算</span>
           <span>结论性质：脱敏 Mock 历史规律，不是本期方案</span>
         </div>
-        <div class="pre-history-grid">${preInsightHomeData.insights.map((insight, index) => `
+        <div class="pre-history-grid">${currentInsights.map((insight, index) => `
           <article class="pre-history-insight ${insight.featured ? "featured" : ""}">
             <div class="pre-history-insight-head"><span>${String(index + 1).padStart(2, "0")} · ${escapeHTML(insight.label)}</span></div>
             <h4>${escapeHTML(insight.title)}</h4>
             <p>${escapeHTML(insight.copy)}</p>
             <div class="pre-insight-metrics">${insight.metrics.map(metric => `<div><b>${escapeHTML(metric.value)}</b><span>${escapeHTML(metric.label)}</span></div>`).join("")}</div>
             ${preRenderTierDrill(insight)}
+            ${preRenderInsightDetail(insight)}
             <div class="pre-insight-summary"><b>AI</b> ${escapeHTML(insight.summary.replace(/^AI 小结：/, ""))}</div>
             <div class="pre-insight-facts">
               <div><b>${escapeHTML(insight.evidence)}</b><span>历史证据 · 当前 ${references.length} 场样本</span></div>
@@ -10563,6 +9550,7 @@
     }
 
     function setDashboardMode(mode, announce = true) {
+      hideInfrastructureView();
       activeDashboardMode = mode === "pre" ? "pre" : "mid";
       document.querySelectorAll(".mode-tab").forEach(button => {
         const selected = button.dataset.mode === activeDashboardMode;
@@ -10573,8 +9561,8 @@
       preDashboard.classList.toggle("is-hidden", activeDashboardMode !== "pre");
       dashboard.classList.toggle("is-hidden", activeDashboardMode !== "mid");
       document.title = activeDashboardMode === "pre"
-        ? "消费券策略调优 Agent · 促前规划"
-        : "消费券策略调优 Agent · 促中盯盘";
+        ? "券策略 Agent · 促前规划"
+        : "券策略 Agent · 促中盯盘";
       if (activeDashboardMode === "pre") preRenderPlanningDashboard();
       if (announce) showToast(activeDashboardMode === "pre" ? "已切换至促前规划工作台" : "已回到促中调优工作台");
       window.scrollTo({ top: 0, behavior: "smooth" });
@@ -11052,9 +10040,10 @@
     }
 
     function renderCoverageResults(coverage) {
+      const resultId = "coverageResult";
       if (!coverage) {
         return `
-          <div class="coverage-result" id="coverageResult">
+          <div class="coverage-result" id="${resultId}">
             <div class="coverage-cell"><strong>jp/t8 重点人群</strong><span>待补充</span><small>人群池 6,400 万</small></div>
             <div class="coverage-cell"><strong>大盘 L4-L5</strong><span>待补充</span><small>人群池 8,000 万</small></div>
           </div>
@@ -11065,7 +10054,7 @@
       const focusGap = Math.max(0, budgetCaseData.populations.focus.count - coverage);
       const l45Gap = Math.max(0, budgetCaseData.populations.l45.count - coverage);
       return `
-        <div class="coverage-result" id="coverageResult">
+        <div class="coverage-result" id="${resultId}">
           <div class="coverage-cell">
             <strong>jp/t8 重点人群</strong><span>${focusRate.toFixed(1)}%</span>
             <small>${focusGap ? `仍有 ${focusGap.toLocaleString()} 万未覆盖` : "可完整覆盖，剩余预算可进入算法层"}</small>
@@ -11233,14 +10222,14 @@
         return;
       }
       if (budgetCaseState.candidateGenerated) {
-        document.getElementById("finalDecision").scrollIntoView({ behavior: "smooth", block: "center" });
+        document.getElementById("caseFinalDecision").scrollIntoView({ behavior: "smooth", block: "center" });
         return;
       }
       budgetCaseState.candidateGenerated = true;
       budgetCaseState.currentStep = 6;
       updateCasePlanStates();
       document.getElementById("caseMainStream").insertAdjacentHTML("beforeend", `
-        <section class="final-decision stage-reveal" id="finalDecision" data-ai-context="decision" data-context-summary="最终推荐：大盘 L1-L5 部分人群算法覆盖">
+        <section class="final-decision stage-reveal" id="caseFinalDecision" data-ai-context="decision" data-context-summary="最终推荐：大盘 L1-L5 部分人群算法覆盖">
           <div class="ai-summary-head"><span class="spark">AI</span>最终候选结论</div>
           <button class="ask-trigger" data-ask-type="decision" style="float:right;margin-top:-25px">✦ 追问结论</button>
           <h3>推荐：大盘 L1-L5 中由算法选择部分人群覆盖</h3>
@@ -11257,7 +10246,7 @@
           <div class="case-approval-banner" id="caseApprovalBanner">✓ 已记录为灰度候选，状态：待审批。未触发真实发券、预算或人群配置。</div>
         </section>
       `);
-      document.getElementById("finalDecision").scrollIntoView({ behavior: "smooth", block: "center" });
+      document.getElementById("caseFinalDecision").scrollIntoView({ behavior: "smooth", block: "center" });
     }
 
     function escapeHTML(value) {
@@ -11286,12 +10275,6 @@
       let questions = [];
       if (trigger.dataset.askQuestions) {
         questions = trigger.dataset.askQuestions.split("|").map(item => item.trim()).filter(Boolean);
-      } else if (source === "pre-dashboard") {
-        questions = [
-          trigger.dataset.preDashboardAsk,
-          `“${contextLabel}”的数据依据是什么？`,
-          `把“${contextLabel}”转成可执行动作`
-        ].filter(Boolean);
       } else if (source === "pre-report") {
         questions = preCaseData.questions[type] || preCaseData.questions.goal;
       } else {
@@ -11339,13 +10322,6 @@
         caseComposerInput.value = `围绕「${context.contextLabel}」追问：${trimmed}\n当前上下文：${context.summary}`;
         autoResizeComposer();
         showToast("已将组件上下文带入促中策略对话");
-        return;
-      }
-      if (context?.source === "pre-dashboard") {
-        enterPreCase();
-        preCaseComposerInput.value = `围绕「${context.contextLabel}」追问：${trimmed}\n当前上下文：${context.summary}`;
-        preAutoResizeComposer();
-        showToast("已将组件上下文带入促前策略对话");
         return;
       }
       if (context?.source === "pre-report") {
@@ -11438,7 +10414,7 @@
         segment: "segmentStage",
         scale: "scaleStage",
         budget: "budgetStage",
-        decision: "finalDecision",
+        decision: "caseFinalDecision",
         risk: "riskStage"
       };
       const target = document.getElementById(targets[type]) || document.getElementById("budgetStage");
@@ -11459,7 +10435,7 @@
     }
 
     function focusCandidateFlow() {
-      const target = document.getElementById("finalDecision") || document.getElementById("riskStage") || document.getElementById("budgetStage");
+      const target = document.getElementById("caseFinalDecision") || document.getElementById("riskStage") || document.getElementById("budgetStage");
       if (!target) {
         showToast("候选策略步骤尚未生成");
         return;
@@ -11467,7 +10443,7 @@
       target.scrollIntoView({ behavior: "smooth", block: "center" });
       target.classList.add("context-highlight");
       setTimeout(() => target.classList.remove("context-highlight"), 1300);
-      if (!document.getElementById("finalDecision")) showToast("请先确认风险，再生成候选策略");
+      if (!document.getElementById("caseFinalDecision")) showToast("请先确认风险，再生成候选策略");
     }
 
     function createCaseMessage(role, type, content, actions = [], contextType = "") {
@@ -11581,7 +10557,7 @@
       }
       const isUser = message.role === "user";
       const avatar = isUser ? "你" : "AI";
-      const name = isUser ? "你" : "策略 Agent";
+      const name = isUser ? "你" : "券策略 Agent";
       let body = message.type === "plan" ? renderChatPlan(message.visibleSteps) : (isUser ? escapeHTML(message.content) : message.content);
       if (message.type === "progress") {
         const labels = message.steps || ["理解任务", "定位数据", "生成章节"];
@@ -11747,7 +10723,7 @@
         </div>`;
       }).join("");
       const final = budgetCaseState.candidateGenerated ? `
-        <div class="final-decision" id="finalDecision" data-ai-context="decision" data-context-summary="最终推荐：大盘 L1-L5 部分人群算法覆盖">
+        <div class="final-decision" id="reportFinalDecision" data-ai-context="decision" data-context-summary="最终推荐：大盘 L1-L5 部分人群算法覆盖">
           <div class="ai-summary-head"><span class="spark">AI</span>最终候选结论</div>
           <h3>推荐：大盘 L1-L5 中由算法选择部分人群覆盖</h3>
           <p>V1 与 V15 的总体和人群兑换比均接近；V15 总体增量偏低主要受 jp/t8 约 6,400 万人群规模约束，不能解释为其兑换效率显著更差。当前数据无法无条件证明 V1 或 V15 胜出。</p>
@@ -11790,8 +10766,9 @@
       };
       const sections = budgetCaseState.reportSections.filter(section => !budgetCaseState.hiddenSections.has(section.id)).map(section => {
         const index = budgetCaseState.reportSections.indexOf(section);
+        const sectionDomId = `report-section-${section.id}`;
         if (section.status === "locked") {
-          return `<section class="report-section is-collapsed" id="report-section-${section.id}" data-report-status="locked">
+          return `<section class="report-section is-collapsed" id="${sectionDomId}" data-report-status="locked">
             <div class="report-section-head">
               <span class="report-section-no">${String(index + 1).padStart(2, "0")}</span>
               <h3>${escapeHTML(section.title)}</h3>
@@ -11809,7 +10786,7 @@
         }
         const isEntering = !renderedReportSectionIds.has(section.id);
         renderedReportSectionIds.add(section.id);
-        return `<section class="report-section${isEntering ? " is-entering" : ""}" id="report-section-${section.id}">
+        return `<section class="report-section${isEntering ? " is-entering" : ""}" id="${sectionDomId}">
           <div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-hide-report-section="${section.id}" aria-label="从报告中隐藏${escapeHTML(section.title)}">×</button></div>
           <p class="report-section-lead">${escapeHTML(sectionLeads[section.id])}</p>
           ${content}
@@ -12443,7 +11420,7 @@
       return `<article class="chat-message ${message.role}${enteringClass}" data-pre-message-id="${message.id}">
         <div class="message-avatar">${isUser ? "你" : "AI"}</div>
         <div class="message-content">
-          <div class="message-meta"><strong>${isUser ? "你" : "促前策略 Agent"}</strong><span>${message.timestamp}</span></div>
+          <div class="message-meta"><strong>${isUser ? "你" : "券策略 Agent"}</strong><span>${message.timestamp}</span></div>
           <div class="message-bubble">${body}${actions ? `<div class="message-actions">${actions}</div>` : ""}</div>
         </div>
       </article>`;
@@ -12586,7 +11563,7 @@
       return `<div class="pre-metric-grid">${preCaseData.baseline.map(metric => `<article class="pre-metric-card"><span>${metric.metric} · 去年同期 ${metric.lastYear}</span><strong>${metric.current}</strong><em>同比 +${metric.yoy}% · ${metric.note}</em></article>`).join("")}</div>
         <div class="pre-attribution">${preCaseData.attribution.map(item => `<div class="pre-attribution-row"><span>${item.label} +${item.value}%</span><div class="pre-attribution-track"><i style="width:${item.width}%"></i></div><b>${item.note}</b></div>`).join("")}</div>
         ${preRenderInsight(
-          "P0 大盘水位洞察",
+          "大盘水位洞察",
           "近期自然水位高于去年同期，但增长主要来自 DAC 扩大。",
           "GMV 93.6 亿，同比 +7.8%；DAC +7.1%；客单仅 +0.6%。",
           "DAC 贡献约 88%，订单量与 DAC 同向；客单不是主要矛盾。",
@@ -12603,7 +11580,7 @@
         <tbody>${preCaseData.categories.map(item => `<tr><td>${item.category}</td><td>${item.gmvIndex}</td><td>+${item.dac}%</td><td>${item.aov >= 0 ? "+" : ""}${item.aov}%</td><td>${item.contribution}%</td><td>${item.demand}</td><td><span class="pre-priority ${item.priority.toLowerCase()}">${item.priority}</span></td><td>${item.tier}</td></tr>`).join("")}</tbody></table></div>
         <div class="pre-subcategory" ${preCaseState.categoryExpanded ? "" : "hidden"}><strong>二级类目需求强度与券档映射</strong><div style="overflow:auto;margin-top:8px"><table class="pre-category-table"><thead><tr><th>二级类目</th><th>GMV 指数</th><th>DAC</th><th>客单</th><th>目标人群</th><th>建议券档</th></tr></thead><tbody>${subRows}</tbody></table></div></div>
         ${preRenderInsight(
-          "P1 类目需求洞察",
+          "类目需求洞察",
           "数码家电与食品生鲜列为 S 级，但发券逻辑不同。",
           "数码家电指数 162、贡献 31%；食品生鲜指数 145、贡献 24%。",
           "前者由高客单与 DAC 双拉动，后者以高频刚需 DAC 扩大为主。",
@@ -12721,8 +11698,9 @@
       };
       const sections = preCaseState.reportSections.filter(section => !preCaseState.hiddenSections.has(section.id)).map(section => {
         const index = preCaseState.reportSections.indexOf(section);
+        const sectionDomId = `pre-report-section-${section.id}`;
         if (section.status === "locked") {
-          return `<section class="report-section is-collapsed" id="pre-report-section-${section.id}" data-report-status="locked">
+          return `<section class="report-section is-collapsed" id="${sectionDomId}" data-report-status="locked">
             <div class="report-section-head">
               <span class="report-section-no">${String(index + 1).padStart(2, "0")}</span>
               <h3>${escapeHTML(section.title)}</h3>
@@ -12736,7 +11714,7 @@
         else if (section.status === "queued") content = `<div class="report-placeholder">章节已进入队列，等待数据计算。</div>`;
         const isEntering = !renderedPreReportSectionIds.has(section.id);
         renderedPreReportSectionIds.add(section.id);
-        return `<section class="report-section${isEntering ? " is-entering" : ""}" id="pre-report-section-${section.id}"><div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-pre-hide-section="${section.id}" aria-label="从促前报告中隐藏${escapeHTML(section.title)}">×</button></div><p class="report-section-lead">${leads[section.id]}</p>${content}</section>`;
+        return `<section class="report-section${isEntering ? " is-entering" : ""}" id="${sectionDomId}"><div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-pre-hide-section="${section.id}" aria-label="从促前报告中隐藏${escapeHTML(section.title)}">×</button></div><p class="report-section-lead">${leads[section.id]}</p>${content}</section>`;
       }).join("");
       preReportDocument.innerHTML = `<header class="report-cover"><div class="report-cover-eyebrow">Pre-campaign strategy report · anonymized mock</div><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignId} · ${preCaseData.profile.period} · ${preCaseData.mockLabel}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>${preCaseData.profile.siteCode}</span><span>${total} 步分析</span><span>未触发真实配置</span></div></header>${sections}`;
       preReportCanvasWrap.scrollTop = previousScrollTop;
@@ -12791,14 +11769,14 @@
       launchCaseReport(preCaseWorkbench, preCaseReportPane, preReportBackdrop);
       preSetSectionStatus("goal", "complete", undefined, false);
       preCaseState.messages.push(preCreateMessage("user", "text", `确认七步分析计划，预算申请上限按 ${preCaseState.budgetCap.toLocaleString()} 万元。`));
-      preGenerateChapter("baseline", `<p><strong>P0 结论：</strong>近 20 天 GMV 同比 +7.8%，主要由 DAC +7.1% 驱动，客单仅 +0.6%。促前优先扩大有效支付用户，不普遍抬高高门槛券。</p>`, [
+      preGenerateChapter("baseline", `<p><strong>大盘水位结论：</strong>近 20 天 GMV 同比 +7.8%，主要由 DAC +7.1% 驱动，客单仅 +0.6%。促前优先扩大有效支付用户，不普遍抬高高门槛券。</p>`, [
         { id: "continue-pre-category", label: "继续分析类目爆发", primary: true },
         { id: "ask-pre-baseline", label: "追问大盘水位" }
       ]);
     }
 
     function preContinueCategory() {
-      preGenerateChapter("category", `<p><strong>P1 结论：</strong>数码家电和食品生鲜为 S 级需求类目；前者适合高客单分层，后者适合普惠扩量。</p>`, [
+      preGenerateChapter("category", `<p><strong>类目需求结论：</strong>数码家电和食品生鲜为 S 级需求类目；前者适合高客单分层，后者适合普惠扩量。</p>`, [
         { id: "continue-pre-funnel", label: "继续复盘领取核销", primary: true },
         { id: "ask-pre-category", label: "追问类目优先级" }
       ]);
@@ -13114,7 +12092,7 @@
       return `<article class="chat-message ${message.role} is-entering">
         <div class="message-avatar">${isUser ? "你" : "AI"}</div>
         <div class="message-content">
-          <div class="message-meta"><strong>${isUser ? "你" : "策略 Agent"}</strong><span>${message.timestamp}</span></div>
+          <div class="message-meta"><strong>${isUser ? "你" : "券策略 Agent"}</strong><span>${message.timestamp}</span></div>
           <div class="message-bubble">${body}</div>
         </div>
       </article>`;
@@ -13128,7 +12106,7 @@
           <div class="new-conversation-empty">
             <div class="new-conversation-mark" aria-hidden="true">券</div>
             <div class="new-conversation-eyebrow">NEW STRATEGY CONVERSATION</div>
-            <h2>你好，我是消费券策略调优 Agent</h2>
+            <h2>你好，我是券策略 Agent</h2>
             <p>告诉我你正处于促前、促中还是复盘阶段，以及本次目标或约束。我会先澄清问题并生成一份可确认的分析计划。</p>
             <div class="new-conversation-starters">
               ${newChatStarters.map(item => `
@@ -13230,6 +12208,7 @@
     }
 
     function enterNewChat() {
+      hideInfrastructureView();
       closeAskPanel(false);
       closeArtifactPreview(false);
       preCloseArtifact(false);
@@ -13269,6 +12248,7 @@
     }
 
     function enterPreCase() {
+      hideInfrastructureView();
       preCaseState.activeView = "pre-case";
       newChatState.responseToken += 1;
       newChatState.isResponding = false;
@@ -13311,6 +12291,7 @@
     }
 
     function enterBudgetCase() {
+      hideInfrastructureView();
       budgetCaseState.activeView = "budget-case";
       newChatState.responseToken += 1;
       newChatState.isResponding = false;
@@ -13395,6 +12376,8 @@
     function closeModal(restoreFocus = true) {
       const trigger = modalReturnFocus;
       modal.classList.remove("show");
+      modal.querySelector(".modal").classList.remove("resource-modal");
+      infrastructureState.modalSelection = null;
       modalReturnFocus = null;
       if (restoreFocus !== false && trigger && document.contains(trigger)) trigger.focus();
     }
@@ -13407,9 +12390,168 @@
       return button;
     }
 
+    function beginResourceModal(title, trigger) {
+      modalReturnFocus = trigger || document.activeElement;
+      modalTitle.textContent = title;
+      modalBody.innerHTML = "";
+      modalActions.innerHTML = "";
+      modal.querySelector(".modal").classList.add("resource-modal");
+      modal.classList.add("show");
+    }
+
+    function addResourceModalActions(label, submit, disabled = false) {
+      const primary = actionButton(label, "resource-primary", submit);
+      primary.disabled = disabled;
+      modalActions.append(actionButton("取消", "ghost", closeModal), primary);
+      return primary;
+    }
+
+    function openKnowledgeCreate(trigger) {
+      beginResourceModal("新建知识资源", trigger);
+      const docs = [["历史活动策略","飞书文档"],["全域能力地图","飞书文档"],["渠道投放策略","飞书表格"],["批次及投放计划","飞书表格"],["消费券数据看板","飞书表格"],["消费券实验框架","飞书文档"],["实验配置巡检","飞书表格"],["消费券工具平台","飞书文档"]];
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">从飞书文档或本地文件中选择知识来源，创建后可单独启停并查看引用关系。</p><div class="resource-type-tabs"><button class="resource-type-tab active" data-picker-tab="lark">飞书文档</button><button class="resource-type-tab" data-picker-tab="local">本地文件或图片</button></div><div id="knowledgePicker"></div></div>`;
+      const primary = addResourceModalActions("创建所选", () => {
+        const selected = infrastructureState.modalSelection;
+        if (!selected) return;
+        const date = new Date().toLocaleString("zh-CN", { hour12: false }).replace(/\//g, "-");
+        infrastructureData.knowledge.unshift({ id: `kn-${Date.now()}`, name: selected.name, type: selected.type, owner: "策略增长团队", updatedAt: date, enabled: true, references: 0 });
+        closeModal();
+        renderInfrastructureView();
+        showToast(`知识资源“${selected.name}”已创建`);
+      }, true);
+      const picker = document.getElementById("knowledgePicker");
+      const renderPicker = tab => {
+        infrastructureState.modalSelection = null;
+        primary.disabled = true;
+        modalBody.querySelectorAll("[data-picker-tab]").forEach(button => button.classList.toggle("active", button.dataset.pickerTab === tab));
+        if (tab === "local") {
+          picker.innerHTML = `<div class="resource-field"><label for="knowledgeFile">选择本地文件</label><input id="knowledgeFile" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.md,image/*"><small>当前 Demo 记录文件名并创建脱敏资源。</small></div>`;
+          document.getElementById("knowledgeFile").addEventListener("change", event => {
+            const file = event.target.files?.[0];
+            infrastructureState.modalSelection = file ? { name: file.name, type: "本地文件" } : null;
+            primary.disabled = !file;
+          });
+          return;
+        }
+        picker.innerHTML = `<label class="resource-search" style="width:100%"><input id="knowledgeSearch" placeholder="搜索飞书文档..."></label><div class="resource-picker-list" id="knowledgeList">${docs.map((doc,index) => `<button class="resource-picker-item" data-doc-index="${index}"><b>${doc[1] === "飞书表格" ? "▦" : "▱"}</b>${escapeHTML(doc[0])}</button>`).join("")}</div>`;
+        document.getElementById("knowledgeList").addEventListener("click", event => {
+          const button = event.target.closest("[data-doc-index]");
+          if (!button) return;
+          const doc = docs[Number(button.dataset.docIndex)];
+          infrastructureState.modalSelection = { name: doc[0], type: doc[1] };
+          document.querySelectorAll("[data-doc-index]").forEach(item => item.classList.toggle("selected", item === button));
+          primary.disabled = false;
+        });
+        document.getElementById("knowledgeSearch").addEventListener("input", event => {
+          const query = event.target.value.toLowerCase();
+          document.querySelectorAll("[data-doc-index]").forEach((button,index) => button.hidden = !docs[index][0].toLowerCase().includes(query));
+        });
+      };
+      modalBody.querySelector(".resource-type-tabs").addEventListener("click", event => {
+        const tab = event.target.closest("[data-picker-tab]");
+        if (tab) renderPicker(tab.dataset.pickerTab);
+      });
+      renderPicker("lark");
+    }
+
+    function openSkillCreate(trigger) {
+      beginResourceModal("新建 / 上传技能", trigger);
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">创建用户技能并补充用途说明，保存后默认启用。</p><div class="resource-field"><label for="skillName">Skill 名称 *</label><input id="skillName" placeholder="例如 coupon-wave-planner"></div><div class="resource-field"><label for="skillDescription">能力说明 *</label><textarea id="skillDescription" placeholder="描述该 Skill 解决的问题、输入和输出。"></textarea></div><div class="resource-field"><label for="skillTags">标签</label><input id="skillTags" placeholder="大促, 资管, 目标测算"></div></div>`;
+      addResourceModalActions("创建技能", () => {
+        const name = document.getElementById("skillName").value.trim();
+        const description = document.getElementById("skillDescription").value.trim();
+        if (!name || !description) return showToast("请填写 Skill 名称和能力说明");
+        const tags = document.getElementById("skillTags").value.split(/[,，]/).map(tag => tag.trim()).filter(Boolean);
+        infrastructureData.skills.unshift({ id: `sk-${Date.now()}`, name, source: "user", description, enabled: true, tags: tags.length ? tags : ["其他"], content: description });
+        closeModal();
+        renderInfrastructureView();
+        showToast(`Skill“${name}”已创建并启用`);
+      });
+    }
+
+    function openDatasourceCreate(trigger) {
+      beginResourceModal("新建数据源", trigger);
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">通过 URL 解析并创建资源级数据源。</p><div class="resource-field"><label>Aeolus</label><small>Connect metrics data through an Aeolus dataset or dashboard identifier.</small></div><div class="resource-field"><label for="datasourceUrl">Aeolus URL *</label><div class="resource-inline-field"><input id="datasourceUrl" placeholder="https://aeolus.mock.invalid/dataset/AEOLUS_MOCK_01"><button class="resource-secondary" id="parseDatasource">⌕ 解析</button></div></div><div class="resource-parse-result" id="datasourceResult"><div><b id="datasourceParsedName">Aeolus</b><span>资源名称</span></div><div><b>Aeolus</b><span>数据源类型</span></div><div><b>权限正常</b><span>解析状态</span></div></div></div>`;
+      let parsed = null;
+      const primary = addResourceModalActions("创建", () => {
+        if (!parsed) return;
+        infrastructureData.datasources.unshift(parsed);
+        closeModal();
+        renderInfrastructureView();
+        showToast(`数据源“${parsed.name}”已创建`);
+      }, true);
+      document.getElementById("parseDatasource").addEventListener("click", () => {
+        const url = document.getElementById("datasourceUrl").value.trim();
+        if (!/^https?:\/\//i.test(url)) return showToast("请输入完整的 Aeolus URL");
+        const id = (url.match(/(\d{5,})/) || [])[1] || String(Date.now()).slice(-7);
+        parsed = { id: `ds-${Date.now()}`, name: `Aeolus ${id}`, type: "Aeolus", description: `Aeolus URL: ${new URL(url).hostname}`, uri: `aeolus:url:${id}${Date.now().toString(16).slice(-8)}`, enabled: true, references: 0 };
+        document.getElementById("datasourceParsedName").textContent = parsed.name;
+        document.getElementById("datasourceResult").classList.add("show");
+        primary.disabled = false;
+        showToast("Aeolus 资源解析完成");
+      });
+    }
+
+    function openMcpCreate(trigger) {
+      beginResourceModal("新建 MCP", trigger);
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">配置 MCP Server。测试只验证演示状态，不会向外部地址发送请求。</p><div class="resource-field"><label for="mcpName">名称 *</label><input id="mcpName" placeholder="例如 ECOP 指标查询"></div><div class="resource-field"><label for="mcpTransport">传输协议 *</label><select id="mcpTransport"><option>Streamable HTTP</option><option>SSE</option></select></div><div class="resource-field"><label for="mcpUrl">Server URL *</label><div class="resource-inline-field"><input id="mcpUrl" placeholder="https://mcp.example.net/server"><button class="resource-secondary" id="testMcp">测试连接</button></div></div><div class="resource-field"><label for="mcpToken">Authorization（可选）</label><input id="mcpToken" type="password" autocomplete="new-password" placeholder="Bearer token"></div><div class="resource-parse-result" id="mcpResult"><div><b>连接正常</b><span>Server 状态</span></div><div><b>8 个工具</b><span>工具发现</span></div><div><b>待创建</b><span>当前状态</span></div></div></div>`;
+      let tested = null;
+      const primary = addResourceModalActions("创建 MCP", () => {
+        if (!tested) return;
+        infrastructureData.mcps.unshift(tested);
+        closeModal();
+        renderInfrastructureView();
+        showToast(`MCP“${tested.name}”已创建并启用`);
+      }, true);
+      document.getElementById("testMcp").addEventListener("click", event => {
+        const name = document.getElementById("mcpName").value.trim();
+        const endpoint = document.getElementById("mcpUrl").value.trim();
+        if (!name || !/^https?:\/\//i.test(endpoint)) return showToast("请填写名称和完整的 Server URL");
+        const button = event.currentTarget;
+        button.textContent = "连接中...";
+        button.disabled = true;
+        setTimeout(() => {
+          tested = { id: `mcp-${Date.now()}`, name, transport: document.getElementById("mcpTransport").value, description: "新建的 MCP Server，已完成连接与工具发现测试。", endpoint, enabled: true, tools: 8 };
+          document.getElementById("mcpResult").classList.add("show");
+          primary.disabled = false;
+          button.textContent = "重新测试";
+          button.disabled = false;
+          showToast("连接测试通过，发现 8 个工具");
+        }, 650);
+      });
+    }
+
+    function openResourceCreate(type, trigger) {
+      ({ knowledge: openKnowledgeCreate, skill: openSkillCreate, datasource: openDatasourceCreate, mcp: openMcpCreate }[type])?.(trigger);
+    }
+
+    function openResourceDetail(kind, id, trigger) {
+      const collection = { knowledge: infrastructureData.knowledge, skill: infrastructureData.skills, datasource: infrastructureData.datasources, mcp: infrastructureData.mcps }[kind];
+      const item = collection?.find(entry => entry.id === id);
+      if (!item) return;
+      beginResourceModal(item.name, trigger);
+      const rows = kind === "skill" ? [["来源",item.source === "system" ? "系统内置" : "用户技能"],["状态",item.enabled ? "已启用" : "已停用"],["标签",item.tags.join(" / ")],["能力内容",item.content]] : kind === "datasource" ? [["类型",item.type],["状态",item.enabled ? "已启用" : "已停用"],["资源 URI",item.uri]] : kind === "mcp" ? [["传输协议",item.transport],["状态",item.enabled ? "已连接" : "已停用"],["Server URL",item.endpoint],["工具数",`${item.tools} 个`]] : [["类型",item.type],["添加者",item.owner],["修改时间",item.updatedAt]];
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">${escapeHTML(item.description || "该资源已纳入 Agent 基础架构管理。")}</p>${rows.map(row => `<div class="resource-field"><label>${escapeHTML(row[0])}</label><div class="resource-code">${escapeHTML(row[1])}</div></div>`).join("")}</div>`;
+      modalActions.append(actionButton("关闭", "resource-primary", closeModal));
+    }
+
+    function downloadSkill(id) {
+      const skill = infrastructureData.skills.find(item => item.id === id);
+      if (!skill) return;
+      const content = `# ${skill.name}\n\n${skill.description}\n\n## Tags\n\n${skill.tags.map(tag => `- ${tag}`).join("\n")}\n\n## Instructions\n\n${skill.content}\n`;
+      const url = URL.createObjectURL(new Blob([content], { type: "text/markdown;charset=utf-8" }));
+      const anchor = document.createElement("a");
+      anchor.href = url;
+      anchor.download = `${skill.name}.md`;
+      anchor.click();
+      URL.revokeObjectURL(url);
+      showToast(`Skill“${skill.name}”已开始下载`);
+    }
+
     function openModal(type, trigger = document.activeElement) {
       modalReturnFocus = trigger;
       modalActions.innerHTML = "";
+      modal.querySelector(".modal").classList.remove("resource-modal");
 
       if (type === "case-adopt") {
         modalTitle.textContent = "确认灰度候选";
@@ -13497,6 +12639,59 @@
 
     document.querySelectorAll("[data-open-modal]").forEach(button => {
       button.addEventListener("click", () => openModal(button.dataset.openModal, button));
+    });
+
+    document.querySelectorAll("[data-infra-view]").forEach(button => button.addEventListener("click", () => openInfrastructureView(button.dataset.infraView)));
+    document.querySelectorAll("[data-infra-toast]").forEach(button => button.addEventListener("click", () => showToast(button.dataset.infraToast)));
+
+    infraManagement.addEventListener("input", event => {
+      if (!event.target.matches("[data-infra-search]")) return;
+      infrastructureState.query = event.target.value;
+      const cursor = event.target.selectionStart;
+      renderInfrastructureView();
+      requestAnimationFrame(() => {
+        const input = infraManagement.querySelector("[data-infra-search]");
+        input?.focus();
+        input?.setSelectionRange(cursor, cursor);
+      });
+    });
+
+    infraManagement.addEventListener("click", event => {
+      const create = event.target.closest("[data-infra-new]");
+      if (create) return openResourceCreate(create.dataset.infraNew, create);
+      if (event.target.closest("[data-infra-back]")) return exitInfrastructureView();
+      const status = event.target.closest("[data-infra-status]");
+      if (status) { infrastructureState.status = status.dataset.infraStatus; return renderInfrastructureView(); }
+      const type = event.target.closest("[data-infra-type]");
+      if (type) { infrastructureState.type = type.dataset.infraType; return renderInfrastructureView(); }
+      const layout = event.target.closest("[data-infra-layout]");
+      if (layout) { infrastructureState.viewMode = layout.dataset.infraLayout; return renderInfrastructureView(); }
+      const source = event.target.closest("[data-skill-source]");
+      if (source) { infrastructureState.skillSource = source.dataset.skillSource; return renderInfrastructureView(); }
+      const tagButton = event.target.closest("[data-skill-tag]");
+      if (tagButton) {
+        const tag = tagButton.dataset.skillTag;
+        infrastructureState.skillTags.has(tag) ? infrastructureState.skillTags.delete(tag) : infrastructureState.skillTags.add(tag);
+        return renderInfrastructureView();
+      }
+      const toggle = event.target.closest("[data-infra-toggle]");
+      if (toggle) {
+        const collection = { knowledge: infrastructureData.knowledge, skill: infrastructureData.skills, datasource: infrastructureData.datasources, mcp: infrastructureData.mcps }[toggle.dataset.infraToggle];
+        const item = collection?.find(entry => entry.id === toggle.dataset.resourceId);
+        if (!item) return;
+        item.enabled = !item.enabled;
+        renderInfrastructureView();
+        return showToast(`“${item.name}”已${item.enabled ? "启用" : "停用"}`);
+      }
+      const detail = event.target.closest("[data-infra-detail]");
+      if (detail) return openResourceDetail(detail.dataset.infraDetail, detail.dataset.resourceId, detail);
+      const skillAction = event.target.closest("[data-skill-action]");
+      if (skillAction) {
+        const skill = infrastructureData.skills.find(item => item.id === skillAction.dataset.resourceId);
+        if (!skill) return;
+        if (skillAction.dataset.skillAction === "download") return downloadSkill(skill.id);
+        showToast(skill.enabled ? `Skill“${skill.name}”已加入当前 Agent 上下文` : `请先启用 Skill“${skill.name}”`);
+      }
     });
 
     newChatButton.addEventListener("click", enterNewChat);
@@ -13637,22 +12832,22 @@
       const removeButton = event.target.closest("[data-pre-remove-reference]");
       if (removeButton) {
         const referenceId = removeButton.dataset.preRemoveReference;
-        const campaign = preInsightHomeData.historicalCampaigns.find(item => item.id === referenceId);
+        const campaign = preFindHistoricalCampaign(referenceId);
         preDashboardState.userAddedReferenceIds.delete(referenceId);
         preDashboardState.excludedReferenceIds.add(referenceId);
         preRenderPlanningDashboard();
-        showToast(`已移除${campaign?.name || "参考促"}，样本覆盖与洞察已更新`);
+        showToast(`已移除${campaign?.name || "参考促"}，样本覆盖、证据指标与 AI 小结已重算`);
         return;
       }
 
       if (event.target.closest("#preReferenceAdd")) {
         const referenceId = document.getElementById("preReferenceSelect").value;
-        const campaign = preInsightHomeData.historicalCampaigns.find(item => item.id === referenceId);
+        const campaign = preFindHistoricalCampaign(referenceId);
         if (!campaign) return;
         preDashboardState.excludedReferenceIds.add(referenceId);
         preDashboardState.userAddedReferenceIds.add(referenceId);
         preRenderPlanningDashboard();
-        showToast(`已将${campaign.name}作为用户添加样本，洞察已更新`);
+        showToast(`已将${campaign.name}作为用户添加样本，证据指标与 AI 小结已重算`);
         return;
       }
 
@@ -13667,22 +12862,11 @@
       if (insightButton) {
         const activity = preGetPlanningActivity();
         const references = preGetReferenceCampaigns();
-        const insight = preInsightHomeData.insights.find(item => item.key === insightButton.dataset.preInsightAsk);
+        const insight = preDashboardState.currentInsights.find(item => item.key === insightButton.dataset.preInsightAsk);
         if (activity && references.length && insight) {
           preOpenDashboardQuestion(`规划活动：${activity.name}（${activity.period}，${activity.level} 级 ${activity.levelName}）；参考促集合：${preReferenceContext(references)}。请基于“${insight.source}”解释历史洞察“${insight.title}”。历史证据：${insight.evidence}；AI 小结：${insight.summary}；适用边界：${insight.boundary}。仅解释历史规律，不生成本期具体券方案。`);
         }
       }
-    });
-
-    document.getElementById("preStartCollaboration").addEventListener("click", () => {
-      preOpenDashboardQuestion("请基于当前促前工作台草案，先确认目标、预算和七步分析计划，再逐步生成策略报告。");
-    });
-    document.getElementById("preContinueToCase").addEventListener("click", () => {
-      preOpenDashboardQuestion("请把当前 4+X 券档、四个主波次、人群渠道矩阵和巡检状态带入策略对话。");
-    });
-    document.getElementById("preExportDraft").addEventListener("click", () => {
-      showToast("已打开促前规划打印视图，可导出为 PDF 草案");
-      setTimeout(() => window.print(), 350);
     });
 
     dashboard.addEventListener("click", event => {
