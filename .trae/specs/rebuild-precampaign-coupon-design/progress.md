@@ -115,3 +115,9 @@
 - 完成 Tasks 29–35：促前历史三栏七步、P0/P1、预算治理与脱敏；促中七节点七维矩阵、三候选、profile 扩量、批次缺值，以及多轮下钻、冲突与缺数处理。
 - 最终静态和浏览器验收 PASS；修复人群 15%、搜索 10pp、跨轮约束与五指标三维证据。
 - 修改文件：`index.html`、`spec.md`、`tasks.md`、`checklist.md`、`progress.md`；即将普通推送。
+
+## Supplemental Release
+
+- 完成 Tasks 36–38：为全部下一波次候选补齐券类型与发放形式，并统一页面、批次表、会话上下文和批次下钻契约。
+- 增加 4 个上下文、12 个候选、45 个批次的精确完整性门禁；独立静态与浏览器冒烟通过，无重复 ID、可见 `undefined` 或页面级横向溢出。
+- 修改文件：`index.html`、`tasks.md`、`checklist.md`、`progress.md`。

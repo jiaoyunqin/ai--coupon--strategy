@@ -1652,7 +1652,7 @@
 
     .mid-current-difference-table {
       width: 100%;
-      min-width: 1010px;
+      min-width: 0;
       border-collapse: collapse;
       table-layout: fixed;
       font-size: 8px;
@@ -9945,6 +9945,7 @@
       }
 
       .case-report-pane.mobile-open {
+        z-index: 220;
         transform: translateX(0);
       }
 
@@ -12124,10 +12125,10 @@
           ],
           tags: ["券档重排", "渠道迁移", "实验保留"],
           batches: [
-            { roleKey: "base", time: "T0 00:00", endpoint: "主端", tier: "300-40 / 600-80", audience: "普惠与中高潜", venue: "会场 / 商城券包", budget: "稳定承接", objective: "补规模", code: "SIM-W05_P01", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每档 1 张" },
-            { roleKey: "focus", time: "T0 12:00", endpoint: "主端", tier: "X 定向券", audience: "年轻中高消费力女性", venue: "搜索 / 会场", budget: "扩量 20%", objective: "提钱效", code: "SIM-W05_X01", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
-            { roleKey: "support", time: "T0 20:00", endpoint: "主端", tier: "1500-150 / 2000-200", audience: "高客单类目高意向", venue: "搜索", budget: "限制泛发", objective: "保客单", code: "SIM-W05_H01", issueWindow: "3/9 20:00—23:59", useWindow: "3/9—3/10", limit: "互斥 1 张" },
-            { roleKey: "reminder", time: "T+1 20:00", endpoint: "主端 / 独立端", tier: "未核销券催用", audience: "已领未用 / 高潜回流", venue: "券包 / Push", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-W05_REMIND", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
+            { roleKey: "base", time: "T0 00:00", endpoint: "主端", couponType: "普惠满减券", tier: "300-40 / 600-80", audience: "普惠与中高潜", venue: "会场 / 商城券包", distributionForm: "会场 / 券包主动领券", budget: "稳定承接", objective: "补规模", code: "SIM-W05_P01", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每档 1 张" },
+            { roleKey: "focus", time: "T0 12:00", endpoint: "主端", couponType: "人群定向券", tier: "X 定向券", audience: "年轻中高消费力女性", venue: "搜索 / 会场", distributionForm: "定向发放", budget: "扩量 20%", objective: "提钱效", code: "SIM-W05_X01", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
+            { roleKey: "support", time: "T0 20:00", endpoint: "主端", couponType: "高门槛满减券", tier: "1500-150 / 2000-200", audience: "高客单类目高意向", venue: "搜索", distributionForm: "搜索定向领券", budget: "限制泛发", objective: "保客单", code: "SIM-W05_H01", issueWindow: "3/9 20:00—23:59", useWindow: "3/9—3/10", limit: "互斥 1 张" },
+            { roleKey: "reminder", time: "T+1 20:00", endpoint: "主端 / 独立端", couponType: "催用任务（非新发券）", tier: "未核销券催用", audience: "已领未用 / 高潜回流", venue: "券包 / Push", distributionForm: "不适用（仅触达）", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-W05_REMIND", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
           ],
           channels: [
             { name: "活动会场", role: "规模主阵地", action: "300-40 / 600-80 稳定承接，X 券定向扩量", result: "预算 +6pp" },
@@ -12177,10 +12178,10 @@
           ],
           tags: ["钱效优先", "高门槛收缩", "扩大对照"],
           batches: [
-            { roleKey: "base", time: "T0 00:00", endpoint: "主端", tier: "300-40", audience: "普惠高潜", venue: "会场 / 券包", budget: "预算聚焦", objective: "稳核销", code: "SIM-W05_E01", issueWindow: "3/9 00:00—15:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
-            { roleKey: "focus", time: "T0 12:00", endpoint: "主端", tier: "X 定向券", audience: "高价值高潜", venue: "搜索 / 会场", budget: "扩量 12%", objective: "锁钱效", code: "SIM-W05_EX1", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
-            { roleKey: "support", time: "T0 20:00", endpoint: "主端", tier: "600-80", audience: "中高价值回流", venue: "商城券包", budget: "小量补位", objective: "补规模", code: "SIM-W05_E02", issueWindow: "3/9 20:00—23:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
-            { roleKey: "reminder", time: "T+1 20:00", endpoint: "主端", tier: "未核销券催用", audience: "已领未用", venue: "券包 / Push", budget: "频控催用", objective: "回收库存", code: "SIM-REMINDER-W05_ER", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
+            { roleKey: "base", time: "T0 00:00", endpoint: "主端", couponType: "普惠满减券", tier: "300-40", audience: "普惠高潜", venue: "会场 / 券包", distributionForm: "会场 / 券包主动领券", budget: "预算聚焦", objective: "稳核销", code: "SIM-W05_E01", issueWindow: "3/9 00:00—15:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
+            { roleKey: "focus", time: "T0 12:00", endpoint: "主端", couponType: "人群定向券", tier: "X 定向券", audience: "高价值高潜", venue: "搜索 / 会场", distributionForm: "定向发放", budget: "扩量 12%", objective: "锁钱效", code: "SIM-W05_EX1", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
+            { roleKey: "support", time: "T0 20:00", endpoint: "主端", couponType: "回流满减券", tier: "600-80", audience: "中高价值回流", venue: "商城券包", distributionForm: "券包主动领券", budget: "小量补位", objective: "补规模", code: "SIM-W05_E02", issueWindow: "3/9 20:00—23:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
+            { roleKey: "reminder", time: "T+1 20:00", endpoint: "主端", couponType: "催用任务（非新发券）", tier: "未核销券催用", audience: "已领未用", venue: "券包 / Push", distributionForm: "不适用（仅触达）", budget: "频控催用", objective: "回收库存", code: "SIM-REMINDER-W05_ER", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
           ],
           channels: [
             { name: "活动会场", role: "核心规模", action: "只保留 300-40 与高价值 X 券", result: "预算 +4pp" },
@@ -12230,10 +12231,10 @@
           ],
           tags: ["规模优先", "准备金补量", "保留止损"],
           batches: [
-            { roleKey: "base", time: "T0 00:00", endpoint: "主端", tier: "300-40 / 600-80", audience: "普惠与中高潜", venue: "会场 / 券包", budget: "准备金补量", objective: "扩规模", code: "SIM-W05_G01", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每档 1 张" },
-            { roleKey: "focus", time: "T0 12:00", endpoint: "主端", tier: "X 定向券", audience: "年轻中高消费力女性", venue: "搜索 / 会场", budget: "扩量 28%", objective: "提增量", code: "SIM-W05_GX1", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
-            { roleKey: "support", time: "T0 20:00", endpoint: "主端", tier: "1500-150", audience: "高客单类目高意向", venue: "搜索 / 会场", budget: "定向补量", objective: "保客单", code: "SIM-W05_GH1", issueWindow: "3/9 20:00—23:59", useWindow: "3/9—3/10", limit: "互斥 1 张" },
-            { roleKey: "reminder", time: "T+1 20:00", endpoint: "主端 / 独立端", tier: "未核销券催用", audience: "已领未用 / 高潜回流", venue: "券包 / Push", budget: "强催用", objective: "保核销", code: "SIM-REMINDER-W05_GR", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
+            { roleKey: "base", time: "T0 00:00", endpoint: "主端", couponType: "普惠满减券", tier: "300-40 / 600-80", audience: "普惠与中高潜", venue: "会场 / 券包", distributionForm: "会场 / 券包主动领券", budget: "准备金补量", objective: "扩规模", code: "SIM-W05_G01", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每档 1 张" },
+            { roleKey: "focus", time: "T0 12:00", endpoint: "主端", couponType: "人群定向券", tier: "X 定向券", audience: "年轻中高消费力女性", venue: "搜索 / 会场", distributionForm: "定向发放", budget: "扩量 28%", objective: "提增量", code: "SIM-W05_GX1", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
+            { roleKey: "support", time: "T0 20:00", endpoint: "主端", couponType: "高门槛满减券", tier: "1500-150", audience: "高客单类目高意向", venue: "搜索 / 会场", distributionForm: "搜索 / 会场定向领券", budget: "定向补量", objective: "保客单", code: "SIM-W05_GH1", issueWindow: "3/9 20:00—23:59", useWindow: "3/9—3/10", limit: "互斥 1 张" },
+            { roleKey: "reminder", time: "T+1 20:00", endpoint: "主端 / 独立端", couponType: "催用任务（非新发券）", tier: "未核销券催用", audience: "已领未用 / 高潜回流", venue: "券包 / Push", distributionForm: "不适用（仅触达）", budget: "强催用", objective: "保核销", code: "SIM-REMINDER-W05_GR", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
           ],
           channels: [
             { name: "活动会场", role: "规模主阵地", action: "固定档与 X 券同步放量", result: "预算 +9pp" },
@@ -12407,9 +12408,9 @@
         { label: "库存状态", title: "高门槛未核销库存仍偏高", action: "停止新增高门槛泛发" }
       ],
       batches: [
-        { time: "3/9 00:00", endpoint: "主端", tier: "300-40", audience: "返场高潜", venue: "活动会场", budget: "稳定承接", objective: "补规模", code: "SIM-38_W05_P01", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
-        { time: "3/9 12:00", endpoint: "主端", tier: "X 定向券", audience: "高价值高意图", venue: "搜索", budget: "扩量 12%", objective: "稳钱效", code: "SIM-38_W05_X01", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
-        { time: "3/9 20:00", endpoint: "主端 / 独立端", tier: "未核销券催用", audience: "3/8 已领未用", venue: "券包 / Push", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-38_W05_REMIND", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
+        { time: "3/9 00:00", endpoint: "主端", couponType: "普惠满减券", tier: "300-40", audience: "返场高潜", venue: "活动会场", distributionForm: "会场主动领券", budget: "稳定承接", objective: "补规模", code: "SIM-38_W05_P01", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
+        { time: "3/9 12:00", endpoint: "主端", couponType: "返场定向券", tier: "X 定向券", audience: "高价值高意图", venue: "搜索", distributionForm: "定向发放", budget: "扩量 12%", objective: "稳钱效", code: "SIM-38_W05_X01", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
+        { time: "3/9 20:00", endpoint: "主端 / 独立端", couponType: "催用任务（非新发券）", tier: "未核销券催用", audience: "3/8 已领未用", venue: "券包 / Push", distributionForm: "不适用（仅触达）", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-38_W05_REMIND", issueWindow: "仅触达", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
       ],
       channels: [
         { name: "活动会场", role: "返场承接", action: "仅保留 300-40 与定向券入口", result: "预算 +3pp" },
@@ -12455,10 +12456,10 @@
         { label: "6/15 券库存", title: "已领未用 286 万", action: "6/16 前置催用并控制重复触达" }
       ],
       batches: [
-        { time: "6/16 00:00", endpoint: "主端", tier: "600-80", audience: "618 普惠高潜", venue: "活动会场 / 券包", budget: "稳定承接", objective: "保规模", code: "SIM-618_W04_P01", issueWindow: "6/16 00:00—11:59", useWindow: "6/16—6/18", limit: "每人 1 张" },
-        { time: "6/16 12:00", endpoint: "主端", tier: "家电 X 定向券", audience: "家电高意图高客单", venue: "搜索 / 会场", budget: "扩量 14%", objective: "提增量", code: "SIM-618_W04_X01", issueWindow: "6/16 12:00—21:59", useWindow: "6/16—6/18", limit: "类目定向 1 张" },
-        { time: "6/17 10:00", endpoint: "主端", tier: "300-40", audience: "新客与回流高潜", venue: "活动会场", budget: "小量补位", objective: "补 DAC", code: "SIM-618_W04_N01", issueWindow: "6/17 10:00—17:59", useWindow: "6/17—6/18", limit: "每人 1 张" },
-        { time: "6/17 20:00", endpoint: "主端 / 独立端", tier: "未核销券催用", audience: "6/15 前已领未用", venue: "券包 / Push", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-618_W04_REMIND", issueWindow: "仅触达", useWindow: "截至 6/18 23:59", limit: "频控 1 次" }
+        { time: "6/16 00:00", endpoint: "主端", couponType: "普惠满减券", tier: "600-80", audience: "618 普惠高潜", venue: "活动会场 / 券包", distributionForm: "会场 / 券包主动领券", budget: "稳定承接", objective: "保规模", code: "SIM-618_W04_P01", issueWindow: "6/16 00:00—11:59", useWindow: "6/16—6/18", limit: "每人 1 张" },
+        { time: "6/16 12:00", endpoint: "主端", couponType: "类目定向券", tier: "家电 X 定向券", audience: "家电高意图高客单", venue: "搜索 / 会场", distributionForm: "定向发放", budget: "扩量 14%", objective: "提增量", code: "SIM-618_W04_X01", issueWindow: "6/16 12:00—21:59", useWindow: "6/16—6/18", limit: "类目定向 1 张" },
+        { time: "6/17 10:00", endpoint: "主端", couponType: "新客满减券", tier: "300-40", audience: "新客与回流高潜", venue: "活动会场", distributionForm: "会场主动领券", budget: "小量补位", objective: "补 DAC", code: "SIM-618_W04_N01", issueWindow: "6/17 10:00—17:59", useWindow: "6/17—6/18", limit: "每人 1 张" },
+        { time: "6/17 20:00", endpoint: "主端 / 独立端", couponType: "催用任务（非新发券）", tier: "未核销券催用", audience: "6/15 前已领未用", venue: "券包 / Push", distributionForm: "不适用（仅触达）", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-618_W04_REMIND", issueWindow: "仅触达", useWindow: "截至 6/18 23:59", limit: "频控 1 次" }
       ],
       channels: [
         { name: "活动会场", role: "收官规模", action: "600-80 稳定承接，家电 X 券定向曝光", result: "预算 +4pp" },
@@ -12505,10 +12506,10 @@
         { label: "11/9 券库存", title: "24 小时内到期券 198 万", action: "终场前置券包催用" }
       ],
       batches: [
-        { time: "11/10 00:00", endpoint: "主端", tier: "500-60 会员券", audience: "活跃会员", venue: "会员中心 / 会场", budget: "扩量 16%", objective: "会员保量", code: "SIM-1111_25_W06_M01", issueWindow: "11/10 00:00—13:59", useWindow: "11/10—11/11", limit: "会员 1 张" },
-        { time: "11/10 14:00", endpoint: "主端", tier: "数码 X 定向券", audience: "数码高意图", venue: "搜索", budget: "预算聚焦", objective: "提客单", code: "SIM-1111_25_W06_X01", issueWindow: "11/10 14:00—21:59", useWindow: "11/10—11/11", limit: "类目定向 1 张" },
-        { time: "11/11 09:00", endpoint: "主端", tier: "200-20", audience: "终场回流高潜", venue: "活动会场", budget: "小量补位", objective: "补订单", code: "SIM-1111_25_W06_R01", issueWindow: "11/11 09:00—17:59", useWindow: "截至 11/11 23:59", limit: "每人 1 张" },
-        { time: "11/11 18:00", endpoint: "主端", tier: "未核销券催用", audience: "24 小时内到期", venue: "券包 / Push", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-1111_25_W06_REMIND", issueWindow: "仅触达", useWindow: "截至 11/11 23:59", limit: "频控 1 次" }
+        { time: "11/10 00:00", endpoint: "主端", couponType: "会员满减券", tier: "500-60 会员券", audience: "活跃会员", venue: "会员中心 / 会场", distributionForm: "会员中心 / 会场主动领券", budget: "扩量 16%", objective: "会员保量", code: "SIM-1111_25_W06_M01", issueWindow: "11/10 00:00—13:59", useWindow: "11/10—11/11", limit: "会员 1 张" },
+        { time: "11/10 14:00", endpoint: "主端", couponType: "类目定向券", tier: "数码 X 定向券", audience: "数码高意图", venue: "搜索", distributionForm: "定向发放", budget: "预算聚焦", objective: "提客单", code: "SIM-1111_25_W06_X01", issueWindow: "11/10 14:00—21:59", useWindow: "11/10—11/11", limit: "类目定向 1 张" },
+        { time: "11/11 09:00", endpoint: "主端", couponType: "回流满减券", tier: "200-20", audience: "终场回流高潜", venue: "活动会场", distributionForm: "会场主动领券", budget: "小量补位", objective: "补订单", code: "SIM-1111_25_W06_R01", issueWindow: "11/11 09:00—17:59", useWindow: "截至 11/11 23:59", limit: "每人 1 张" },
+        { time: "11/11 18:00", endpoint: "主端", couponType: "催用任务（非新发券）", tier: "未核销券催用", audience: "24 小时内到期", venue: "券包 / Push", distributionForm: "不适用（仅触达）", budget: "库存回收", objective: "提核销", code: "SIM-REMINDER-1111_25_W06_REMIND", issueWindow: "仅触达", useWindow: "截至 11/11 23:59", limit: "频控 1 次" }
       ],
       channels: [
         { name: "活动会场", role: "终场规模", action: "会员券与低门槛回流券承接", result: "预算 +3pp" },
@@ -12667,8 +12668,8 @@
     }
 
     const batchFieldNames = [
-      "code", "time", "endpoint", "tier", "audience", "venue",
-      "budget", "objective", "issueWindow", "useWindow", "limit"
+      "code", "time", "endpoint", "couponType", "tier", "audience", "venue",
+      "distributionForm", "budget", "objective", "issueWindow", "useWindow", "limit"
     ];
 
     function formatBatchField(batch, field, emptyLabel) {
@@ -12693,6 +12694,14 @@
 
     function formatBatchRecords(batches) {
       return Array.isArray(batches) ? batches.map(formatBatchRecord) : [];
+    }
+
+    function formatBatchCouponContract(batch) {
+      return [
+        formatBatchField(batch, "couponType"),
+        formatBatchField(batch, "tier"),
+        formatBatchField(batch, "distributionForm")
+      ].join(" · ");
     }
 
     function resolveMidPlanKey(plans, preferredKeys = [], planOrder = []) {
@@ -12748,7 +12757,7 @@
       },
       "batchWindow/couponRole": {
         dimensions: ["batchWindow", "couponRole"],
-        requiredFields: ["批次别名", "发放窗口", "使用窗口", "券角色", "预算", "频控"]
+        requiredFields: ["批次别名", "券类型", "门槛-面额", "发放形式", "发放窗口", "使用窗口", "券角色", "预算", "频控"]
       }
     };
 
@@ -12896,7 +12905,7 @@
       ],
       batchProtocol: {
         aliasPattern: "SIM-38-{MODE}-{SEQ}",
-        requiredFields: ["时点", "投放端", "券档/任务", "目标人群", "场域", "预算动作", "发放窗口", "使用窗口", "频控"],
+        requiredFields: ["时点", "投放端", "券类型", "券档/任务", "目标人群", "场域", "发放形式", "预算动作", "发放窗口", "使用窗口", "频控"],
         missingPolicy: "缺失字段显示暂无数据；不生成真实批次 ID"
       },
       candidates: midNextWaveData.plans
@@ -12939,13 +12948,13 @@
       ],
       batchProtocol: {
         aliasPattern: "SIM-38CLOSE-{MODE}-{SEQ}",
-        requiredFields: ["时点", "端", "券角色", "返场人群", "场域", "预算", "发放窗口", "使用窗口", "频控"],
+        requiredFields: ["时点", "端", "券类型", "券角色", "返场人群", "场域", "发放形式", "预算", "发放窗口", "使用窗口", "频控"],
         missingPolicy: "缺失字段显示暂无数据；催用任务不伪装成券批次"
       },
       batchBlueprints: [
-        { roleKey: "base", time: "3/9 00:00", endpoint: "主端", tier: "300-40", audience: "返场普惠高潜", venue: "活动会场", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
-        { roleKey: "focus", time: "3/9 12:00", endpoint: "主端", tier: "返场定向券", audience: "返场高价值高意图", venue: "搜索 / 会场", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
-        { roleKey: "reminder", time: "3/9 20:00", endpoint: "主端", tier: "即将到期券催用", audience: "3/8 已领未用", venue: "券包 / Push", issueWindow: "不适用", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
+        { roleKey: "base", time: "3/9 00:00", endpoint: "主端", couponType: "普惠满减券", tier: "300-40", audience: "返场普惠高潜", venue: "活动会场", distributionForm: "会场主动领券", issueWindow: "3/9 00:00—11:59", useWindow: "3/9—3/10", limit: "每人 1 张" },
+        { roleKey: "focus", time: "3/9 12:00", endpoint: "主端", couponType: "返场定向券", tier: "返场定向券", audience: "返场高价值高意图", venue: "搜索 / 会场", distributionForm: "定向发放", issueWindow: "3/9 12:00—19:59", useWindow: "3/9—3/10", limit: "定向 1 张" },
+        { roleKey: "reminder", time: "3/9 20:00", endpoint: "主端", couponType: "催用任务（非新发券）", tier: "即将到期券催用", audience: "3/8 已领未用", venue: "券包 / Push", distributionForm: "不适用（仅触达）", issueWindow: "不适用", useWindow: "截至 3/10 23:59", limit: "频控 1 次" }
       ],
       channelBlueprints: [
         { name: "活动会场", role: "返场承接", action: "保留普惠入口" },
@@ -13071,14 +13080,14 @@
       ],
       batchProtocol: {
         aliasPattern: "SIM-618-{MODE}-{SEQ}",
-        requiredFields: ["时点", "端", "券档/任务", "618 人群", "场域", "预算", "发放窗口", "使用窗口", "频控"],
+        requiredFields: ["时点", "端", "券类型", "券档/任务", "618 人群", "场域", "发放形式", "预算", "发放窗口", "使用窗口", "频控"],
         missingPolicy: "缺失字段显示暂无数据；不回填 38 节批次"
       },
       batchBlueprints: [
-        { roleKey: "base", time: "6/16 00:00", endpoint: "主端", tier: "600-80", audience: "618 普惠高潜", venue: "活动会场 / 券包", issueWindow: "6/16 00:00—11:59", useWindow: "6/16—6/18", limit: "每人 1 张" },
-        { roleKey: "focus", time: "6/16 12:00", endpoint: "主端", tier: "家电定向券", audience: "家电高意图高客单", venue: "搜索 / 会场", issueWindow: "6/16 12:00—21:59", useWindow: "6/16—6/18", limit: "类目定向 1 张" },
-        { roleKey: "support", time: "6/17 10:00", endpoint: "主端", tier: "300-40 新客券", audience: "新客与回流高潜", venue: "活动会场", issueWindow: "6/17 10:00—17:59", useWindow: "6/17—6/18", limit: "每人 1 张" },
-        { roleKey: "reminder", time: "6/17 20:00", endpoint: "主端 / 独立端", tier: "618 到期券催用", audience: "6/15 前已领未用", venue: "券包 / Push", issueWindow: "不适用", useWindow: "截至 6/18 23:59", limit: "频控 1 次" }
+        { roleKey: "base", time: "6/16 00:00", endpoint: "主端", couponType: "普惠满减券", tier: "600-80", audience: "618 普惠高潜", venue: "活动会场 / 券包", distributionForm: "会场 / 券包主动领券", issueWindow: "6/16 00:00—11:59", useWindow: "6/16—6/18", limit: "每人 1 张" },
+        { roleKey: "focus", time: "6/16 12:00", endpoint: "主端", couponType: "类目定向券", tier: "家电定向券", audience: "家电高意图高客单", venue: "搜索 / 会场", distributionForm: "定向发放", issueWindow: "6/16 12:00—21:59", useWindow: "6/16—6/18", limit: "类目定向 1 张" },
+        { roleKey: "support", time: "6/17 10:00", endpoint: "主端", couponType: "新客满减券", tier: "300-40 新客券", audience: "新客与回流高潜", venue: "活动会场", distributionForm: "会场主动领券", issueWindow: "6/17 10:00—17:59", useWindow: "6/17—6/18", limit: "每人 1 张" },
+        { roleKey: "reminder", time: "6/17 20:00", endpoint: "主端 / 独立端", couponType: "催用任务（非新发券）", tier: "618 到期券催用", audience: "6/15 前已领未用", venue: "券包 / Push", distributionForm: "不适用（仅触达）", issueWindow: "不适用", useWindow: "截至 6/18 23:59", limit: "频控 1 次" }
       ],
       channelBlueprints: [
         { name: "活动会场", role: "收官规模", action: "600-80 稳定承接" },
@@ -13130,7 +13139,7 @@
           },
           tags: ["618 钱效", "搜索聚焦", "扩大对照"],
           batchBudgets: ["收缩 5%", "扩量 9%", "停止补位", "低频催用"],
-          batchObjectives: ["稳钱效", "提成交", "不适用", "回收库存"],
+          batchObjectives: ["稳钱效", "提成交", "停止新客补位", "回收库存"],
           channelActions: ["预算持平", "预算 +8pp", "预算 +2pp", "预算 -7pp", "预算 -3pp"],
           channelMoves: ["持平", "+8pp", "+2pp", "-7pp", "-3pp"],
           controlName: "618 自然收官对照", testOneName: "家电搜索聚焦", testTwoName: "到期券前置催用",
@@ -13207,14 +13216,14 @@
       ],
       batchProtocol: {
         aliasPattern: "SIM-DOUBLE11-{MODE}-{SEQ}",
-        requiredFields: ["时点", "端", "券角色", "会员/类目人群", "场域", "预算", "发放窗口", "使用窗口", "频控"],
+        requiredFields: ["时点", "端", "券类型", "券角色", "会员/类目人群", "场域", "发放形式", "预算", "发放窗口", "使用窗口", "频控"],
         missingPolicy: "缺失字段显示暂无数据；不回填 38 节批次"
       },
       batchBlueprints: [
-        { roleKey: "base", time: "11/10 00:00", endpoint: "主端", tier: "500-60 会员券", audience: "活跃会员", venue: "会员中心 / 会场", issueWindow: "11/10 00:00—13:59", useWindow: "11/10—11/11", limit: "会员 1 张" },
-        { roleKey: "focus", time: "11/10 14:00", endpoint: "主端", tier: "数码定向券", audience: "数码高意图", venue: "搜索", issueWindow: "11/10 14:00—21:59", useWindow: "11/10—11/11", limit: "类目定向 1 张" },
-        { roleKey: "support", time: "11/11 09:00", endpoint: "主端", tier: "200-20 回流券", audience: "终场回流高潜", venue: "活动会场", issueWindow: "11/11 09:00—17:59", useWindow: "截至 11/11 23:59", limit: "每人 1 张" },
-        { roleKey: "reminder", time: "11/11 18:00", endpoint: "主端", tier: "到期券催用", audience: "24 小时内到期", venue: "券包 / Push", issueWindow: "不适用", useWindow: "截至 11/11 23:59", limit: "频控 1 次" }
+        { roleKey: "base", time: "11/10 00:00", endpoint: "主端", couponType: "会员满减券", tier: "500-60 会员券", audience: "活跃会员", venue: "会员中心 / 会场", distributionForm: "会员中心 / 会场主动领券", issueWindow: "11/10 00:00—13:59", useWindow: "11/10—11/11", limit: "会员 1 张" },
+        { roleKey: "focus", time: "11/10 14:00", endpoint: "主端", couponType: "类目定向券", tier: "数码定向券", audience: "数码高意图", venue: "搜索", distributionForm: "定向发放", issueWindow: "11/10 14:00—21:59", useWindow: "11/10—11/11", limit: "类目定向 1 张" },
+        { roleKey: "support", time: "11/11 09:00", endpoint: "主端", couponType: "回流满减券", tier: "200-20 回流券", audience: "终场回流高潜", venue: "活动会场", distributionForm: "会场主动领券", issueWindow: "11/11 09:00—17:59", useWindow: "截至 11/11 23:59", limit: "每人 1 张" },
+        { roleKey: "reminder", time: "11/11 18:00", endpoint: "主端", couponType: "催用任务（非新发券）", tier: "到期券催用", audience: "24 小时内到期", venue: "券包 / Push", distributionForm: "不适用（仅触达）", issueWindow: "不适用", useWindow: "截至 11/11 23:59", limit: "频控 1 次" }
       ],
       channelBlueprints: [
         { name: "活动会场", role: "终场规模", action: "会员券与回流券承接" },
@@ -13266,7 +13275,7 @@
           },
           tags: ["终场钱效", "会员聚焦", "停止补发"],
           batchBudgets: ["扩量 10%", "预算聚焦", "停止补发", "低频催用"],
-          batchObjectives: ["锁会员钱效", "保高客单", "不适用", "回收库存"],
+          batchObjectives: ["锁会员钱效", "保高客单", "停止回流补发", "回收库存"],
           channelActions: ["预算持平", "预算 +7pp", "预算 +3pp", "预算 -8pp", "预算 -2pp"],
           channelMoves: ["持平", "+7pp", "+3pp", "-8pp", "-2pp"],
           controlName: "会员自然转化对照", testOneName: "活跃会员聚焦", testTwoName: "数码搜索聚焦",
@@ -13383,9 +13392,9 @@
         endpointFunnel: entry(["endpoint", "funnelStage"], ["投放端", "曝光", "领券", "核销", "支付", "归因窗口"], [
           { keys: [endpoint, "领券→核销→支付"], label: `${endpoint} × 领券→核销→支付`, finding: `${focusTier} 使用窗口为 ${formatBatchField(focusBatch, "useWindow")}，跨端结果不可直接合并。` }
         ]),
-        "batchWindow/couponRole": entry(["batchWindow", "couponRole"], ["批次别名", "发放窗口", "使用窗口", "券角色", "预算", "频控"], [
-          { keys: [formatBatchField(focusBatch, "issueWindow"), focusTier], label: `${formatBatchField(focusBatch, "code")} · ${focusTier}`, finding: `${formatBatchField(focusBatch, "issueWindow")} 发放，${formatBatchField(focusBatch, "useWindow")} 使用，角色为${formatBatchField(focusBatch, "objective")}。` },
-          { keys: [formatBatchField(reminderBatch, "issueWindow", "不适用"), formatBatchField(reminderBatch, "tier")], label: `${formatBatchField(reminderBatch, "code")} · ${formatBatchField(reminderBatch, "tier")}`, finding: `催用任务发放窗口为${formatBatchField(reminderBatch, "issueWindow", "不适用")}，不等同于新发券。` }
+        "batchWindow/couponRole": entry(["batchWindow", "couponRole"], ["批次别名", "券类型", "门槛-面额", "发放形式", "发放窗口", "使用窗口", "券角色", "预算", "频控"], [
+          { keys: [formatBatchField(focusBatch, "issueWindow"), focusTier, formatBatchField(focusBatch, "couponType"), formatBatchField(focusBatch, "distributionForm")], label: `${formatBatchField(focusBatch, "code")} · ${focusTier}`, finding: `${formatBatchField(focusBatch, "couponType")}，${formatBatchField(focusBatch, "distributionForm")}；${formatBatchField(focusBatch, "issueWindow")} 发放，${formatBatchField(focusBatch, "useWindow")} 使用，角色为${formatBatchField(focusBatch, "objective")}。` },
+          { keys: [formatBatchField(reminderBatch, "issueWindow", "不适用"), formatBatchField(reminderBatch, "tier"), formatBatchField(reminderBatch, "couponType"), formatBatchField(reminderBatch, "distributionForm")], label: `${formatBatchField(reminderBatch, "code")} · ${formatBatchField(reminderBatch, "tier")}`, finding: `${formatBatchField(reminderBatch, "couponType")}，发放形式为${formatBatchField(reminderBatch, "distributionForm")}；催用任务发放窗口为${formatBatchField(reminderBatch, "issueWindow", "不适用")}，不等同于新发券。` }
         ])
       };
     }
@@ -13419,6 +13428,45 @@
         currentActionUnits: cloneStructuredData(profile.currentActionUnits),
         batchProtocol: cloneStructuredData(profile.batchProtocol),
         crossEvidence: [...profile.crossEvidence]
+      });
+      const candidateContext = {
+        festival: profile.campaign,
+        year: profile.year,
+        waveKey: profile.waveKey,
+        wave: displayValue(dataset.nextWave.wave, profile.waveKey),
+        waveLabel: displayValue(dataset.nextWave.wave, profile.waveKey),
+        key: profile.contextKey,
+        label: `${profile.year} · ${profile.campaign} · ${displayValue(dataset.nextWave.wave, profile.waveKey)}`
+      };
+      Object.entries(profile.candidates).forEach(([candidateKey, plan]) => {
+        const candidateRecommendation = normalizeStructuredData({
+          ...profile.currentRecommendation,
+          available: true,
+          currentActionUnits: cloneStructuredData(profile.currentActionUnits),
+          selectedPlanKey: candidateKey
+        });
+        plan.decisionTable = cloneStructuredData(
+          getMidBusinessDecisionRows(candidateContext, dataset, candidateRecommendation)
+        );
+        plan.endpointFunnel = normalizeStructuredData({
+          contextKey: profile.contextKey,
+          planKey: candidateKey,
+          dimensions: [...midStructuredDrillDefinitions.endpointFunnel.dimensions],
+          requiredFields: [...midStructuredDrillDefinitions.endpointFunnel.requiredFields],
+          records: formatBatchRecords(plan.batches).map(batch => ({
+            keys: [formatBatchField(batch, "endpoint"), "发放→领取→核销→支付"],
+            label: `${formatBatchField(batch, "endpoint")} · ${formatBatchField(batch, "code")}`,
+            finding: [
+              `券类型 ${formatBatchField(batch, "couponType")}`,
+              `发放形式 ${formatBatchField(batch, "distributionForm")}`,
+              `发放 ${formatBatchField(batch, "issueWindow")}`,
+              `使用 ${formatBatchField(batch, "useWindow")}`,
+              `发放/领取/核销 ${displayValue(plan.comparison?.funnel)}`,
+              `支付 GMV ${displayValue(plan.comparison?.paymentGmv)}`,
+              `归因窗口 ${formatBatchField(batch, "useWindow")}`
+            ].join("；")
+          }))
+        });
       });
     });
 
@@ -15285,6 +15333,10 @@
           return plan
             && Array.isArray(plan.batches)
             && plan.batches.length >= 3
+            && plan.batches.every(batch =>
+              displayValue(batch.couponType, "") !== ""
+              && displayValue(batch.distributionForm, "") !== ""
+            )
             && Array.isArray(plan.channels)
             && plan.channels.length >= 5
             && Array.isArray(plan.matrix)
@@ -15296,7 +15348,13 @@
             && plan.reserve !== null
             && plan.risk
             && plan.condition
-            && comparisonFields.every(field => displayValue(plan.comparison?.[field], "") !== "");
+            && comparisonFields.every(field => displayValue(plan.comparison?.[field], "") !== "")
+            && Array.isArray(plan.decisionTable)
+            && plan.decisionTable.length === 7
+            && plan.endpointFunnel?.contextKey === context.key
+            && plan.endpointFunnel?.planKey === key
+            && Array.isArray(plan.endpointFunnel.records)
+            && plan.endpointFunnel.records.length === plan.batches.length;
         })
         && !hasUndefinedValue(profile);
       return hasCompleteRecommendation ? dataset : null;
@@ -15346,9 +15404,14 @@
     function attachMidConversationEvidence(recommendation, context, dataset) {
       const normalized = normalizeStructuredData(recommendation);
       normalized.decisionTable = cloneStructuredData(
-        getMidLatestCurrentDecisionRows(context, dataset, normalized)
+        getMidBusinessDecisionRows(context, dataset, normalized)
       );
-      normalized.endpointFunnel = null;
+      normalized.endpointFunnel = cloneStructuredData(
+        resolveMidPlan(
+          dataset?.profile,
+          normalized.selectedPlanKey || dataset?.nextWave?.defaultPlan
+        ).plan?.endpointFunnel
+      );
       normalized.crossEvidence = [...midStructuredDrillKeys];
       return normalizeStructuredData(normalized);
     }
@@ -15401,7 +15464,7 @@
         status: `${profile.nextRecommendation.status} · ${plan.label}`,
         objective: `${profile.nextRecommendation.objective} 当前候选为“${plan.label}”，适用条件：${plan.condition}。`,
         conclusion: `${plan.decision} 准备金：${plan.reserve}。`,
-        structure: `券档与节奏：${batches.map(item => `${formatBatchField(item, "time")} ${formatBatchField(item, "tier")}`).join("；") || "暂无数据"}。渠道：${channels.map(item => `${displayValue(item.name)}${displayValue(item.result)}`).join("、") || "暂无数据"}。实验：${arms.map(item => `${displayValue(item.id)} ${displayValue(item.share)}`).join(" / ") || "暂无数据"}。`,
+        structure: `批次配置：${batches.map(item => `${formatBatchField(item, "time")} ${formatBatchCouponContract(item)}`).join("；") || "暂无数据"}。渠道：${channels.map(item => `${displayValue(item.name)}${displayValue(item.result)}`).join("、") || "暂无数据"}。实验：${arms.map(item => `${displayValue(item.id)} ${displayValue(item.share)}`).join(" / ") || "暂无数据"}。`,
         logic: evidence.map(item => `${displayValue(item.label)}：${displayValue(item.title)}，${displayValue(item.action)}`).join("；") || "暂无数据",
         risk: `${plan.risk || derivedRisk} 适用条件：${plan.condition}。`,
         estimate: metrics.map(metric => `${displayValue(metric.label)} ${displayValue(metric.value)}`).join("；") || "暂无数据",
@@ -15506,7 +15569,7 @@
       );
       const planKey = resolveMidPlanKey(
         profile.candidates,
-        [profile.defaultPlan, dataset.nextWave?.defaultPlan, "balanced"],
+        [recommendation.selectedPlanKey, profile.defaultPlan, dataset.nextWave?.defaultPlan, "balanced"],
         dataset.nextWave?.planOrder
       );
       const plan = profile.candidates?.[planKey] || {};
@@ -15543,9 +15606,9 @@
         {
           key: "issuance",
           label: "发券形式",
-          before: `按既有券档并行发放：${displayValue(profile.currentStrategy?.tiers)}`,
-          after: batches.map(item => `${formatBatchField(item, "objective")}：${formatBatchField(item, "tier")}`).join("；"),
-          change: "普惠承接、定向增量与催用任务分角色执行",
+          before: "券类型：暂无数据；发放形式：暂无数据",
+          after: batches.map(formatBatchCouponContract).join("；") || "暂无数据",
+          change: "批次分别读取券类型、门槛-面额与发放形式；催用任务不计作新发券",
           effective: `${formatBatchField(base, "issueWindow")}；${formatBatchField(reminder, "issueWindow", "不适用")}`,
           status,
           rollback: guardrail(/频控|重复|互斥|核销/)
@@ -15554,7 +15617,7 @@
           key: "tiers",
           label: "券档",
           before: displayValue(tiers.before),
-          after: displayValue(tiers.after),
+          after: batches.map(formatBatchCouponContract).join("；") || displayValue(tiers.after),
           change: `${displayValue(tiers.action)}；${displayValue(tiers.impact)}`,
           effective: formatBatchField(focus, "issueWindow"),
           status,
@@ -15574,7 +15637,7 @@
           key: "audience",
           label: "投放人群",
           before: displayValue(audience.before),
-          after: displayValue(audience.after),
+          after: `${displayValue(audience.after)}；重点批次 ${formatBatchField(focus, "audience")}`,
           change: `${displayValue(audience.action)}；${displayValue(audience.impact)}`,
           effective: formatBatchField(focus, "issueWindow"),
           status,
@@ -15584,7 +15647,7 @@
           key: "channels",
           label: "灵活渠道",
           before: displayValue(channels.before),
-          after: displayValue(channels.after),
+          after: `${displayValue(channels.after)}；${(Array.isArray(plan.channels) ? plan.channels : []).map(channel => `${displayValue(channel.name)} ${displayValue(channel.result)}`).join("、")}`,
           change: `${displayValue(channels.action)}；${displayValue(channels.impact)}`,
           effective: `${formatBatchField(focus, "issueWindow")}；${formatBatchField(reminder, "useWindow")}`,
           status,
@@ -15594,7 +15657,7 @@
           key: "budget",
           label: "预算",
           before: displayValue(budget.before),
-          after: displayValue(budget.after),
+          after: `${displayValue(budget.after)}；候选预算动作 ${displayValue(plan.budget)}；准备金 ${displayValue(plan.reserve)}`,
           change: `${displayValue(budget.action)}；${displayValue(budget.impact)}；准备金 ${displayValue(plan.reserve)}`,
           effective: formatBatchField(base, "issueWindow"),
           status,
@@ -15647,20 +15710,26 @@
         },
         {
           ...unitRow("tiers", "券角色与券档"),
-          basis: `${displayValue(actionUnits.tiers?.basis)}；催用任务与新发券分开归因`,
-          impact: `${displayValue(actionUnits.tiers?.impact)}；${batches.map(batch => `${formatBatchField(batch, "objective")}：${formatBatchField(batch, "tier")}`).join("；")}`,
+          before: `${displayValue(actionUnits.tiers?.before)}；券类型：暂无数据；发放形式：暂无数据`,
+          after: batches.map(formatBatchCouponContract).join("；") || "暂无数据",
+          basis: `${displayValue(actionUnits.tiers?.basis)}；券类型与发放形式从批次契约读取，催用任务与新发券分开归因`,
+          impact: `${displayValue(actionUnits.tiers?.impact)}；${batches.map(batch => `${formatBatchField(batch, "objective")}：${formatBatchCouponContract(batch)}`).join("；")}`,
           risk: `${displayValue(actionUnits.tiers?.risk)}；缺失批次字段统一降级`
         },
         unitRow("audience", "投放人群", [
           ["适用对象", `${formatBatchField(focusBatch, "audience")}；${formatBatchField(reminderBatch, "audience")}`],
+          ["券类型", `${formatBatchField(focusBatch, "couponType")}；${formatBatchField(reminderBatch, "couponType")}`],
           ["券角色/档位", `${formatBatchField(focusBatch, "tier")}；${formatBatchField(reminderBatch, "tier")}`],
+          ["发放形式", `${formatBatchField(focusBatch, "distributionForm")}；${formatBatchField(reminderBatch, "distributionForm")}`],
           ["渠道/场域", `${formatBatchField(focusBatch, "venue")}；${formatBatchField(reminderBatch, "venue")}`],
           ["端口", `${formatBatchField(focusBatch, "endpoint")}；${formatBatchField(reminderBatch, "endpoint")}`],
           ["时间窗口", `${formatBatchField(focusBatch, "issueWindow")}；${formatBatchField(reminderBatch, "useWindow")}`]
         ]),
         unitRow("channels", "渠道与场域", [
           ["适用对象", `${formatBatchField(focusBatch, "audience")}；${formatBatchField(reminderBatch, "audience")}`],
+          ["券类型", `${formatBatchField(focusBatch, "couponType")}；${formatBatchField(reminderBatch, "couponType")}`],
           ["券角色/档位", `${formatBatchField(focusBatch, "tier")}；${formatBatchField(reminderBatch, "tier")}`],
+          ["发放形式", `${formatBatchField(focusBatch, "distributionForm")}；${formatBatchField(reminderBatch, "distributionForm")}`],
           ["渠道/场域", channels.map(channel => `${displayValue(channel.name)} ${displayValue(channel.result)}`).join("；")],
           ["端口", `${formatBatchField(focusBatch, "endpoint")}；${formatBatchField(reminderBatch, "endpoint")}`],
           ["时间窗口", `${formatBatchField(focusBatch, "time")}—${formatBatchField(reminderBatch, "time")}`]
@@ -15760,8 +15829,8 @@
         ? [[focusRow?.rate, "核销率"], [focusRow?.budget, "预算占比"], [exchangeMetric?.value, "支付兑换比"]]
         : [[focusRow?.rate, "核销率"], [flowGuardrail, "预算流速"], [exchangeMetric?.value, "支付兑换比"]];
       const objectAction = row.key === "audience"
-        ? `${formatBatchField(focus, "audience")} × ${formatBatchField(focus, "tier")} × ${formatBatchField(focus, "venue")} × ${formatBatchField(focus, "endpoint")} × ${formatBatchField(focus, "issueWindow")}`
-        : `${planChannels.slice(0, 2).map(item => `${displayValue(item.name)} ${displayValue(item.result)}`).join(" / ")} × ${formatBatchField(focus, "tier")} × ${formatBatchField(focus, "audience")} × ${formatBatchField(focus, "endpoint")} × ${formatBatchField(focus, "issueWindow")}；催用 ${formatBatchField(reminder, "venue")} × ${formatBatchField(reminder, "useWindow")}`;
+        ? `${formatBatchField(focus, "audience")} × ${formatBatchCouponContract(focus)} × ${formatBatchField(focus, "venue")} × ${formatBatchField(focus, "endpoint")} × ${formatBatchField(focus, "issueWindow")}`
+        : `${planChannels.slice(0, 2).map(item => `${displayValue(item.name)} ${displayValue(item.result)}`).join(" / ")} × ${formatBatchCouponContract(focus)} × ${formatBatchField(focus, "audience")} × ${formatBatchField(focus, "endpoint")} × ${formatBatchField(focus, "issueWindow")}；催用 ${formatBatchField(reminder, "couponType")} × ${formatBatchField(reminder, "distributionForm")} × ${formatBatchField(reminder, "venue")} × ${formatBatchField(reminder, "useWindow")}`;
       const dataPeriod = evidence?.period || `暂无数据：${context.label} 未提供同口径数据周期`;
       const comparisonPeriod = evidence?.experiment?.toolbar
         || `暂无数据：${context.label} 未提供同口径实验对比周期`;
@@ -15807,7 +15876,7 @@
             <div class="mid-decision-detail-grid">
               <div class="wide"><b>异常说明</b><span>${escapeHTML(anomaly)}</span></div>
               <div><b>结论</b><span>${escapeHTML(displayValue(action.action))}</span></div>
-              <div class="wide"><b>执行动作 · 对象 × 券角色/档位 × 渠道/场域 × 端口 × 时间窗口</b><span>${escapeHTML(objectAction)}</span></div>
+              <div class="wide"><b>执行动作 · 对象 × 券类型 × 券角色/档位 × 发放形式 × 渠道/场域 × 端口 × 时间窗口</b><span>${escapeHTML(objectAction)}</span></div>
               <div><b>预期影响</b><span>${escapeHTML(displayValue(action.impact))}</span></div>
               <div><b>护栏</b><span>${escapeHTML(guardrails.join("；") || "暂无数据")}</span></div>
               <div><b>回滚条件</b><span>${escapeHTML(displayValue(action.risk))}</span></div>
@@ -15841,7 +15910,7 @@
       const activity = getMidCampaignContext();
       const dataset = getMidRecommendationDataset(activity);
       const recommendation = getMidRecommendation("current", activity, dataset);
-      const rows = getMidLatestCurrentDecisionRows(activity, dataset, recommendation);
+      const rows = getMidBusinessDecisionRows(activity, dataset, recommendation);
       document.getElementById("midRecommendationTitle").textContent = dataset
         ? `${activity.festival} ${activity.waveLabel} · 当前波次决策`
         : `${activity.festival} ${activity.waveLabel} · 当前波次待分析`;
@@ -15928,7 +15997,7 @@
             <div class="mid-decision-evidence-grid">
               <div><b>主要风险</b><span>${escapeHTML(recommendation.risk)}</span></div>
               <div><b>预估影响</b><span>${escapeHTML(recommendation.estimate)}</span></div>
-              <div><b>回滚边界</b><span>${escapeHTML(rowByKey.experiment.risk)}</span></div>
+              <div><b>回滚边界</b><span>${escapeHTML(rowByKey.budget?.risk || recommendation.risk)}</span></div>
             </div>
           </section>
           <section class="mid-decision-section">
@@ -15957,11 +16026,11 @@
       const guardrails = Array.isArray(plan?.experiment?.guardrails) ? plan.experiment.guardrails : [];
       const metrics = Array.isArray(plan?.metrics) ? plan.metrics : [];
       const uniqueBatchValues = field => [...new Set(batches.map(batch => formatBatchField(batch, field)))].join("；") || "暂无数据";
-      const batchRoles = batches.map(batch => `${formatBatchField(batch, "objective")} · ${formatBatchField(batch, "tier")}`).join("；") || "暂无数据";
       const base = batches.find(batch => batch.roleKey === "base") || batches[0] || {};
       const focus = batches.find(batch => batch.roleKey === "focus") || batches[1] || base;
       const rhythm = batches.map(batch => `${formatBatchField(batch, "time")} ${formatBatchField(batch, "objective")}`).join("；") || "暂无数据";
-      const issuance = batches.map(batch => `${formatBatchField(batch, "objective")}：${formatBatchField(batch, "tier")}（${formatBatchField(batch, "issueWindow")} / ${formatBatchField(batch, "useWindow")}）`).join("；") || "暂无数据";
+      const couponTypes = uniqueBatchValues("couponType");
+      const distributionForms = uniqueBatchValues("distributionForm");
       const experimentTraffic = arms.map(arm => `${displayValue(arm.id)} ${displayValue(arm.share)}`).join(" / ") || "暂无数据";
       const expectedMetrics = metrics.map(metric => `${displayValue(metric.label)} ${displayValue(metric.value)}`).join("；") || "暂无数据";
       const comparison = plan?.comparison || {};
@@ -15996,7 +16065,8 @@
           </div>
           <div class="mid-candidate-config">
             <div><b>节奏</b><span>${escapeHTML(rhythm)}</span></div>
-            <div><b>发券形式</b><span>${escapeHTML(issuance)}</span></div>
+            <div><b>券类型</b><span>${escapeHTML(couponTypes)}</span></div>
+            <div><b>发放形式</b><span>${escapeHTML(distributionForms)}</span></div>
             <div><b>批次别名</b><span>${escapeHTML(uniqueBatchValues("code"))}</span></div>
             <div><b>固定渠道/全人群</b><span>${escapeHTML(`${formatBatchField(base, "audience")} × ${formatBatchField(base, "tier")} × ${formatBatchField(base, "venue")}`)}</span></div>
             <div><b>人群圈选</b><span>${escapeHTML(`${formatBatchField(focus, "audience")}；排除/互斥 ${formatBatchField(focus, "limit")}`)}</span></div>
@@ -16176,10 +16246,12 @@
       if (midNextWaveState.selectedView === "batch") {
         const batches = formatBatchRecords(plan.batches);
         midNextWaveBatchContent.innerHTML = `<div class="mid-wave-table-wrap"><table class="mid-wave-table">
-          <thead><tr><th>批次别名</th><th>券档 / 任务</th><th>发放窗口</th><th>使用窗口</th><th>限领 / 频控</th><th>端</th></tr></thead>
+          <thead><tr><th>批次别名</th><th>券类型</th><th>门槛-面额 / 任务</th><th>发放形式</th><th>发放窗口</th><th>使用窗口</th><th>限领 / 频控</th><th>端</th></tr></thead>
           <tbody>${batches.map(item => `<tr>
             <td><span class="mid-wave-batch-code">${escapeHTML(formatBatchField(item, "code"))}</span></td>
+            <td>${escapeHTML(formatBatchField(item, "couponType"))}</td>
             <td>${escapeHTML(formatBatchField(item, "tier"))}</td>
+            <td>${escapeHTML(formatBatchField(item, "distributionForm"))}</td>
             <td>${escapeHTML(formatBatchField(item, "issueWindow"))}</td>
             <td>${escapeHTML(formatBatchField(item, "useWindow"))}</td>
             <td>${escapeHTML(formatBatchField(item, "limit"))}</td>
@@ -16207,11 +16279,13 @@
 
       const batches = formatBatchRecords(plan.batches);
       midNextWaveBatchContent.innerHTML = `<div class="mid-wave-table-wrap"><table class="mid-wave-table">
-        <thead><tr><th>时点</th><th>端</th><th>券档 / 批次</th><th>目标人群</th><th>投放场域</th><th>预算动作</th><th>目标</th></tr></thead>
+        <thead><tr><th>时点</th><th>端</th><th>券类型</th><th>门槛-面额 / 任务</th><th>发放形式</th><th>目标人群</th><th>投放场域</th><th>预算动作</th><th>目标</th></tr></thead>
         <tbody>${batches.map(item => `<tr>
           <td>${escapeHTML(formatBatchField(item, "time"))}</td>
           <td>${escapeHTML(formatBatchField(item, "endpoint"))}</td>
+          <td>${escapeHTML(formatBatchField(item, "couponType"))}</td>
           <td>${escapeHTML(formatBatchField(item, "tier"))}</td>
+          <td>${escapeHTML(formatBatchField(item, "distributionForm"))}</td>
           <td>${escapeHTML(formatBatchField(item, "audience"))}</td>
           <td>${escapeHTML(formatBatchField(item, "venue"))}</td>
           <td><span class="mid-wave-budget-move">${escapeHTML(formatBatchField(item, "budget"))}</span></td>
@@ -20691,6 +20765,8 @@
         })),
         couponTiers: batches.map(batch => ({
           name: formatBatchField(batch, "tier"),
+          couponType: formatBatchField(batch, "couponType"),
+          distributionForm: formatBatchField(batch, "distributionForm"),
           role: formatBatchField(batch, "objective"),
           budgetAction: formatBatchField(batch, "budget"),
           sourceBatchRoleKey: batch.roleKey,
@@ -20711,6 +20787,8 @@
         endpointFunnel: cloneStructuredData(recommendation.endpointFunnel),
         activeFilters: {
           couponRole: formatBatchField(batches.find(batch => batch.roleKey === "focus"), "objective"),
+          couponType: formatBatchField(focusBatch, "couponType"),
+          distributionForm: formatBatchField(focusBatch, "distributionForm"),
           industry,
           priceBand,
           consumerPower: formatBatchField(focusBatch, "audience"),
@@ -21102,6 +21180,30 @@
       return `${normalized > 0 ? "+" : ""}${normalized}${unit}`;
     }
 
+    function parseNamedAdjustment(question, target, verbs, units) {
+      if (!target) return null;
+      const escapedTarget = String(target).replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+      const verbPattern = `(${verbs})`;
+      const valuePattern = "([+-]?\\d+(?:\\.\\d+)?)";
+      const unitPattern = `(${units})`;
+      const patterns = [
+        new RegExp(`${escapedTarget}(?:渠道|场域|人群|用户|客群)?[^，。；]{0,10}${verbPattern}[^0-9+\\-]{0,6}${valuePattern}\\s*${unitPattern}`, "i"),
+        new RegExp(`${verbPattern}[^0-9+\\-]{0,6}${valuePattern}\\s*${unitPattern}[^，。；]{0,10}${escapedTarget}(?:渠道|场域|人群|用户|客群)?`, "i")
+      ];
+      for (const pattern of patterns) {
+        const match = question.match(pattern);
+        if (!match) continue;
+        const action = match[1];
+        const raw = Number.parseFloat(match[2]);
+        if (!Number.isFinite(raw)) return null;
+        const signed = /减少|降低|下调|调低|收缩|缩量|减/.test(action)
+          ? -Math.abs(raw)
+          : /^[+-]/.test(match[2]) ? raw : Math.abs(raw);
+        return [match[0], String(signed), match[3]];
+      }
+      return null;
+    }
+
     function applyRecommendationTurn(session, question) {
       const configuration = session.currentConfiguration;
       const configurationBeforeTurn = cloneStructuredData(configuration);
@@ -21137,12 +21239,24 @@
         };
       }
 
-      const channelMatch = question.match(/(?:增加|提升|上调|调高|扩量|加|减少|降低|下调|调低|缩量|减)\s*(?:预算|占比|流量)?\s*([+-]?\d+(?:\.\d+)?)\s*(pp|个百分点|个点|%)/i)
+      const explicitChannel = findConfigurationChannel(configuration, question);
+      const explicitAudience = findConfigurationAudience(configuration, question);
+      const channelMatch = parseNamedAdjustment(
+        question,
+        explicitChannel?.name,
+        "增加|提升|上调|调高|扩量|加|减少|降低|下调|调低|缩量|减",
+        "pp|个百分点|个点|%"
+      ) || question.match(/(?:增加|提升|上调|调高|扩量|加|减少|降低|下调|调低|缩量|减)\s*(?:预算|占比|流量)?\s*([+-]?\d+(?:\.\d+)?)\s*(pp|个百分点|个点|%)/i)
         || question.match(/([+-]\d+(?:\.\d+)?)\s*(pp|个百分点|个点|%)/i);
-      const audienceMatch = question.match(/(?:扩量|放量|扩大|增加|提升|上调|收缩|缩量|减少|降低|下调)\s*(?:至|到)?\s*([+-]?\d+(?:\.\d+)?)\s*%/)
+      const audienceMatch = parseNamedAdjustment(
+        question,
+        explicitAudience,
+        "扩量|放量|扩大|增加|提升|上调|收缩|缩量|减少|降低|下调",
+        "%"
+      ) || question.match(/(?:扩量|放量|扩大|增加|提升|上调|收缩|缩量|减少|降低|下调)\s*(?:至|到)?\s*([+-]?\d+(?:\.\d+)?)\s*%/)
         || question.match(/([+-]\d+(?:\.\d+)?)\s*%/);
-      const matchedAudience = audienceMatch ? findConfigurationAudience(configuration, question) : null;
-      const matchedChannel = channelMatch ? findConfigurationChannel(configuration, question) : null;
+      const matchedAudience = audienceMatch ? explicitAudience : null;
+      const matchedChannel = channelMatch ? explicitChannel : null;
       const lastPatchTarget = findLastRecommendationPatchTarget(session);
       const channelUnit = /pp|百分点|个点/i.test(channelMatch?.[2] || "") ? "pp" : "%";
       const channel = matchedChannel || (
@@ -21206,6 +21320,8 @@
             || configuration.batches[0] || {};
           configuration.couponTiers.push({
             name: tierName,
+            couponType: "暂无数据",
+            distributionForm: "暂无数据",
             role: "用户新增券档",
             budgetAction: budgetWan ? `新增 ${budgetWan} 万` : "预算待补充",
             sourceBatchRoleKey: `user-added-${configuration.couponTiers.length + 1}`,
@@ -21217,9 +21333,11 @@
             code: "暂无数据",
             time: "暂无数据",
             endpoint: formatBatchField(focusBatch, "endpoint"),
+            couponType: "暂无数据",
             tier: tierName,
             audience: displayValue(focusBatch.baseAudience, formatBatchField(focusBatch, "audience")),
             venue: formatBatchField(focusBatch, "venue"),
+            distributionForm: "暂无数据",
             budget: budgetWan ? `新增 ${budgetWan} 万` : "暂无数据",
             objective: "用户新增券档",
             issueWindow: "暂无数据",
@@ -21337,7 +21455,7 @@
       if (/行业.*价格带|价格带.*行业/.test(question)) return "industryPrice";
       if (/消费力.*钱效|钱效.*消费力/.test(question)) return "powerEfficiency";
       if (/端.*漏斗|漏斗.*端|端口.*核销/.test(question)) return "endpointFunnel";
-      if (/批次.*(?:窗口|券角色)|发放窗口.*券|券角色/.test(question)) return "batchWindow/couponRole";
+      if (/批次.*(?:窗口|券角色|券类型|发放形式)|发放窗口.*券|券角色|券类型|发放形式/.test(question)) return "batchWindow/couponRole";
       return "";
     }
 
@@ -21489,7 +21607,10 @@
       const finding = batch => {
         const channel = channelState(batch);
         return [
-          `${formatBatchField(batch, "code")}，${formatBatchField(batch, "issueWindow")} 发放`,
+          `${formatBatchField(batch, "code")}，券类型 ${formatBatchField(batch, "couponType")}`,
+          `门槛-面额 ${formatBatchField(batch, "tier")}`,
+          `发放形式 ${formatBatchField(batch, "distributionForm")}`,
+          `${formatBatchField(batch, "issueWindow")} 发放`,
           `${formatBatchField(batch, "useWindow")} 使用`,
           formatBatchField(batch, "limit"),
           `预算 ${formatBatchField(batch, "budget")}`,
@@ -21588,16 +21709,28 @@
 
       if (drillKey === "industryPrice") {
         const filters = configuration.activeFilters || {};
+        const tierEvidenceRows = midEvidenceCatalog[configuration.contextKey]?.redemption?.tier?.rows || [];
+        const focusTier = formatBatchField(focusBatch, "tier");
+        const tierEvidence = tierEvidenceRows
+          .map(row => ({
+            row,
+            score: longestCommonTargetLength(displayValue(row.name), focusTier)
+          }))
+          .sort((left, right) => right.score - left.score)[0];
+        const redemptionRate = tierEvidence?.score >= 2
+          ? displayValue(tierEvidence.row.rate, "")
+          : "";
         const available = [];
         if (hasValue(filters.industry)) available.push("行业/类目");
         if (hasValue(filters.priceBand)) available.push("价格带");
         if (aov) available.push("客单");
         if (hasValue(focusBatch.tier)) available.push("券门槛");
+        if (redemptionRate) available.push("核销率");
         if (hasValue(focusBatch.useWindow)) available.push("样本窗口");
         return createDrill(available, [{
           keys: uniqueKeys([filters.industry, filters.priceBand, focusBatch.tier]),
           label: `${displayValue(filters.industry)} × ${displayValue(filters.priceBand)}`,
-          finding: `${formatBatchField(focusBatch, "tier")}；客单 ${aov || "暂无数据"}；样本窗口 ${formatBatchField(focusBatch, "useWindow")}。`
+          finding: `${focusTier}；客单 ${aov || "暂无数据"}；核销率 ${redemptionRate || "暂无数据"}；样本窗口 ${formatBatchField(focusBatch, "useWindow")}。`
         }]);
       }
 
@@ -21616,17 +21749,35 @@
 
       if (drillKey === "endpointFunnel") {
         const filters = configuration.activeFilters || {};
-        const available = [];
-        if (hasValue(filters.endpoint)) available.push("投放端");
-        return createDrill(available, batchRecords.map(item => ({
-          keys: uniqueKeys([item.endpoint, "领券→核销→支付"]),
-          label: `${item.endpoint} × 领券→核销→支付`,
-          finding: item.finding
-        })));
+        const endpointFunnel = configuration.endpointFunnel;
+        const endpointRecords = Array.isArray(endpointFunnel?.records)
+          ? endpointFunnel.records
+          : [];
+        const records = batchRecords.map(item => {
+          const code = formatBatchField(item.batch, "code");
+          const baseline = endpointRecords.find(record => displayValue(record.label, "").includes(code));
+          return {
+            keys: uniqueKeys([item.endpoint, "发放→领取→核销→支付", "领券→核销→支付"]),
+            label: `${item.endpoint} × 发放→领取→核销→支付`,
+            finding: [displayValue(baseline?.finding, ""), item.finding].filter(Boolean).join("；")
+          };
+        });
+        const complete = hasValue(filters.endpoint)
+          && endpointFunnel?.contextKey === configuration.contextKey
+          && endpointFunnel?.planKey === configuration.planKey
+          && endpointRecords.length === batches.length
+          && records.every(record => hasValue(record.finding));
+        return createDrill(
+          complete ? [...definition.requiredFields] : hasValue(filters.endpoint) ? ["投放端"] : [],
+          records
+        );
       }
 
       const allBatchFieldsAvailable = batches.length > 0 && batches.every(batch =>
         hasValue(batch.code)
+        && hasValue(batch.couponType)
+        && hasValue(batch.tier)
+        && hasValue(batch.distributionForm, true)
         && hasValue(batch.issueWindow, true)
         && hasValue(batch.useWindow)
         && hasValue(batch.objective)
@@ -21639,6 +21790,8 @@
           keys: uniqueKeys([
             formatBatchField(item.batch, "issueWindow"),
             item.tier,
+            formatBatchField(item.batch, "couponType"),
+            formatBatchField(item.batch, "distributionForm"),
             formatBatchField(item.batch, "objective")
           ]),
           label: `${formatBatchField(item.batch, "code")} · ${item.tier}`,
@@ -21742,6 +21895,9 @@
     function describeRecommendationConfiguration(session) {
       const configuration = session.currentConfiguration;
       const activeTiers = configuration.couponTiers.filter(tier => tier.active).map(tier => tier.name);
+      const batchContracts = (configuration.batches || [])
+        .filter(batch => batch.active !== false)
+        .map(formatBatchCouponContract);
       const channelPatches = configuration.channels
         .filter(channel => channel.manualAdjustment)
         .map(channel => `${channel.name} ${channel.manualAdjustment}`);
@@ -21750,6 +21906,7 @@
       return [
         `版本 V${session.version}`,
         `券档：${activeTiers.join(" / ")}`,
+        `券类型 / 门槛-面额 / 发放形式：${batchContracts.join("；") || "暂无数据"}`,
         `总预算累计调整：${configuration.budget.deltaWan > 0 ? "+" : ""}${configuration.budget.deltaWan} 万`,
         channelPatches.length ? `渠道调整：${channelPatches.join("、")}` : "渠道调整：沿用当前版本",
         audiencePatches.length ? `人群调整：${audiencePatches.join("、")}` : "人群调整：沿用当前版本",
@@ -21949,7 +22106,7 @@
       if (context.recommendationType) {
         const session = context.solutionSession;
         const batchSummary = context.batches.length
-          ? context.batches.map(batch => `${formatBatchField(batch, "code")} · ${formatBatchField(batch, "tier")} · ${formatBatchField(batch, "issueWindow")}`).join("；")
+          ? context.batches.map(batch => `${formatBatchField(batch, "code")} · ${formatBatchCouponContract(batch)} · ${formatBatchField(batch, "issueWindow")}`).join("；")
           : "不适用";
         const sourceSummary = (context.sourceSummary || [])
           .map(source => `${source.sourceId} · ${source.name} · ${source.type}`)
@@ -22387,6 +22544,104 @@
     }
 
     runTask35StructuredAssertions();
+
+    function runTask36StructuredAssertions() {
+      const assert = (condition, code) => {
+        if (!condition) throw new Error(`Task36 structured assertion failed: ${code}`);
+      };
+      const profileCount = Object.keys(midStrategyProfiles).length;
+      let candidateCount = 0;
+      let batchCount = 0;
+      Object.values(midStrategyProfiles).forEach(profile => {
+        const dataset = midRecommendationCatalog[profile.contextKey];
+        const activity = {
+          festival: profile.campaign,
+          year: profile.year,
+          waveKey: profile.waveKey,
+          wave: profile.waveKey,
+          waveLabel: profile.waveKey,
+          key: profile.contextKey,
+          label: `${profile.year} · ${profile.campaign} · ${profile.waveKey}`
+        };
+        assert(dataset?.profile === profile, `profile-binding:${profile.contextKey}`);
+        assert(
+          Object.keys(profile.candidates || {}).sort().join("|") === "balanced|efficiency|growth",
+          `candidate-set:${profile.contextKey}`
+        );
+        midCandidateOrder.forEach(planKey => {
+          const plan = profile.candidates[planKey];
+          candidateCount += 1;
+          assert(Array.isArray(plan?.batches) && plan.batches.length >= 3, `batches:${profile.contextKey}:${planKey}`);
+          plan.batches.forEach((batch, index) => {
+            batchCount += 1;
+            assert(
+              Object.prototype.hasOwnProperty.call(batch, "couponType")
+              && displayValue(batch.couponType, "") !== "",
+              `coupon-type:${profile.contextKey}:${planKey}:${index}`
+            );
+            assert(
+              Object.prototype.hasOwnProperty.call(batch, "distributionForm")
+              && displayValue(batch.distributionForm, "") !== "",
+              `distribution-form:${profile.contextKey}:${planKey}:${index}`
+            );
+          });
+          const recommendation = getMidRecommendation("next", activity, dataset, planKey);
+          assert(
+            Array.isArray(plan.decisionTable)
+            && plan.decisionTable.map(row => row.object).join("|")
+              === "节奏|发券形式|券档|固定渠道/全人群|投放人群|灵活渠道|预算",
+            `decision-table:${profile.contextKey}:${planKey}`
+          );
+          assert(
+            plan.endpointFunnel?.contextKey === profile.contextKey
+            && plan.endpointFunnel?.planKey === planKey
+            && plan.endpointFunnel.records.length === plan.batches.length,
+            `endpoint-funnel:${profile.contextKey}:${planKey}`
+          );
+          const session = createRecommendationSession(activity, dataset, recommendation, {
+            adjustmentKey: planKey,
+            contextLabel: `${displayValue(plan.label)}方案`
+          });
+          assert(
+            session.currentConfiguration.batches.every(batch =>
+              displayValue(batch.couponType, "") !== ""
+              && displayValue(batch.distributionForm, "") !== ""
+            ),
+            `conversation-contract:${profile.contextKey}:${planKey}`
+          );
+          const activeBatches = session.currentConfiguration.batches
+            .filter(batch => batch.active !== false);
+          const batchDrill = buildRecommendationStructuredDrill(session, "batchWindow/couponRole");
+          assert(batchDrill.missingFields.length === 0, `batch-drill:${profile.contextKey}:${planKey}`);
+          assert(
+            batchDrill.contextKey === profile.contextKey && batchDrill.planKey === planKey,
+            `batch-drill-context:${profile.contextKey}:${planKey}`
+          );
+          assert(
+            batchDrill.records.length === activeBatches.length,
+            `batch-drill-records:${profile.contextKey}:${planKey}`
+          );
+          activeBatches.forEach((batch, index) => {
+            const record = batchDrill.records[index];
+            assert(
+              record
+              && record.finding.includes(formatBatchField(batch, "couponType"))
+              && record.finding.includes(formatBatchField(batch, "distributionForm")),
+              `batch-drill-fields:${profile.contextKey}:${planKey}:${index}`
+            );
+          });
+        });
+      });
+      assert(profileCount === 4, "all-profile-contexts");
+      assert(candidateCount === 12, "all-profile-candidates");
+      assert(batchCount === 45, "all-profile-batches");
+      window.__task36Assertions = Object.freeze({
+        passed: true,
+        profileCount,
+        candidateCount,
+        batchCount
+      });
+    }
 
     function renderNewChatMessage(message) {
       const isUser = message.role === "user";
@@ -23683,13 +23938,6 @@
         setMidNextWavePlan(candidateCard.dataset.midCandidateId, { focusTarget: "candidate" });
         return;
       }
-      if (event.key !== "Enter" && event.key !== " ") return;
-      const control = event.target.closest(
-        "[data-mid-current-adjustment], [data-mid-wave-plan], [data-mid-recommendation-action]"
-      );
-      if (!control || control.disabled) return;
-      event.preventDefault();
-      control.click();
     });
 
     dashboard.addEventListener("click", event => {
@@ -24139,6 +24387,8 @@
     document.querySelectorAll("select").forEach(select => {
       select.addEventListener("change", () => showToast(`筛选已更新：${select.value}`));
     });
+
+    runTask36StructuredAssertions();
   </script>
 </body>
 </html>

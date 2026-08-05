@@ -253,3 +253,20 @@
   - [x] SubTask 35.1: 将“目标”“重点”“核心人群”等泛称映射到当前 `profile` 的主投人群，并纳入累计 patch，持续影响后续回答与证据。
   - [x] SubTask 35.2: 冲突轮仅回滚配置 patch，保留用户已声明的全部硬约束并继续作用于后续轮次。
   - [x] SubTask 35.3: 三维证据补充当前上下文的曝光、领券、核销、增量 GMV 和 ROI，结果受累计 patch 影响；缺数时仍明确展示“暂无数据”或缺失字段，不编造精确值。
+
+- [x] Task 36: 补齐下一波次券类型与发放形式契约。
+  - [x] SubTask 36.1: 为所有下一波次候选批次显式建模 `couponType` / 券类型与 `distributionForm` / 发放形式，字段命名遵循现有代码模式。
+  - [x] SubTask 36.2: 当前/下一波次标准配置、完整方案卡、批次表、追问/继续调整上下文统一读取这些字段，缺失使用“暂无数据”，不得用券角色 + 券档 + 窗口拼接冒充发放形式。
+  - [x] SubTask 36.3: 保持所有活动、年份、波次的三候选完整，不改历史会话结构或促前行为。
+  - [x] SubTask 36.4: 运行 JavaScript 语法、静态 ID、undefined / 敏感 URL、目标文案和 `git diff --check`。
+
+- [x] Task 37: 修复非默认活动 Task36 批次断言与上下文切换。
+  - [x] SubTask 37.1: 复现 `618|2026|full:efficiency` 的 Task36 `batch-drill` 结构化断言失败。
+  - [x] SubTask 37.2: 修正非默认钱效候选的批次字段与强契约断言，确保券类型、发放形式和券角色语义完整。
+  - [x] SubTask 37.3: 验证 618 与至少双11的活动、年份、波次及 balanced / efficiency / growth 候选切换。
+  - [x] SubTask 37.4: 运行 JavaScript 语法、静态 ID、所有上下文批次契约、undefined / URL 和 `git diff --check`。
+
+- [x] Task 38: 补齐 Task36 精确批次总量门禁。
+  - [x] SubTask 38.1: 在 Task36 结构化断言中精确断言 4 个 context、12 个 candidate、45 个 batch。
+  - [x] SubTask 38.2: 保留逐候选完整字段断言，继续校验券类型、发放形式、会话契约和批次下钻字段。
+  - [x] SubTask 38.3: 运行 JavaScript 语法、静态 ID、所有批次字段、4/12/45、undefined / URL 和 `git diff --check`。
