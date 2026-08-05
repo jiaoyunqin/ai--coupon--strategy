@@ -107,5 +107,5 @@
 - 完成 Tasks 25–30、32–35：促中七行六列差异矩阵与三候选决策首屏、独立方案会话、多轮自然语言调整、交叉下钻、约束冲突与缺数边界，以及促前人群/渠道切换和脱敏 Mock 报告边界全部落地。
 - 关键修复覆盖旧证据数据追问隔离、非默认活动与波次上下文、泛称主投人群映射、冲突轮硬约束保留、三维证据指标、批次缺值、动态 Tab 运行时 ID/ARIA、来源不可点击、favicon 与网络请求、五档响应式布局和促前七步逐章门禁。
 - 独立验收结论：静态 PASS；最终浏览器 5/5 PASS；促前七步全链 PASS；Task 34 PASS；五档响应式 PASS；旧证据追问、ARIA、运行时 ID 和网络检查 PASS。
-- 发布状态：待本轮受控发布；仅允许提交 `index.html`、`spec.md`、`tasks.md`、`checklist.md` 和 `progress.md`，使用普通推送同步 GitHub `main`。
+- 发布完成：先普通推送主体实现与规格，再将 Task 31.5 状态同步及并行完成的 Task 35 最终修复通过后续普通推送发布；全程未使用强制推送，最终本地 HEAD、`origin/main` 与远端 `main` 一致。
 - 修改文件：`index.html`、`spec.md`、`tasks.md`、`checklist.md`、`progress.md`。

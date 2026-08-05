@@ -20775,6 +20775,11 @@
           totalBudgetDelta ? `总预算累计 ${totalBudgetDelta > 0 ? "+" : ""}${totalBudgetDelta} 万` : ""
         ].filter(Boolean).join("；");
       });
+      const focusBatch = (configuration.batches || []).find(batch => batch.roleKey === "focus");
+      if (focusBatch) {
+        configuration.candidateEvidence.focusBatch = cloneStructuredData(focusBatch);
+        configuration.activeFilters.consumerPower = formatBatchField(focusBatch, "audience");
+      }
 
       const metrics = cloneStructuredData(configuration.baseline?.metrics || []);
       const setMetric = (label, value) => {
@@ -20872,20 +20877,57 @@
       if (/总预算(?:不增|不增加|不能增加|保持不变)|预算总额(?:不增|不增加|保持不变)/.test(question)) {
         constraints.totalBudgetIncreaseAllowed = false;
       }
+      if (
+        /(?:允许|可以|可|同意|放宽)[^，。；]{0,10}总预算[^，。；]{0,8}(?:增加|上调|追加)/
+          .test(question)
+        || /总预算[^，。；]{0,8}(?:允许|可以|可)[^，。；]{0,5}(?:增加|上调|追加)/.test(question)
+      ) {
+        constraints.totalBudgetIncreaseAllowed = true;
+      }
       if (/渠道(?:预算)?不减|任何渠道(?:预算)?都(?:不减|不能减少)|渠道不能减少/.test(question)) {
         constraints.channelReductionAllowed = false;
+      }
+      if (
+        /(?:允许|可以|可|同意|放宽)[^，。；]{0,10}渠道(?:预算)?[^，。；]{0,8}(?:减少|下调|回收)/
+          .test(question)
+        || /渠道(?:预算)?[^，。；]{0,8}(?:允许|可以|可)[^，。；]{0,5}(?:减少|下调|回收)/.test(question)
+      ) {
+        constraints.channelReductionAllowed = true;
       }
       if (/库存(?:不增|不增加|不能增加|保持不变)|券库存上限不变/.test(question)) {
         constraints.inventoryIncreaseAllowed = false;
       }
-      const frequencyCapMatch = question.match(/(?:频控|触达频次)(?:不超过|上限(?:为)?|最多)\s*(\d+)\s*次/);
-      if (frequencyCapMatch) constraints.frequencyCap = Number(frequencyCapMatch[1]);
+      if (
+        /(?:允许|可以|可|同意|放宽)[^，。；]{0,10}(?:券)?库存[^，。；]{0,8}(?:增加|上调)/
+          .test(question)
+        || /(?:券)?库存[^，。；]{0,8}(?:允许|可以|可)[^，。；]{0,5}(?:增加|上调)/.test(question)
+      ) {
+        constraints.inventoryIncreaseAllowed = true;
+      }
+      if (/取消频控(?:限制|上限)?|不再限制触达频次/.test(question)) {
+        constraints.frequencyCap = null;
+      } else {
+        const frequencyCapMatch = question.match(
+          /(?:频控|触达频次)(?:不超过|上限(?:为)?|最多|放宽(?:至|到|为)?|调整(?:至|到|为)?)\s*(\d+)\s*次/
+        );
+        if (frequencyCapMatch) constraints.frequencyCap = Number(frequencyCapMatch[1]);
+      }
       const requestedFrequencyMatch = question.match(/(?:触达|频次)(?:增加到|提升到|改为|设为)\s*(\d+)\s*次/);
       if (requestedFrequencyMatch) constraints.requestedFrequency = Number(requestedFrequencyMatch[1]);
       if (/互斥|不可叠加|不能叠加/.test(question)) constraints.mutualExclusionRequired = true;
+      if (/取消互斥|不再互斥|允许叠加|可以叠加/.test(question)) {
+        constraints.mutualExclusionRequired = false;
+      }
       if (/同时领取|叠加使用|允许叠加|券叠加/.test(question)) constraints.stackingRequested = true;
-      const roiFloorMatch = question.match(/ROI\s*(?:不低于|至少|下限(?:为)?)\s*(\d+(?:\.\d+)?)/i);
-      if (roiFloorMatch) constraints.roiFloor = Number(roiFloorMatch[1]);
+      if (/不再叠加|取消叠加|保持互斥/.test(question)) constraints.stackingRequested = false;
+      if (/取消\s*ROI\s*(?:下限|限制)|ROI\s*不再设下限/i.test(question)) {
+        constraints.roiFloor = null;
+      } else {
+        const roiFloorMatch = question.match(
+          /ROI\s*(?:不低于|至少|下限(?:放宽|调整|降低)?(?:至|到|为)?|放宽(?:至|到|为))\s*(\d+(?:\.\d+)?)/i
+        );
+        if (roiFloorMatch) constraints.roiFloor = Number(roiFloorMatch[1]);
+      }
       const newTierBudgetMatch = question.match(/新增(?:[^，。；]{0,16})券档[^0-9]{0,8}(\d+(?:\.\d+)?)\s*万/);
       if (newTierBudgetMatch) {
         constraints.newTierBudgetWan = Math.max(
@@ -20983,11 +21025,21 @@
     }
 
     function findConfigurationAudience(configuration, question) {
-      const audiences = (configuration.batches || []).map(batch => batch.baseAudience || batch.audience)
+      const batches = configuration.batches || [];
+      const audiences = batches.map(batch => batch.baseAudience || batch.audience)
         .filter((value, index, values) => value && values.indexOf(value) === index)
         .sort((a, b) => b.length - a.length);
       const exact = audiences.find(audience => question.includes(audience));
       if (exact) return exact;
+      if (
+        /(?:目标|重点|核心|主投)(?:投放)?(?:人群|用户|客群)|(?:人群|用户|客群)(?:目标|重点|核心|主投)/
+          .test(question)
+      ) {
+        const focusBatch = batches.find(batch => batch.roleKey === "focus");
+        return focusBatch
+          ? displayValue(focusBatch.baseAudience, formatBatchField(focusBatch, "audience"))
+          : null;
+      }
       const normalizedQuestion = normalizeRecommendationTarget(question);
       const ranked = audiences
         .map(audience => ({
@@ -21204,7 +21256,9 @@
       const conflict = getConstraintConflict(session);
       if (conflict) {
         session.currentConfiguration = configurationBeforeTurn;
-        session.constraints = constraintsBeforeTurn;
+        ["newTierBudgetWan", "requestedFrequency", "stackingRequested"].forEach(key => {
+          session.constraints[key] = constraintsBeforeTurn[key];
+        });
       } else if (patches.length) {
         recomputeRecommendationConfiguration(configuration);
         session.version += 1;
@@ -21285,6 +21339,103 @@
       if (/端.*漏斗|漏斗.*端|端口.*核销/.test(question)) return "endpointFunnel";
       if (/批次.*(?:窗口|券角色)|发放窗口.*券|券角色/.test(question)) return "batchWindow/couponRole";
       return "";
+    }
+
+    function parseMockMetricValue(value, targetUnit) {
+      const match = String(value || "").replace(/,/g, "").match(/-?\d+(?:\.\d+)?\s*(万|亿)?/);
+      if (!match) return null;
+      let numeric = Number.parseFloat(match[0]);
+      if (!Number.isFinite(numeric)) return null;
+      const sourceUnit = match[1] || targetUnit;
+      if (sourceUnit === targetUnit) return numeric;
+      if (sourceUnit === "亿" && targetUnit === "万") numeric *= 10000;
+      if (sourceUnit === "万" && targetUnit === "亿") numeric /= 10000;
+      return numeric;
+    }
+
+    function parseCandidateFunnelEvidence(funnel) {
+      const text = String(funnel || "").replace(/,/g, "");
+      const readVolume = labels => {
+        const match = text.match(new RegExp(`(?:${labels.join("|")})\\s*(\\d+(?:\\.\\d+)?)\\s*(万|亿)?`));
+        return match ? parseMockMetricValue(`${match[1]} ${match[2] || "万"}`, "万") : null;
+      };
+      return {
+        exposure: readVolume(["曝光", "发放"]),
+        claimed: readVolume(["领券", "领取"]),
+        redeemed: readVolume(["核销"])
+      };
+    }
+
+    function formatMockVolume(value) {
+      if (!Number.isFinite(value)) return "暂无数据";
+      return `${Number(value.toFixed(1)).toLocaleString("zh-CN")} 万`;
+    }
+
+    function formatMockGmv(value) {
+      return Number.isFinite(value) ? `${value.toFixed(2)} 亿` : "暂无数据";
+    }
+
+    function formatMockRoi(value) {
+      return Number.isFinite(value) ? Number(value.toFixed(2)).toString() : "暂无数据";
+    }
+
+    function deriveAudienceTierChannelEvidence(configuration, batches, channels) {
+      const comparison = configuration.candidateEvidence?.comparison || {};
+      const funnel = parseCandidateFunnelEvidence(comparison.funnel);
+      const totalIncrementalGmv = parseMockMetricValue(comparison.incrementalGmv, "亿");
+      const totalRoi = parseMockMetricValue(comparison.roi, "");
+      if (
+        !Number.isFinite(funnel.exposure)
+        || !Number.isFinite(funnel.claimed)
+        || !Number.isFinite(funnel.redeemed)
+        || !Number.isFinite(totalIncrementalGmv)
+        || !Number.isFinite(totalRoi)
+      ) {
+        return new Map();
+      }
+      const roleWeights = { base: 0.32, focus: 0.34, support: 0.2, reminder: 0.14 };
+      const modeledBatches = batches.filter(batch => Number.isFinite(roleWeights[batch.roleKey]));
+      const totalWeight = modeledBatches.reduce((total, batch) => total + roleWeights[batch.roleKey], 0);
+      return new Map(modeledBatches.map(batch => {
+        const baseAudience = displayValue(batch.baseAudience, formatBatchField(batch, "audience"));
+        const audienceDelta = parseSignedMetric(configuration.audience?.adjustments?.[baseAudience]);
+        const venue = formatBatchField(batch, "venue");
+        const venueParts = venue.split(/\s*\/\s*/).filter(Boolean);
+        const matchedChannels = channels.filter(channel => venueParts.some(part =>
+          channel.name.includes(part) || part.includes(channel.name)
+        ));
+        const channelPatches = matchedChannels
+          .filter(channel => displayValue(channel.manualAdjustment, ""))
+          .map(channel => ({
+            name: channel.name,
+            value: parseSignedMetric(channel.manualAdjustment),
+            label: displayValue(channel.manualAdjustment)
+          }));
+        const channelDelta = channelPatches.length
+          ? channelPatches.reduce((total, patch) => total + patch.value, 0) / matchedChannels.length
+          : 0;
+        const cumulativeDelta = audienceDelta + channelDelta;
+        const volumeFactor = Math.max(0.1, 1 + cumulativeDelta / 100);
+        const roiFactor = Math.max(0.7, 1 - cumulativeDelta / 1000);
+        const weight = roleWeights[batch.roleKey] / totalWeight;
+        const patchLabels = [
+          audienceDelta ? `${baseAudience}累计 ${formatCumulativeAdjustment(audienceDelta, "%")}` : "",
+          ...channelPatches.map(patch => `${patch.name}累计 ${patch.label}`)
+        ].filter(Boolean);
+        const changeExplanation = patchLabels.length
+          ? `累计 patch：${patchLabels.join("、")}；量级按合计变化 ${formatCumulativeAdjustment(cumulativeDelta, "%")} 重算，ROI 按同口径边际折减重算`
+          : "无会话 patch；沿用候选汇总漏斗的批次角色权重分摊";
+        return [batch.roleKey, normalizeStructuredData({
+          exposure: formatMockVolume(funnel.exposure * weight * volumeFactor),
+          claimed: formatMockVolume(funnel.claimed * weight * volumeFactor),
+          redeemed: formatMockVolume(funnel.redeemed * weight * volumeFactor),
+          incrementalGmv: formatMockGmv(totalIncrementalGmv * weight * volumeFactor),
+          roi: formatMockRoi(totalRoi * roiFactor),
+          evidenceType: "脱敏 Mock 派生",
+          metricScope: "候选汇总漏斗按批次角色权重分摊；曝光以候选发放量作为 Mock 代理；会话人群与渠道累计 patch 联合重算",
+          changeExplanation
+        })];
+      }));
     }
 
     function buildRecommendationStructuredDrill(session, drillKey) {
@@ -21369,14 +21520,42 @@
       });
 
       if (drillKey === "audienceTierChannel") {
-        const available = ["人群标签", "券档/券角色", "渠道/场域"];
-        if (incrementalGmv) available.push("增量 GMV");
-        if (roi) available.push("ROI");
-        return createDrill(available, batchRecords.map(item => ({
-          keys: uniqueKeys([item.audience, item.baseAudience, item.tier, ...item.channel.keys]),
-          label: `${item.audience} × ${item.tier} × ${formatBatchField(item.batch, "venue")}`,
-          finding: item.finding
-        })));
+        const evidenceByRole = deriveAudienceTierChannelEvidence(configuration, batches, channels);
+        const records = batchRecords.map(item => {
+          const evidence = evidenceByRole.get(item.batch.roleKey);
+          if (!evidence) return null;
+          return {
+            roleKey: item.batch.roleKey,
+            keys: uniqueKeys([item.audience, item.baseAudience, item.tier, ...item.channel.keys]),
+            label: `${item.audience} × ${item.tier} × ${formatBatchField(item.batch, "venue")}`,
+            exposure: evidence.exposure,
+            claimed: evidence.claimed,
+            redeemed: evidence.redeemed,
+            incrementalGmv: evidence.incrementalGmv,
+            roi: evidence.roi,
+            evidenceType: evidence.evidenceType,
+            metricScope: evidence.metricScope,
+            changeExplanation: evidence.changeExplanation,
+            finding: [
+              `曝光 ${evidence.exposure}`,
+              `领券 ${evidence.claimed}`,
+              `核销 ${evidence.redeemed}`,
+              `增量 GMV ${evidence.incrementalGmv}`,
+              `ROI ${evidence.roi}`,
+              evidence.evidenceType,
+              `口径：${evidence.metricScope}`,
+              `变化说明：${evidence.changeExplanation}`,
+              `风险 ${displayValue(configuration.risk)}`
+            ].join("；")
+          };
+        }).filter(Boolean);
+        const complete = records.length > 0 && records.every(record =>
+          ["exposure", "claimed", "redeemed", "incrementalGmv", "roi"]
+            .every(field => hasValue(record[field]))
+        );
+        return createDrill(complete ? [...definition.requiredFields] : [
+          "人群标签", "券档/券角色", "渠道/场域"
+        ], records);
       }
 
       if (drillKey === "audienceTier") {

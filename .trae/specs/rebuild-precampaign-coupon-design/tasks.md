@@ -208,12 +208,12 @@
   - [x] SubTask 30.3: 促前来源统一为不可点击、不可聚焦为链接的脱敏标签，移除链接样式、链接角色、外链图标和跳转交互。
   - [x] SubTask 30.4: 清除页面、数据模型、报告和会话上下文中的真实 URL，仅保留不可反推的脱敏来源名称，并补充非默认活动和缺数场景回归。
 
-- [ ] Task 31: 完成全量浏览器/静态回归与 GitHub 发布。
+- [x] Task 31: 完成全量浏览器/静态回归与 GitHub 发布。
   - [x] SubTask 31.1: 运行 JavaScript 语法、静态重复 ID、敏感信息与真实 URL 扫描、目标文案和 `git diff --check`。
   - [x] SubTask 31.2: 浏览器全量验证 Task 29 七步逐章主链、三栏布局、下钻追问、3+X/4+X、预算治理、报告产物和脱敏 Mock 边界。
   - [x] SubTask 31.3: 浏览器验证 Task 30 的非默认活动 profile、`expansionRate`/`after`、批次缺值、来源不可点击和无真实 URL，并覆盖桌面宽屏及 1440px、1280px、1024px 窄屏。
   - [x] SubTask 31.4: 回归促前默认工作台、促中纵向双模块、证据入口、历史会话、键盘/ARIA、控制台和既有交互，确认无新增回归。
-  - [ ] SubTask 31.5: 验收通过后扫描待发布内容，提交本轮实现与规格文档并非强制推送到 GitHub `main`，验证远端 commit 与本地 HEAD 一致。
+  - [x] SubTask 31.5: 验收通过后扫描待发布内容，提交本轮实现与规格文档并非强制推送到 GitHub `main`，验证远端 commit 与本地 HEAD 一致。
 
 - Task 30 can be implemented in parallel with Task 29.
 - Task 31 depends on Tasks 29 and 30.
