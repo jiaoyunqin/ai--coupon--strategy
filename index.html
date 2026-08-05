@@ -8191,7 +8191,7 @@
 
         <section class="panel pre-dashboard is-hidden" id="preDashboard" aria-label="促前活动与历史券洞察">
           <div class="pre-home-shell">
-            <section class="pre-planning-summary" id="prePlanningSummary" aria-label="促前规划决策摘要" aria-live="polite"></section>
+            <section class="pre-planning-summary" id="prePlanningSummary" aria-label="促前历史证据摘要" aria-live="polite"></section>
 
             <div class="pre-control-grid">
               <section class="pre-home-card" aria-labelledby="preCalendarTitle">
@@ -10616,6 +10616,10 @@
       return insights.find(insight => insight.key === key);
     }
 
+    function preNormalizeInsightSummary(summary) {
+      return String(summary || "").replace(/^(?:AI 小结：\s*)+/, "").trim();
+    }
+
     function preRenderPlanningSummary(activity, references, insights) {
       const baseline = preInsightByKey(insights, "baseline");
       const category = preInsightByKey(insights, "category");
@@ -10630,27 +10634,27 @@
             channel.metrics[0]
           ]
         : [
-            { value: references.length, label: "当前参考促" },
+            { value: references.length, label: "历史参考样本" },
             { value: "待计算", label: "GMV 自然水位" },
-            { value: "待计算", label: "类目机会" },
-            { value: "待计算", label: "券档效率" }
+            { value: "待计算", label: "类目差异" },
+            { value: "待计算", label: "券档历史表现" }
           ];
-      const recommendation = hasEvidence
-        ? "先扩大有效支付用户，再用高客单类目 X 券承接增量，避免高门槛券跨人群泛发"
-        : "先补充历史参考促，再生成自然水位、类目机会与券档效率判断";
+      const evidenceSummary = hasEvidence
+        ? "自然水位、类目爆发机制与券档渠道表现存在历史差异"
+        : "当前参考样本不足，暂无可计算的同口径历史证据";
       const description = hasEvidence
-        ? `${activity.name}当前参考 ${references.length} 场历史活动。GMV 自然水位主要由 DAC 拉动；数码家电适合高意向定向券，300-40 承接普惠规模，搜索负责高意图转化。`
-        : `${activity.name}当前没有可计算的历史样本，策略建议暂不生成。`;
+        ? `${activity.name}当前参考 ${references.length} 场历史活动。样本中的 GMV 自然水位主要随 DAC 变化；数码家电与食品生鲜的爆发机制不同；普惠档较高门槛档的历史领后核销更稳定，搜索的历史领后核销高于 Push。上述观察仅供本期分析参考。`
+        : `${activity.name}当前没有可计算的历史样本，仅展示样本状态，不形成方案判断。`;
       prePlanningSummary.innerHTML = `
         <div class="pre-summary-rail">
           <div><small>PRE CAMPAIGN</small><strong>${escapeHTML(activity.level)} 级</strong><span>${escapeHTML(activity.name)}<br>${escapeHTML(activity.period)}</span></div>
           <em>${escapeHTML(activity.stage)} · ${references.length} 场样本</em>
         </div>
         <div class="pre-summary-main">
-          <div class="pre-summary-kicker"><b>AI 规划建议</b><span>历史证据驱动 · 当前活动</span></div>
-          <h2>${escapeHTML(recommendation)}</h2>
+          <div class="pre-summary-kicker"><b>历史证据摘要</b><span>仅供本期分析参考</span></div>
+          <h2>${escapeHTML(evidenceSummary)}</h2>
           <p>${escapeHTML(description)}</p>
-          <div class="pre-summary-tags"><span>自然水位</span><span>类目爆发</span><span>券档适配</span><span>人群与渠道</span></div>
+          <div class="pre-summary-tags"><span>自然水位</span><span>类目差异</span><span>券档历史</span><span>渠道历史</span></div>
         </div>
         <div class="pre-summary-side">
           <div class="pre-summary-metrics">${metrics.map(metric => `
@@ -10660,10 +10664,10 @@
             <button
               class="workbench-ask"
               data-workbench-ask="pre"
-              data-ask-context="促前规划整体判断"
-              data-ask-summary="${escapeHTML(recommendation)}"
-              data-ask-questions="为什么建议先扩大有效支付用户？|高门槛券应该限制在哪些组合？|把整体判断拆成验证顺序"
-            >✦ 追问推荐依据</button>
+              data-ask-context="促前历史证据摘要"
+              data-ask-summary="${escapeHTML(evidenceSummary)}"
+              data-ask-questions="自然水位观察来自哪些历史指标？|类目差异在参考样本中如何体现？|券档与渠道的历史表现有哪些适用边界？"
+            >✦ 追问历史证据</button>
             <button class="primary" data-pre-dashboard-action="co-create" ${hasEvidence ? "" : "disabled"}>进入策略共创</button>
           </div>
         </div>`;
@@ -10677,7 +10681,7 @@
         event.stopPropagation();
         if (coCreateButton.disabled) return;
         const recommendationContext = createRecommendationConversationContext("pre-dashboard", {
-          contextLabel: "促前规划整体判断",
+          contextLabel: "历史证据摘要",
           summary: askButton?.dataset.askSummary || ""
         });
         enterRecommendationConversation(recommendationContext);
@@ -10901,7 +10905,7 @@
           <h4>${escapeHTML(insight.title)}</h4>
           <p>${escapeHTML(insight.copy)}</p>
           <div class="pre-insight-metrics">${insight.metrics.map(metric => `<div><b>${escapeHTML(metric.value)}</b><span>${escapeHTML(metric.label)}</span></div>`).join("")}</div>
-          <div class="pre-insight-summary"><b>AI</b> ${escapeHTML(insight.summary.replace(/^AI 小结：/, ""))}</div>
+          <div class="pre-insight-summary"><b>AI</b> ${escapeHTML(preNormalizeInsightSummary(insight.summary))}</div>
           ${expanded ? `
             ${preRenderTierDrill(insight)}
             ${preRenderInsightDetail(insight)}
@@ -13568,19 +13572,36 @@
       return {
         source: "pre-dashboard",
         stage: "促前规划",
-        label: `${activity.name} · ${askContext.contextLabel || "AI 规划建议"}`,
-        summary: askContext.summary || "先扩大有效支付用户，再用高客单类目 X 券承接增量，避免高门槛券跨人群泛发",
-        rationale: "先确认目标与预算，再按自然水位、类目机会、券档效率、人群与渠道生成 3+X / 4+X 候选。",
+        label: `${activity.name} · ${askContext.contextLabel || "历史证据摘要"}`,
+        summary: askContext.summary || "当前参考样本中，GMV 自然水位主要随 DAC 变化；类目爆发机制、券档核销和渠道承接表现存在历史差异。",
+        rationale: "当前内容来自历史参考样本，仅供本期分析参考，不构成本期券档、预算或渠道方案。",
         evidence,
+        evidenceOnly: true,
         prompts: [
-          { label: "生成候选", prompt: "请把当前建议拆成 3+X 和 4+X 两套可比较方案。" },
-          { label: "调整预算", prompt: "如果预算上限下降 10%，券档、人群和渠道应该如何收缩？" },
-          { label: "限制门槛", prompt: "哪些高门槛券应该限制使用，并绑定到哪些类目与人群？" }
+          { label: "自然水位", prompt: "解释当前参考样本中的自然水位观察和指标来源。" },
+          { label: "类目差异", prompt: "对比参考样本中的类目爆发机制与适用边界。" },
+          { label: "券档渠道", prompt: "归纳不同券档与渠道的历史表现，不生成本期方案。" }
         ]
       };
     }
 
     function renderRecommendationContextCard(context) {
+      if (context.evidenceOnly) {
+        return `
+          <p>已从促前首页带入历史证据摘要，仅供本期分析参考，不构成本期方案。</p>
+          <div class="recommendation-context-card">
+            <div class="recommendation-context-head">
+              <span>历史证据摘要</span>
+              <strong>${escapeHTML(context.label)}</strong>
+            </div>
+            <p>${escapeHTML(context.summary)}</p>
+            <div class="recommendation-context-grid">
+              <div><b>参考边界</b><span>${escapeHTML(context.rationale)}</span></div>
+              <div><b>样本范围</b><span>${escapeHTML(context.evidence || "当前页面的结构化历史证据")}</span></div>
+            </div>
+          </div>
+          <div class="message-callout">策略共创仍需确认本期目标与约束，历史观察不会直接转换为券档、预算或渠道动作。</div>`;
+      }
       return `
         <p>已从策略工作台带入当前系统推荐，后续调整将沿用这份方案上下文。</p>
         <div class="recommendation-context-card">
@@ -13600,7 +13621,15 @@
     function renderRecommendationReply(context, question) {
       const isMid = context.source === "mid-dashboard";
       let advice = "";
-      if (isMid && /追加预算/.test(question)) {
+      if (context.evidenceOnly && /自然水位|GMV|DAC|客单/.test(question)) {
+        advice = "当前参考样本中，GMV 同比与 DAC 变化方向一致，客单变化相对有限；该观察描述历史自然水位，不等于本期增长目标。";
+      } else if (context.evidenceOnly && /类目|爆发/.test(question)) {
+        advice = "参考样本中，数码家电同时受 DAC 与客单影响，食品生鲜更偏 DAC 扩张；类目货盘、履约和价格带变化会限制跨期复用。";
+      } else if (context.evidenceOnly && /券档|渠道|核销/.test(question)) {
+        advice = "参考样本中，普惠档的领后核销较高门槛档稳定，搜索的领后核销高于 Push；门槛、资源位和归因窗口不同会影响可比性。";
+      } else if (context.evidenceOnly) {
+        advice = context.summary;
+      } else if (isMid && /追加预算/.test(question)) {
         advice = "当前 GMV 达成已高于预算进度，建议先回收低效高门槛泛发并做结构迁移；只有迁移后仍存在明确增量缺口，才讨论动用准备金。";
       } else if (isMid && /迁移|比例|预算/.test(question)) {
         advice = "先按低核销券档、低意图渠道和泛人群三个层级回收预算，再迁移到 300-40、高价值 X 券及会场/搜索高效点位，并保留实验对照。";
@@ -13614,6 +13643,16 @@
         advice = "优先保留 300-40 普惠档与高确定性 X 券，随后收缩低潜人群、高门槛泛发和低效 Push，保持核心对照组不变。";
       } else {
         advice = `先保留“${context.summary}”这条主线，再围绕你的调整目标重算预算、人群覆盖与实验边界。`;
+      }
+      if (context.evidenceOnly) {
+        return `
+          <p>以下内容继续沿用<strong>${escapeHTML(context.label)}</strong>的历史样本口径。</p>
+          <div class="message-callout"><strong>针对“${escapeHTML(question)}”：</strong>${escapeHTML(advice)}</div>
+          <ul>
+            <li>证据来自当前参考促集合的同口径历史指标。</li>
+            <li>样本差异、数据时效与归因窗口构成适用边界。</li>
+            <li>本期方案需在目标与约束确认后另行形成。</li>
+          </ul>`;
       }
       return `
         <p>我会继续沿用<strong>${escapeHTML(context.label)}</strong>，不会引用无关历史案例。</p>
@@ -13704,8 +13743,10 @@
       autoResizeNewChatComposer();
       newChatState.isResponding = true;
       const progress = createCaseMessage("assistant", "progress", "");
-      progress.steps = newChatState.context
-        ? ["读取当前推荐", "评估调整影响", "形成调整建议"]
+      progress.steps = newChatState.context?.evidenceOnly
+        ? ["读取历史证据", "核对样本边界", "形成参考说明"]
+        : newChatState.context
+          ? ["读取当前推荐", "评估调整影响", "形成调整建议"]
         : ["理解业务问题", "识别必要约束", "准备追问"];
       progress.phase = 0;
       newChatState.messages.push(progress);
@@ -13791,9 +13832,13 @@
       syncWorkspaceEntryState("new-chat");
       document.querySelectorAll(".history-item").forEach(item => item.classList.remove("active"));
       resetNewChat(context);
-      newChatTitle.textContent = context ? `${context.stage} · 方案调整` : "新策略对话";
-      newChatComposerInput.placeholder = context
-        ? "继续调整预算、券档、人群、渠道或实验约束…"
+      newChatTitle.textContent = context
+        ? context.evidenceOnly ? `${context.stage} · 策略共创` : `${context.stage} · 方案调整`
+        : "新策略对话";
+      newChatComposerInput.placeholder = context?.evidenceOnly
+        ? "基于历史证据继续追问，或补充本期目标与约束…"
+        : context
+          ? "继续调整预算、券档、人群、渠道或实验约束…"
         : "描述你的活动阶段、目标、预算或当前遇到的问题…";
       window.scrollTo({ top: 0 });
       requestAnimationFrame(() => newChatComposerInput.focus());
@@ -14562,7 +14607,8 @@
         const references = preGetReferenceCampaigns();
         const insight = preDashboardState.currentInsights.find(item => item.key === insightButton.dataset.preInsightAsk);
         if (activity && references.length && insight) {
-          preOpenDashboardQuestion(`规划活动：${activity.name}（${activity.period}，${activity.level} 级 ${activity.levelName}）；参考促集合：${preReferenceContext(references)}；洞察标题：${insight.title}；历史证据：${insight.evidence}；来源：${insight.source}；适用边界：${insight.boundary}；AI 小结：${insight.summary}。仅解释历史规律，不生成本期具体券方案。`);
+          const insightSummary = preNormalizeInsightSummary(insight.summary);
+          preOpenDashboardQuestion(`规划活动：${activity.name}（${activity.period}，${activity.level} 级 ${activity.levelName}）；参考促集合：${preReferenceContext(references)}；洞察标题：${insight.title}；历史证据：${insight.evidence}；来源：${insight.source}；适用边界：${insight.boundary}；AI 小结：${insightSummary}。仅解释历史规律，不生成本期具体券方案。`);
         }
         return;
       }
