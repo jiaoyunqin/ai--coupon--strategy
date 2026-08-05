@@ -49,3 +49,11 @@
 - 修复“用户添加”对自动样本重复加权的问题，同时保留纯手动额外样本的原有手动权重语义
 - JavaScript 语法、196 个静态 ID、`git diff --check` 和基于 `index.html` 实际函数的定向可复现性断言通过
 - 修改文件：`index.html`、`tasks.md`、`checklist.md`、`progress.md`
+
+## Round 6
+
+- 完成 Tasks 18–21：参考促连续衰减与动态 24 月窗口、工作台与飞书 Mock 回归、促前洞察展开与追问、首页信息边界与追问前缀均通过验收
+- 修复跨年权重跳变、窗口边界、手动样本权重、新建对话状态继承、`contextRange` 持久化、任务与定时任务计数/空态、飞书 Mock 一致性、洞察事件和重复前缀缺陷
+- Task 18 日期连续衰减、动态 24 月、手动中立及边界测试全部 PASS；Task 19 新建对话重置、`contextRange`、任务/定时任务计数、零项空态、飞书 Mock 及促前/促中回归全部 PASS；Tasks 20–21 PASS；Code Guard 无当前 P0–P2
+- 浏览器无控制台错误，重复 ID 为 0，1688px 宽度无溢出；1280px 已有既有回归记录
+- 修改文件：`index.html`、`tasks.md`、`checklist.md`、`progress.md`

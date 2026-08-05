@@ -14608,7 +14608,8 @@
         const insight = preDashboardState.currentInsights.find(item => item.key === insightButton.dataset.preInsightAsk);
         if (activity && references.length && insight) {
           const insightSummary = preNormalizeInsightSummary(insight.summary);
-          preOpenDashboardQuestion(`规划活动：${activity.name}（${activity.period}，${activity.level} 级 ${activity.levelName}）；参考促集合：${preReferenceContext(references)}；洞察标题：${insight.title}；历史证据：${insight.evidence}；来源：${insight.source}；适用边界：${insight.boundary}；AI 小结：${insightSummary}。仅解释历史规律，不生成本期具体券方案。`);
+          const promptSummary = insightSummary.replace(/[。；\s]+$/, "");
+          preOpenDashboardQuestion(`规划活动：${activity.name}（${activity.period}，${activity.level} 级 ${activity.levelName}）；参考促集合：${preReferenceContext(references)}；洞察标题：${insight.title}；历史证据：${insight.evidence}；来源：${insight.source}；适用边界：${insight.boundary}；AI 小结：${promptSummary}。仅解释历史规律，不生成本期具体券方案。`);
         }
         return;
       }
