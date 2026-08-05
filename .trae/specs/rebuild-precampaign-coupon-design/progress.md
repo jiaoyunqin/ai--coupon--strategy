@@ -109,3 +109,9 @@
 - 独立验收结论：静态 PASS；最终浏览器 5/5 PASS；促前七步全链 PASS；Task 34 PASS；五档响应式 PASS；旧证据追问、ARIA、运行时 ID 和网络检查 PASS。
 - 发布完成：先普通推送主体实现与规格，再将 Task 31.5 状态同步及并行完成的 Task 35 最终修复通过后续普通推送发布；全程未使用强制推送，最终本地 HEAD、`origin/main` 与远端 `main` 一致。
 - 修改文件：`index.html`、`spec.md`、`tasks.md`、`checklist.md`、`progress.md`。
+
+## Round 7
+
+- 完成 Tasks 29–35：促前历史三栏七步、P0/P1、预算治理与脱敏；促中七节点七维矩阵、三候选、profile 扩量、批次缺值，以及多轮下钻、冲突与缺数处理。
+- 最终静态和浏览器验收 PASS；修复人群 15%、搜索 10pp、跨轮约束与五指标三维证据。
+- 修改文件：`index.html`、`spec.md`、`tasks.md`、`checklist.md`、`progress.md`；即将普通推送。
