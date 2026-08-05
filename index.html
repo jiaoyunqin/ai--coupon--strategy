@@ -22212,6 +22212,182 @@
 
     runTask33StructuredAssertions();
 
+    function runTask35StructuredAssertions() {
+      const assert = (condition, code) => {
+        if (!condition) throw new Error(`Task35 structured assertion failed: ${code}`);
+      };
+      const createSession = (festival, year, waveKey, waveLabel) => {
+        const activity = {
+          festival,
+          year,
+          waveKey,
+          wave: waveLabel,
+          waveLabel,
+          key: createMidContextKey(festival, year, waveKey),
+          label: `${year} · ${festival} · ${waveLabel}`
+        };
+        const dataset = getMidRecommendationDataset(activity);
+        const recommendation = getMidRecommendation("next", activity, dataset, "balanced");
+        return createRecommendationSession(activity, dataset, recommendation, {
+          adjustmentKey: "balanced",
+          contextLabel: `${festival}均衡补量方案`
+        });
+      };
+      const sessions = [
+        { code: "38", session: createSession("38节", "2026", "full", "全周期 3.4 - 3.8") },
+        { code: "618", session: createSession("618", "2026", "full", "全周期 6.1 - 6.18") },
+        { code: "double11", session: createSession("双11", "2025", "full", "全周期 10.24 - 11.11") }
+      ];
+      const evidenceFields = ["exposure", "claimed", "redeemed", "incrementalGmv", "roi"];
+      const focusAudience = session => {
+        const focus = session.currentConfiguration.batches.find(batch => batch.roleKey === "focus");
+        return displayValue(focus.baseAudience, formatBatchField(focus, "audience"));
+      };
+      const focusEvidence = drill => drill.records.find(record => record.roleKey === "focus");
+
+      const targetSession = sessions[0].session;
+      const targetName = focusAudience(targetSession);
+      const baselineExpansion = parseSignedMetric(targetSession.currentConfiguration.baseline.expansionRate);
+      assert(!applyRecommendationTurn(targetSession, "目标人群扩量 10%").conflict, "generic-target-first-patch");
+      assert(!applyRecommendationTurn(targetSession, "核心人群再扩量 5%").conflict, "generic-target-second-patch");
+      assert(
+        parseSignedMetric(targetSession.currentConfiguration.audience.adjustments[targetName]) === 15,
+        "generic-target-cumulative-15"
+      );
+      const targetFocusBatch = targetSession.currentConfiguration.batches.find(batch => batch.roleKey === "focus");
+      assert(targetFocusBatch.audience.includes("+15%"), "focus-batch-synchronized");
+      assert(
+        parseSignedMetric(
+          targetSession.currentConfiguration.metrics.find(metric => metric.label === "调整后覆盖")?.value
+        ) === baselineExpansion + 15,
+        "focus-current-metrics-synchronized"
+      );
+      assert(/人群切量达到 10%/.test(targetSession.currentConfiguration.risk), "focus-risk-synchronized");
+      assert(
+        targetSession.currentConfiguration.candidateEvidence.focusBatch.audience.includes("+15%"),
+        "focus-evidence-snapshot-synchronized"
+      );
+
+      sessions.forEach(({ code, session }, index) => {
+        const beforeDrill = buildRecommendationStructuredDrill(session, "audienceTierChannel");
+        assert(beforeDrill.missingFields.length === 0, `${code}-three-dimensional-complete`);
+        assert(beforeDrill.records.length >= 3, `${code}-three-dimensional-records`);
+        beforeDrill.records.forEach(record => {
+          evidenceFields.forEach(field => {
+            assert(
+              displayValue(record[field], "") && record[field] !== "暂无数据",
+              `${code}-${record.roleKey}-${field}`
+            );
+          });
+          assert(record.evidenceType === "脱敏 Mock 派生", `${code}-${record.roleKey}-mock-label`);
+          assert(/口径|分摊|Mock/.test(record.metricScope), `${code}-${record.roleKey}-metric-scope`);
+        });
+        const beforeFocus = focusEvidence(beforeDrill);
+        if (index > 0) {
+          assert(
+            !applyRecommendationTurn(session, `${index === 1 ? "重点人群" : "主投人群"}扩量 5%`).conflict,
+            `${code}-audience-patch`
+          );
+        }
+        const focusBatch = session.currentConfiguration.batches.find(batch => batch.roleKey === "focus");
+        const focusChannel = session.currentConfiguration.channels.find(channel =>
+          formatBatchField(focusBatch, "venue").includes(channel.name)
+          || channel.name.includes(formatBatchField(focusBatch, "venue").split(/\s*\/\s*/)[0])
+        ) || session.currentConfiguration.channels.find(channel => channel.name === "搜索");
+        assert(focusChannel, `${code}-focus-channel`);
+        assert(
+          !applyRecommendationTurn(session, `${focusChannel.name}渠道预算增加 3pp`).conflict,
+          `${code}-channel-patch`
+        );
+        const afterDrill = buildRecommendationStructuredDrill(session, "audienceTierChannel");
+        const afterFocus = focusEvidence(afterDrill);
+        evidenceFields.forEach(field => {
+          assert(afterFocus[field] !== beforeFocus[field], `${code}-patched-${field}`);
+        });
+        assert(
+          afterFocus.changeExplanation !== beforeFocus.changeExplanation
+          && /累计 patch/.test(afterFocus.changeExplanation),
+          `${code}-change-explanation`
+        );
+        const readResult = readStructuredEvidence(
+          { contextKey: session.contextKey, solutionSession: session },
+          "按人群、券档和渠道查看三维证据"
+        );
+        assert(readResult && !readResult.missing && /脱敏 Mock 派生/.test(readResult.text), `${code}-read-evidence`);
+      });
+
+      const unknownCombination = readStructuredEvidence(
+        { contextKey: targetSession.contextKey, solutionSession: targetSession },
+        "具体查看未建模人群 × 未建模券档 × 未建模渠道"
+      );
+      assert(unknownCombination?.missing && /暂无数据/.test(unknownCombination.text), "unmodeled-combination");
+
+      const constraintSession = createSession("618", "2026", "full", "全周期 6.1 - 6.18");
+      const firstConflict = applyRecommendationTurn(
+        constraintSession,
+        "总预算不增、渠道不减、库存不增、频控不超过 1 次、券档互斥、ROI 不低于 6.0；总预算增加 100 万"
+      );
+      assert(firstConflict.conflict && constraintSession.currentConfiguration.budget.deltaWan === 0, "conflict-rollback");
+      assert(constraintSession.constraints.totalBudgetIncreaseAllowed === false, "constraint-budget-retained");
+      assert(constraintSession.constraints.channelReductionAllowed === false, "constraint-channel-retained");
+      assert(constraintSession.constraints.inventoryIncreaseAllowed === false, "constraint-inventory-retained");
+      assert(constraintSession.constraints.frequencyCap === 1, "constraint-frequency-retained");
+      assert(constraintSession.constraints.mutualExclusionRequired === true, "constraint-exclusion-retained");
+      assert(constraintSession.constraints.roiFloor === 6, "constraint-roi-retained");
+      const secondConflict = applyRecommendationTurn(constraintSession, "下一轮总预算增加 50 万");
+      assert(
+        secondConflict.conflict
+        && constraintSession.currentConfiguration.budget.deltaWan === 0
+        && constraintSession.appliedPatches.length === 0,
+        "retained-constraint-blocks-next-turn"
+      );
+      const relaxed = applyRecommendationTurn(
+        constraintSession,
+        "明确放宽：允许总预算增加；总预算增加 50 万"
+      );
+      assert(
+        !relaxed.conflict
+        && constraintSession.constraints.totalBudgetIncreaseAllowed === true
+        && constraintSession.currentConfiguration.budget.deltaWan === 50,
+        "explicit-constraint-relaxation"
+      );
+      const restored = applyRecommendationTurn(constraintSession, "恢复原方案");
+      const emptyConstraints = {
+        totalBudgetIncreaseAllowed: null,
+        channelReductionAllowed: null,
+        newTierBudgetWan: 0,
+        inventoryIncreaseAllowed: null,
+        frequencyCap: null,
+        requestedFrequency: null,
+        mutualExclusionRequired: false,
+        stackingRequested: false,
+        roiFloor: null
+      };
+      assert(restored.restored, "restore-result");
+      assert(
+        JSON.stringify(constraintSession.currentConfiguration)
+          === JSON.stringify(constraintSession.originalConfiguration),
+        "restore-original-configuration"
+      );
+      assert(constraintSession.appliedPatches.length === 0, "restore-clears-patches");
+      assert(
+        JSON.stringify(constraintSession.constraints) === JSON.stringify(emptyConstraints),
+        "restore-clears-constraints"
+      );
+
+      window.__task35Assertions = Object.freeze({
+        passed: true,
+        genericAudienceCumulative: 15,
+        retainedConstraintBlockedNextTurn: true,
+        evidenceContexts: sessions.map(item => item.code),
+        evidenceFields,
+        unmodeledCombinationMissing: true,
+        restoreCleared: true
+      });
+    }
+
+    runTask35StructuredAssertions();
+
     function renderNewChatMessage(message) {
       const isUser = message.role === "user";
       let body = isUser ? escapeHTML(message.content) : message.content;
