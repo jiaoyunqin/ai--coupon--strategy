@@ -23680,6 +23680,27 @@
         }
         return;
       }
+      if (!event.defaultPrevented && (event.key === "Enter" || event.key === " ")) {
+        const askOption = event.target.closest?.(
+          '#askOptions [data-question], #askOptions [data-ask-question]'
+        );
+        const askTrigger = askOption
+          ? null
+          : event.target.closest?.(
+              '[data-workbench-ask], [data-pre-ask-type], [data-ask-type]'
+            );
+        if (askTrigger) {
+          event.preventDefault();
+          openAskPanel(askTrigger);
+          return;
+        }
+        const currentTab = event.target.closest?.('[role="tab"]');
+        if (currentTab) {
+          event.preventDefault();
+          currentTab.click();
+          return;
+        }
+      }
       const currentTab = event.target.closest?.('[role="tab"]');
       if (!currentTab || !["ArrowLeft", "ArrowRight", "ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
       const tablist = currentTab.closest('[role="tablist"]');

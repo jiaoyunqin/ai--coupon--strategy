@@ -132,10 +132,12 @@
 ## 信息边界、视觉与回归
 
 - [x] 首页洞察文案明确是历史规律或参考，不表述为本期确定方案。
-- [x] 首页不出现“推荐 B”“申请预算”“预估 ROI”等方案推荐内容。
-- [x] 首页不直接推荐本期采用 3+X、4+X 或具体券档组合。
-- [x] 首页不展示方案形成后的配置巡检模块。
-- [x] 顶部活动选择和参考促区域轻量、紧凑，不使用大幅方案结论卡。
+> 以下四项为历史基线，已被后续增量替代，不作为当前现状。
+
+- 历史版本：首页不出现“推荐 B”“申请预算”“预估 ROI”等方案推荐内容。
+- 历史版本：首页不直接推荐本期采用 3+X、4+X 或具体券档组合。
+- 历史版本：首页不展示方案形成后的配置巡检模块。
+- 历史版本：顶部活动选择和参考促区域轻量、紧凑，不使用大幅方案结论卡。
 - [x] 活动、参考促和洞察区具有明确阅读顺序。
 - [x] 桌面宽屏和 1280px 下无横向溢出或内容遮挡。
 - [x] JavaScript 语法与 diff 检查通过。
@@ -400,3 +402,10 @@
 - [x] 三候选与方案 Tab 切换显式传递 candidate / plan 焦点来源，重渲染后同步更新 selectedPlan、`aria-selected`、`tabindex` 和焦点，方向键、Home / End、Enter / Space 均可操作。
 - [x] KPI / 趋势追问弹层选项支持 ArrowDown 后 Enter 及 Space 激活，并通过既有点击路由进入 `newChatState.context.dataContext = true` 且无 `solutionSession` 的独立 data context，popover 内部 wheel / touch 行为保持不变。
 - [x] JavaScript 语法、静态重复 ID、`git diff --check` 和浏览器原生交互回归通过，三候选仍同屏且控制台无页面错误。
+
+## Task 40 显式处理追问入口与Tab的Enter/Space
+
+- [x] 非选中方案 Tab 使用 Enter / Space 后实际选择，`selectedPlan`、`aria-selected`、`tabindex` 与焦点同步；趋势或 KPI 追问入口使用 Space 可打开 popover。
+- [x] 追问选项 ArrowDown 后使用 Enter / Space 仅路由一次并进入独立 data context；JavaScript、静态重复 ID、`git diff --check` 与浏览器控制台检查通过。
+
+- [x] 规格不存在重复任务编号或互斥现状勾选。
