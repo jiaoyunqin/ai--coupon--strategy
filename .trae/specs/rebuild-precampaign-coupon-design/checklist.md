@@ -394,3 +394,9 @@
 ## Task 38 精确批次总量门禁
 
 - [x] Task36 精确断言 4/12/45。
+
+## Task 39 方案 Tab 与追问弹层键盘激活
+
+- [x] 三候选与方案 Tab 切换显式传递 candidate / plan 焦点来源，重渲染后同步更新 selectedPlan、`aria-selected`、`tabindex` 和焦点，方向键、Home / End、Enter / Space 均可操作。
+- [x] KPI / 趋势追问弹层选项支持 ArrowDown 后 Enter 及 Space 激活，并通过既有点击路由进入 `newChatState.context.dataContext = true` 且无 `solutionSession` 的独立 data context，popover 内部 wheel / touch 行为保持不变。
+- [x] JavaScript 语法、静态重复 ID、`git diff --check` 和浏览器原生交互回归通过，三候选仍同屏且控制台无页面错误。

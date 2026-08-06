@@ -16174,8 +16174,10 @@
       showToast(`已将「${context.contextLabel}」带入独立方案对话`);
     }
 
-    function renderMidNextWavePlanTabs() {
-      const restoreFocusKey = captureTabFocus(midNextWavePlanTabs);
+    function renderMidNextWavePlanTabs(options = {}) {
+      const restoreFocusKey = options.restoreFocus === false
+        ? ""
+        : captureTabFocus(midNextWavePlanTabs);
       const panel = document.getElementById("midNextWavePlanPanel");
       const nextWaveData = getMidNextWaveData();
       if (!nextWaveData) {
@@ -16349,7 +16351,7 @@
         <div class="mid-wave-guardrails">${experiment.guardrails.map(item => `<span>${escapeHTML(item)}</span>`).join("")}</div>`;
     }
 
-    function renderMidNextWavePlanner() {
+    function renderMidNextWavePlanner(options = {}) {
       const context = getMidCampaignContext();
       const nextWaveData = getMidNextWaveData(context);
       const businessEvidence = getMidEvidenceDataset(context);
@@ -16370,7 +16372,9 @@
           ? `${context.label}：${businessEvidence.overview.conclusion}`
           : `${context.label}：暂无同口径经营证据`;
       });
-      renderMidNextWavePlanTabs();
+      renderMidNextWavePlanTabs({
+        restoreFocus: options.restorePlanTabFocus !== false
+      });
       renderMidNextWaveEvidence();
       renderMidNextWaveBatches();
       renderMidNextWaveChannels();
@@ -16409,26 +16413,23 @@
     function setMidNextWavePlan(planKey, options = {}) {
       const nextWaveData = getMidNextWaveData();
       if (!nextWaveData?.plans?.[planKey]) return;
-      const active = document.activeElement;
-      const restoreCandidateFocus = options.focusTarget === "candidate"
-        || active?.classList.contains("mid-candidate-entry");
-      const restorePlanTabFocus = midNextWavePlanTabs.contains(active);
+      const focusTarget = ["candidate", "plan"].includes(options.focusTarget)
+        ? options.focusTarget
+        : "";
+      const focusSelectedPlan = () => {
+        if (!focusTarget) return;
+        const tablist = focusTarget === "candidate" ? midNextWaveCompare : midNextWavePlanTabs;
+        tablist.querySelector(`[data-mid-wave-plan="${planKey}"]`)?.focus();
+      };
       if (planKey === midNextWaveState.selectedPlan) {
-        if (restoreCandidateFocus) {
-          midNextWaveCompare.querySelector(`[data-mid-wave-plan="${planKey}"]`)?.focus();
-        } else if (restorePlanTabFocus) {
-          midNextWavePlanTabs.querySelector(`[data-mid-wave-plan="${planKey}"]`)?.focus();
-        }
+        focusSelectedPlan();
         return;
       }
       midNextWaveState.selectedPlan = planKey;
-      renderMidNextWavePlanner();
-      if (restoreCandidateFocus || restorePlanTabFocus) {
-        requestAnimationFrame(() => {
-          const tablist = restoreCandidateFocus ? midNextWaveCompare : midNextWavePlanTabs;
-          tablist.querySelector(`[data-mid-wave-plan="${planKey}"]`)?.focus();
-        });
-      }
+      renderMidNextWavePlanner({
+        restorePlanTabFocus: !focusTarget
+      });
+      focusSelectedPlan();
       showToast(`已切换为“${getMidNextWavePlan(nextWaveData).label}”方案`);
     }
 
@@ -24004,7 +24005,10 @@
       }
       const plan = event.target.closest("[data-mid-wave-plan]");
       if (plan) {
-        setMidNextWavePlan(plan.dataset.midWavePlan);
+        const focusTarget = midNextWaveCompare.contains(plan)
+          ? "candidate"
+          : midNextWavePlanTabs.contains(plan) ? "plan" : "";
+        setMidNextWavePlan(plan.dataset.midWavePlan, { focusTarget });
         return;
       }
       const view = event.target.closest("[data-mid-wave-view]");
@@ -24238,7 +24242,13 @@
 
     askOptions.addEventListener("keydown", event => {
       const option = event.target.closest("[data-question]");
-      if (!option || !["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
+      if (!option) return;
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault();
+        option.click();
+        return;
+      }
+      if (!["ArrowUp", "ArrowDown", "Home", "End"].includes(event.key)) return;
       const options = Array.from(askOptions.querySelectorAll("[data-question]"));
       const currentIndex = options.indexOf(option);
       if (currentIndex < 0) return;

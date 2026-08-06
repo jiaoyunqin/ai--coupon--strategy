@@ -270,3 +270,8 @@
   - [x] SubTask 38.1: 在 Task36 结构化断言中精确断言 4 个 context、12 个 candidate、45 个 batch。
   - [x] SubTask 38.2: 保留逐候选完整字段断言，继续校验券类型、发放形式、会话契约和批次下钻字段。
   - [x] SubTask 38.3: 运行 JavaScript 语法、静态 ID、所有批次字段、4/12/45、undefined / URL 和 `git diff --check`。
+
+- [x] Task 39: 修复方案 Tab 与追问弹层键盘激活。
+  - [x] SubTask 39.1: 为三候选与方案 Tab 切换显式传递焦点来源，重渲染后同步聚焦新节点，并确保方向键、Home / End、Enter / Space 的选中态、ARIA、tabindex 与焦点同步。
+  - [x] SubTask 39.2: 为追问弹层选项显式处理 Enter / Space，复用现有点击路由进入独立 data context，同时保留弹层内部 wheel / touch 行为。
+  - [x] SubTask 39.3: 运行 JavaScript 语法、静态重复 ID、`git diff --check` 与浏览器原生键盘回归，确认三候选同屏且控制台无页面错误。
