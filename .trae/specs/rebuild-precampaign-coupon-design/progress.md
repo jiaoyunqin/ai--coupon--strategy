@@ -121,3 +121,10 @@
 - 完成 Tasks 36–38：为全部下一波次候选补齐券类型与发放形式，并统一页面、批次表、会话上下文和批次下钻契约。
 - 增加 4 个上下文、12 个候选、45 个批次的精确完整性门禁；独立静态与浏览器冒烟通过，无重复 ID、可见 `undefined` 或页面级横向溢出。
 - 修改文件：`index.html`、`tasks.md`、`checklist.md`、`progress.md`。
+
+## Round 22
+
+- 核对 `tasks.md` 与 `checklist.md` 全部完成。
+- Tasks 36–38 契约与 4/12/45 门禁已发布；静态检查、浏览器冒烟和远端一致性均已通过。
+- 清理延迟代理造成的 `spec.md`、`tasks.md`、`checklist.md` 旧文档覆盖，三份文档恢复后均无 diff。
+- 本轮文件变更仅 `progress.md`。
