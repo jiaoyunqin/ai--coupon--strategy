@@ -22,12 +22,22 @@
   - [x] SubTask 4.2: 保持独立追问和灰度候选审计上下文与当前筛选一致。
   - [x] SubTask 4.3: 完成桌面双栏、窄屏单栏及键盘/焦点/ARIA 状态。
 
-- [ ] Task 5: 执行静态、浏览器和回归验证。
-  - [ ] SubTask 5.1: 运行 JavaScript、重复 ID、敏感信息与 `git diff --check`。
-  - [ ] SubTask 5.2: 验证第一波主端全周期、独立端、具体日期和占位波次。
-  - [ ] SubTask 5.3: 验证采纳、取消预览、下方四块联动和查看详情。
-  - [ ] SubTask 5.4: 验证 1440px、1280px、1024px、860px 和 760px 布局及 Axe。
-  - [ ] SubTask 5.5: 回归 02、03、促前默认工作台和历史会话。
+- [x] Task 5: 执行静态、浏览器和回归验证。
+  - [x] SubTask 5.1: 运行 JavaScript、重复 ID、敏感信息与 `git diff --check`。
+  - [x] SubTask 5.2: 验证第一波主端全周期、独立端、具体日期和占位波次。
+  - [x] SubTask 5.3: 验证采纳、取消预览、下方四块联动和查看详情。
+  - [x] SubTask 5.4: 验证 1440px、1280px、1024px、860px 和 760px 布局及 Axe。
+  - [x] SubTask 5.5: 回归 02、03、促前默认工作台和历史会话。
+
+- [x] Task 6: 修复键盘打开策略弹层后的焦点进入与焦点陷阱。
+  - [x] SubTask 6.1: 使用 Enter 或 Space 打开采纳确认、策略详情弹层时，将焦点移入弹层首个可操作元素。
+  - [x] SubTask 6.2: 当弹层已打开且焦点仍在弹层外时，Tab / Shift+Tab 应先进入弹层并只在弹层内循环。
+  - [x] SubTask 6.3: 回归键盘采纳、取消预览、查看详情、Escape 关闭及触发按钮焦点恢复。
+
+- [x] Task 7: 修复策略弹层边界焦点仍可逃逸。
+  - [x] SubTask 7.1: 修复采纳确认与策略详情弹层在首项 Shift+Tab、末项 Tab 时焦点进入背景的问题。
+  - [x] SubTask 7.2: 弹层打开期间隔离背景可聚焦元素，并保留弹层外焦点重新进入弹层的处理。
+  - [x] SubTask 7.3: 真实浏览器重验 Enter / Space 打开、Tab / Shift+Tab 循环、Escape 恢复焦点、鼠标开关与取消预览键盘操作；清单唯一未勾项保留独立复验。
 
 # Task Dependencies
 
@@ -36,3 +46,5 @@
 - Task 3 依赖 Task 1 和 Task 2。
 - Task 4 依赖 Task 2 和 Task 3。
 - Task 5 依赖 Task 1 至 Task 4。
+- Task 6 依赖 Task 5 的失败证据，修复后需重验对应检查点。
+- Task 7 依赖 Task 6 的独立复验失败证据，修复后需重验对应检查点。

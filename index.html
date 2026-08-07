@@ -21,6 +21,14 @@
       --violet: #7957d6;
       --violet-soft: #f4efff;
       --red: #da4d5b;
+      --state-positive: #17866b;
+      --state-positive-soft: #eaf8f3;
+      --state-warning: #b87522;
+      --state-warning-soft: #fff4e5;
+      --state-danger: #c94752;
+      --state-danger-soft: #fff0f2;
+      --state-disabled: #778296;
+      --state-disabled-soft: #f0f2f5;
       --ink: #202533;
       --muted: #72798b;
       --line: #e6e9f0;
@@ -13745,6 +13753,46 @@
         linear-gradient(135deg, #fff 0%, color-mix(in srgb, var(--chapter-soft) 48%, #fff) 100%);
     }
 
+    #dashboard .mid-chapter-head.has-context {
+      grid-template-columns: 46px minmax(190px, .42fr) minmax(0, 1.58fr);
+    }
+
+    #dashboard .mid-chapter-context {
+      display: grid;
+      min-width: 0;
+      gap: 10px;
+      align-items: center;
+    }
+
+    #dashboard .mid-chapter-context-current {
+      grid-template-columns: auto minmax(220px, .9fr) minmax(250px, 1fr) auto;
+    }
+
+    #dashboard .mid-chapter-context-next {
+      grid-template-columns: auto minmax(210px, .9fr) minmax(230px, 1fr);
+    }
+
+    #dashboard .mid-chapter-context-monitor {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    #dashboard .mid-chapter-campaign {
+      padding-right: 12px;
+      border-right: 1px solid #d7dfea;
+      color: #34455f;
+      font-size: 11px;
+      font-weight: 780;
+      white-space: nowrap;
+    }
+
+    #dashboard .mid-chapter-scope {
+      color: #5f6d82;
+      font-size: 11px;
+      font-weight: 680;
+      white-space: nowrap;
+    }
+
     #dashboard .mid-chapter-index {
       display: grid;
       width: 46px;
@@ -13804,32 +13852,9 @@
       content: none;
     }
 
-    #dashboard .mid-recommendation-intro {
-      align-items: center;
-      margin: 0 0 16px;
-      padding: 0 1px;
-    }
-
     #dashboard .mid-recommendation-eyebrow {
       color: color-mix(in srgb, var(--chapter-accent) 86%, #2f3d55);
       font-size: 9px;
-    }
-
-    #dashboard .mid-recommendation-intro h3,
-    #dashboard .mid-next-decision-head h3 {
-      margin-top: 6px;
-      color: #263247;
-      font-size: 17px;
-      line-height: 1.4;
-      letter-spacing: -.02em;
-    }
-
-    #dashboard .mid-recommendation-intro p,
-    #dashboard .mid-next-decision-head p {
-      margin-top: 5px;
-      color: #68758a;
-      font-size: 10px;
-      line-height: 1.6;
     }
 
     #dashboard .mid-recommendation-activity {
@@ -13877,15 +13902,6 @@
       border-color: #d8e1e8;
       border-radius: 12px;
       box-shadow: 0 8px 24px rgba(31, 48, 70, .04);
-    }
-
-    #dashboard .mid-next-decision-head {
-      min-height: 78px;
-      padding: 15px 18px;
-      border-color: #e4e9ed;
-      background:
-        radial-gradient(circle at 96% 0%, rgba(23, 134, 107, .09), transparent 34%),
-        #f8fbfa;
     }
 
     #dashboard .mid-wave-candidate-stage {
@@ -14284,29 +14300,6 @@
       transform: translateY(-1px);
     }
 
-    #dashboard .mid38-context {
-      overflow: hidden;
-      border: 1px solid #d7dfea;
-      border-radius: 15px;
-      background: rgba(255, 255, 255, .96);
-      box-shadow: 0 10px 28px rgba(31, 45, 74, .055);
-    }
-
-    #dashboard .mid38-context-main {
-      display: grid;
-      grid-template-columns: minmax(180px, 1fr) auto;
-      gap: 18px;
-      align-items: center;
-      padding: 15px 17px;
-      border-left: 3px solid #3157c4;
-    }
-
-    #dashboard .mid38-context-copy h2 {
-      margin: 0;
-      color: #26344b;
-      font-size: 18px;
-    }
-
     #dashboard .mid38-endpoints {
       display: flex;
       align-items: center;
@@ -14314,50 +14307,27 @@
       justify-self: end;
     }
 
-    #dashboard .mid-wave-context-toolbar {
-      display: block;
-      min-height: 0;
-      margin: 0 0 14px;
-      padding: 14px 16px;
-      border: 1px solid #dce3ec;
-      border-radius: 10px;
-      background: #f7f9fc;
-    }
-
-    #dashboard .mid-next-decision-head.mid-wave-context-toolbar {
-      margin: 0;
-      border-width: 0 0 1px;
-      border-radius: 0;
-      background: #f8fbfa;
-    }
-
-    #dashboard .mid-wave-filter-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: 12px;
-    }
-
     #dashboard .mid-wave-filter {
       display: grid;
       min-width: 0;
-      grid-template-columns: 76px minmax(0, 1fr);
-      gap: 10px;
+      grid-template-columns: auto minmax(120px, 1fr);
+      gap: 8px;
       align-items: center;
       color: #536177;
-      font-size: 10px;
+      font-size: 9px;
       font-weight: 700;
     }
 
     #dashboard .mid-wave-filter select {
       width: 100%;
       min-width: 0;
-      height: 40px;
-      padding: 0 34px 0 11px;
+      height: 36px;
+      padding: 0 32px 0 10px;
       border: 1px solid #ccd7e8;
       border-radius: 8px;
       color: #263d67;
       background-color: #fff;
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 720;
     }
 
@@ -15205,6 +15175,18 @@
         padding: 15px;
       }
 
+      #dashboard .mid-chapter-head.has-context {
+        grid-template-columns: 46px minmax(0, 1fr);
+      }
+
+      #dashboard .mid-chapter-head.has-context .mid-chapter-context {
+        grid-column: 2 / -1;
+      }
+
+      #dashboard .mid-chapter-context-monitor {
+        justify-content: flex-start;
+      }
+
       #dashboard .mid-context-bar {
         flex-wrap: wrap;
       }
@@ -15224,10 +15206,6 @@
     }
 
     @media (max-width: 1100px) {
-      #dashboard .mid38-context-main {
-        grid-template-columns: minmax(180px, 1fr) auto;
-      }
-
       #dashboard .mid38-summary-grid,
       #dashboard .mid38-fact-grid {
         grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -15468,13 +15446,23 @@
         grid-column: auto;
       }
 
-      #dashboard .mid38-context-main {
+      #dashboard .mid-chapter-head.has-context .mid-chapter-context {
+        grid-column: 1 / -1;
+      }
+
+      #dashboard .mid-chapter-context-current,
+      #dashboard .mid-chapter-context-next {
         grid-template-columns: minmax(0, 1fr);
-        gap: 10px;
-        align-items: start;
+      }
+
+      #dashboard .mid-chapter-campaign {
+        padding: 0 0 8px;
+        border-right: 0;
+        border-bottom: 1px solid #d7dfea;
       }
 
       #dashboard .mid38-endpoints {
+        width: 100%;
         justify-self: stretch;
       }
 
@@ -15482,12 +15470,8 @@
         flex: 1 1 50%;
       }
 
-      #dashboard .mid-wave-filter-grid {
-        grid-template-columns: minmax(0, 1fr);
-      }
-
       #dashboard .mid-wave-filter {
-        grid-template-columns: 76px minmax(0, 1fr);
+        grid-template-columns: 82px minmax(0, 1fr);
       }
 
       #dashboard .mid38-summary-grid,
@@ -15529,8 +15513,6 @@
         grid-template-columns: minmax(0, 1fr);
       }
 
-      #dashboard .mid-recommendation-intro,
-      #dashboard .mid-next-decision-head,
       #dashboard .breakdown-top {
         align-items: stretch;
         flex-direction: column;
@@ -16253,6 +16235,664 @@
       }
     }
 
+    /* Unified chapter palette: decorative color follows the chapter; semantic states stay explicit. */
+    .pre-dashboard .pre-chapter,
+    #dashboard .mid-chapter {
+      --chapter-surface: color-mix(in srgb, var(--chapter-accent) 4%, #fff);
+      --chapter-surface-strong: color-mix(in srgb, var(--chapter-accent) 8%, #fff);
+      --chapter-line: color-mix(in srgb, var(--chapter-accent) 18%, #fff);
+      --chapter-line-strong: color-mix(in srgb, var(--chapter-accent) 42%, #fff);
+      --chapter-hover: color-mix(in srgb, var(--chapter-accent) 7%, #fff);
+      --chapter-focus: color-mix(in srgb, var(--chapter-accent) 28%, transparent);
+      --chapter-shadow: color-mix(in srgb, var(--chapter-accent) 12%, transparent);
+    }
+
+    .pre-dashboard .pre-chapter .workbench-ask,
+    #dashboard .mid-chapter .workbench-ask {
+      border-color: var(--chapter-line-strong);
+      color: var(--chapter-accent);
+      background: var(--chapter-surface);
+      box-shadow: 0 2px 7px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter .workbench-ask:hover,
+    .pre-dashboard .pre-chapter .workbench-ask:focus-visible,
+    #dashboard .mid-chapter .workbench-ask:hover,
+    #dashboard .mid-chapter .workbench-ask:focus-visible {
+      border-color: var(--chapter-accent);
+      color: color-mix(in srgb, var(--chapter-accent) 82%, #172033);
+      background: var(--chapter-surface-strong);
+      box-shadow: 0 5px 12px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter .workbench-ask:disabled,
+    #dashboard .mid-chapter .workbench-ask:disabled {
+      border-color: #d8dee7;
+      color: var(--state-disabled);
+      background: var(--state-disabled-soft);
+      box-shadow: none;
+    }
+
+    /* Pre-campaign chapter 01: activity context. */
+    .pre-dashboard .pre-chapter-activity .pre-calendar-select,
+    .pre-dashboard .pre-chapter-activity .pre-activity-field {
+      border-color: var(--chapter-line);
+    }
+
+    .pre-dashboard .pre-chapter-activity .pre-calendar-select {
+      background:
+        radial-gradient(circle at 92% 0, var(--chapter-shadow), transparent 36%),
+        var(--chapter-surface);
+    }
+
+    .pre-dashboard .pre-chapter-activity .pre-auto-badge {
+      color: var(--chapter-accent);
+      background: var(--chapter-soft);
+    }
+
+    .pre-dashboard .pre-chapter-activity .pre-calendar-select select:focus-visible {
+      border-color: var(--chapter-line-strong);
+      box-shadow: 0 0 0 3px var(--chapter-focus);
+    }
+
+    /* Pre-campaign chapter 02: planning workbench. */
+    .pre-dashboard .pre-chapter-plan .pre-strategy-workbench,
+    .pre-dashboard .pre-chapter-plan .pre-calendar-timeline,
+    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-panel,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix-panel,
+    .pre-dashboard .pre-chapter-plan .pre-execution-handoff {
+      border-color: var(--chapter-line);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-strategy-candidates,
+    .pre-dashboard .pre-chapter-plan .pre-calendar-timeline {
+      background: var(--chapter-surface);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-strategy-candidate-heading strong,
+    .pre-dashboard .pre-chapter-plan .pre-wave-card-head b,
+    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-head em,
+    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-group h4,
+    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-record strong,
+    .pre-dashboard .pre-chapter-plan .pre-channel-cell summary,
+    .pre-dashboard .pre-chapter-plan .pre-execution-handoff-head em,
+    .pre-dashboard .pre-chapter-plan .pre-execution-handoff-actions a {
+      color: var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-strategy-candidate-heading strong,
+    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-head em,
+    .pre-dashboard .pre-chapter-plan .pre-execution-handoff-head em {
+      background: var(--chapter-soft);
+    }
+
+    .pre-dashboard .pre-chapter-plan :is(
+      .pre-strategy-tabs,
+      .pre-endpoint-tabs,
+      .pre-batch-tabs,
+      .pre-channel-segment,
+      .pre-channel-wave-tabs
+    ) button.active {
+      color: var(--chapter-accent);
+      box-shadow: 0 2px 7px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter-plan :is(
+      .pre-strategy-tabs,
+      .pre-endpoint-tabs,
+      .pre-batch-tabs,
+      .pre-channel-segment,
+      .pre-channel-wave-tabs
+    ) button:focus-visible,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix-scroll:focus-visible,
+    .pre-dashboard .pre-chapter-plan .pre-channel-cell summary:focus-visible,
+    .pre-dashboard .pre-chapter-plan .pre-execution-handoff-actions a:focus-visible {
+      outline-color: var(--chapter-focus);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-calendar-node::before,
+    .pre-dashboard .pre-chapter-plan .pre-calendar-item:last-child .pre-calendar-node::before {
+      background: var(--chapter-accent);
+      box-shadow: 0 0 0 2px var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-calendar-card:hover,
+    .pre-dashboard .pre-chapter-plan .pre-calendar-card.active {
+      border-color: var(--chapter-line-strong);
+      background: var(--chapter-surface);
+      box-shadow: 0 8px 22px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-calendar-card:focus-visible {
+      outline-color: var(--chapter-focus);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-calendar-card time,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix caption,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix .pre-channel-group-head,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix .pre-channel-group-head.flexible,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix .pre-channel-group-head.lead {
+      color: var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix caption,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix .pre-channel-group-head,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix .pre-channel-group-head.flexible,
+    .pre-dashboard .pre-chapter-plan .pre-channel-matrix .pre-channel-group-head.lead {
+      background: var(--chapter-surface-strong);
+    }
+
+    /* Pre-campaign chapter 03: intelligence and opportunity. */
+    .pre-dashboard .pre-chapter-intelligence .pre-analysis-card,
+    .pre-dashboard .pre-chapter-intelligence .pre-competitor-broadcast,
+    .pre-dashboard .pre-chapter-intelligence .pre-decision-bridge {
+      border-color: var(--chapter-line);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-analysis-head,
+    .pre-dashboard .pre-chapter-intelligence .pre-competitor-broadcast .card-head {
+      background: linear-gradient(145deg, #fff, var(--chapter-surface));
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-decision-bridge {
+      background:
+        radial-gradient(circle at 96% 0%, var(--chapter-shadow), transparent 32%),
+        linear-gradient(100deg, var(--chapter-surface-strong), #fff);
+      box-shadow: 0 7px 18px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-decision-bridge .spark {
+      background: var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-decision-bridge .dashboard-ai-overview-copy strong,
+    .pre-dashboard .pre-chapter-intelligence .pre-chart-context b,
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-row em,
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-focus b {
+      color: var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence :is(
+      .pre-chart-tabs,
+      .pre-opportunity-tabs
+    ) button.active,
+    .pre-dashboard .pre-chapter-intelligence .pre-competitor-broadcast .year-tabs button.active {
+      color: var(--chapter-accent);
+      box-shadow: 0 2px 7px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-trend-stage {
+      border-color: var(--chapter-line);
+      background:
+        linear-gradient(color-mix(in srgb, var(--chapter-accent) 5%, transparent) 1px, transparent 1px),
+        var(--chapter-surface);
+      background-size: 100% 46px;
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-chart-context {
+      border-color: var(--chapter-line);
+      background: var(--chapter-surface);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-chart-point {
+      --pre-point-color: var(--chapter-accent) !important;
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-row:hover,
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-row:focus-visible,
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-row.active {
+      border-color: var(--chapter-line-strong);
+      color: color-mix(in srgb, var(--chapter-accent) 82%, #172033);
+      background: var(--chapter-surface);
+      box-shadow: inset 3px 0 0 var(--chapter-accent), 0 4px 12px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-row:focus-visible {
+      outline-color: var(--chapter-focus);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-track i {
+      background: linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--chapter-accent) 82%, #fff),
+        color-mix(in srgb, var(--chapter-accent) 58%, #fff)
+      );
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-opportunity-focus {
+      border-color: var(--chapter-line);
+      background: var(--chapter-surface);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-competitor-broadcast :is(
+      .text-btn,
+      .change b
+    ) {
+      color: var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-competitor-broadcast .mid-competitor-action-feedback,
+    .pre-dashboard .pre-chapter-intelligence .pre-competitor-broadcast .mid-evidence-feedback {
+      border-color: var(--chapter-line);
+      background: var(--chapter-surface);
+    }
+
+    /* Pre-campaign chapter 04: historical insight. */
+    .pre-dashboard .pre-chapter-history .pre-insight-filter button.active,
+    .pre-dashboard .pre-chapter-history .pre-insight-drill-tabs button.active {
+      border-color: var(--chapter-line-strong);
+      color: var(--chapter-accent);
+      background: #fff;
+      box-shadow: 0 2px 7px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter-history .pre-history-meta span,
+    .pre-dashboard .pre-chapter-history .pre-insight-summary {
+      border-color: var(--chapter-line);
+      background: var(--chapter-surface);
+    }
+
+    .pre-dashboard .pre-chapter-history .pre-history-insight,
+    .pre-dashboard .pre-chapter-history .pre-history-insight.tone-category,
+    .pre-dashboard .pre-chapter-history .pre-history-insight.tone-audience,
+    .pre-dashboard .pre-chapter-history .pre-history-insight.tone-wave,
+    .pre-dashboard .pre-chapter-history .pre-history-insight.tone-competitor {
+      border-top-color: var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-history .pre-history-insight:hover {
+      border-color: var(--chapter-line-strong);
+      border-top-color: var(--chapter-accent);
+      box-shadow: 0 9px 22px var(--chapter-shadow);
+    }
+
+    .pre-dashboard .pre-chapter-history .pre-history-insight-head > span,
+    .pre-dashboard .pre-chapter-history .pre-insight-summary b,
+    .pre-dashboard .pre-chapter-history .pre-insight-source button {
+      color: var(--chapter-accent);
+    }
+
+    .pre-dashboard .pre-chapter-history .pre-insight-metrics div {
+      border-left-color: var(--chapter-line-strong);
+      background: var(--chapter-surface);
+    }
+
+    .pre-dashboard .pre-chapter-history .pre-insight-toggle:hover,
+    .pre-dashboard .pre-chapter-history .pre-insight-toggle:focus-visible {
+      border-color: var(--chapter-line-strong);
+      color: var(--chapter-accent);
+      background: var(--chapter-surface);
+      outline: 2px solid var(--chapter-focus);
+      outline-offset: 1px;
+    }
+
+    /* Mid-campaign chapter 01: current-wave optimization. */
+    #dashboard .mid-chapter-current .mid-wave-filter select:focus-visible {
+      border-color: var(--chapter-line-strong);
+      outline-color: var(--chapter-focus);
+    }
+
+    #dashboard .mid-chapter-current .mid38-endpoints button.active,
+    #dashboard .mid-chapter-current .mid38-monitor-tabs button.active {
+      border-color: var(--chapter-line-strong);
+      color: var(--chapter-accent);
+      background: #fff;
+      box-shadow: 0 2px 8px var(--chapter-shadow);
+    }
+
+    #dashboard .mid-chapter-current .mid38-wave-all {
+      border-color: var(--chapter-line-strong);
+      color: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-current .mid38-wave-all[aria-pressed="true"] {
+      color: #fff;
+      background: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-current .mid38-block[data-mid38-block] {
+      --mid38-block-accent: var(--chapter-accent);
+      --mid38-block-soft: var(--chapter-soft);
+    }
+
+    #dashboard .mid-chapter-current .mid38-ai-strip {
+      border-color: var(--chapter-line);
+      background: var(--chapter-surface);
+    }
+
+    #dashboard .mid-chapter-current .mid38-ai-strip b {
+      color: var(--chapter-accent);
+      background: var(--chapter-soft);
+    }
+
+    #dashboard .mid-chapter-current .mid38-ai-strip span {
+      color: #485a72;
+    }
+
+    #dashboard .mid-chapter-current .mid-current-ai-advice {
+      border-color: var(--chapter-line-strong);
+      background:
+        radial-gradient(circle at 96% 0%, var(--chapter-shadow), transparent 34%),
+        #fff;
+      box-shadow: 0 9px 24px var(--chapter-shadow);
+    }
+
+    #dashboard .mid-chapter-current .mid-current-ai-head {
+      border-bottom-color: var(--chapter-line);
+      background: linear-gradient(110deg, var(--chapter-surface-strong), #fff);
+    }
+
+    #dashboard .mid-chapter-current .mid-current-ai-mark,
+    #dashboard .mid-chapter-current .mid-current-ai-item > b {
+      color: #fff;
+      background: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-current .mid-current-ai-status:not(.adopted):not(.unavailable) {
+      border-color: var(--chapter-line-strong);
+      color: var(--chapter-accent);
+      background: var(--chapter-soft);
+    }
+
+    #dashboard .mid-chapter-current .mid-current-ai-effect b {
+      color: var(--chapter-accent);
+    }
+
+    /* Mid-campaign chapter 02: next-wave planning. */
+    #dashboard .mid-chapter-next :is(
+      .mid-next-detail-tabs,
+      .mid-wave-view-tabs
+    ) button.active {
+      color: var(--chapter-accent);
+      box-shadow: 0 2px 7px var(--chapter-shadow);
+    }
+
+    #dashboard .mid-chapter-next .mid-next-fact-card strong,
+    #dashboard .mid-chapter-next .mid-next-overview-card strong,
+    #dashboard .mid-chapter-next .mid-wave-decision-line b,
+    #dashboard .mid-chapter-next .mid-wave-decision-action strong {
+      color: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-next .mid-wave-panel,
+    #dashboard .mid-chapter-next .mid-next-overview-card,
+    #dashboard .mid-chapter-next .mid-next-fact-card,
+    #dashboard .mid-chapter-next .mid-next-strategy-card,
+    #dashboard .mid-chapter-next .mid-next-recommendation-basis {
+      border-color: var(--chapter-line);
+    }
+
+    #dashboard .mid-chapter-next .mid-wave-panel-head,
+    #dashboard .mid-chapter-next .mid-wave-technical-head {
+      background: linear-gradient(145deg, #fff, var(--chapter-surface));
+    }
+
+    #dashboard .mid-chapter-next .mid-next-collapse:hover,
+    #dashboard .mid-chapter-next .mid-next-collapse:focus-visible {
+      border-color: var(--chapter-line-strong);
+      color: var(--chapter-accent);
+      background: var(--chapter-surface);
+    }
+
+    /* Mid-campaign chapter 03: monitoring and recommendations. */
+    #dashboard .mid-chapter-monitor .mid-monitor-section {
+      min-width: 0;
+      padding: 14px;
+      border: 1px solid var(--chapter-line);
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 7px 18px color-mix(in srgb, var(--chapter-accent) 6%, transparent);
+    }
+
+    #dashboard .mid-chapter-monitor .mid-monitor-section-head {
+      display: flex;
+      min-height: 48px;
+      align-items: center;
+      gap: 10px;
+      margin: -14px -14px 14px;
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--chapter-line);
+      background: linear-gradient(145deg, #fff, var(--chapter-surface));
+    }
+
+    #dashboard .mid-chapter-monitor .mid-monitor-section-head > span {
+      display: grid;
+      width: 28px;
+      height: 28px;
+      flex: 0 0 28px;
+      place-items: center;
+      border: 1px solid var(--chapter-line-strong);
+      border-radius: 8px;
+      color: var(--chapter-accent);
+      background: var(--chapter-soft);
+      font-size: 9px;
+      font-weight: 800;
+    }
+
+    #dashboard .mid-chapter-monitor .mid-monitor-section-head h3 {
+      color: #2a374d;
+      font-size: 13px;
+      line-height: 1.35;
+    }
+
+    #dashboard .mid-chapter-monitor .mid-monitor-section-head p {
+      margin-top: 2px;
+      color: #748095;
+      font-size: 9px;
+    }
+
+    #dashboard .mid-chapter-monitor .dashboard-ai-overview,
+    #dashboard .mid-chapter-monitor .dashboard-ai-bridge {
+      border-color: var(--chapter-line);
+      background:
+        radial-gradient(circle at 96% 0%, var(--chapter-shadow), transparent 34%),
+        linear-gradient(105deg, var(--chapter-surface-strong), #fff);
+      box-shadow: 0 8px 20px var(--chapter-shadow);
+    }
+
+    #dashboard .mid-chapter-monitor :is(
+      .dashboard-ai-overview,
+      .dashboard-ai-bridge
+    ) .dashboard-ai-overview-copy strong,
+    #dashboard .mid-chapter-monitor .dashboard-ai-facts b {
+      color: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-monitor :is(
+      .dashboard-ai-overview,
+      .dashboard-ai-bridge,
+      .ai-box
+    ) .spark {
+      border-color: var(--chapter-line-strong);
+      color: #fff;
+      background: var(--chapter-accent);
+      box-shadow: 0 4px 12px var(--chapter-shadow);
+    }
+
+    #dashboard .mid-chapter-monitor .dashboard-ai-overview .spark.coupon-spark {
+      color: var(--chapter-accent);
+      background: #fff;
+    }
+
+    #dashboard .mid-chapter-monitor .dashboard-ai-bridge .dashboard-ai-overview-copy div {
+      border-right-color: var(--chapter-line);
+    }
+
+    #dashboard .mid-chapter-monitor .kpi,
+    #dashboard .mid-chapter-monitor .analysis-card,
+    #dashboard .mid-chapter-monitor .competitor-card,
+    #dashboard .mid-chapter-monitor .chart-box,
+    #dashboard .mid-chapter-monitor .ai-box,
+    #dashboard .mid-chapter-monitor .breakdown {
+      border-color: var(--chapter-line);
+    }
+
+    #dashboard .mid-chapter-monitor .kpi::after,
+    #dashboard .mid-chapter-monitor .kpi.green::after,
+    #dashboard .mid-chapter-monitor .kpi.orange::after,
+    #dashboard .mid-chapter-monitor .kpi.violet::after {
+      background: var(--chapter-soft);
+    }
+
+    #dashboard .mid-chapter-monitor .kpi .neutral {
+      color: var(--state-disabled);
+    }
+
+    #dashboard .mid-chapter-monitor :is(
+      .analysis-card,
+      .competitor-card
+    ) > .card-head {
+      border-bottom-color: var(--chapter-line);
+      background: linear-gradient(145deg, #fff, var(--chapter-surface));
+    }
+
+    #dashboard .mid-chapter-monitor .subtab.active,
+    #dashboard .mid-chapter-monitor :is(
+      .metric-seg,
+      .seg,
+      .year-tabs
+    ) button.active {
+      color: var(--chapter-accent);
+      background: var(--chapter-soft);
+      box-shadow: 0 2px 7px var(--chapter-shadow);
+    }
+
+    #dashboard .mid-chapter-monitor .ai-box {
+      background:
+        radial-gradient(circle at 100% 0%, var(--chapter-shadow), transparent 34%),
+        linear-gradient(145deg, var(--chapter-surface), #fff);
+    }
+
+    #dashboard .mid-chapter-monitor .insight-chip,
+    #dashboard .mid-chapter-monitor .judgement,
+    #dashboard .mid-chapter-monitor .mid-evidence-feedback,
+    #dashboard .mid-chapter-monitor .mid-competitor-action-feedback {
+      border-color: var(--chapter-line);
+      color: color-mix(in srgb, var(--chapter-accent) 84%, #28364d);
+      background: var(--chapter-surface);
+    }
+
+    #dashboard .mid-chapter-monitor .data-table tr.highlight td,
+    #dashboard .mid-chapter-monitor .mid-evidence-table-scroll .data-table tr.is-selected td {
+      background: var(--chapter-surface);
+      box-shadow: inset 0 1px 0 var(--chapter-line), inset 0 -1px 0 var(--chapter-line);
+    }
+
+    #dashboard .mid-chapter-monitor .mid-evidence-feedback::before {
+      background: var(--chapter-accent);
+      box-shadow: 0 0 0 3px var(--chapter-focus);
+    }
+
+    #dashboard .mid-chapter-monitor .legend i:not(.average),
+    #dashboard .mid-chapter-monitor .scale-btn.active,
+    #dashboard .mid-chapter-monitor .scale-btn[aria-pressed="true"] {
+      background: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-monitor .scale-btn {
+      color: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-monitor .scale-btn:hover,
+    #dashboard .mid-chapter-monitor .scale-btn:focus-visible {
+      border-color: var(--chapter-line-strong);
+      background: var(--chapter-surface);
+      outline-color: var(--chapter-focus);
+    }
+
+    #dashboard .mid-chapter-monitor .scale-btn.active,
+    #dashboard .mid-chapter-monitor .scale-btn[aria-pressed="true"] {
+      border-color: var(--chapter-accent);
+      color: #fff;
+      box-shadow: 0 3px 8px var(--chapter-shadow);
+    }
+
+    #dashboard .mid-chapter-monitor .competitor-card :is(
+      .change b,
+      .text-btn
+    ) {
+      color: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-monitor .competitor-card .text-btn.active,
+    #dashboard .mid-chapter-monitor .competitor-card .text-btn[aria-pressed="true"] {
+      color: color-mix(in srgb, var(--chapter-accent) 84%, #172033);
+    }
+
+    #dashboard .mid-chapter-monitor :is(
+      .dashboard-ai-overview,
+      .dashboard-ai-bridge
+    ).is-unavailable {
+      border-color: #dce1e9;
+      background: var(--state-disabled-soft);
+      box-shadow: none;
+    }
+
+    /* Explicit business states are the only allowed cross-chapter colors. */
+    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-record mark,
+    #dashboard .mid-chapter-current .mid38-status.reserve,
+    #dashboard .mid-chapter-next .mid-candidate-risk,
+    #dashboard .mid-chapter-monitor .kpi .warn {
+      color: var(--state-warning);
+      background: var(--state-warning-soft);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .alert,
+    #dashboard .mid-chapter-monitor .alert {
+      border-left-color: var(--state-danger);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .level,
+    #dashboard .mid-chapter-monitor .level {
+      color: var(--state-danger);
+      background: var(--state-danger-soft);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .alert.medium,
+    #dashboard .mid-chapter-monitor .alert.medium {
+      border-left-color: var(--state-warning);
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .alert.medium .level,
+    #dashboard .mid-chapter-monitor .alert.medium .level {
+      color: var(--state-warning);
+      background: var(--state-warning-soft);
+    }
+
+    #dashboard .mid-chapter-current :is(
+      .mid-current-ai-status.adopted,
+      .mid-current-ai-impact,
+      .mid38-status.experiment
+    ),
+    #dashboard .mid-chapter-monitor :is(
+      .sig,
+      .mini .best,
+      .delta-up
+    ) {
+      color: var(--state-positive);
+    }
+
+    #dashboard .mid-chapter-current :is(
+      .mid-current-ai-status.adopted,
+      .mid-current-ai-impact,
+      .mid38-status.experiment
+    ),
+    #dashboard .mid-chapter-monitor .sig {
+      background: var(--state-positive-soft);
+    }
+
+    #dashboard .mid-chapter-current :is(
+      .mid-current-ai-status.unavailable,
+      .mid-current-ai-advice.is-unavailable
+    ),
+    #dashboard .mid-chapter-monitor :is(
+      .dashboard-ai-overview,
+      .dashboard-ai-bridge
+    ).is-unavailable {
+      color: var(--state-disabled);
+      background: var(--state-disabled-soft);
+    }
+
     @media print {
       .sidebar,
       .mode-tabs,
@@ -16538,40 +17178,31 @@
 
         <section class="panel" id="dashboard" role="tabpanel" aria-labelledby="dashboardModeMidTab">
           <div class="mid-home-shell">
-            <section class="mid38-context" aria-labelledby="mid38ContextTitle">
-              <div class="mid38-context-main">
-                <div class="mid38-context-copy">
-                  <h2 id="mid38ContextTitle">2026 38节</h2>
-                </div>
-                <div class="mid38-endpoints" role="group" aria-label="全局投放端口">
-                  <button type="button" class="active" aria-pressed="true" data-mid38-endpoint="main">主端</button>
-                  <button type="button" aria-pressed="false" data-mid38-endpoint="standalone">独立端</button>
-                </div>
-              </div>
-            </section>
-
             <section class="mid-chapter mid-chapter-current" aria-labelledby="midCurrentChapterTitle" data-mid-chapter="current">
-              <header class="mid-chapter-head">
+              <header class="mid-chapter-head has-context">
                 <span class="mid-chapter-index" aria-hidden="true">01</span>
                 <div class="mid-chapter-heading">
                   <h2 id="midCurrentChapterTitle">当前波次调优</h2>
                 </div>
+                <div class="mid-chapter-context mid-chapter-context-current" aria-label="当前波次上下文">
+                  <strong class="mid-chapter-campaign" data-mid-campaign-label>2026 38节</strong>
+                  <label class="mid-wave-filter" for="mid38WaveSelect">
+                    <span>当前波次</span>
+                    <select id="mid38WaveSelect" aria-label="选择当前波次"></select>
+                  </label>
+                  <label class="mid-wave-filter" for="mid38PeriodSelect">
+                    <span>活动周期</span>
+                    <select id="mid38PeriodSelect" aria-label="选择当前波次活动周期"></select>
+                  </label>
+                  <div class="mid38-endpoints" role="group" aria-label="当前波次投放端口">
+                    <button type="button" class="active" aria-pressed="true" data-mid38-endpoint="main">主端</button>
+                    <button type="button" aria-pressed="false" data-mid38-endpoint="standalone">独立端</button>
+                  </div>
+                </div>
               </header>
               <div class="mid-chapter-body">
                 <section class="mid-recommendation-hub" id="midRecommendationHub" aria-labelledby="midRecommendationTitle" data-mid-workflow-module="current">
-                  <header class="mid-recommendation-intro mid-wave-context-toolbar">
-                    <h3 class="visually-hidden" id="midRecommendationTitle">当前波次筛选与调优</h3>
-                    <div class="mid-wave-filter-grid">
-                      <label class="mid-wave-filter" for="mid38WaveSelect">
-                        <span>当前波次</span>
-                        <select id="mid38WaveSelect" aria-label="选择当前波次"></select>
-                      </label>
-                      <label class="mid-wave-filter" for="mid38PeriodSelect">
-                        <span>活动周期</span>
-                        <select id="mid38PeriodSelect" aria-label="选择当前波次活动周期"></select>
-                      </label>
-                    </div>
-                  </header>
+                  <h3 class="visually-hidden" id="midRecommendationTitle">当前波次筛选与调优</h3>
                   <div class="mid38-wave-board" id="mid38WaveBoard"></div>
                   <div class="mid-recommendation-grid" id="midRecommendationCards"></div>
                 </section>
@@ -16579,27 +17210,26 @@
             </section>
 
             <section class="mid-chapter mid-chapter-next" aria-labelledby="midNextChapterTitle" data-mid-chapter="next">
-              <header class="mid-chapter-head">
+              <header class="mid-chapter-head has-context">
                 <span class="mid-chapter-index" aria-hidden="true">02</span>
                 <div class="mid-chapter-heading">
-                  <h2 id="midNextChapterTitle">下一波次方案明细与调优</h2>
+                  <h2 id="midNextChapterTitle">下一波次方案规划</h2>
+                </div>
+                <div class="mid-chapter-context mid-chapter-context-next" aria-label="下一波次规划上下文">
+                  <strong class="mid-chapter-campaign" data-mid-campaign-label>2026 38节</strong>
+                  <label class="mid-wave-filter" for="midNextWaveSelect">
+                    <span>规划波次</span>
+                    <select id="midNextWaveSelect" aria-label="选择后续规划波次"></select>
+                  </label>
+                  <label class="mid-wave-filter" for="midNextPeriodSelect">
+                    <span>活动周期</span>
+                    <select id="midNextPeriodSelect" aria-label="选择规划波次活动周期"></select>
+                  </label>
                 </div>
               </header>
               <div class="mid-chapter-body">
                 <section class="card mid-wave-planner mid-next-decision" id="midNextWavePlanner" aria-labelledby="midNextWaveTitle" data-mid-workflow-module="next">
-                  <header class="mid-wave-head mid-next-decision-head mid-wave-context-toolbar">
-                    <h3 class="visually-hidden" id="midNextWaveTitle">下一波次三方案比较</h3>
-                    <div class="mid-wave-filter-grid">
-                      <label class="mid-wave-filter" for="midNextWaveSelect">
-                        <span>规划波次</span>
-                        <select id="midNextWaveSelect" aria-label="选择后续规划波次"></select>
-                      </label>
-                      <label class="mid-wave-filter" for="midNextPeriodSelect">
-                        <span>活动周期</span>
-                        <select id="midNextPeriodSelect" aria-label="选择规划波次活动周期"></select>
-                      </label>
-                    </div>
-                  </header>
+                  <h3 class="visually-hidden" id="midNextWaveTitle">下一波次三方案比较</h3>
 
             <div class="mid-wave-candidate-stage">
               <div class="mid-wave-candidate-grid" id="midNextWaveCompare" role="group"
@@ -16707,13 +17337,21 @@
             </section>
 
             <section class="mid-chapter mid-chapter-monitor" aria-labelledby="midMonitorChapterTitle" data-mid-chapter="monitor">
-              <header class="mid-chapter-head">
+              <header class="mid-chapter-head has-context">
                 <span class="mid-chapter-index" aria-hidden="true">03</span>
                 <div class="mid-chapter-heading">
-                  <h2 id="midMonitorChapterTitle">实时监控、竞对与归因</h2>
+                  <h2 id="midMonitorChapterTitle">实时监控与调优建议</h2>
+                </div>
+                <div class="mid-chapter-context mid-chapter-context-monitor" aria-label="监控数据范围">
+                  <span class="mid-chapter-scope" id="midMonitorScope">2026 38节 · 第一波</span>
                 </div>
               </header>
               <div class="mid-chapter-body mid-monitor-body">
+          <section class="mid-monitor-section mid-monitor-ai-section" aria-labelledby="midMonitorAiTitle">
+            <header class="mid-monitor-section-head">
+              <span>01</span>
+              <div><h3 id="midMonitorAiTitle">AI 结论</h3><p>先给判断，再查看竞对信号与数据依据</p></div>
+            </header>
           <section
             class="dashboard-ai-overview"
             id="midOverallEvidence"
@@ -16744,6 +17382,70 @@
             >✦ 追问</button>
           </section>
 
+          <section
+            class="dashboard-ai-bridge"
+            id="midAttributionBridge"
+            data-ai-context="mid-attribution"
+            data-context-summary="促中归因小结：效率问题来自人群、面额和点位组合，而非总盘目标不足"
+          >
+            <span class="spark">AI</span>
+            <div class="dashboard-ai-overview-copy">
+              <div><strong>结论</strong><span>大盘目标已达成，当前矛盾是预算内部的结构效率。</span></div>
+              <div><strong>依据</strong><span>高门槛券核销低，主端反转实验显著，末日催用有效。</span></div>
+              <div><strong>下一步</strong><span>收缩低效泛发，把预算迁移到高价值人群、会场和搜索。</span></div>
+            </div>
+            <button
+              class="workbench-ask"
+              data-workbench-ask="mid"
+              data-ask-context="促中归因小结"
+              data-ask-summary="人群、面额和点位组合是当前预算效率差异的主要来源"
+              data-ask-questions="把归因拆成预算迁移动作|哪些证据支持优先调结构？|生成按影响排序的执行清单"
+            >✦ 追问</button>
+          </section>
+          </section>
+
+          <section class="mid-monitor-section mid-monitor-competitor-section" aria-labelledby="midMonitorCompetitorTitle">
+            <header class="mid-monitor-section-head">
+              <span>02</span>
+              <div><h3 id="midMonitorCompetitorTitle">实时竞对信息</h3><p>识别外部压力，不替代自身实验结论</p></div>
+            </header>
+            <aside class="card competitor-card">
+              <div class="card-head">
+                <div class="competitor-title">
+                  <h3>当前竞对变化</h3>
+                  <span><i class="live-dot"></i>最新变化已归档</span>
+                </div>
+                <div class="card-head-actions">
+                  <button
+                    class="workbench-ask"
+                    data-workbench-ask="mid"
+                    data-ask-context="竞对策略变化"
+                    data-ask-summary="竞对正在增加人群分层、会员加码和低门槛券频次"
+                    data-ask-questions="哪些竞对变化需要跟进？|为什么不建议机械跟价？|结合自身钱效生成应对优先级"
+                  >✦ 追问</button>
+                  <button class="ghost" id="watchBtn">关注变化</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="comp-filter">
+                  <div class="year-tabs" id="midCompetitorYearTabs" data-group="competitorYear" role="group" aria-label="竞对归档年份">
+                    <button type="button" data-mid-competitor-year="2024" aria-pressed="false">24年38</button>
+                    <button type="button" data-mid-competitor-year="2025" aria-pressed="false">25年38</button>
+                    <button class="active" type="button" data-mid-competitor-year="2026" aria-pressed="true">26年38</button>
+                  </div>
+                </div>
+                <div class="mid-evidence-feedback mid-competitor-year-feedback" id="midCompetitorYearFeedback" aria-live="polite"></div>
+                <div class="comp-list" id="midCompetitorList"></div>
+                <div class="archive-note" id="midCompetitorArchiveNote">38节 · 2026 视图；竞对信息需在执行前再次核验。</div>
+              </div>
+            </aside>
+          </section>
+
+          <section class="mid-monitor-section mid-monitor-data-section" aria-labelledby="midMonitorDataTitle">
+            <header class="mid-monitor-section-head">
+              <span>03</span>
+              <div><h3 id="midMonitorDataTitle">数据表现</h3><p>核心指标、趋势、实验与领取核销拆解</p></div>
+            </header>
           <div class="dashboard-section-title" id="midKpiSectionTitle">
             <div><strong>当前核心指标监控</strong><span>目标、核销、预算与钱效</span></div>
             <button
@@ -16824,8 +17526,8 @@
                         </g>
                         <line id="averageLine" x1="42" y1="93" x2="520" y2="93" stroke="#aab1c1" stroke-width="1" stroke-dasharray="5 5"></line>
                         <path id="areaPath" d="M42 126 L161 85 L280 62 L399 85 L518 44 L518 177 L42 177 Z" fill="url(#chartFill)"></path>
-                        <path id="linePath" d="M42 126 L161 85 L280 62 L399 85 L518 44" fill="none" stroke="#3157e6" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-                        <g id="chartPoints" fill="#fff" stroke="#3157e6" stroke-width="3">
+                        <path id="linePath" d="M42 126 L161 85 L280 62 L399 85 L518 44" fill="none" stroke="#b87522" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+                        <g id="chartPoints" fill="#fff" stroke="#b87522" stroke-width="3">
                           <circle cx="42" cy="126" r="5"></circle>
                           <circle cx="161" cy="85" r="5"></circle>
                           <circle cx="280" cy="62" r="5"></circle>
@@ -16841,8 +17543,8 @@
                         </g>
                         <defs>
                           <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                            <stop offset="0%" stop-color="#5577ef" stop-opacity=".23"></stop>
-                            <stop offset="100%" stop-color="#5577ef" stop-opacity=".02"></stop>
+                            <stop offset="0%" stop-color="#b87522" stop-opacity=".23"></stop>
+                            <stop offset="100%" stop-color="#b87522" stop-opacity=".02"></stop>
                           </linearGradient>
                         </defs>
                       </svg>
@@ -16949,57 +17651,7 @@
               </div>
             </section>
 
-            <aside class="card competitor-card">
-              <div class="card-head">
-                <div class="competitor-title">
-                  <h3>当前竞对信息实时监控</h3>
-                  <span><i class="live-dot"></i>最新变化已归档</span>
-                </div>
-                <div class="card-head-actions">
-                  <button
-                    class="workbench-ask"
-                    data-workbench-ask="mid"
-                    data-ask-context="竞对策略变化"
-                    data-ask-summary="竞对正在增加人群分层、会员加码和低门槛券频次"
-                    data-ask-questions="哪些竞对变化需要跟进？|为什么不建议机械跟价？|结合自身钱效生成应对优先级"
-                  >✦ 追问</button>
-                  <button class="ghost" id="watchBtn">关注变化</button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="comp-filter">
-                  <div class="year-tabs" id="midCompetitorYearTabs" data-group="competitorYear" role="group" aria-label="竞对归档年份">
-                    <button type="button" data-mid-competitor-year="2024" aria-pressed="false">24年38</button>
-                    <button type="button" data-mid-competitor-year="2025" aria-pressed="false">25年38</button>
-                    <button class="active" type="button" data-mid-competitor-year="2026" aria-pressed="true">26年38</button>
-                  </div>
-                </div>
-                <div class="mid-evidence-feedback mid-competitor-year-feedback" id="midCompetitorYearFeedback" aria-live="polite"></div>
-                <div class="comp-list" id="midCompetitorList"></div>
-                <div class="archive-note" id="midCompetitorArchiveNote">38节 · 2026 视图；竞对信息需在执行前再次核验。</div>
-              </div>
-            </aside>
           </div>
-
-          <section
-            class="dashboard-ai-bridge"
-            id="midAttributionBridge"
-            data-ai-context="mid-attribution"
-            data-context-summary="促中归因小结：效率问题来自人群、面额和点位组合，而非总盘目标不足"
-          >
-            <span class="spark">AI</span>
-            <div class="dashboard-ai-overview-copy">
-              <div><strong>结论</strong><span>大盘目标已达成，当前矛盾是预算内部的结构效率。</span></div>
-              <div><strong>依据</strong><span>高门槛券核销低，主端反转实验显著，末日催用有效。</span></div>
-              <div><strong>下一步</strong><span>收缩低效泛发，把预算迁移到高价值人群、会场和搜索。</span></div>
-            </div>
-            <button
-              class="workbench-ask"
-              data-workbench-ask="mid"
-              data-ask-context="促中归因小结"
-              data-ask-summary="人群、面额和点位组合是当前预算效率差异的主要来源"
-              data-ask-questions="把归因拆成预算迁移动作|哪些证据支持优先调结构？|生成按影响排序的执行清单"
-            >✦ 追问</button>
           </section>
 
               </div>
@@ -22216,13 +22868,16 @@
     function renderMid38Context(options = {}) {
       const focusKey = options.focusKey || "";
       const wave = getMid38Wave();
-      const title = document.getElementById("mid38ContextTitle");
       const waveBoard = document.getElementById("mid38WaveBoard");
+      const campaignLabel = `${mid38SourceSnapshot.context.year} ${mid38SourceSnapshot.context.campaign}`;
+      document.querySelectorAll("[data-mid-campaign-label]").forEach(label => {
+        label.textContent = campaignLabel;
+      });
+      document.getElementById("midMonitorScope").textContent = `${campaignLabel} · ${wave.label}`;
       mid38WaveSelect.innerHTML = mid38SourceSnapshot.waves.map(item =>
         `<option value="${item.key}">${escapeHTML(item.label)}｜${escapeHTML(item.dateRange || "暂无数据")}</option>`
       ).join("");
       mid38WaveSelect.value = wave.key;
-      title.textContent = `${mid38SourceSnapshot.context.year} ${mid38SourceSnapshot.context.campaign}`;
       if (wave.available) {
         mid38PeriodSelect.innerHTML = mid38SourceSnapshot.rhythm.map(item => {
           const label = item.key === "full"
@@ -22968,9 +23623,9 @@
       if (!getMidCurrentAdoptionPreview(contract)) return;
       clearMidCurrentAdoptionPreview(contract.contextKey);
       renderMidRecommendationHub();
-      requestAnimationFrame(() => {
-        midRecommendationCards.querySelector('[data-mid-current-ai-action="adopt"]')?.focus();
-      });
+      midRecommendationCards
+        .querySelector('[data-mid-current-ai-action="adopt"]')
+        ?.focus({ preventScroll: true });
       showToast("已取消采纳预览，券批次、人群、渠道与监控恢复默认视图");
     }
 
@@ -25327,10 +25982,13 @@
     function preBuildTrendSeries(insights) {
       const baseline = preInsightByKey(insights, "baseline");
       if (!baseline) return null;
+      const chapterColor = getComputedStyle(document.querySelector(".pre-chapter-intelligence"))
+        .getPropertyValue("--chapter-accent")
+        .trim() || "#b87522";
       const config = {
-        gmv: { label: "GMV", metricIndex: 0, color: "#3157c4", note: "GMV 水位随支付用户扩张逐步抬升，末段增速仍需剔除异常流量日。" },
-        dac: { label: "DAC", metricIndex: 1, color: "#209574", note: "DAC 与 GMV 方向一致，是当前自然增长的主要解释变量。" },
-        aov: { label: "客单", metricIndex: 2, color: "#d28a35", note: "客单变化相对温和，不支持普遍抬高高门槛券。" }
+        gmv: { label: "GMV", metricIndex: 0, color: chapterColor, note: "GMV 水位随支付用户扩张逐步抬升，末段增速仍需剔除异常流量日。" },
+        dac: { label: "DAC", metricIndex: 1, color: chapterColor, note: "DAC 与 GMV 方向一致，是当前自然增长的主要解释变量。" },
+        aov: { label: "客单", metricIndex: 2, color: chapterColor, note: "客单变化相对温和，不支持普遍抬高高门槛券。" }
       }[preDashboardState.selectedTrendMetric] || null;
       if (!config) return null;
       const target = preNumericValue(baseline.metrics[config.metricIndex]?.value);
@@ -31297,6 +31955,8 @@
     const modalBody = document.getElementById("modalBody");
     const modalActions = document.getElementById("modalActions");
     const toast = document.getElementById("toast");
+    let strategyModalFocusBoundaryActive = false;
+    let strategyModalBackgroundState = [];
     let toastTimer;
 
     function showToast(message) {
@@ -31321,7 +31981,10 @@
       }
       const first = focusable[0];
       const last = focusable[focusable.length - 1];
-      if (event.shiftKey && document.activeElement === first) {
+      if (!container.contains(document.activeElement)) {
+        event.preventDefault();
+        (event.shiftKey ? last : first).focus();
+      } else if (event.shiftKey && document.activeElement === first) {
         event.preventDefault();
         last.focus();
       } else if (!event.shiftKey && document.activeElement === last) {
@@ -31330,8 +31993,38 @@
       }
     }
 
+    function setStrategyModalBackgroundInert(active) {
+      if (active) {
+        if (strategyModalBackgroundState.length) return;
+        strategyModalBackgroundState = Array.from(document.body.children)
+          .filter(element => element !== modal && element instanceof HTMLElement)
+          .map(element => ({ element, wasInert: element.inert }));
+        strategyModalBackgroundState.forEach(({ element }) => {
+          element.inert = true;
+        });
+        return;
+      }
+      strategyModalBackgroundState.forEach(({ element, wasInert }) => {
+        element.inert = wasInert;
+      });
+      strategyModalBackgroundState = [];
+    }
+
+    function activateStrategyModalFocusBoundary() {
+      strategyModalFocusBoundaryActive = true;
+      modal.dataset.focusBoundary = "strategy";
+      setStrategyModalBackgroundInert(true);
+    }
+
+    function deactivateStrategyModalFocusBoundary() {
+      strategyModalFocusBoundaryActive = false;
+      delete modal.dataset.focusBoundary;
+      setStrategyModalBackgroundInert(false);
+    }
+
     function closeModal(restoreFocus = true) {
       const trigger = modalReturnFocus;
+      deactivateStrategyModalFocusBoundary();
       modal.classList.remove("show");
       modal.querySelector(".modal").classList.remove("resource-modal", "strategy-detail-modal");
       infrastructureState.modalSelection = null;
@@ -31698,11 +32391,9 @@
               createMidCurrentAdoptionSnapshot(activeContract);
             closeModal(false);
             renderMidRecommendationHub();
-            requestAnimationFrame(() => {
-              midRecommendationCards
-                .querySelector('[data-mid-current-ai-action="cancel-adoption"]')
-                ?.focus();
-            });
+            midRecommendationCards
+              .querySelector('[data-mid-current-ai-action="cancel-adoption"]')
+              ?.focus({ preventScroll: true });
             showToast(`${midContext.label} 灰度候选已写入当前预览`);
           })
         );
@@ -31724,7 +32415,12 @@
       }
 
       modal.classList.add("show");
-      requestAnimationFrame(() => document.getElementById("modalClose").focus());
+      if (["adopt", "details"].includes(type)) {
+        document.getElementById("modalClose").focus({ preventScroll: true });
+        activateStrategyModalFocusBoundary();
+      } else {
+        requestAnimationFrame(() => document.getElementById("modalClose").focus());
+      }
     }
 
     function getTabIdentity(tab) {
@@ -31905,15 +32601,18 @@
     function updateChart(key) {
       const data = metricData[key];
       if (!data || !Array.isArray(data.values) || data.values.length !== 5) return;
+      const chartColor = getComputedStyle(document.querySelector(".mid-chapter-monitor"))
+        .getPropertyValue("--chapter-accent")
+        .trim() || "#b87522";
       const xs = [42, 161, 280, 399, 518];
       const top = 24;
       const bottom = 177;
       const ys = data.values.map(value => bottom - (value / data.max) * (bottom - top));
       const line = xs.map((x, index) => `${index ? "L" : "M"}${x} ${ys[index].toFixed(1)}`).join(" ");
       document.getElementById("linePath").setAttribute("d", line);
-      document.getElementById("linePath").setAttribute("stroke", data.color);
+      document.getElementById("linePath").setAttribute("stroke", chartColor);
       document.getElementById("areaPath").setAttribute("d", `${line} L518 ${bottom} L42 ${bottom} Z`);
-      document.getElementById("areaPath").setAttribute("fill", data.color + "28");
+      document.getElementById("areaPath").setAttribute("fill", chartColor + "28");
       document.getElementById("chartTitle").textContent = data.title;
       document.getElementById("trendChart").setAttribute("aria-label", `${data.title}：${data.values.map((value, index) => `${data.labels?.[index] || index + 1} ${value}${data.suffix}`).join("，")}`);
       const averageY = bottom - (data.average / data.max) * (bottom - top);
@@ -31937,7 +32636,7 @@
 
       document.querySelectorAll("#chartPoints circle").forEach((circle, index) => {
         circle.setAttribute("cy", ys[index]);
-        circle.setAttribute("stroke", data.color);
+        circle.setAttribute("stroke", chartColor);
       });
 
       document.querySelectorAll("#valueLabels text").forEach((label, index) => {
@@ -32067,6 +32766,33 @@
       if (event.target === modal) closeModal();
     });
 
+    // Capture Tab before target/bubble handlers so the browser cannot apply its default move first.
+    document.addEventListener("keydown", event => {
+      if (
+        modal.classList.contains("show")
+        && event.key === "Tab"
+      ) {
+        trapFocus(event, modal);
+      }
+    }, true);
+
+    document.addEventListener("focusin", event => {
+      if (
+        !strategyModalFocusBoundaryActive
+        || !modal.classList.contains("show")
+        || modal.contains(event.target)
+      ) return;
+      queueMicrotask(() => {
+        if (
+          strategyModalFocusBoundaryActive
+          && modal.classList.contains("show")
+          && !modal.contains(document.activeElement)
+        ) {
+          getFocusableElements(modal)[0]?.focus({ preventScroll: true });
+        }
+      });
+    }, true);
+
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
         if (preReportFilePreview.classList.contains("show")) {
@@ -32094,7 +32820,7 @@
       }
       if (event.key === "Tab") {
         if (modal.classList.contains("show")) {
-          trapFocus(event, modal);
+          // The shared modal trap already ran during capture.
         } else if (askPopover.classList.contains("show")) {
           trapFocus(event, askPopover);
         } else if (preCaseReportPane.classList.contains("is-fullscreen")) {
@@ -32105,6 +32831,12 @@
         return;
       }
       if (!event.defaultPrevented && (event.key === "Enter" || event.key === " ")) {
+        const currentAiAction = event.target.closest?.("[data-mid-current-ai-action]");
+        if (currentAiAction) {
+          event.preventDefault();
+          currentAiAction.click();
+          return;
+        }
         const askOption = event.target.closest?.(
           '#askOptions [data-question], #askOptions [data-ask-question]'
         );
