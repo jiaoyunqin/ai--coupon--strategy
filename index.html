@@ -14109,26 +14109,6 @@
       gap: 16px;
     }
 
-    #dashboard .mid-monitor-body > .dashboard-ai-overview,
-    #dashboard .mid-monitor-body > .dashboard-ai-bridge,
-    #dashboard .mid-monitor-body > .dashboard-grid,
-    #dashboard .mid-monitor-body > .kpis {
-      margin: 0;
-    }
-
-    #dashboard .mid-monitor-body > .dashboard-ai-overview {
-      border-color: #cbd8ee;
-      border-radius: 11px;
-      background:
-        radial-gradient(circle at 96% 0%, rgba(65, 100, 200, .1), transparent 34%),
-        linear-gradient(105deg, #f1f5ff, #f7fafc);
-      box-shadow: 0 8px 20px rgba(44, 70, 128, .05);
-    }
-
-    #dashboard .mid-monitor-body > .dashboard-ai-overview .dashboard-ai-overview-copy strong {
-      color: #3157a8;
-    }
-
     #dashboard .dashboard-section-title {
       min-height: 42px;
       margin: 0;
@@ -14172,10 +14152,6 @@
 
     #dashboard .kpi em {
       font-size: 10px;
-    }
-
-    #dashboard .dashboard-grid {
-      gap: 16px;
     }
 
     #dashboard .analysis-card,
@@ -14261,19 +14237,6 @@
     #dashboard .competitor-card .alert {
       border-radius: 9px;
       box-shadow: 0 4px 12px rgba(31, 45, 74, .025);
-    }
-
-    #dashboard .mid-monitor-body > .dashboard-ai-bridge {
-      border-color: #c8ddd6;
-      border-radius: 11px;
-      background:
-        radial-gradient(circle at 96% 0%, rgba(23, 134, 107, .1), transparent 32%),
-        linear-gradient(100deg, #edf8f4, #f6f9fc);
-      box-shadow: 0 7px 18px rgba(29, 91, 73, .045);
-    }
-
-    #dashboard .mid-monitor-body > .dashboard-ai-bridge .dashboard-ai-overview-copy strong {
-      color: #176f59;
     }
 
     #dashboard .archive-note {
@@ -16657,21 +16620,30 @@
 
     #dashboard .mid-chapter-monitor .mid-monitor-section-head > span {
       display: grid;
-      width: 28px;
+      width: auto;
+      min-width: 42px;
       height: 28px;
-      flex: 0 0 28px;
+      flex: 0 0 auto;
       place-items: center;
+      padding: 0 7px;
       border: 1px solid var(--chapter-line-strong);
       border-radius: 8px;
       color: var(--chapter-accent);
       background: var(--chapter-soft);
       font-size: 9px;
       font-weight: 800;
+      letter-spacing: .02em;
+      white-space: nowrap;
+    }
+
+    #dashboard .mid-chapter-monitor .mid-monitor-section-head > div {
+      min-width: 0;
     }
 
     #dashboard .mid-chapter-monitor .mid-monitor-section-head h3 {
       color: #2a374d;
-      font-size: 13px;
+      font-size: 14px;
+      font-weight: 760;
       line-height: 1.35;
     }
 
@@ -16679,6 +16651,29 @@
       margin-top: 2px;
       color: #748095;
       font-size: 9px;
+      line-height: 1.45;
+    }
+
+    #dashboard .mid-chapter-monitor .dashboard-section-title h4 {
+      display: inline;
+    }
+
+    #dashboard .mid-chapter-monitor .dashboard-section-title h4,
+    #dashboard .mid-chapter-monitor .competitor-title h4 {
+      color: #2a374d;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    #dashboard .mid-chapter-monitor :is(
+      .analysis-card,
+      .competitor-card
+    ) {
+      min-height: 0;
+    }
+
+    #dashboard .mid-chapter-monitor .mid-monitor-attribution-section > .dashboard-ai-overview {
+      margin-top: 0;
     }
 
     #dashboard .mid-chapter-monitor .dashboard-ai-overview,
@@ -16772,6 +16767,10 @@
       background: var(--chapter-surface);
     }
 
+    #dashboard .mid-chapter-monitor .mid-evidence-feedback {
+      color: #7b4d0d;
+    }
+
     #dashboard .mid-chapter-monitor .data-table tr.highlight td,
     #dashboard .mid-chapter-monitor .mid-evidence-table-scroll .data-table tr.is-selected td {
       background: var(--chapter-surface);
@@ -16826,6 +16825,25 @@
       border-color: #dce1e9;
       background: var(--state-disabled-soft);
       box-shadow: none;
+    }
+
+    @media (max-width: 760px) {
+      #dashboard .mid-chapter-monitor .mid-monitor-section-head {
+        align-items: flex-start;
+      }
+
+      #dashboard .mid-chapter-monitor .mid-monitor-section-head > span {
+        margin-top: 1px;
+      }
+
+      #dashboard .mid-chapter-monitor .dashboard-ai-overview {
+        grid-template-columns: 32px minmax(0, 1fr);
+      }
+
+      #dashboard .mid-chapter-monitor .dashboard-ai-overview > .workbench-ask {
+        grid-column: 2;
+        justify-self: start;
+      }
     }
 
     /* Explicit business states are the only allowed cross-chapter colors. */
@@ -17213,7 +17231,7 @@
               <header class="mid-chapter-head has-context">
                 <span class="mid-chapter-index" aria-hidden="true">02</span>
                 <div class="mid-chapter-heading">
-                  <h2 id="midNextChapterTitle">下一波次方案规划</h2>
+                  <h2 id="midNextChapterTitle">下一波次方案明细与调优</h2>
                 </div>
                 <div class="mid-chapter-context mid-chapter-context-next" aria-label="下一波次规划上下文">
                   <strong class="mid-chapter-campaign" data-mid-campaign-label>2026 38节</strong>
@@ -17347,140 +17365,52 @@
                 </div>
               </header>
               <div class="mid-chapter-body mid-monitor-body">
-          <section class="mid-monitor-section mid-monitor-ai-section" aria-labelledby="midMonitorAiTitle">
+          <section class="mid-monitor-section mid-monitor-kpi-section" aria-labelledby="midMonitorKpiTitle">
             <header class="mid-monitor-section-head">
-              <span>01</span>
-              <div><h3 id="midMonitorAiTitle">AI 结论</h3><p>先给判断，再查看竞对信号与数据依据</p></div>
+              <span>03.1</span>
+              <div><h3 id="midMonitorKpiTitle">核心指标监控</h3><p>先核对目标、核销、预算与钱效</p></div>
             </header>
-          <section
-            class="dashboard-ai-overview"
-            id="midOverallEvidence"
-            data-ai-context="mid-overall"
-            data-context-summary="促中整体结论：预算已用满，高门槛券核销偏低，优先做结构性调优"
-          >
-            <span class="spark coupon-spark" aria-hidden="true">
-              <svg class="coupon-glyph" viewBox="0 0 64 48" fill="none" focusable="false">
-                <path d="M7 6h50v10c-5.5 0-9 3.5-9 8s3.5 8 9 8v10H7V32c5.5 0 9-3.5 9-8s-3.5-8-9-8V6Z" stroke="currentColor" stroke-width="4.5"/>
-                <path d="m23.5 14.5 8.5 9 8.5-9M32 23.5V37M23.5 25h17M23.5 31h17" stroke="currentColor" stroke-width="4.5"/>
-              </svg>
-            </span>
-            <div class="dashboard-ai-overview-copy">
-              <strong>整体结论：不追加总预算，先收缩高门槛泛发并向高价值人群和高效点位迁移</strong>
-              <span>当前券引导支付 GMV 达成 107%，但核销预算已使用 100%。问题集中在活动前两日和高门槛券；末日催用有效，主端反转实验在目标人群上钱效最优。</span>
-              <div class="dashboard-ai-facts">
-                <span><b>关键矛盾</b> 预算满载但结构效率不均</span>
-                <span><b>主要归因</b> 高门槛泛发 + 催用偏晚</span>
-                <span><b>建议动作</b> 人群定向、点位前置、保留对照</span>
-              </div>
+            <div class="dashboard-section-title" id="midKpiSectionTitle">
+              <div><h4>当前核心指标监控</h4><span>目标、核销、预算与钱效</span></div>
+              <button
+                class="workbench-ask"
+                data-workbench-ask="mid"
+                data-ask-context="促中核心指标"
+                data-ask-summary="GMV 84.58 亿，核销率 32.9%，预算 8.14 亿，支付兑换比 10.4"
+                data-ask-questions="四项指标之间有什么因果关系？|预算占满后还有哪些优化空间？|哪项指标最需要设置止损线？"
+              >✦ 追问</button>
             </div>
-            <button
-              class="workbench-ask"
-              data-workbench-ask="mid"
-              data-ask-context="促中整体结论"
-              data-ask-summary="预算使用 100%，GMV 达成 107%，应优先做结构性调优"
-              data-ask-questions="为什么预算用满后仍建议调整结构？|哪些高门槛券应该先收缩？|把整体结论拆成可执行优先级"
-            >✦ 追问</button>
-          </section>
 
-          <section
-            class="dashboard-ai-bridge"
-            id="midAttributionBridge"
-            data-ai-context="mid-attribution"
-            data-context-summary="促中归因小结：效率问题来自人群、面额和点位组合，而非总盘目标不足"
-          >
-            <span class="spark">AI</span>
-            <div class="dashboard-ai-overview-copy">
-              <div><strong>结论</strong><span>大盘目标已达成，当前矛盾是预算内部的结构效率。</span></div>
-              <div><strong>依据</strong><span>高门槛券核销低，主端反转实验显著，末日催用有效。</span></div>
-              <div><strong>下一步</strong><span>收缩低效泛发，把预算迁移到高价值人群、会场和搜索。</span></div>
+            <div class="kpis" id="midKpis">
+              <article class="kpi">
+                <div class="kpi-label">券引导支付 GMV</div>
+                <strong>84.58 亿</strong>
+                <em>大盘目标达成 107%</em>
+              </article>
+              <article class="kpi green">
+                <div class="kpi-label">用户核销率</div>
+                <strong>32.9%</strong>
+                <em>3/4 21% → 3/8 52%</em>
+              </article>
+              <article class="kpi orange">
+                <div class="kpi-label">核销预算</div>
+                <strong>8.14 亿</strong>
+                <em class="warn">预算占比 100%</em>
+              </article>
+              <article class="kpi violet">
+                <div class="kpi-label">支付兑换比</div>
+                <strong>10.4</strong>
+                <em class="neutral">全周期稳定</em>
+              </article>
             </div>
-            <button
-              class="workbench-ask"
-              data-workbench-ask="mid"
-              data-ask-context="促中归因小结"
-              data-ask-summary="人群、面额和点位组合是当前预算效率差异的主要来源"
-              data-ask-questions="把归因拆成预算迁移动作|哪些证据支持优先调结构？|生成按影响排序的执行清单"
-            >✦ 追问</button>
-          </section>
           </section>
 
-          <section class="mid-monitor-section mid-monitor-competitor-section" aria-labelledby="midMonitorCompetitorTitle">
+          <section class="mid-monitor-section mid-monitor-analysis-section" aria-labelledby="midMonitorAnalysisTitle">
             <header class="mid-monitor-section-head">
-              <span>02</span>
-              <div><h3 id="midMonitorCompetitorTitle">实时竞对信息</h3><p>识别外部压力，不替代自身实验结论</p></div>
+              <span>03.2</span>
+              <div><h3 id="midMonitorAnalysisTitle">核销与实验分析</h3><p>结合趋势、领取核销拆解与实验结果验证表现</p></div>
             </header>
-            <aside class="card competitor-card">
-              <div class="card-head">
-                <div class="competitor-title">
-                  <h3>当前竞对变化</h3>
-                  <span><i class="live-dot"></i>最新变化已归档</span>
-                </div>
-                <div class="card-head-actions">
-                  <button
-                    class="workbench-ask"
-                    data-workbench-ask="mid"
-                    data-ask-context="竞对策略变化"
-                    data-ask-summary="竞对正在增加人群分层、会员加码和低门槛券频次"
-                    data-ask-questions="哪些竞对变化需要跟进？|为什么不建议机械跟价？|结合自身钱效生成应对优先级"
-                  >✦ 追问</button>
-                  <button class="ghost" id="watchBtn">关注变化</button>
-                </div>
-              </div>
-              <div class="card-body">
-                <div class="comp-filter">
-                  <div class="year-tabs" id="midCompetitorYearTabs" data-group="competitorYear" role="group" aria-label="竞对归档年份">
-                    <button type="button" data-mid-competitor-year="2024" aria-pressed="false">24年38</button>
-                    <button type="button" data-mid-competitor-year="2025" aria-pressed="false">25年38</button>
-                    <button class="active" type="button" data-mid-competitor-year="2026" aria-pressed="true">26年38</button>
-                  </div>
-                </div>
-                <div class="mid-evidence-feedback mid-competitor-year-feedback" id="midCompetitorYearFeedback" aria-live="polite"></div>
-                <div class="comp-list" id="midCompetitorList"></div>
-                <div class="archive-note" id="midCompetitorArchiveNote">38节 · 2026 视图；竞对信息需在执行前再次核验。</div>
-              </div>
-            </aside>
-          </section>
 
-          <section class="mid-monitor-section mid-monitor-data-section" aria-labelledby="midMonitorDataTitle">
-            <header class="mid-monitor-section-head">
-              <span>03</span>
-              <div><h3 id="midMonitorDataTitle">数据表现</h3><p>核心指标、趋势、实验与领取核销拆解</p></div>
-            </header>
-          <div class="dashboard-section-title" id="midKpiSectionTitle">
-            <div><strong>当前核心指标监控</strong><span>目标、核销、预算与钱效</span></div>
-            <button
-              class="workbench-ask"
-              data-workbench-ask="mid"
-              data-ask-context="促中核心指标"
-              data-ask-summary="GMV 84.58 亿，核销率 32.9%，预算 8.14 亿，支付兑换比 10.4"
-              data-ask-questions="四项指标之间有什么因果关系？|预算占满后还有哪些优化空间？|哪项指标最需要设置止损线？"
-            >✦ 追问</button>
-          </div>
-
-          <div class="kpis" id="midKpis">
-            <article class="kpi">
-              <div class="kpi-label">券引导支付 GMV</div>
-              <strong>84.58 亿</strong>
-              <em>大盘目标达成 107%</em>
-            </article>
-            <article class="kpi green">
-              <div class="kpi-label">用户核销率</div>
-              <strong>32.9%</strong>
-              <em>3/4 21% → 3/8 52%</em>
-            </article>
-            <article class="kpi orange">
-              <div class="kpi-label">核销预算</div>
-              <strong>8.14 亿</strong>
-              <em class="warn">预算占比 100%</em>
-            </article>
-            <article class="kpi violet">
-              <div class="kpi-label">支付兑换比</div>
-              <strong>10.4</strong>
-              <em class="neutral">全周期稳定</em>
-            </article>
-          </div>
-
-          <div class="dashboard-grid">
             <section class="card analysis-card">
               <div class="card-head">
                 <div class="subtabs" role="tablist" aria-label="分析数据">
@@ -17650,8 +17580,100 @@
                 </div>
               </div>
             </section>
+          </section>
 
-          </div>
+          <section class="mid-monitor-section mid-monitor-competitor-section" aria-labelledby="midMonitorCompetitorTitle">
+            <header class="mid-monitor-section-head">
+              <span>03.3</span>
+              <div><h3 id="midMonitorCompetitorTitle">竞对动态监控</h3><p>识别外部压力，不替代自身实验结论</p></div>
+            </header>
+            <aside class="card competitor-card">
+              <div class="card-head">
+                <div class="competitor-title">
+                  <h4>当前竞对变化</h4>
+                  <span><i class="live-dot"></i>最新变化已归档</span>
+                </div>
+                <div class="card-head-actions">
+                  <button
+                    class="workbench-ask"
+                    data-workbench-ask="mid"
+                    data-ask-context="竞对策略变化"
+                    data-ask-summary="竞对正在增加人群分层、会员加码和低门槛券频次"
+                    data-ask-questions="哪些竞对变化需要跟进？|为什么不建议机械跟价？|结合自身钱效生成应对优先级"
+                  >✦ 追问</button>
+                  <button class="ghost" id="watchBtn">关注变化</button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="comp-filter">
+                  <div class="year-tabs" id="midCompetitorYearTabs" data-group="competitorYear" role="group" aria-label="竞对归档年份">
+                    <button type="button" data-mid-competitor-year="2024" aria-pressed="false">24年38</button>
+                    <button type="button" data-mid-competitor-year="2025" aria-pressed="false">25年38</button>
+                    <button class="active" type="button" data-mid-competitor-year="2026" aria-pressed="true">26年38</button>
+                  </div>
+                </div>
+                <div class="mid-evidence-feedback mid-competitor-year-feedback" id="midCompetitorYearFeedback" aria-live="polite"></div>
+                <div class="comp-list" id="midCompetitorList"></div>
+                <div class="archive-note" id="midCompetitorArchiveNote">38节 · 2026 视图；竞对信息需在执行前再次核验。</div>
+              </div>
+            </aside>
+          </section>
+
+          <section class="mid-monitor-section mid-monitor-attribution-section" aria-labelledby="midMonitorAttributionTitle">
+            <header class="mid-monitor-section-head">
+              <span>03.4</span>
+              <div><h3 id="midMonitorAttributionTitle">归因结论与调优提示</h3><p>基于前序事实收敛整体判断与下一步动作</p></div>
+            </header>
+            <section
+              class="dashboard-ai-overview"
+              id="midOverallEvidence"
+              data-ai-context="mid-overall"
+              data-context-summary="促中整体结论：预算已用满，高门槛券核销偏低，优先做结构性调优"
+            >
+              <span class="spark coupon-spark" aria-hidden="true">
+                <svg class="coupon-glyph" viewBox="0 0 64 48" fill="none" focusable="false">
+                  <path d="M7 6h50v10c-5.5 0-9 3.5-9 8s3.5 8 9 8v10H7V32c5.5 0 9-3.5 9-8s-3.5-8-9-8V6Z" stroke="currentColor" stroke-width="4.5"/>
+                  <path d="m23.5 14.5 8.5 9 8.5-9M32 23.5V37M23.5 25h17M23.5 31h17" stroke="currentColor" stroke-width="4.5"/>
+                </svg>
+              </span>
+              <div class="dashboard-ai-overview-copy">
+                <strong>整体结论：不追加总预算，先收缩高门槛泛发并向高价值人群和高效点位迁移</strong>
+                <span>当前券引导支付 GMV 达成 107%，但核销预算已使用 100%。问题集中在活动前两日和高门槛券；末日催用有效，主端反转实验在目标人群上钱效最优。</span>
+                <div class="dashboard-ai-facts">
+                  <span><b>关键矛盾</b> 预算满载但结构效率不均</span>
+                  <span><b>主要归因</b> 高门槛泛发 + 催用偏晚</span>
+                  <span><b>建议动作</b> 人群定向、点位前置、保留对照</span>
+                </div>
+              </div>
+              <button
+                class="workbench-ask"
+                data-workbench-ask="mid"
+                data-ask-context="促中整体结论"
+                data-ask-summary="预算使用 100%，GMV 达成 107%，应优先做结构性调优"
+                data-ask-questions="为什么预算用满后仍建议调整结构？|哪些高门槛券应该先收缩？|把整体结论拆成可执行优先级"
+              >✦ 追问</button>
+            </section>
+
+            <section
+              class="dashboard-ai-bridge"
+              id="midAttributionBridge"
+              data-ai-context="mid-attribution"
+              data-context-summary="促中归因小结：效率问题来自人群、面额和点位组合，而非总盘目标不足"
+            >
+              <span class="spark">AI</span>
+              <div class="dashboard-ai-overview-copy">
+                <div><strong>结论</strong><span>大盘目标已达成，当前矛盾是预算内部的结构效率。</span></div>
+                <div><strong>依据</strong><span>高门槛券核销低，主端反转实验显著，末日催用有效。</span></div>
+                <div><strong>下一步</strong><span>收缩低效泛发，把预算迁移到高价值人群、会场和搜索。</span></div>
+              </div>
+              <button
+                class="workbench-ask"
+                data-workbench-ask="mid"
+                data-ask-context="促中归因小结"
+                data-ask-summary="人群、面额和点位组合是当前预算效率差异的主要来源"
+                data-ask-questions="把归因拆成预算迁移动作|哪些证据支持优先调结构？|生成按影响排序的执行清单"
+              >✦ 追问</button>
+            </section>
           </section>
 
               </div>
@@ -21307,8 +21329,8 @@
       const sectionTitle = document.getElementById("midKpiSectionTitle");
       const titleCopy = sectionTitle.querySelector("div");
       titleCopy.innerHTML = evidence
-        ? `<strong>当前核心指标监控</strong><span>${escapeHTML(context.festival)} ${escapeHTML(context.waveLabel)} · 目标、核销、预算与钱效</span>`
-        : `<strong>当前核心指标监控</strong><span>${escapeHTML(context.label)} · 暂无证据</span>`;
+        ? `<h4>当前核心指标监控</h4><span>${escapeHTML(context.festival)} ${escapeHTML(context.waveLabel)} · 目标、核销、预算与钱效</span>`
+        : `<h4>当前核心指标监控</h4><span>${escapeHTML(context.label)} · 暂无证据</span>`;
       document.getElementById("midKpis").innerHTML = (evidence?.kpis || [
         { label: "券引导支付 GMV" },
         { label: "用户核销率", tone: "green" },
