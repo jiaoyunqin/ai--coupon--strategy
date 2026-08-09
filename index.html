@@ -29,14 +29,74 @@
       --state-danger-soft: #fff0f2;
       --state-disabled: #778296;
       --state-disabled-soft: #f0f2f5;
-      --ink: #202533;
-      --muted: #72798b;
-      --line: #e6e9f0;
-      --page: #f5f7fb;
-      --card: #ffffff;
-      --shadow: 0 1px 2px rgba(20, 27, 48, .03);
-      --radius: 10px;
+      --state-success: var(--state-positive);
+      --state-success-soft: var(--state-positive-soft);
+
       --font: "PingFang SC", "Microsoft YaHei", "Noto Sans CJK SC", -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-size-section: 20px;
+      --font-size-subsection-lg: 16px;
+      --font-size-subsection: 15px;
+      --font-size-card-lg: 14px;
+      --font-size-card: 13px;
+      --font-size-body: 12px;
+      --font-size-caption: 11px;
+      --font-size-micro: 10px;
+
+      --space-xs: 4px;
+      --space-sm: 8px;
+      --space-md: 12px;
+      --space-lg: 16px;
+      --space-xl: 24px;
+      --space-2xl: 32px;
+
+      --radius-sm: 6px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+      --radius-xl: 16px;
+      --radius-pill: 999px;
+
+      --shadow-low: 0 1px 2px rgba(20, 27, 48, .03);
+      --shadow-medium: 0 8px 24px rgba(20, 27, 48, .08);
+      --shadow-high: 0 18px 46px rgba(31, 45, 74, .075), 0 2px 8px rgba(31, 45, 74, .035);
+
+      --color-text-primary: #202533;
+      --color-text-secondary: #72798b;
+      --color-text-heading: #1d2a43;
+      --color-text-subtle: #627087;
+      --color-text-inverse: #ffffff;
+      --color-border-default: #e6e9f0;
+      --color-border-subtle: #dbe2ed;
+      --color-border-strong: #cbd2de;
+      --color-surface-page: #f5f7fb;
+      --color-surface-section: #f3f6fa;
+      --color-surface-default: #ffffff;
+      --color-surface-subtle: #f8f9fc;
+
+      --control-height-compact: 28px;
+      --control-height-standard: 32px;
+      --control-height-default: 36px;
+      --control-size-icon: 32px;
+      --focus-ring-color: rgba(49, 87, 230, .62);
+      --focus-ring-width: 2px;
+      --focus-ring-offset: 2px;
+
+      --chapter-accent-blue: #4164c8;
+      --chapter-accent-blue-soft: #edf2ff;
+      --chapter-accent-green: #17866b;
+      --chapter-accent-green-soft: #eaf8f3;
+      --chapter-accent-amber: #b87522;
+      --chapter-accent-amber-soft: #fff4e5;
+      --chapter-accent-violet: #6557b6;
+      --chapter-accent-violet-soft: #f1effb;
+
+      /* Compatibility aliases for existing components. */
+      --ink: var(--color-text-primary);
+      --muted: var(--color-text-secondary);
+      --line: var(--color-border-default);
+      --page: var(--color-surface-page);
+      --card: var(--color-surface-default);
+      --shadow: var(--shadow-low);
+      --radius: var(--radius-lg);
     }
 
     * {
@@ -45,15 +105,15 @@
 
     html {
       min-width: 1080px;
-      background: var(--page);
+      background: var(--color-surface-page);
     }
 
     body {
       margin: 0;
       min-height: 100vh;
-      color: var(--ink);
-      background: var(--page);
-      font: 14px/1.45 var(--font);
+      color: var(--color-text-primary);
+      background: var(--color-surface-page);
+      font: var(--font-size-body)/1.45 var(--font);
       -webkit-font-smoothing: antialiased;
     }
 
@@ -72,6 +132,7 @@
     button,
     select {
       font: inherit;
+      font-size: var(--font-size-body);
     }
 
     button {
@@ -80,9 +141,10 @@
 
     button:focus-visible,
     select:focus-visible,
-    input:focus-visible {
-      outline: 2px solid rgba(49, 87, 230, .62);
-      outline-offset: 2px;
+    input:focus-visible,
+    textarea:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--focus-ring-offset);
     }
 
     button:disabled {
@@ -420,16 +482,16 @@
 
     .ghost,
     .primary {
-      height: 42px;
-      padding: 0 17px;
-      border-radius: 7px;
+      height: var(--control-height-default);
+      padding: 0 var(--space-lg);
+      border-radius: var(--radius-md);
       transition: transform .18s, box-shadow .18s, border-color .18s;
     }
 
     .ghost {
-      border: 1px solid #dfe3eb;
-      color: #4c5362;
-      background: #fff;
+      border: 1px solid var(--color-border-default);
+      color: var(--color-text-secondary);
+      background: var(--color-surface-default);
     }
 
     .ghost:hover {
@@ -573,13 +635,13 @@
     }
 
     select {
-      height: 34px;
+      height: var(--control-height-default);
       min-width: 80px;
       padding: 0 28px 0 10px;
       border: 0;
-      border-radius: 5px;
-      color: #343a48;
-      background: #f6f7fa;
+      border-radius: var(--radius-sm);
+      color: var(--color-text-primary);
+      background: var(--color-surface-subtle);
       outline: none;
     }
 
@@ -1092,7 +1154,7 @@
     }
 
     .mid-recommendation-toggle::after {
-      content: "↓";
+      content: none;
       font-size: 10px;
       transition: transform .18s ease;
     }
@@ -1788,7 +1850,7 @@
     }
 
     .mid-decision-toggle::after {
-      content: "↓";
+      content: none;
       transition: transform .18s ease;
     }
 
@@ -2185,7 +2247,7 @@
     }
 
     .mid-current-adjustment-toggle::after {
-      content: "↓";
+      content: none;
       transition: transform .18s ease;
     }
 
@@ -2961,7 +3023,7 @@
     .mid-next-basis-toggle strong::after {
       display: inline-block;
       margin-left: 6px;
-      content: "↓";
+      content: none;
       transition: transform .18s ease;
     }
 
@@ -4688,6 +4750,14 @@
       border-left: 1px solid #e8ebf1;
     }
 
+    .pre-dashboard .pre-chapter-activity .pre-activity-field.wide .pre-comparison-value b {
+      min-width: 0;
+      overflow: visible;
+      overflow-wrap: anywhere;
+      text-overflow: clip;
+      white-space: normal;
+    }
+
     .pre-reference-card {
       align-self: start;
       border-color: #e8ebf0;
@@ -5976,7 +6046,6 @@
     .pre-timeline-coupon-head {
       display: flex;
       align-items: center;
-      justify-content: space-between;
       gap: 14px;
       padding-bottom: 10px;
       border-bottom: 1px solid #edf0f5;
@@ -5996,17 +6065,6 @@
       margin-top: 3px;
       color: #778398;
       font-size: 7px;
-    }
-
-    .pre-timeline-coupon-head em {
-      flex: 0 0 auto;
-      padding: 5px 8px;
-      border-radius: 999px;
-      color: #3157c4;
-      background: #edf2ff;
-      font-size: 7px;
-      font-style: normal;
-      font-weight: 720;
     }
 
     .pre-timeline-coupon-grid {
@@ -7817,7 +7875,6 @@
       font-size: 9px;
       font-weight: 750;
       letter-spacing: .09em;
-      text-transform: uppercase;
     }
 
     .case-question {
@@ -9251,13 +9308,6 @@
       width: 40px;
     }
 
-    .new-conversation-eyebrow {
-      color: #8a94a8;
-      font-size: 9px;
-      font-weight: 750;
-      letter-spacing: .16em;
-    }
-
     .new-conversation-empty h2 {
       margin: 8px 0 9px;
       color: #242c3c;
@@ -10372,14 +10422,6 @@
     .report-cover {
       padding-bottom: 18px;
       border-bottom: 1px solid #e6e9ef;
-    }
-
-    .report-cover-eyebrow {
-      color: #3157e6;
-      font-size: 8px;
-      font-weight: 750;
-      letter-spacing: .12em;
-      text-transform: uppercase;
     }
 
     .report-cover h2 {
@@ -12646,7 +12688,7 @@
       }
     }
 
-    @media (max-width: 1280px) {
+    @media (max-width: 1279px) {
       html {
         min-width: 0;
       }
@@ -12770,14 +12812,14 @@
 
     /* Pre-campaign four-chapter visual system. */
     .pre-dashboard {
-      --pre-chapter-ink: #1d2a43;
-      --pre-chapter-muted: #627087;
-      --pre-chapter-line: #dbe2ed;
-      --pre-chapter-page: #f3f6fa;
-      --pre-chapter-surface: #ffffff;
-      --pre-chapter-accent: #4164c8;
-      --pre-chapter-soft: #edf2ff;
-      --pre-chapter-shadow: 0 18px 46px rgba(31, 45, 74, .075), 0 2px 8px rgba(31, 45, 74, .035);
+      --pre-chapter-ink: var(--color-text-heading);
+      --pre-chapter-muted: var(--color-text-subtle);
+      --pre-chapter-line: var(--color-border-subtle);
+      --pre-chapter-page: var(--color-surface-section);
+      --pre-chapter-surface: var(--color-surface-default);
+      --pre-chapter-accent: var(--chapter-accent-blue);
+      --pre-chapter-soft: var(--chapter-accent-blue-soft);
+      --pre-chapter-shadow: var(--shadow-high);
       color: var(--pre-chapter-ink);
     }
 
@@ -12799,8 +12841,8 @@
     }
 
     .pre-dashboard .pre-chapter {
-      --chapter-accent: #4164c8;
-      --chapter-soft: #edf2ff;
+      --chapter-accent: var(--chapter-accent-blue);
+      --chapter-soft: var(--chapter-accent-blue-soft);
       position: relative;
       display: block;
       min-width: 0;
@@ -12822,23 +12864,23 @@
     }
 
     .pre-dashboard .pre-chapter-activity {
-      --chapter-accent: #4164c8;
-      --chapter-soft: #edf2ff;
+      --chapter-accent: var(--chapter-accent-blue);
+      --chapter-soft: var(--chapter-accent-blue-soft);
     }
 
     .pre-dashboard .pre-chapter-plan {
-      --chapter-accent: #17866b;
-      --chapter-soft: #eaf8f3;
+      --chapter-accent: var(--chapter-accent-green);
+      --chapter-soft: var(--chapter-accent-green-soft);
     }
 
     .pre-dashboard .pre-chapter-intelligence {
-      --chapter-accent: #b87522;
-      --chapter-soft: #fff4e5;
+      --chapter-accent: var(--chapter-accent-amber);
+      --chapter-soft: var(--chapter-accent-amber-soft);
     }
 
     .pre-dashboard .pre-chapter-history {
-      --chapter-accent: #6557b6;
-      --chapter-soft: #f1effb;
+      --chapter-accent: var(--chapter-accent-violet);
+      --chapter-soft: var(--chapter-accent-violet-soft);
     }
 
     .pre-dashboard .pre-chapter-head {
@@ -13611,12 +13653,12 @@
 
     /* Mid-campaign three-chapter visual system, aligned with pre-campaign planning. */
     #dashboard {
-      --mid-chapter-ink: #1d2a43;
-      --mid-chapter-muted: #627087;
-      --mid-chapter-line: #dbe2ed;
-      --mid-chapter-page: #f3f6fa;
-      --mid-chapter-surface: #ffffff;
-      --mid-chapter-shadow: 0 18px 46px rgba(31, 45, 74, .075), 0 2px 8px rgba(31, 45, 74, .035);
+      --mid-chapter-ink: var(--color-text-heading);
+      --mid-chapter-muted: var(--color-text-subtle);
+      --mid-chapter-line: var(--color-border-subtle);
+      --mid-chapter-page: var(--color-surface-section);
+      --mid-chapter-surface: var(--color-surface-default);
+      --mid-chapter-shadow: var(--shadow-high);
       color: var(--mid-chapter-ink);
     }
 
@@ -13656,7 +13698,7 @@
       position: absolute;
       inset: 0 auto 0 0;
       width: 3px;
-      background: linear-gradient(180deg, #4164c8, #17866b);
+      background: linear-gradient(180deg, var(--chapter-accent-blue), var(--chapter-accent-green));
       content: "";
     }
 
@@ -13702,8 +13744,8 @@
     }
 
     #dashboard .mid-chapter {
-      --chapter-accent: #4164c8;
-      --chapter-soft: #edf2ff;
+      --chapter-accent: var(--chapter-accent-blue);
+      --chapter-soft: var(--chapter-accent-blue-soft);
       position: relative;
       display: block;
       min-width: 0;
@@ -13725,18 +13767,18 @@
     }
 
     #dashboard .mid-chapter-current {
-      --chapter-accent: #4164c8;
-      --chapter-soft: #edf2ff;
+      --chapter-accent: var(--chapter-accent-blue);
+      --chapter-soft: var(--chapter-accent-blue-soft);
     }
 
     #dashboard .mid-chapter-next {
-      --chapter-accent: #17866b;
-      --chapter-soft: #eaf8f3;
+      --chapter-accent: var(--chapter-accent-green);
+      --chapter-soft: var(--chapter-accent-green-soft);
     }
 
     #dashboard .mid-chapter-monitor {
-      --chapter-accent: #b87522;
-      --chapter-soft: #fff4e5;
+      --chapter-accent: var(--chapter-accent-amber);
+      --chapter-soft: var(--chapter-accent-amber-soft);
     }
 
     #dashboard .mid-chapter-head {
@@ -16274,7 +16316,6 @@
 
     .pre-dashboard .pre-chapter-plan .pre-strategy-candidate-heading strong,
     .pre-dashboard .pre-chapter-plan .pre-wave-card-head b,
-    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-head em,
     .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-group h4,
     .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-record strong,
     .pre-dashboard .pre-chapter-plan .pre-channel-cell summary,
@@ -16284,7 +16325,6 @@
     }
 
     .pre-dashboard .pre-chapter-plan .pre-strategy-candidate-heading strong,
-    .pre-dashboard .pre-chapter-plan .pre-timeline-coupon-head em,
     .pre-dashboard .pre-chapter-plan .pre-execution-handoff-head em {
       background: var(--chapter-soft);
     }
@@ -16887,7 +16927,7 @@
       .mini .best,
       .delta-up
     ) {
-      color: var(--state-positive);
+      color: var(--state-success);
     }
 
     #dashboard .mid-chapter-current :is(
@@ -16896,7 +16936,7 @@
       .mid38-status.experiment
     ),
     #dashboard .mid-chapter-monitor .sig {
-      background: var(--state-positive-soft);
+      background: var(--state-success-soft);
     }
 
     #dashboard .mid-chapter-current :is(
@@ -16944,6 +16984,1238 @@
         break-inside: avoid;
       }
     }
+
+    /* Core visual language consolidation: Tasks 2-4. */
+    .core-font-floor {
+      font-size: var(--font-size-micro) !important;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) h2 {
+      font-size: var(--font-size-section) !important;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) h3 {
+      font-size: var(--font-size-subsection) !important;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) h4 {
+      font-size: var(--font-size-card) !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) p,
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) li,
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) input,
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) textarea {
+      font-size: var(--font-size-body) !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management) :where(th, td, caption) {
+      font-size: var(--font-size-micro) !important;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) :where(
+      .hint,
+      .filter-label,
+      .message-meta,
+      .report-toolbar-title span,
+      .report-section-lead,
+      .pre-home-head p,
+      .pre-analysis-head p,
+      .mid-monitor-section-head p,
+      .mid-chapter-scope,
+      .mid-chapter-campaign
+    ) {
+      font-size: var(--font-size-caption) !important;
+    }
+
+    .sidebar :where(.history-label, .owner-copy span) {
+      font-size: var(--font-size-micro) !important;
+    }
+
+    .pre-strategy-workspace-title {
+      margin: 0;
+      padding: 0 2px 12px;
+      color: var(--color-text-subtle);
+      font-size: var(--font-size-subsection) !important;
+      font-weight: 700;
+      line-height: 1.4;
+    }
+
+    #dashboard .mid-kpi-workspace-label {
+      display: inline-block;
+      color: var(--color-text-heading);
+      font-size: var(--font-size-card) !important;
+      line-height: 1.4;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) button {
+      font-size: var(--font-size-body) !important;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) button:not(
+      .text-btn,
+      .scale-btn,
+      .risk-confirm,
+      .resource-row-action,
+      .report-section-remove
+    ) {
+      min-height: var(--control-height-standard) !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap) :where(select, input[type="text"], input[type="number"], input[type="password"]) {
+      min-height: var(--control-height-default);
+      font-size: var(--font-size-body) !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management) [role="tab"] {
+      min-height: var(--control-height-standard) !important;
+      height: auto;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management) :where(
+      .primary,
+      .composer-send,
+      .resource-primary,
+      .mid-candidate-entry
+    ) {
+      min-height: var(--control-height-default) !important;
+      height: auto;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view, .infra-management) :where(
+      .text-btn,
+      .scale-btn,
+      .risk-confirm,
+      .resource-row-action
+    ) {
+      min-height: var(--control-height-compact) !important;
+      padding-right: var(--space-sm);
+      padding-left: var(--space-sm);
+    }
+
+    #dashboard .competitor-card .text-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 72px;
+    }
+
+    #dashboard .mid-candidate-entry {
+      display: flex;
+      min-height: var(--control-height-default) !important;
+      align-items: center;
+      padding: var(--space-xs) 0;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) :where(
+      .case-header-icon,
+      .composer-tool,
+      .report-tool.icon-only,
+      .close,
+      .ask-close,
+      .customize-head button,
+      .report-section-remove,
+      .resource-row-action,
+      .resource-view-toggle button,
+      .resource-switch
+    ) {
+      width: var(--control-size-icon) !important;
+      min-width: var(--control-size-icon) !important;
+      height: var(--control-size-icon) !important;
+      min-height: var(--control-size-icon) !important;
+      padding: 0 !important;
+    }
+
+    .core-action-icon {
+      display: inline-block;
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      vertical-align: -3px;
+      pointer-events: none;
+    }
+
+    :where(.workbench-ask, .ask-trigger, .report-tool, .case-back, .case-header-icon, .composer-tool, .close, .ask-close, .report-section-remove) .core-action-icon {
+      margin-right: var(--space-xs);
+    }
+
+    :where(.case-header-icon, .composer-tool, .report-tool.icon-only, .close, .ask-close, .report-section-remove) .core-action-icon {
+      margin-right: 0;
+    }
+
+    :where(
+      .mid-recommendation-toggle,
+      .mid-decision-toggle,
+      .mid-current-adjustment-toggle,
+      .mid-next-basis-toggle,
+      .mid-candidate-expand,
+      .mid38-toggle
+    ) .core-action-icon {
+      transition: transform .18s ease;
+    }
+
+    :where(
+      .mid-recommendation-toggle,
+      .mid-decision-toggle,
+      .mid-current-adjustment-toggle,
+      .mid-next-basis-toggle,
+      .mid-candidate-expand,
+      .mid38-toggle
+    )[aria-expanded="true"] .core-action-icon {
+      transform: rotate(180deg);
+    }
+
+    .mid-recommendation-toggle::after,
+    .mid-decision-toggle::after,
+    .mid-current-adjustment-toggle::after,
+    .mid-next-basis-toggle strong::after {
+      content: none !important;
+    }
+
+    #dashboard .mid-candidate-expand i {
+      display: none;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :where(
+      .mid-wave-table-wrap,
+      .mid-wave-matrix-wrap,
+      .mid38-table-wrap,
+      .mid38-wave-table-wrap,
+      .mid-evidence-table-scroll,
+      .pre-table-scroll,
+      .pre-calendar-scroll,
+      .pre-channel-matrix-scroll,
+      .report-canvas-wrap
+    ) {
+      max-width: 100%;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    @media (max-width: 760px) {
+      :where(.pre-dashboard, #dashboard, .case-view) :where(
+        .pre-strategy-toolbar,
+        .mid-wave-technical-head,
+        .mid-current-ai-head,
+        .breakdown-top,
+        .case-chat-header-row,
+        .report-toolbar
+      ) {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      :where(.pre-dashboard, #dashboard, .case-view) :where(
+        .pre-strategy-tabs,
+        .pre-endpoint-tabs,
+        .pre-batch-tabs,
+        .mid-next-detail-tabs,
+        .mid38-monitor-tabs,
+        .prompt-chips
+      ) {
+        flex-wrap: nowrap;
+        max-width: 100%;
+        overflow-x: auto;
+      }
+
+      :where(.pre-dashboard, #dashboard, .case-view) :where(
+        .pre-strategy-candidates,
+        .mid-wave-candidate-grid,
+        .new-conversation-starters,
+        .report-workspace
+      ) {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Task 5 runtime overrides: consolidate cards, actions, tabs, and statuses. */
+    .pre-dashboard .pre-chapter,
+    #dashboard .mid-chapter {
+      border: 1px solid var(--color-border-subtle);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-high);
+    }
+
+    .pre-dashboard .pre-chapter-head,
+    #dashboard .mid-chapter-head {
+      background: linear-gradient(
+        135deg,
+        var(--color-surface-default) 0%,
+        color-mix(in srgb, var(--chapter-soft) 48%, var(--color-surface-default)) 100%
+      );
+    }
+
+    .pre-dashboard .pre-chapter-plan :is(
+      .pre-strategy-workbench,
+      .pre-strategy-candidate
+    ),
+    .pre-dashboard .pre-chapter-intelligence :is(
+      .pre-analysis-card,
+      .pre-competitor-broadcast
+    ),
+    .pre-dashboard .pre-chapter-history :is(
+      .pre-history-insight
+    ),
+    #dashboard .mid-chapter-current :is(
+      .mid-recommendation-card,
+      .mid-current-ai-advice
+    ),
+    #dashboard .mid-chapter-next :is(
+      .mid-wave-candidate-card
+    ),
+    #dashboard .mid-chapter-monitor :is(
+      .mid-monitor-section,
+      .analysis-card,
+      .competitor-card
+    ),
+    .case-view :is(
+      .message-bubble,
+      .report-section
+    ),
+    .case-view .case-main-stream > .case-card {
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-default);
+      box-shadow: var(--shadow-low);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-strategy-workbench,
+    #dashboard .mid-chapter-current .mid-current-ai-advice {
+      box-shadow: var(--shadow-medium);
+    }
+
+    .pre-dashboard .pre-chapter-plan :is(
+      .pre-strategy-candidate
+    ),
+    .pre-dashboard .pre-chapter-history :is(
+      .pre-history-insight
+    ):hover,
+    #dashboard .mid-chapter-current :is(
+      .mid-recommendation-card
+    ):is(:hover, :focus-within),
+    #dashboard .mid-chapter-next :is(
+      .mid-wave-candidate-card
+    ):is(:hover, :focus-within) {
+      transform: none;
+      box-shadow: var(--shadow-low);
+    }
+
+    .pre-dashboard .pre-chapter-plan .pre-strategy-candidate.active,
+    #dashboard .mid-chapter-next .mid-wave-candidate-card:is(.recommended, .selected) {
+      border-color: var(--chapter-line-strong);
+      background: linear-gradient(
+        145deg,
+        var(--chapter-surface-strong),
+        var(--color-surface-default)
+      );
+      box-shadow: var(--shadow-low);
+    }
+
+    .pre-dashboard .pre-chapter-history .pre-history-insight,
+    .pre-dashboard .pre-chapter-history .pre-history-insight:is(
+      .tone-category,
+      .tone-audience,
+      .tone-wave,
+      .tone-competitor
+    ) {
+      border-top-color: var(--chapter-accent);
+    }
+
+    #dashboard .mid-chapter-monitor .mid-monitor-section-head,
+    #dashboard .mid-chapter-monitor :is(
+      .analysis-card,
+      .competitor-card
+    ) > .card-head {
+      background: linear-gradient(
+        145deg,
+        var(--color-surface-default),
+        var(--chapter-surface)
+      );
+    }
+
+    .case-view .report-section {
+      padding: var(--space-lg);
+    }
+
+    .case-view .report-section.is-collapsed {
+      padding: var(--space-md) var(--space-lg);
+    }
+
+    .case-view .report-section + .report-section,
+    .case-view .report-section + .report-section.is-collapsed,
+    .case-view .report-section.is-collapsed + .report-section.is-collapsed {
+      margin-top: var(--space-lg);
+      border-top: 1px solid var(--color-border-default);
+    }
+
+    .pre-dashboard .pre-chapter-activity :is(
+      .pre-calendar-select
+    ),
+    .pre-dashboard .pre-chapter-intelligence :is(
+      .pre-decision-bridge
+    ),
+    #dashboard .mid-chapter-current :is(
+      .mid-current-ai-advice
+    ),
+    #dashboard .mid-chapter-next :is(
+      .mid-next-overview-hero
+    ),
+    #dashboard .mid-chapter-monitor :is(
+      .dashboard-ai-overview,
+      .dashboard-ai-bridge,
+      .ai-box,
+      .kpi
+    ),
+    .case-view .final-decision {
+      background-image: linear-gradient(
+        145deg,
+        var(--color-surface-subtle),
+        var(--color-surface-default)
+      );
+    }
+
+    .pre-dashboard :is(
+      .pre-summary-structure-item,
+      .pre-summary-detail > div,
+      .pre-summary-confidence,
+      .pre-summary-metric,
+      .pre-strategy-candidate-metric,
+      .pre-metric-card,
+      .pre-series-summary,
+      .pre-insight-metrics > div,
+      .pre-insight-summary,
+      .pre-insight-facts > div
+    ),
+    #dashboard :is(
+      .kpi,
+      .mid-recommendation-metric,
+      .mid-recommendation-detail,
+      .mid38-summary-card,
+      .mid38-fact-card,
+      .mid38-preview-guardrails,
+      .mid38-preview-guardrail,
+      .mid-current-ai-item,
+      .mid-current-ai-effect,
+      .mid-candidate-kpi,
+      .mid-candidate-strategy-row,
+      .mid-next-fact-card,
+      .mid-next-strategy-card,
+      .mid-wave-guardrails > span,
+      .dashboard-ai-overview,
+      .dashboard-ai-bridge,
+      .ai-box
+    ),
+    .case-view :is(
+      .overall-metric,
+      .metric-version,
+      .ai-summary,
+      .ai-summary-item,
+      .strategy-card,
+      .scale-card,
+      .coverage-cell,
+      .candidate-fact,
+      .decision-point,
+      .pre-metric-card,
+      .pre-series-summary,
+      .pre-candidate-fact,
+      .strategy-detail-fact,
+      .strategy-detail-metric,
+      .strategy-detail-guardrail,
+      .effect
+    ) {
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-subtle);
+      box-shadow: none;
+    }
+
+    .pre-dashboard .pre-chapter-intelligence .pre-decision-bridge,
+    #dashboard .mid-chapter-monitor :is(
+      .dashboard-ai-overview,
+      .dashboard-ai-bridge,
+      .ai-box
+    ) {
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      background: linear-gradient(
+        145deg,
+        var(--color-surface-subtle),
+        var(--color-surface-default)
+      );
+      box-shadow: none;
+    }
+
+    #dashboard .mid-chapter-next .mid-candidate-risk {
+      border-radius: var(--radius-md);
+      box-shadow: none;
+    }
+
+    #dashboard .mid-chapter-next .mid-wave-candidate-card.selected :is(
+      .mid-candidate-kpi,
+      .mid-candidate-strategy-row
+    ) {
+      border-color: var(--chapter-line);
+      background: var(--chapter-surface);
+    }
+
+    .case-view .chat-message.user .message-bubble {
+      border-color: color-mix(in srgb, var(--blue) 18%, var(--color-border-default));
+      background: color-mix(in srgb, var(--blue) 7%, var(--color-surface-default));
+    }
+
+    .mode-tabs,
+    .pre-dashboard :is(
+      .pre-strategy-tabs,
+      .pre-endpoint-tabs,
+      .pre-batch-tabs,
+      .pre-chart-tabs,
+      .pre-opportunity-tabs,
+      .pre-insight-filter,
+      .pre-insight-drill-tabs,
+      .pre-channel-segment,
+      .pre-channel-wave-tabs,
+      .pre-tabs,
+      .year-tabs
+    ),
+    #dashboard :is(
+      .mid-next-detail-tabs,
+      .mid-wave-view-tabs,
+      .mid38-endpoints,
+      .subtabs,
+      .metric-seg,
+      .seg,
+      .year-tabs
+    ),
+    .case-view :is(
+      .case-seg,
+      .pre-analysis-tabs,
+      .pre-tabs
+    ) {
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      background: var(--color-surface-section);
+    }
+
+    .mode-tab,
+    .pre-dashboard :is(
+      .pre-strategy-tabs,
+      .pre-endpoint-tabs,
+      .pre-batch-tabs,
+      .pre-chart-tabs,
+      .pre-opportunity-tabs,
+      .pre-insight-filter,
+      .pre-insight-drill-tabs,
+      .pre-channel-segment,
+      .pre-channel-wave-tabs,
+      .pre-tabs,
+      .year-tabs
+    ) button,
+    #dashboard :is(
+      .mid-next-detail-tabs,
+      .mid-wave-view-tabs,
+      .mid38-endpoints,
+      .mid38-monitor-tabs,
+      .subtabs,
+      .metric-seg,
+      .seg,
+      .year-tabs
+    ) button,
+    .case-view :is(
+      .case-seg,
+      .pre-analysis-tabs,
+      .pre-tabs
+    ) button {
+      height: var(--control-height-standard) !important;
+      min-height: var(--control-height-standard) !important;
+      border-radius: var(--radius-md);
+    }
+
+    .mode-tab.active,
+    .mode-tab[aria-selected="true"],
+    .pre-dashboard :is(
+      .pre-strategy-tabs,
+      .pre-endpoint-tabs,
+      .pre-batch-tabs,
+      .pre-chart-tabs,
+      .pre-opportunity-tabs,
+      .pre-insight-filter,
+      .pre-insight-drill-tabs,
+      .pre-channel-segment,
+      .pre-channel-wave-tabs,
+      .pre-tabs,
+      .year-tabs
+    ) button:is(.active, [aria-selected="true"], [aria-pressed="true"]),
+    #dashboard :is(
+      .mid-next-detail-tabs,
+      .mid-wave-view-tabs,
+      .mid38-endpoints,
+      .mid38-monitor-tabs,
+      .subtabs,
+      .metric-seg,
+      .seg,
+      .year-tabs
+    ) button:is(.active, [aria-selected="true"], [aria-pressed="true"]),
+    .case-view :is(
+      .case-seg,
+      .pre-analysis-tabs,
+      .pre-tabs
+    ) button:is(.active, [aria-selected="true"], [aria-pressed="true"]) {
+      background: var(--color-surface-default) !important;
+      box-shadow: var(--shadow-low) !important;
+    }
+
+    .case-view .report-tool:is(.active, [aria-pressed="true"]) {
+      background: var(--color-surface-default) !important;
+      box-shadow: var(--shadow-low) !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :is(
+      .tag,
+      .source-status,
+      .candidate-badge,
+      .mid-candidate-badge,
+      .mid-recommendation-status,
+      .mid38-status,
+      .mid-current-ai-status,
+      .mid-current-ai-impact,
+      .case-state-pill,
+      .report-section-state,
+      .report-meta span,
+      .judgement,
+      .sig,
+      .level,
+      .pre-auto-badge,
+      .pre-governance-status
+    ) {
+      border-radius: var(--radius-pill);
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :is(
+      .ghost,
+      .secondary,
+      .message-action:not(.primary-action),
+      .report-tool,
+      .case-header-icon,
+      .composer-tool,
+      .mid-next-collapse
+    ) {
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary);
+      background: var(--color-surface-default);
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :is(
+      .ghost,
+      .secondary,
+      .message-action:not(.primary-action),
+      .report-tool,
+      .case-header-icon,
+      .composer-tool,
+      .mid-next-collapse
+    ):is(:hover, :focus-visible) {
+      border-color: var(--color-border-strong);
+      color: var(--color-text-primary);
+      background: var(--color-surface-subtle);
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :is(
+      .workbench-ask,
+      .ask-trigger,
+      .text-btn,
+      .mid-recommendation-toggle,
+      .mid-decision-toggle,
+      .mid-current-adjustment-toggle,
+      .mid-next-basis-toggle,
+      .mid-candidate-expand,
+      .mid38-toggle,
+      .pre-insight-toggle,
+      .pre-summary-detail-toggle,
+      .pre-inline-action,
+      [data-mid-next-collapse]
+    ) {
+      border: 1px solid var(--color-border-default) !important;
+      border-radius: var(--radius-md);
+      color: var(--color-text-secondary) !important;
+      background: var(--color-surface-subtle) !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :is(
+      .workbench-ask,
+      .ask-trigger,
+      .text-btn,
+      .mid-recommendation-toggle,
+      .mid-decision-toggle,
+      .mid-current-adjustment-toggle,
+      .mid-next-basis-toggle,
+      .mid-candidate-expand,
+      .mid38-toggle,
+      .pre-insight-toggle,
+      .pre-summary-detail-toggle,
+      .pre-inline-action,
+      [data-mid-next-collapse]
+    ):is(:hover, :focus-visible, [aria-expanded="true"]) {
+      border-color: var(--color-border-strong) !important;
+      color: var(--color-text-primary) !important;
+      background: var(--color-surface-default) !important;
+      box-shadow: none !important;
+      transform: none !important;
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :is(
+      .ghost,
+      .secondary,
+      .message-action:not(.primary-action),
+      .report-tool,
+      .case-header-icon,
+      .composer-tool,
+      .mid-next-collapse,
+      .workbench-ask,
+      .ask-trigger,
+      .text-btn,
+      .mid-recommendation-toggle,
+      .mid-decision-toggle,
+      .mid-current-adjustment-toggle,
+      .mid-next-basis-toggle,
+      .mid-candidate-expand,
+      .mid38-toggle,
+      .pre-insight-toggle,
+      .pre-summary-detail-toggle,
+      .pre-inline-action,
+      [data-mid-next-collapse]
+    ):focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color) !important;
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    :where(.pre-dashboard, #dashboard, .case-view) :is(
+      .ghost,
+      .secondary,
+      .message-action:not(.primary-action),
+      .report-tool,
+      .case-header-icon,
+      .composer-tool,
+      .mid-next-collapse,
+      .workbench-ask,
+      .ask-trigger,
+      .text-btn,
+      .mid-recommendation-toggle,
+      .mid-decision-toggle,
+      .mid-current-adjustment-toggle,
+      .mid-next-basis-toggle,
+      .mid-candidate-expand,
+      .mid38-toggle,
+      .pre-insight-toggle,
+      .pre-summary-detail-toggle,
+      .pre-inline-action,
+      [data-mid-next-collapse]
+    ):is(:disabled, [aria-disabled="true"]) {
+      border-color: var(--color-border-default) !important;
+      color: var(--state-disabled) !important;
+      background: var(--state-disabled-soft) !important;
+      box-shadow: none !important;
+      transform: none !important;
+      cursor: not-allowed;
+      opacity: 1;
+    }
+
+    /* Task 6: shared sidebar, conversation, report, and infrastructure language. */
+    .case-view .case-chat-header {
+      min-height: calc(var(--control-height-standard) + var(--space-lg));
+      gap: var(--space-md);
+      padding: 0 var(--space-lg);
+      border-color: var(--color-border-default);
+      background: color-mix(in srgb, var(--color-surface-default) 97%, transparent);
+      box-shadow: var(--shadow-low);
+    }
+
+    .case-view .case-task-title strong {
+      color: var(--color-text-primary);
+      font-size: var(--font-size-card) !important;
+    }
+
+    .case-view :is(.case-header-icon, .composer-tool) {
+      width: var(--control-size-icon) !important;
+      min-width: var(--control-size-icon) !important;
+      height: var(--control-size-icon) !important;
+      min-height: var(--control-size-icon) !important;
+    }
+
+    .case-view .case-mobile-report {
+      width: auto !important;
+      min-width: max-content !important;
+      padding: 0 var(--space-md) !important;
+    }
+
+    .case-view .case-message-list {
+      gap: var(--space-lg);
+    }
+
+    .case-view .chat-message {
+      gap: var(--space-sm);
+    }
+
+    .case-view .message-meta {
+      gap: var(--space-sm);
+      margin-bottom: var(--space-xs);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-caption) !important;
+    }
+
+    .case-view .message-meta strong {
+      color: var(--color-text-subtle);
+      font-size: var(--font-size-body) !important;
+    }
+
+    .case-view .message-bubble {
+      padding: var(--space-sm) var(--space-md);
+      border-color: var(--color-border-default);
+      border-radius: var(--radius-lg);
+      color: var(--color-text-primary);
+      background: var(--color-surface-default);
+      box-shadow: var(--shadow-low);
+      font-size: var(--font-size-body) !important;
+    }
+
+    .case-view :is(.message-callout, .composer-status) {
+      font-size: var(--font-size-caption) !important;
+    }
+
+    .case-view .message-action {
+      min-height: var(--control-height-standard) !important;
+      padding: 0 var(--space-md);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-body) !important;
+    }
+
+    .case-view .case-composer {
+      padding: var(--space-sm) var(--space-md) var(--space-md);
+      border-color: var(--color-border-default);
+      background: color-mix(in srgb, var(--color-surface-default) 98%, transparent);
+      box-shadow: var(--shadow-medium);
+    }
+
+    .case-view .prompt-chips {
+      gap: var(--space-sm);
+      margin-bottom: var(--space-sm);
+    }
+
+    .case-view .prompt-chip {
+      height: auto;
+      min-height: var(--control-height-standard) !important;
+      padding: 0 var(--space-md);
+      border-color: var(--color-border-default);
+      border-radius: var(--radius-pill);
+      color: var(--color-text-secondary);
+      background: var(--color-surface-subtle);
+      font-size: var(--font-size-body) !important;
+    }
+
+    .case-view .composer-box {
+      border-color: var(--color-border-subtle);
+      border-radius: var(--radius-lg);
+      background: var(--color-surface-default);
+    }
+
+    .case-view .composer-box textarea {
+      min-height: calc(var(--control-height-default) + var(--space-lg));
+      padding: var(--space-md) var(--space-md) var(--space-xs);
+      color: var(--color-text-primary);
+      font: var(--font-size-body)/1.55 var(--font) !important;
+    }
+
+    .case-view .composer-tools {
+      gap: var(--space-md);
+      padding: var(--space-xs) var(--space-sm) var(--space-sm);
+    }
+
+    .case-view .composer-toolset {
+      gap: var(--space-xs);
+      align-items: center;
+    }
+
+    .case-view .new-chat-model-picker {
+      height: var(--control-height-default);
+      min-height: var(--control-height-default);
+      border-radius: var(--radius-md);
+    }
+
+    .case-view .new-chat-model-picker select {
+      height: var(--control-height-default);
+      min-height: var(--control-height-default);
+      font: 650 var(--font-size-body)/1 var(--font) !important;
+    }
+
+    .case-view .composer-send {
+      height: var(--control-height-default);
+      min-height: var(--control-height-default) !important;
+      padding: 0 var(--space-lg);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-body) !important;
+    }
+
+    .case-view .case-report-pane {
+      grid-template-rows: calc(var(--control-height-default) + var(--space-lg)) minmax(0, 1fr);
+      background: var(--color-surface-section);
+    }
+
+    .case-view .report-toolbar {
+      min-height: calc(var(--control-height-default) + var(--space-lg));
+      gap: var(--space-md);
+      padding: 0 var(--space-md);
+      border-color: var(--color-border-default);
+      background: color-mix(in srgb, var(--color-surface-default) 97%, transparent);
+    }
+
+    .case-view .report-toolbar-title strong {
+      color: var(--color-text-primary);
+      font-size: var(--font-size-card) !important;
+    }
+
+    .case-view .report-toolbar-title span {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-caption) !important;
+    }
+
+    .case-view .report-toolbar-actions {
+      gap: var(--space-xs);
+    }
+
+    .case-view .report-tool {
+      height: var(--control-height-standard);
+      min-height: var(--control-height-standard) !important;
+      padding: 0 var(--space-md);
+      border-radius: var(--radius-md);
+      font-size: var(--font-size-body) !important;
+    }
+
+    .case-view .report-tool.icon-only {
+      width: var(--control-size-icon) !important;
+      min-width: var(--control-size-icon) !important;
+      height: var(--control-size-icon) !important;
+      min-height: var(--control-size-icon) !important;
+      padding: 0 !important;
+    }
+
+    .case-view .report-queue-head {
+      padding: var(--space-lg) var(--space-md) var(--space-sm);
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-caption) !important;
+      letter-spacing: .06em;
+    }
+
+    .case-view .report-queue-list {
+      gap: var(--space-xs);
+      padding: 0 var(--space-sm) var(--space-lg);
+    }
+
+    .case-view .report-queue-item {
+      min-height: calc(var(--control-height-standard) + var(--space-xl));
+      gap: var(--space-sm);
+      padding: var(--space-sm);
+      border-radius: var(--radius-md);
+    }
+
+    .case-view .queue-index {
+      width: var(--space-xl);
+      height: var(--space-xl);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-micro) !important;
+    }
+
+    .case-view .queue-copy strong {
+      color: var(--color-text-primary);
+      font-size: var(--font-size-body) !important;
+    }
+
+    .case-view .queue-copy span {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-caption) !important;
+    }
+
+    .case-view .report-section-no {
+      min-height: var(--space-xl);
+      padding: 0 var(--space-sm);
+      border-radius: var(--radius-sm);
+      font-size: var(--font-size-micro) !important;
+    }
+
+    .case-view .report-section-head h3 {
+      color: var(--color-text-heading);
+      font-size: var(--font-size-subsection) !important;
+    }
+
+    .case-view .report-section-state,
+    .case-view .report-section-lead,
+    .case-view .report-placeholder {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-caption) !important;
+    }
+
+    .case-view .report-section-remove {
+      width: var(--control-size-icon) !important;
+      min-width: var(--control-size-icon) !important;
+      height: var(--control-size-icon) !important;
+      min-height: var(--control-size-icon) !important;
+    }
+
+    .infra-management {
+      color: var(--color-text-primary);
+      background: var(--color-surface-page);
+      font-size: var(--font-size-body);
+    }
+
+    .infra-management :is(
+      .resource-title p,
+      .resource-card-copy,
+      .resource-form-note,
+      .lark-resource-description
+    ) {
+      font-size: var(--font-size-caption) !important;
+    }
+
+    .infra-management :is(
+      .resource-table-title,
+      .resource-card-title strong
+    ) {
+      font-size: var(--font-size-card) !important;
+    }
+
+    .infra-management :is(
+      .resource-card-title span,
+      .resource-name small,
+      .resource-card-meta span,
+      .resource-status,
+      .resource-source-type
+    ) {
+      font-size: var(--font-size-micro) !important;
+    }
+
+    .infra-management :is(
+      .resource-secondary,
+      .resource-filter,
+      .resource-action,
+      .resource-summary-tab,
+      .resource-type-tab,
+      .resource-tag
+    ) {
+      height: auto;
+      min-height: var(--control-height-standard) !important;
+      font-size: var(--font-size-body) !important;
+    }
+
+    .infra-management .resource-primary {
+      height: auto;
+      min-height: var(--control-height-default) !important;
+      font-size: var(--font-size-body) !important;
+    }
+
+    .infra-management .core-action-icon {
+      width: 16px;
+      height: 16px;
+      flex-basis: 16px;
+    }
+
+    @media (max-width: 1279px) {
+      .sidebar {
+        overflow: visible;
+      }
+
+      .sidebar :is(.workspace-entry, .history-item, .infra-btn)[data-tooltip] {
+        position: relative;
+      }
+
+      .sidebar :is(.workspace-entry, .history-item, .infra-btn)[data-tooltip]::before,
+      .sidebar :is(.workspace-entry, .history-item, .infra-btn)[data-tooltip]::after {
+        position: absolute;
+        top: 50%;
+        z-index: 160;
+        visibility: hidden;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity .14s ease, transform .14s ease, visibility .14s;
+      }
+
+      .sidebar :is(.workspace-entry, .history-item, .infra-btn)[data-tooltip]::before {
+        left: calc(100% + var(--space-sm));
+        width: var(--space-sm);
+        height: var(--space-sm);
+        border-bottom: 1px solid #424c64;
+        border-left: 1px solid #424c64;
+        background: #222a3d;
+        content: "";
+        transform: translate(-4px, -50%) rotate(45deg);
+      }
+
+      .sidebar :is(.workspace-entry, .history-item, .infra-btn)[data-tooltip]::after {
+        left: calc(100% + var(--space-md));
+        min-height: var(--control-height-standard);
+        padding: 7px 10px;
+        border: 1px solid #424c64;
+        border-radius: var(--radius-md);
+        color: var(--color-text-inverse);
+        background: #222a3d;
+        box-shadow: var(--shadow-high);
+        content: attr(data-tooltip);
+        font-size: var(--font-size-caption);
+        font-weight: 650;
+        line-height: 1.4;
+        white-space: nowrap;
+        transform: translate(-4px, -50%);
+      }
+
+      .sidebar :is(.workspace-entry, .history-item, .infra-btn)[data-tooltip]:is(:hover, :focus-visible)::before {
+        visibility: visible;
+        opacity: 1;
+        transform: translate(0, -50%) rotate(45deg);
+      }
+
+      .sidebar :is(.workspace-entry, .history-item, .infra-btn)[data-tooltip]:is(:hover, :focus-visible)::after {
+        visibility: visible;
+        opacity: 1;
+        transform: translate(0, -50%);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .case-view .case-report-pane {
+        grid-template-rows: auto minmax(0, 1fr);
+      }
+
+      .case-view .report-toolbar {
+        padding: var(--space-sm) var(--space-md);
+      }
+    }
+
+    /* Task 8: independent acceptance blockers. */
+    .pre-dashboard .pre-home-shell {
+      gap: var(--space-2xl);
+    }
+
+    .pre-dashboard .pre-strategy-workspace-title,
+    #dashboard .mid-monitor-section-head h3 {
+      font-size: var(--font-size-subsection-lg) !important;
+    }
+
+    .pre-dashboard .pre-history-insight h4,
+    #dashboard #midNextWavePlanner h4 {
+      font-size: var(--font-size-card-lg) !important;
+    }
+
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) *::before,
+    :where(.sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover) *::after {
+      font-size: max(var(--font-size-micro), 1em) !important;
+    }
+
+    .pre-dashboard .pre-opportunity-focus b {
+      color: #765117 !important;
+    }
+
+    .case-view .composer-status,
+    .case-view .chat-plan-row > em,
+    .case-view .chat-process-step {
+      color: #596579 !important;
+    }
+
+    .case-view .chat-process-step.active {
+      color: #3157c4 !important;
+    }
+
+    .case-view .chat-process-step.done {
+      color: #24715d !important;
+    }
+
+    .case-view .pre-series-summary > span,
+    .case-view .chat-plan-row:not(.done):not(.active) > b {
+      color: #596579 !important;
+    }
+
+    .case-view .message-action:not(.primary-action),
+    .case-view .prompt-chip {
+      color: #596579 !important;
+    }
+
+    @keyframes chat-message-in {
+      from { opacity: 1; transform: translateY(5px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .pre-dashboard .pre-timeline-coupon-group:focus-visible {
+      outline: var(--focus-ring-width) solid var(--focus-ring-color);
+      outline-offset: var(--focus-ring-offset);
+    }
+
+    .pre-dashboard .pre-chart-point-hit {
+      fill: transparent;
+      pointer-events: all;
+    }
+
+    .pre-dashboard .pre-chart-point:focus-visible > .pre-chart-point-halo {
+      r: 16;
+    }
+
+    #dashboard :is(.primary, .mid-recommendation-continue) {
+      height: auto;
+      min-height: var(--control-height-default) !important;
+    }
+
+    .pre-dashboard .pre-strategy-candidate-metric small {
+      overflow: visible;
+      text-overflow: clip;
+      white-space: normal;
+    }
+
+    .pre-dashboard .pre-calendar-select select {
+      width: 100%;
+    }
+
+    #dashboard #midNextWavePlanner :is(
+      .mid-candidate-summary,
+      .mid-candidate-condition,
+      .mid-candidate-condition span,
+      .mid-candidate-kpi small,
+      .mid-candidate-strategy-row span,
+      .mid-candidate-risk span
+    ) {
+      display: block;
+      min-height: 0;
+      max-height: none;
+      overflow: visible;
+      text-overflow: clip;
+      white-space: normal;
+      -webkit-box-orient: initial;
+      -webkit-line-clamp: unset;
+      line-clamp: unset;
+    }
+
+    #dashboard #midNextWavePlanner .mid-candidate-strategy-row {
+      min-height: 0;
+    }
+
+    .pre-insight-toggle .core-action-icon {
+      transition: transform .18s ease;
+    }
+
+    .pre-insight-toggle[aria-expanded="true"] .core-action-icon {
+      transform: rotate(180deg);
+    }
+
+    @media (max-width: 900px) {
+      .pre-dashboard .pre-calendar-select {
+        grid-column: 1 / -1;
+      }
+    }
   </style>
 </head>
 <body>
@@ -16962,13 +18234,13 @@
         </div>
       </div>
 
-      <div class="nav-label workspace-label">AGENT 工作台</div>
+      <div class="nav-label workspace-label">策略工作台</div>
       <button
         class="workspace-entry strategy-inspiration active"
         id="strategyInspirationButton"
         aria-label="查看策略灵感"
         aria-current="page"
-        title="查看策略灵感"
+        data-tooltip="查看策略灵感"
       >
         <span class="workspace-entry-icon" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M8 2v12M2 8h12M4 4l8 8M12 4l-8 8"/></svg></span>
         <span class="workspace-entry-copy">查看策略灵感</span>
@@ -16977,7 +18249,7 @@
         class="workspace-entry new-chat"
         id="newChatButton"
         aria-label="新建策略对话"
-        title="新建策略对话"
+        data-tooltip="新建策略对话"
       >
         <span class="workspace-entry-icon" aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M8 3v10M3 8h10"/></svg></span>
         <span class="workspace-entry-copy">新建策略对话</span>
@@ -16985,12 +18257,12 @@
 
       <div class="nav-label history-label">历史对话 · 2</div>
       <div class="history-list">
-        <button class="history-item" data-history="促前券档位设计">
+        <button class="history-item" data-history="促前券档位设计" data-tooltip="促前券档位设计" aria-label="促前券档位设计">
           <span class="history-copy">
             <strong>促前券档位设计</strong>
           </span>
         </button>
-        <button class="history-item" data-history="促中预算紧张">
+        <button class="history-item" data-history="促中预算紧张" data-tooltip="促中预算紧张" aria-label="促中预算紧张">
           <span class="history-copy">
             <strong>促中预算紧张</strong>
           </span>
@@ -16999,11 +18271,11 @@
 
       <div class="sidebar-lower">
         <nav class="infra-grid" aria-label="基础能力">
-          <button class="infra-btn" data-infra-view="knowledge" aria-label="Knowledge"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M3 2.5h8.5A1.5 1.5 0 0 1 13 4v9.5H4.5A1.5 1.5 0 0 1 3 12V2.5Z"/><path d="M5.5 5.5h5M5.5 8h5"/></svg></b><span>Knowledge</span></button>
-          <button class="infra-btn" data-infra-view="datasource" aria-label="Datasource"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><ellipse cx="8" cy="3.5" rx="5" ry="2"/><path d="M3 3.5v4c0 1.1 2.2 2 5 2s5-.9 5-2v-4M3 7.5v4c0 1.1 2.2 2 5 2s5-.9 5-2v-4"/></svg></b><span>Datasource</span></button>
-          <button class="infra-btn" data-infra-view="mcp" aria-label="MCP"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><circle cx="4" cy="4" r="1.5"/><circle cx="12" cy="4" r="1.5"/><circle cx="8" cy="12" r="1.5"/><path d="m5.2 5 2 5.4M10.8 5l-2 5.4M5.5 4h5"/></svg></b><span>MCP</span></button>
-          <button class="infra-btn" data-infra-view="skill" aria-label="Skill"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M8 2v12M2 8h12M4 4l8 8M12 4l-8 8"/></svg></b><span>Skill</span></button>
-          <button class="infra-btn" data-infra-view="lark" aria-label="飞书机器人"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><circle cx="8" cy="5" r="2.5"/><path d="M3.5 14c.4-3 2-4.5 4.5-4.5s4.1 1.5 4.5 4.5"/></svg></b><span>飞书机器人</span></button>
+          <button class="infra-btn" data-infra-view="knowledge" data-tooltip="知识库" aria-label="知识库"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M3 2.5h8.5A1.5 1.5 0 0 1 13 4v9.5H4.5A1.5 1.5 0 0 1 3 12V2.5Z"/><path d="M5.5 5.5h5M5.5 8h5"/></svg></b><span>知识库</span></button>
+          <button class="infra-btn" data-infra-view="datasource" data-tooltip="数据源" aria-label="数据源"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><ellipse cx="8" cy="3.5" rx="5" ry="2"/><path d="M3 3.5v4c0 1.1 2.2 2 5 2s5-.9 5-2v-4M3 7.5v4c0 1.1 2.2 2 5 2s5-.9 5-2v-4"/></svg></b><span>数据源</span></button>
+          <button class="infra-btn" data-infra-view="mcp" data-tooltip="MCP" aria-label="MCP"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><circle cx="4" cy="4" r="1.5"/><circle cx="12" cy="4" r="1.5"/><circle cx="8" cy="12" r="1.5"/><path d="m5.2 5 2 5.4M10.8 5l-2 5.4M5.5 4h5"/></svg></b><span>MCP</span></button>
+          <button class="infra-btn" data-infra-view="skill" data-tooltip="技能" aria-label="技能"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><path d="M8 2v12M2 8h12M4 4l8 8M12 4l-8 8"/></svg></b><span>技能</span></button>
+          <button class="infra-btn" data-infra-view="lark" data-tooltip="飞书机器人" aria-label="飞书机器人"><b aria-hidden="true"><svg viewBox="0 0 16 16" focusable="false"><circle cx="8" cy="5" r="2.5"/><path d="M3.5 14c.4-3 2-4.5 4.5-4.5s4.1 1.5 4.5 4.5"/></svg></b><span>飞书机器人</span></button>
         </nav>
         <div class="sidebar-foot">
           <div class="service"><i class="live-dot"></i>Agent 服务正常</div>
@@ -17057,7 +18329,8 @@
                 </div>
               </header>
               <div class="pre-chapter-body pre-chapter-plan-body">
-                <section class="pre-strategy-workbench" id="preStrategyWorkbench" aria-label="券波次策略工作台">
+                <section class="pre-strategy-workbench" id="preStrategyWorkbench" aria-labelledby="preStrategyWorkspaceTitle">
+                  <h3 class="pre-strategy-workspace-title" id="preStrategyWorkspaceTitle">候选方案与波次配置</h3>
                   <div class="pre-strategy-candidates" id="preStrategyCandidates" role="tablist" aria-label="促前候选方案"></div>
                   <div class="pre-strategy-toolbar">
                     <div class="pre-strategy-tabs" id="preStrategyViewTabs" role="tablist" aria-label="促前方案视图"></div>
@@ -17100,7 +18373,7 @@
                           data-ask-context="近 20 天自然水位"
                           data-ask-summary="GMV、DAC 与客单的历史基线趋势"
                           data-ask-questions="近期水位主要由什么驱动？|把工作日和周末拆开解释|这个趋势如何影响促前券档？"
-                        >✦ 追问</button>
+                        >追问</button>
                       </div>
                     </header>
                     <div class="pre-chart-body">
@@ -17127,7 +18400,7 @@
                           data-ask-context="促前机会与效率"
                           data-ask-summary="类目爆发指数与券档核销效率"
                           data-ask-questions="哪些类目值得优先配置预算？|高门槛券应该绑定哪些类目？|把机会转成类目 × 券档动作"
-                        >✦ 追问</button>
+                        >追问</button>
                       </div>
                     </header>
                     <div class="pre-opportunity-body" id="preOpportunityChart" aria-live="polite"></div>
@@ -17148,7 +18421,7 @@
                         data-ask-context="促前竞对策略变化"
                         data-ask-summary="竞对的人群分层、会员加码和投放节奏变化"
                         data-ask-questions="哪些竞对变化需要纳入促前规划？|为什么不建议机械跟价？|结合当前候选方案生成应对优先级"
-                      >✦ 追问</button>
+                      >追问</button>
                       <button class="ghost" id="preWatchCompetitorBtn" type="button" data-pre-competitor-watch>关注变化</button>
                     </div>
                   </div>
@@ -17184,11 +18457,12 @@
                     data-ask-context="历史实验洞察"
                     data-ask-summary="历史水位、类目、券档、人群、渠道和竞对的证据集合"
                     data-ask-questions="先总结最重要的三条历史规律|哪些结论不能直接用于本期？|按影响程度生成验证清单"
-                  >✦ 追问</button>
+                  >追问</button>
                 </div>
               </header>
               <div class="pre-chapter-body pre-chapter-history-body">
-                <div class="pre-insight-body" id="preHistoricalInsights" aria-live="polite"></div>
+                <h3 class="visually-hidden" id="preHistoricalInsightListTitle">历史洞察卡片</h3>
+                <div class="pre-insight-body" id="preHistoricalInsights" aria-labelledby="preHistoricalInsightListTitle" aria-live="polite"></div>
               </div>
             </section>
           </div>
@@ -17371,14 +18645,14 @@
               <div><h3 id="midMonitorKpiTitle">核心指标监控</h3><p>先核对目标、核销、预算与钱效</p></div>
             </header>
             <div class="dashboard-section-title" id="midKpiSectionTitle">
-              <div><h4>当前核心指标监控</h4><span>目标、核销、预算与钱效</span></div>
+              <div><strong class="mid-kpi-workspace-label">当前波次指标</strong><span>目标、核销、预算与钱效</span></div>
               <button
                 class="workbench-ask"
                 data-workbench-ask="mid"
                 data-ask-context="促中核心指标"
                 data-ask-summary="GMV 84.58 亿，核销率 32.9%，预算 8.14 亿，支付兑换比 10.4"
                 data-ask-questions="四项指标之间有什么因果关系？|预算占满后还有哪些优化空间？|哪项指标最需要设置止损线？"
-              >✦ 追问</button>
+              >追问</button>
             </div>
 
             <div class="kpis" id="midKpis">
@@ -17422,7 +18696,7 @@
               <div class="card-body">
                 <div class="view active" id="monitorView" role="tabpanel" aria-labelledby="monitorViewTab">
                   <div class="monitor-toolbar">
-                    <div class="hint" id="midTrendPeriod">2026.03.04 — 03.08 · 38节</div>
+                    <div class="hint" id="midTrendPeriod">2026.03.04—03.08 · 38节</div>
                     <div class="metric-seg" data-group="metric">
                       <button class="active" data-metric="redemption">用户核销率</button>
                       <button data-metric="gmv">支付GMV</button>
@@ -17489,7 +18763,7 @@
                           data-ask-context="核销趋势洞察"
                           data-ask-summary="前两日和高门槛券核销偏低，末日催用明显有效"
                           data-ask-questions="为什么前两日核销偏低？|哪些点位应该提前切换为催用？|按日期和面额拆解低核销原因"
-                        >✦ 追问</button>
+                        >追问</button>
                       </div>
                       <div class="ai-copy">
                         <p><strong>低核销集中在前两日与高门槛券。</strong> 3/4 用户核销率仅 21%；1500-150、2000-200、3000-300 券的券核销率分别为 2.6%、5.2%、6.7%，显著低于 300-40 的 32.6%。</p>
@@ -17505,7 +18779,7 @@
 
                   <div class="breakdown">
                     <div class="breakdown-top">
-                      <div class="breakdown-title">领取 / 核销拆解</div>
+                  <div class="breakdown-title">领取与核销拆解</div>
                       <div class="breakdown-actions">
                         <div class="seg" data-group="dimension" role="group" aria-label="领取核销拆解维度">
                           <button class="active" type="button" data-mid-redemption-dimension="audience" aria-pressed="true">人群</button>
@@ -17518,7 +18792,7 @@
                           data-ask-context="领取核销拆解"
                           data-ask-summary="高消费力女性贡献主要 GMV，低消费力和高门槛泛发效率偏低"
                           data-ask-questions="继续下钻到人群 × 渠道 × 面额|为什么高消费力女性更适合放量？|列出应该收缩的低效组合"
-                        >✦ 追问</button>
+                        >追问</button>
                       </div>
                     </div>
                     <div class="mid-evidence-table-scroll redemption" tabindex="0" role="region" aria-label="领取核销拆解宽表，可横向滚动">
@@ -17573,7 +18847,7 @@
                         data-ask-context="消费券实验结论"
                         data-ask-summary="主端大促反转券组兑换比 6.71、增量 +22.12%，建议定向扩量并保留对照"
                         data-ask-questions="为什么主端反转券组最优？|扩量 20% 的风险是什么？|如何设计 10% 对照组？"
-                      >✦ 追问</button>
+                      >追问</button>
                     </div>
                     <div class="ai-copy"><p>“消费券主端·大促反转”在目标人群上的增量与兑换比均最优，建议在预算不变的前提下扩量 20%，并保留 10% 对照观察稳定性。</p></div>
                   </aside>
@@ -17600,7 +18874,7 @@
                     data-ask-context="竞对策略变化"
                     data-ask-summary="竞对正在增加人群分层、会员加码和低门槛券频次"
                     data-ask-questions="哪些竞对变化需要跟进？|为什么不建议机械跟价？|结合自身钱效生成应对优先级"
-                  >✦ 追问</button>
+                  >追问</button>
                   <button class="ghost" id="watchBtn">关注变化</button>
                 </div>
               </div>
@@ -17651,7 +18925,7 @@
                 data-ask-context="促中整体结论"
                 data-ask-summary="预算使用 100%，GMV 达成 107%，应优先做结构性调优"
                 data-ask-questions="为什么预算用满后仍建议调整结构？|哪些高门槛券应该先收缩？|把整体结论拆成可执行优先级"
-              >✦ 追问</button>
+              >追问</button>
             </section>
 
             <section
@@ -17672,7 +18946,7 @@
                 data-ask-context="促中归因小结"
                 data-ask-summary="人群、面额和点位组合是当前预算效率差异的主要来源"
                 data-ask-questions="把归因拆成预算迁移动作|哪些证据支持优先调结构？|生成按影响排序的执行清单"
-              >✦ 追问</button>
+              >追问</button>
             </section>
           </section>
 
@@ -17689,7 +18963,7 @@
                   <strong id="newChatTitle">新策略对话</strong>
                 </div>
                 <div class="case-chat-actions">
-                  <button class="case-header-icon" id="newChatBackToDashboard" aria-label="回到策略工作台">←</button>
+                  <button class="case-header-icon" id="newChatBackToDashboard" data-core-icon="back" data-core-icon-only="true" aria-label="回到策略工作台"></button>
                 </div>
               </header>
 
@@ -17698,14 +18972,14 @@
               </div>
 
               <footer class="case-composer" aria-label="新策略对话输入区">
-                <div class="prompt-chips" id="newChatPromptChips" aria-label="推荐开场问题"></div>
+                <div class="prompt-chips" id="newChatPromptChips" role="group" aria-label="推荐开场问题"></div>
                 <div class="composer-box">
                   <textarea id="newChatComposerInput" rows="2" aria-label="描述策略问题" placeholder="描述你的活动阶段、目标、预算或当前遇到的问题…"></textarea>
                   <div class="composer-tools new-chat-composer-tools">
                     <div class="new-chat-composer-leading">
-                      <button class="composer-tool" id="newChatComposerAttach" aria-label="添加附件">＋</button>
+                      <button class="composer-tool" id="newChatComposerAttach" data-core-icon="add" data-core-icon-only="true" aria-label="添加附件"></button>
                       <div class="composer-status">
-                        <span id="newChatComposerStatus">Enter 发送 · Shift+Enter 换行</span>
+                        <span id="newChatComposerStatus">回车发送 · Shift + 回车换行</span>
                       </div>
                     </div>
                     <div class="composer-toolset">
@@ -17724,8 +18998,8 @@
                         </select>
                         <span class="new-chat-model-chevron" aria-hidden="true"></span>
                       </label>
-                      <button class="composer-tool" id="newChatComposerClear" aria-label="清空输入">×</button>
-                      <button class="composer-send" id="newChatComposerSend">发送</button>
+                      <button class="composer-tool" id="newChatComposerClear" data-core-icon="close" data-core-icon-only="true" aria-label="清空输入"></button>
+                      <button class="composer-send" id="newChatComposerSend" data-core-icon="send">发送</button>
                     </div>
                   </div>
                 </div>
@@ -17743,7 +19017,7 @@
                 </div>
                 <div class="case-chat-actions">
                   <button class="case-header-icon case-mobile-report" id="preOpenCaseReport" aria-label="查看促前渐进式报告">查看报告</button>
-                  <button class="case-header-icon" id="preBackToDashboard" aria-label="回到促前规划工作台">←</button>
+                  <button class="case-header-icon" id="preBackToDashboard" data-core-icon="back" data-core-icon-only="true" aria-label="回到促前规划工作台"></button>
                 </div>
               </header>
 
@@ -17753,17 +19027,17 @@
 
               <footer class="case-composer" aria-label="促前对话输入区">
                 <div class="case-artifact-dock" id="preCaseArtifactDock" aria-label="促前已生成报告附件"></div>
-                <div class="prompt-chips" id="preCasePromptChips" aria-label="促前推荐问题"></div>
+                <div class="prompt-chips" id="preCasePromptChips" role="group" aria-label="促前推荐问题"></div>
                 <div class="composer-box">
                   <textarea id="preCaseComposerInput" rows="2" aria-label="继续追问或补充促前分析要求" placeholder="继续追问，或补充预算、类目与券档要求…"></textarea>
                   <div class="composer-tools">
                     <div class="composer-status">
-                      <span id="preCaseComposerStatus">Enter 发送 · Shift+Enter 换行</span>
+                      <span id="preCaseComposerStatus">回车发送 · Shift + 回车换行</span>
                     </div>
                     <div class="composer-toolset">
-                      <button class="composer-tool" id="preCaseComposerAttach" aria-label="添加促前附件">＋</button>
-                      <button class="composer-tool" id="preCaseComposerClear" aria-label="清空促前输入">×</button>
-                      <button class="composer-send" id="preCaseComposerSend">发送</button>
+                      <button class="composer-tool" id="preCaseComposerAttach" data-core-icon="add" data-core-icon-only="true" aria-label="添加促前附件"></button>
+                      <button class="composer-tool" id="preCaseComposerClear" data-core-icon="close" data-core-icon-only="true" aria-label="清空促前输入"></button>
+                      <button class="composer-send" id="preCaseComposerSend" data-core-icon="send">发送</button>
                     </div>
                   </div>
                 </div>
@@ -17780,15 +19054,15 @@
                   <button class="report-tool" id="preReportCustomize" aria-expanded="false">自定义</button>
                   <button class="report-tool active" id="preReportQueueMode" aria-pressed="true">生成队列</button>
                   <button class="report-tool" id="preReportFocusMode" aria-pressed="false">查看报告</button>
-                  <button class="report-tool icon-only" id="preReportFullscreen" aria-label="全屏查看促前报告">⛶</button>
-                  <button class="report-tool icon-only" id="preReportCloseMobile" aria-label="关闭促前报告">×</button>
+                  <button class="report-tool icon-only" id="preReportFullscreen" data-core-icon="fullscreen" data-core-icon-only="true" aria-label="全屏查看促前报告"></button>
+                  <button class="report-tool icon-only" id="preReportCloseMobile" data-core-icon="close" data-core-icon-only="true" aria-label="关闭促前报告"></button>
                 </div>
               </header>
 
               <aside class="report-customize-panel" id="preReportCustomizePanel" aria-label="自定义促前报告">
                 <div class="customize-head">
                   <strong>自定义促前报告</strong>
-                  <button id="preReportCustomizeClose" aria-label="关闭促前报告自定义">×</button>
+                  <button id="preReportCustomizeClose" data-core-icon="close" data-core-icon-only="true" aria-label="关闭促前报告自定义"></button>
                 </div>
                 <div class="customize-body">
                   <label class="customize-label" for="preReportTitleInput">报告标题</label>
@@ -17803,7 +19077,7 @@
 
               <div class="report-workspace" id="preReportWorkspace">
                 <nav class="report-queue" aria-label="促前报告章节生成队列">
-                  <div class="report-queue-head">Pre-campaign queue</div>
+                  <div class="report-queue-head">促前生成队列</div>
                   <ol class="report-queue-list" id="preReportQueueList"></ol>
                 </nav>
                 <div class="report-canvas-wrap" id="preReportCanvasWrap">
@@ -17813,12 +19087,12 @@
 
               <div class="report-file-preview" id="preReportFilePreview" aria-label="促前生成文件预览">
                 <div class="file-preview-bar">
-                  <button class="report-tool" id="preFilePreviewBack">← 返回生成队列</button>
+                  <button class="report-tool" id="preFilePreviewBack" data-core-icon="back">返回生成队列</button>
                   <strong id="preFilePreviewName">促前券档位设计_策略与预算规划.html</strong>
                   <div class="report-toolbar-actions">
-                    <button class="report-tool" id="preFilePreviewDownload">下载 HTML</button>
-                    <button class="report-tool icon-only" id="preFilePreviewFullscreen" aria-label="全屏预览促前文件">⛶</button>
-                    <button class="report-tool icon-only" id="preFilePreviewClose" aria-label="关闭促前文件预览">×</button>
+                    <button class="report-tool" id="preFilePreviewDownload" data-core-icon="download">下载 HTML</button>
+                    <button class="report-tool icon-only" id="preFilePreviewFullscreen" data-core-icon="fullscreen" data-core-icon-only="true" aria-label="全屏预览促前文件"></button>
+                    <button class="report-tool icon-only" id="preFilePreviewClose" data-core-icon="close" data-core-icon-only="true" aria-label="关闭促前文件预览"></button>
                   </div>
                 </div>
                 <iframe id="preReportPreviewFrame" title="促前券档位设计策略与预算规划报告预览"></iframe>
@@ -17837,7 +19111,7 @@
                 </div>
                 <div class="case-chat-actions">
                   <button class="case-header-icon case-mobile-report" id="openCaseReport" aria-label="查看渐进式报告">查看报告</button>
-                  <button class="case-header-icon" id="backToDashboard" aria-label="回到促中调优工作台">←</button>
+                  <button class="case-header-icon" id="backToDashboard" data-core-icon="back" data-core-icon-only="true" aria-label="回到促中调优工作台"></button>
                 </div>
                 <span hidden id="caseApprovalStatus">待业务确认</span>
                 <span hidden id="caseReportProgressLabel">0 / 6 章节</span>
@@ -17850,17 +19124,17 @@
 
               <footer class="case-composer" aria-label="对话输入区">
                 <div class="case-artifact-dock" id="caseArtifactDock" aria-label="已生成报告附件"></div>
-                <div class="prompt-chips" id="casePromptChips" aria-label="推荐问题"></div>
+                <div class="prompt-chips" id="casePromptChips" role="group" aria-label="推荐问题"></div>
                 <div class="composer-box">
                   <textarea id="caseComposerInput" rows="2" aria-label="继续追问或补充分析要求" placeholder="继续追问，或补充预算、人群与风险要求…"></textarea>
                   <div class="composer-tools">
                     <div class="composer-status">
-                      <span id="caseComposerStatus">Enter 发送 · Shift+Enter 换行</span>
+                      <span id="caseComposerStatus">回车发送 · Shift + 回车换行</span>
                     </div>
                     <div class="composer-toolset">
-                      <button class="composer-tool" id="caseComposerAttach" aria-label="添加附件">＋</button>
-                      <button class="composer-tool" id="caseComposerClear" aria-label="清空输入">×</button>
-                      <button class="composer-send" id="caseComposerSend">发送</button>
+                      <button class="composer-tool" id="caseComposerAttach" data-core-icon="add" data-core-icon-only="true" aria-label="添加附件"></button>
+                      <button class="composer-tool" id="caseComposerClear" data-core-icon="close" data-core-icon-only="true" aria-label="清空输入"></button>
+                      <button class="composer-send" id="caseComposerSend" data-core-icon="send">发送</button>
                     </div>
                   </div>
                 </div>
@@ -17877,19 +19151,19 @@
                   <button class="report-tool" id="reportCustomize" aria-expanded="false">自定义</button>
                   <button class="report-tool active" id="reportQueueMode" aria-pressed="true">生成队列</button>
                   <button class="report-tool" id="reportFocusMode" aria-pressed="false">查看报告</button>
-                  <button class="report-tool icon-only" id="reportFullscreen" aria-label="全屏查看报告">⛶</button>
-                  <button class="report-tool icon-only" id="reportCloseMobile" aria-label="关闭报告">×</button>
+                  <button class="report-tool icon-only" id="reportFullscreen" data-core-icon="fullscreen" data-core-icon-only="true" aria-label="全屏查看报告"></button>
+                  <button class="report-tool icon-only" id="reportCloseMobile" data-core-icon="close" data-core-icon-only="true" aria-label="关闭报告"></button>
                 </div>
               </header>
 
               <aside class="report-customize-panel" id="reportCustomizePanel" aria-label="自定义报告">
                 <div class="customize-head">
                   <strong>自定义报告</strong>
-                  <button id="reportCustomizeClose" aria-label="关闭自定义报告">×</button>
+                  <button id="reportCustomizeClose" data-core-icon="close" data-core-icon-only="true" aria-label="关闭自定义报告"></button>
                 </div>
                 <div class="customize-body">
                   <label class="customize-label" for="reportTitleInput">报告标题</label>
-                  <input class="customize-title-input" id="reportTitleInput" type="text" value="促中预算紧张 · V1 / V15 策略分析">
+                  <input class="customize-title-input" id="reportTitleInput" type="text" value="促中预算紧张 · V1 与 V15 策略分析">
                   <div class="customize-section-list" id="reportCustomizeSections"></div>
                   <div class="customize-actions">
                     <button id="reportRestoreAll">恢复全部章节</button>
@@ -17900,7 +19174,7 @@
 
               <div class="report-workspace" id="reportWorkspace">
                 <nav class="report-queue" aria-label="报告章节生成队列">
-                  <div class="report-queue-head">Report queue</div>
+                  <div class="report-queue-head">报告生成队列</div>
                   <ol class="report-queue-list" id="reportQueueList"></ol>
                 </nav>
                 <div class="report-canvas-wrap" id="reportCanvasWrap">
@@ -17910,12 +19184,12 @@
 
               <div class="report-file-preview" id="reportFilePreview" aria-label="生成文件预览">
                 <div class="file-preview-bar">
-                  <button class="report-tool" id="filePreviewBack">← 返回生成队列</button>
+                  <button class="report-tool" id="filePreviewBack" data-core-icon="back">返回生成队列</button>
                   <strong id="filePreviewName">促中预算紧张_V1-V15策略分析报告.html</strong>
                   <div class="report-toolbar-actions">
-                    <button class="report-tool" id="filePreviewDownload">下载 HTML</button>
-                    <button class="report-tool icon-only" id="filePreviewFullscreen" aria-label="全屏预览文件">⛶</button>
-                    <button class="report-tool icon-only" id="filePreviewClose" aria-label="关闭文件预览">×</button>
+                    <button class="report-tool" id="filePreviewDownload" data-core-icon="download">下载 HTML</button>
+                    <button class="report-tool icon-only" id="filePreviewFullscreen" data-core-icon="fullscreen" data-core-icon-only="true" aria-label="全屏预览文件"></button>
+                    <button class="report-tool icon-only" id="filePreviewClose" data-core-icon="close" data-core-icon-only="true" aria-label="关闭文件预览"></button>
                   </div>
                 </div>
                 <iframe id="reportPreviewFrame" title="促中预算紧张策略分析报告预览"></iframe>
@@ -17932,7 +19206,7 @@
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-head">
         <h3 id="modalTitle">操作确认</h3>
-        <button class="close" id="modalClose" aria-label="关闭">×</button>
+        <button class="close" id="modalClose" data-core-icon="close" data-core-icon-only="true" aria-label="关闭"></button>
       </div>
       <div class="modal-body" id="modalBody"></div>
       <div class="modal-actions" id="modalActions"></div>
@@ -17942,17 +19216,17 @@
   <div class="ask-popover" id="askPopover" role="dialog" aria-modal="false" aria-labelledby="askPopoverTitle" hidden>
     <div class="ask-popover-head">
       <div>
-        <strong id="askPopoverTitle"><span aria-hidden="true">✦ </span>就当前内容追问</strong>
+        <strong id="askPopoverTitle"><span data-core-icon-slot="ask"></span>就当前内容追问</strong>
         <span id="askContextSummary"></span>
       </div>
-      <button class="ask-close" id="askClose" aria-label="关闭追问">×</button>
+      <button class="ask-close" id="askClose" data-core-icon="close" data-core-icon-only="true" aria-label="关闭追问"></button>
     </div>
     <div class="ask-popover-body">
       <div class="ask-label">选择一个追问，或自定义</div>
       <div class="ask-options" id="askOptions"></div>
       <div class="ask-custom">
         <input id="askCustomInput" type="text" aria-label="自定义追问" placeholder="输入你的追问…">
-        <button class="ask-send" id="askSend" aria-label="发送追问">↑</button>
+        <button class="ask-send" id="askSend" data-core-icon="send" data-core-icon-only="true" aria-label="发送追问"></button>
       </div>
     </div>
   </div>
@@ -17960,6 +19234,118 @@
   <div class="toast" id="toast" role="status"></div>
 
   <script>
+    const coreIconPaths = Object.freeze({
+      ask: '<path d="M8 2.4v2.2M8 11.4v2.2M2.4 8h2.2M11.4 8h2.2"/><path d="m4 4 1.5 1.5M10.5 10.5 12 12M12 4l-1.5 1.5M5.5 10.5 4 12"/><circle cx="8" cy="8" r="1.6"/>',
+      back: '<path d="M13.5 8H3.2M7.2 4 3.2 8l4 4"/>',
+      add: '<path d="M8 2.8v10.4M2.8 8h10.4"/>',
+      close: '<path d="m3.5 3.5 9 9M12.5 3.5l-9 9"/>',
+      fullscreen: '<path d="M6.2 3H3v3.2M9.8 3H13v3.2M13 9.8V13H9.8M6.2 13H3V9.8"/>',
+      expand: '<path d="m3.5 6 4.5 4 4.5-4"/>',
+      download: '<path d="M8 2.5v7M5 7l3 3 3-3M3 13h10"/>',
+      send: '<path d="m2.5 3 11 5-11 5 2-5-2-5Z"/><path d="M4.5 8h9"/>'
+    });
+
+    function iconSVG(name) {
+      const paths = coreIconPaths[name];
+      if (!paths) return "";
+      return `<svg class="core-action-icon" viewBox="0 0 16 16" aria-hidden="true" focusable="false">${paths}</svg>`;
+    }
+
+    function hydrateCoreActionIcons(root = document) {
+      const query = selector => {
+        const matches = root instanceof Element && root.matches(selector) ? [root] : [];
+        return [...matches, ...root.querySelectorAll(selector)];
+      };
+      query("[data-core-icon-slot]").forEach(slot => {
+        if (!slot.querySelector(".core-action-icon")) {
+          slot.innerHTML = iconSVG(slot.dataset.coreIconSlot);
+        }
+      });
+      query("[data-core-icon]").forEach(element => {
+        if (element.querySelector(".core-action-icon")) return;
+        const svg = iconSVG(element.dataset.coreIcon);
+        if (!svg) return;
+        if (element.dataset.coreIconOnly === "true") element.innerHTML = svg;
+        else element.insertAdjacentHTML("afterbegin", svg);
+      });
+      [
+        [".workbench-ask, .ask-trigger", "ask", false],
+        [".mid-recommendation-toggle, .mid-decision-toggle, .mid-current-adjustment-toggle, .mid-next-basis-toggle, .mid-candidate-expand, .mid38-toggle, .pre-insight-toggle", "expand", false],
+        [".report-section-remove", "close", true]
+      ].forEach(([selector, name, iconOnly]) => {
+        query(selector).forEach(element => {
+          if (element.querySelector(".core-action-icon")) return;
+          Array.from(element.childNodes).forEach(node => {
+            if (node.nodeType === Node.TEXT_NODE) {
+              node.nodeValue = node.nodeValue.replace(/^\s*[\u2726\u2193]\s*/, "");
+            }
+          });
+          if (iconOnly) element.innerHTML = iconSVG(name);
+          else element.insertAdjacentHTML("afterbegin", iconSVG(name));
+        });
+      });
+    }
+
+    const coreVisualScopes = ".sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover";
+    let coreVisualLanguageFrame = 0;
+
+    function applyCoreFontFloor() {
+      document.querySelectorAll(coreVisualScopes).forEach(scope => {
+        if (scope.closest("[hidden], .is-hidden") || !scope.getClientRects().length) return;
+        const walker = document.createTreeWalker(scope, NodeFilter.SHOW_TEXT);
+        const textParents = new Set();
+        while (walker.nextNode()) {
+          const text = walker.currentNode;
+          if (!text.nodeValue.trim()) continue;
+          const parent = text.parentElement;
+          if (
+            !parent
+            || parent.closest("svg, script, style, [hidden], .visually-hidden")
+            || !parent.getClientRects().length
+          ) continue;
+          textParents.add(parent);
+        }
+        textParents.forEach(element => {
+          if (Number.parseFloat(getComputedStyle(element).fontSize) < 10) {
+            element.classList.add("core-font-floor");
+          }
+        });
+      });
+    }
+
+    function hydrateSidebarTooltips(root = document) {
+      const sidebarItems = root instanceof Element && root.matches(".sidebar :is(.workspace-entry, .history-item, .infra-btn)")
+        ? [root]
+        : Array.from(root.querySelectorAll(".sidebar :is(.workspace-entry, .history-item, .infra-btn)"));
+      sidebarItems.forEach(item => {
+        const visibleLabel = item.querySelector(".workspace-entry-copy, .history-copy strong, .infra-btn span")?.textContent.trim();
+        const label = item.getAttribute("aria-label") || visibleLabel;
+        if (!label) return;
+        item.dataset.tooltip = label;
+        item.setAttribute("aria-label", label);
+      });
+    }
+
+    function scheduleCoreVisualLanguageConsolidation() {
+      cancelAnimationFrame(coreVisualLanguageFrame);
+      coreVisualLanguageFrame = requestAnimationFrame(() => {
+        hydrateCoreActionIcons();
+        hydrateSidebarTooltips();
+        applyCoreFontFloor();
+      });
+    }
+
+    const coreVisualLanguageObserver = new MutationObserver(scheduleCoreVisualLanguageConsolidation);
+    coreVisualLanguageObserver.observe(document.body, {
+      subtree: true,
+      childList: true,
+      attributes: true,
+      attributeFilter: ["class", "hidden", "style"]
+    });
+    hydrateCoreActionIcons();
+    hydrateSidebarTooltips();
+    scheduleCoreVisualLanguageConsolidation();
+
     const midDefaultMetricData = {
       redemption: {
         title: "分日用户核销率趋势",
@@ -19566,7 +20952,7 @@
           {
             keys: [focusAudience, focusTier, displayValue(focusChannel.name)],
             label: `${focusAudience} × ${focusTier} × ${displayValue(focusChannel.name)}`,
-            finding: `${displayValue(focusChannel.action)}；当前 profile 扩量率为 ${displayValue(profile.expansionRate)}，受 ${roiGuardrail} 约束。`
+            finding: `${displayValue(focusChannel.action)}；当前策略扩量率为 ${displayValue(profile.expansionRate)}，受 ${roiGuardrail} 约束。`
           },
           {
             keys: [formatBatchField(reminderBatch, "audience"), formatBatchField(reminderBatch, "tier"), displayValue(packChannel.name)],
@@ -19575,7 +20961,7 @@
           }
         ]),
         audienceTier: entry(["audience", "tier"], ["人群标签", "券档", "领券 UV", "核销 UV", "增量 GMV", "ROI"], [
-          { keys: [focusAudience, focusTier], label: `${focusAudience} × ${focusTier}`, finding: `${profile.expansionRate} 为当前 profile 的定向扩量率，仍受 ${roiGuardrail} 约束。` },
+          { keys: [focusAudience, focusTier], label: `${focusAudience} × ${focusTier}`, finding: `${profile.expansionRate} 为当前策略的定向扩量率，仍受 ${roiGuardrail} 约束。` },
           { keys: [baseAudience, baseTier], label: `${baseAudience} × ${baseTier}`, finding: "承担稳态规模，不能与定向扩量组混合归因。" }
         ]),
         audienceChannel: entry(["audience", "channel"], ["人群标签", "渠道", "曝光 UV", "领券 UV", "核销 UV", "增量 ROI"], [
@@ -19821,7 +21207,7 @@
 
     const midEvidenceCatalog = {
       [createMidContextKey("38节", "2026", "full")]: {
-        period: "2026.03.04 — 03.08 · 38节",
+        period: "2026.03.04—03.08 · 38节",
         overview: {
           conclusion: "整体结论：不追加总预算，先收缩高门槛泛发并向高价值人群和高效点位迁移",
           copy: "当前券引导支付 GMV 达成 107%，但核销预算已使用 100%。问题集中在活动前两日和高门槛券；末日催用有效，主端反转实验在目标人群上钱效最优。",
@@ -19867,7 +21253,7 @@
         }
       },
       [createMidContextKey("38节", "2026", "close")]: {
-        period: "2026.03.08 00:00 — 24:00 · 38节收官波次",
+        period: "2026.03.08 00:00—24:00 · 38节收官波次",
         overview: {
           conclusion: "收官结论：停止新增高门槛泛发，优先回收库存并准备返场高意图补量",
           copy: "3/8 已领未用催用后核销率升至 52%，20:00 后预算流速回落至 94%；返场仅保留 300-40、高价值 X 券和一次到期提醒。",
@@ -19916,7 +21302,7 @@
         }
       },
       [createMidContextKey("618", "2026", "full")]: {
-        period: "2026.06.11 — 06.15 · 618",
+        period: "2026.06.11—06.15 · 618",
         overview: {
           conclusion: "整体结论：收官前不追加总预算，回收 2000-200 泛发并向家电高意图和已领未用迁移",
           copy: "6/1—6/15 预算达成 76%、GMV 达成 80%；家电定向 X 券兑换比 6.82，2000-200 领后核销仅 24%，6/15 已领未用库存 286 万。",
@@ -19966,7 +21352,7 @@
         }
       },
       [createMidContextKey("双11", "2025", "full")]: {
-        period: "2025.11.05 — 11.09 · 双11",
+        period: "2025.11.05—11.09 · 双11",
         overview: {
           conclusion: "整体结论：终场回收低意图 Push 与高门槛泛发，保障会员和数码高意图成交",
           copy: "10/24—11/9 预算达成 91%、GMV 达成 95%；Push 三次以上人群边际 ROI 仅 3.8，会员券兑换比 6.54，24 小时内到期券 198 万。",
@@ -20072,7 +21458,7 @@
       id: "CMP_26M06_A",
       title: "促前券档位设计",
       question: "请结合历史复盘、近期大盘水位、类目需求、实验钱效和竞对变化，设计 3+X / 4+X 券档、人群、渠道、发放节奏与预算方案。",
-      mockLabel: "脱敏 Mock，仅用于原型演示",
+      mockLabel: "脱敏样例",
       profile: {
         campaignId: "CMP_26M06_A",
         siteCode: "SITE_****",
@@ -20085,24 +21471,24 @@
         confidentiality: "L4"
       },
       sources: [
-        { label: "近期大盘水位", detail: "ECOP · 近 20 天", type: "ECOP · 脱敏 Mock，仅用于原型演示" },
-        { label: "历史领取核销", detail: "历史复盘 · 人群/渠道/面额", type: "历史复盘 · 脱敏 Mock，仅用于原型演示" },
-        { label: "券组实验", detail: "EXP_G01—G03 · 脱敏数据", type: "ECOP · 脱敏 Mock，仅用于原型演示" },
-        { label: "竞对档位", detail: "竞对调研 · A/B/C", type: "竞对调研 · 脱敏 Mock，仅用于原型演示" },
-        { label: "目标与预算上限", detail: "用户输入 · 可调整", type: "用户输入 · 脱敏 Mock，仅用于原型演示" },
-        { label: "优先级与方案推荐", detail: "指标规则计算", type: "AI 推导 · 脱敏 Mock，仅用于原型演示" }
+        { label: "近期大盘水位", detail: "ECOP · 近 20 天", type: "ECOP · 脱敏样例" },
+        { label: "历史领取核销", detail: "历史复盘 · 人群/渠道/面额", type: "历史复盘 · 脱敏样例" },
+        { label: "券组实验", detail: "EXP_G01—G03 · 脱敏数据", type: "ECOP · 脱敏样例" },
+        { label: "竞对档位", detail: "竞对调研 · A/B/C", type: "竞对调研 · 脱敏样例" },
+        { label: "目标与预算上限", detail: "用户输入 · 可调整", type: "用户输入 · 脱敏样例" },
+        { label: "优先级与方案推荐", detail: "指标规则计算", type: "AI 推导 · 脱敏样例" }
       ],
       plan: [
         "确认目标、预算与治理约束",
         "评估活动前 20 天大盘自然水位",
         "识别活动期类目需求爆发与优先级",
-        "复盘人群 / 渠道 / 面额领取核销链路",
+        "复盘人群、渠道与面额领取核销链路",
         "合并实验钱效与竞对压力判断",
         "生成 3+X / 4+X 候选并测算预算",
         "完成团队拉齐、保密与待审批策略包"
       ],
       knownData: [
-        "活动前 20 天 GMV / DAC / 客单逐日与同比基期",
+        "活动前 20 天 GMV、DAC 与客单逐日及同比基期",
         "历史活动前窗口与活动期分类目日均原值",
         "历史券领取核销、券组实验与竞对脱敏快照",
         "候选预算、结算率、增量 GMV、ROI 与波次结构"
@@ -20235,10 +21621,10 @@
         { role: "安全角色", item: "确认 L4 同步范围与参与角色", status: "待确认" }
       ],
       governanceProcesses: [
-        { key: "mainBudget", name: "主预算申请", detail: "主预算申请单独立 Mock 状态", pending: "待申请", complete: "Mock 已申请" },
-        { key: "specialBudget", name: "专项子预算", detail: "X 定向券专项子预算独立 Mock 状态", pending: "待申请", complete: "Mock 已申请" },
-        { key: "project", name: "活动立项", detail: "活动立项独立 Mock 状态", pending: "待立项", complete: "Mock 已立项" },
-        { key: "nda", name: "保密协议", detail: "L4 参与范围保密协议独立 Mock 状态", pending: "待签署", complete: "Mock 已签署" }
+        { key: "mainBudget", name: "主预算申请", detail: "主预算申请为独立演示状态", pending: "待申请", complete: "演示已申请" },
+        { key: "specialBudget", name: "专项子预算", detail: "X 定向券专项子预算为独立演示状态", pending: "待申请", complete: "演示已申请" },
+        { key: "project", name: "活动立项", detail: "活动立项为独立演示状态", pending: "待立项", complete: "演示已立项" },
+        { key: "nda", name: "保密协议", detail: "L4 参与范围保密协议为独立演示状态", pending: "待签署", complete: "演示已签署" }
       ],
       questions: {
         goal: ["为什么先确认 ROI 下限？", "预算上限变化会影响哪些步骤？", "当前还缺哪些业务输入？"],
@@ -20638,7 +22024,7 @@
           evidence: "历史窗口中 DAC 解释约 88% 的 GMV 同比增幅",
           summary: "AI 小结：自然水位抬升更多来自用户规模，需继续按日、周末/工作日和渠道校验。",
           boundary: "采用活动前 15—20 天同口径窗口；异常流量日需剔除",
-          source: "消费券数据看板 · 大盘 GMV / DAC / 客单"
+          source: "消费券数据看板 · 大盘 GMV、DAC 与客单"
         },
         {
           key: "category", label: "类目爆发", featured: true,
@@ -20868,7 +22254,7 @@
       ],
       reportMode: "queue",
       activeReportSection: "plan",
-      reportTitle: "促中预算紧张 · V1 / V15 策略分析",
+      reportTitle: "促中预算紧张 · V1 与 V15 策略分析",
       hiddenSections: new Set(),
       artifact: null,
       isResponding: false,
@@ -21036,33 +22422,33 @@
       larkGroups: [
         {
           id: "lark-group-01",
-          name: "Mock 策略协作群 A",
+          name: "策略协作群 A",
           members: 17,
           tasks: [
-            { icon: "析", title: "Mock 预算流速归因", detail: "合成记录 T-A01 · 群内 @助理触发", status: "已完成" },
-            { icon: "券", title: "Mock 下一波次券档建议", detail: "合成记录 T-A02 · 保留分析计划门禁", status: "已完成" },
-            { icon: "核", title: "Mock 核销链路下钻", detail: "合成记录 T-A03 · 等待补充模拟口径", status: "待输入" }
+            { icon: "析", title: "预算流速归因", detail: "合成记录 T-A01 · 群内 @助理触发", status: "已完成" },
+            { icon: "券", title: "下一波次券档建议", detail: "合成记录 T-A02 · 保留分析计划门禁", status: "已完成" },
+            { icon: "核", title: "核销链路下钻", detail: "合成记录 T-A03 · 等待补充模拟口径", status: "待输入" }
           ],
           schedules: [
-            { icon: "09", title: "Mock 钱效早报", detail: "工作日 09:30 · 合成指标快照", status: "运行中" },
-            { icon: "18", title: "Mock 活动复盘", detail: "模拟活动日 18:30 · 合成异常归因", status: "运行中" }
+            { icon: "09", title: "钱效早报", detail: "工作日 09:30 · 合成指标快照", status: "运行中" },
+            { icon: "18", title: "活动复盘", detail: "模拟活动日 18:30 · 合成异常归因", status: "运行中" }
           ],
           replyMode: "仅 @机器人时回复",
           contextRange: "最近 20 条消息"
         },
         {
           id: "lark-group-02",
-          name: "Mock 预算联调群 B",
+          name: "预算联调群 B",
           members: 29,
           tasks: [
-            { icon: "流", title: "Mock 预算节奏检查", detail: "合成记录 T-B01 · 模拟预算流速", status: "已完成" },
-            { icon: "档", title: "Mock 券档候选比较", detail: "合成记录 T-B02 · 模拟券档对照", status: "已完成" },
-            { icon: "群", title: "Mock 人群容量校验", detail: "合成记录 T-B03 · 模拟人群容量", status: "进行中" },
-            { icon: "渠", title: "Mock 渠道承接复核", detail: "合成记录 T-B04 · 模拟渠道分配", status: "待输入" },
-            { icon: "险", title: "Mock 风险边界检查", detail: "合成记录 T-B05 · 不触发真实配置", status: "已完成" }
+            { icon: "流", title: "预算节奏检查", detail: "合成记录 T-B01 · 模拟预算流速", status: "已完成" },
+            { icon: "档", title: "券档候选比较", detail: "合成记录 T-B02 · 模拟券档对照", status: "已完成" },
+            { icon: "群", title: "人群容量校验", detail: "合成记录 T-B03 · 模拟人群容量", status: "进行中" },
+            { icon: "渠", title: "渠道承接复核", detail: "合成记录 T-B04 · 模拟渠道分配", status: "待输入" },
+            { icon: "险", title: "风险边界检查", detail: "合成记录 T-B05 · 不触发真实配置", status: "已完成" }
           ],
           schedules: [
-            { icon: "10", title: "Mock 联调摘要", detail: "每周二 10:00 · 合成协作摘要", status: "运行中" }
+            { icon: "10", title: "联调摘要", detail: "每周二 10:00 · 合成协作摘要", status: "运行中" }
           ],
           replyMode: "群内问题自动识别",
           contextRange: "仅当前话题"
@@ -21107,7 +22493,7 @@
       rules: {
         title: "工作区规则",
         description: "配置机器人在当前策略工作区必须遵循的业务规则。",
-        cards: [["计划门禁", "确认计划前不生成右侧正式报告。"], ["数据规范", "默认使用脱敏 Mock 数据和统一指标口径。"], ["执行边界", "不直接执行发券、预算或线上人群变更。"]]
+        cards: [["计划门禁", "确认计划前不生成右侧正式报告。"], ["数据规范", "默认使用脱敏样例和统一指标口径。"], ["执行边界", "不直接执行发券、预算或线上人群变更。"]]
       },
       memory: {
         title: "长期记忆",
@@ -21121,7 +22507,7 @@
       },
       skills: {
         title: "技能配置",
-        description: "配置机器人在群聊中可调用的 Agent Skill。",
+        description: "配置机器人在群聊中可调用的 Agent 技能。",
         cards: [["已启用技能", "预算归因、指标口径查询、消费券策略播报。"], ["调用策略", "先识别意图，再按最小权限选择技能。"], ["审计记录", "每次技能调用均保留会话级执行记录。"]]
       },
       usage: {
@@ -21132,7 +22518,7 @@
     };
 
     function infrastructureHeader(title, description, actionLabel, actionType, tone = "") {
-      return `<header class="resource-head"><div class="resource-title"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(description)}</p></div><button class="resource-primary ${tone}" data-infra-new="${actionType}">＋ ${escapeHTML(actionLabel)}</button></header>`;
+      return `<header class="resource-head"><div class="resource-title"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(description)}</p></div><button class="resource-primary ${tone}" data-infra-new="${actionType}">${iconSVG("add")}${escapeHTML(actionLabel)}</button></header>`;
     }
 
     function infrastructureStatusTabs(items) {
@@ -21149,23 +22535,30 @@
     function renderKnowledgeView() {
       const items = infrastructureData.knowledge;
       const filtered = items.filter(item => infrastructureMatches(item) && (infrastructureState.type === "all" || item.type === infrastructureState.type));
-      const table = `<div class="resource-table-card"><div class="resource-table-title">▱ Knowledge</div><table class="resource-table"><thead><tr><th style="width:40%">名称</th><th>添加者</th><th>修改时间</th><th>状态</th><th>引用</th><th></th></tr></thead><tbody>${filtered.map(item => `<tr><td><div class="resource-name"><span class="resource-name-icon">${item.type === "飞书表格" ? "▦" : item.type === "本地文件" ? "↥" : "▱"}</span><span><strong>${escapeHTML(item.name)}</strong><small>${escapeHTML(item.type)}</small></span></div></td><td>${escapeHTML(item.owner)}</td><td>${escapeHTML(item.updatedAt)}</td><td><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button></td><td>${item.references} 处引用</td><td><button class="resource-row-action" data-infra-detail="knowledge" data-resource-id="${item.id}">›</button></td></tr>`).join("")}</tbody></table></div>`;
-      const cards = `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card"><div class="resource-source-type">${item.type}</div><h3>${escapeHTML(item.name)}</h3><p>${escapeHTML(item.owner)} · ${item.updatedAt}</p><div class="resource-code">▱ knowledge:${item.id}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button><button data-infra-detail="knowledge" data-resource-id="${item.id}">${item.references} 处引用 ›</button></div></article>`).join("")}</div>`;
-      return `<div class="resource-shell">${infrastructureHeader("Knowledge", "统一维护可复用的文档、文件和知识库资源，启用后即可被策略 Agent 引用。", "新建知识资源", "knowledge")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索资源..."></label>${["all","飞书文档","飞书表格","本地文件"].map(type => `<button class="resource-filter ${infrastructureState.type === type ? "active" : ""}" data-infra-type="${type}">${type === "all" ? "全部类型" : type}</button>`).join("")}<span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>← 返回工作台</button><div class="resource-view-toggle"><button class="${infrastructureState.viewMode === "table" ? "active" : ""}" data-infra-layout="table">▤</button><button class="${infrastructureState.viewMode === "grid" ? "active" : ""}" data-infra-layout="grid">▦</button></div></div>${filtered.length ? infrastructureState.viewMode === "table" ? table : cards : '<div class="resource-empty">没有符合条件的知识资源</div>'}</div></div>`;
+      const table = `<div class="resource-table-card"><div class="resource-table-title">▱ 知识库</div><table class="resource-table"><thead><tr><th style="width:40%">名称</th><th>添加者</th><th>修改时间</th><th>状态</th><th>引用</th><th></th></tr></thead><tbody>${filtered.map(item => `<tr><td><div class="resource-name"><span class="resource-name-icon">${item.type === "飞书表格" ? "▦" : item.type === "本地文件" ? "↥" : "▱"}</span><span><strong>${escapeHTML(item.name)}</strong><small>${escapeHTML(item.type)}</small></span></div></td><td>${escapeHTML(item.owner)}</td><td>${escapeHTML(item.updatedAt)}</td><td><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button></td><td>${item.references} 处引用</td><td><button class="resource-row-action" data-infra-detail="knowledge" data-resource-id="${item.id}">›</button></td></tr>`).join("")}</tbody></table></div>`;
+      const cards = `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card"><div class="resource-source-type">${item.type}</div><h3>${escapeHTML(item.name)}</h3><p>${escapeHTML(item.owner)} · ${item.updatedAt}</p><div class="resource-code">▱ 知识资源：${item.id}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button><button data-infra-detail="knowledge" data-resource-id="${item.id}">${item.references} 处引用 ›</button></div></article>`).join("")}</div>`;
+      return `<div class="resource-shell">${infrastructureHeader("知识库", "统一维护可复用的文档、文件和知识库资源，启用后即可被策略 Agent 引用。", "新建知识资源", "knowledge")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索资源..."></label>${["all","飞书文档","飞书表格","本地文件"].map(type => `<button class="resource-filter ${infrastructureState.type === type ? "active" : ""}" data-infra-type="${type}">${type === "all" ? "全部类型" : type}</button>`).join("")}<span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button><div class="resource-view-toggle"><button class="${infrastructureState.viewMode === "table" ? "active" : ""}" data-infra-layout="table">▤</button><button class="${infrastructureState.viewMode === "grid" ? "active" : ""}" data-infra-layout="grid">▦</button></div></div>${filtered.length ? infrastructureState.viewMode === "table" ? table : cards : '<div class="resource-empty">没有符合条件的知识资源</div>'}</div></div>`;
     }
 
     function renderSkillView() {
       const items = infrastructureData.skills;
       const rows = [["适用业务","C侧","大促","其他"],["适用角色","管理者","业务","资管","其他"],["场景","异动归因","预算消耗预估","预算分配","钱效健康度分析","目标测算","历史参照日","大盘目标","行业目标"]];
       const filtered = items.filter(item => (infrastructureState.skillSource === "all" || item.source === infrastructureState.skillSource) && (!infrastructureState.skillTags.size || item.tags.some(tag => infrastructureState.skillTags.has(tag))) && infrastructureMatches(item));
-      return `<div class="resource-shell">${infrastructureHeader("Skill", "管理所有 Agent Skill 的配置、启停和内容。", "新建 / 上传技能", "skill", "blue")}<div class="resource-content"><div class="resource-summary-tabs">${["all","user","system"].map(source => `<button class="resource-summary-tab ${infrastructureState.skillSource === source ? "active" : ""}" data-skill-source="${source}">${source === "all" ? "全部" : source === "user" ? "用户技能" : "系统内置"}</button>`).join("")}</div><div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索技能..."></label><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>← 返回工作台</button></div><div class="resource-filter-stack">${rows.map(row => `<div class="resource-filter-row"><b>${row[0]}</b>${row.slice(1).map(tag => `<button class="resource-tag ${infrastructureState.skillTags.has(tag) ? "active" : ""}" data-skill-tag="${tag}">${infrastructureState.skillTags.has(tag) ? "✓ " : ""}${tag}</button>`).join("")}</div>`).join("")}</div>${filtered.length ? `<div class="resource-card-grid">${filtered.map(item => `<article class="resource-card"><div class="resource-card-head"><span class="resource-card-icon">⌁</span><div class="resource-card-title"><strong>${escapeHTML(item.name)}</strong><span>${item.source === "system" ? "系统内置" : "公开"}</span></div><button class="resource-switch ${item.enabled ? "on" : ""}" data-infra-toggle="skill" data-resource-id="${item.id}"></button></div><p class="resource-card-copy">${escapeHTML(item.description)}</p><div class="resource-card-meta">${item.tags.map(tag => `<span>${tag}</span>`).join("")}</div><div class="resource-card-actions"><button class="resource-action primary-action" data-skill-action="use" data-resource-id="${item.id}">▷ 使用</button><button class="resource-action" data-skill-action="download" data-resource-id="${item.id}">⇩ 下载</button><button class="resource-action" data-infra-detail="skill" data-resource-id="${item.id}">⊙ 查看</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有符合条件的技能</div>'}</div></div>`;
+      return `<div class="resource-shell">${infrastructureHeader("技能", "管理所有 Agent 技能的配置、启停和内容。", "新建或上传技能", "skill", "blue")}<div class="resource-content"><div class="resource-summary-tabs">${["all","user","system"].map(source => `<button class="resource-summary-tab ${infrastructureState.skillSource === source ? "active" : ""}" data-skill-source="${source}">${source === "all" ? "全部" : source === "user" ? "用户技能" : "系统内置"}</button>`).join("")}</div><div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索技能..."></label><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button></div><div class="resource-filter-stack">${rows.map(row => `<div class="resource-filter-row"><b>${row[0]}</b>${row.slice(1).map(tag => `<button class="resource-tag ${infrastructureState.skillTags.has(tag) ? "active" : ""}" data-skill-tag="${tag}">${infrastructureState.skillTags.has(tag) ? "✓ " : ""}${tag}</button>`).join("")}</div>`).join("")}</div>${filtered.length ? `<div class="resource-card-grid">${filtered.map(item => `<article class="resource-card"><div class="resource-card-head"><span class="resource-card-icon">⌁</span><div class="resource-card-title"><strong>${escapeHTML(item.name)}</strong><span>${item.source === "system" ? "系统内置" : "公开"}</span></div><button class="resource-switch ${item.enabled ? "on" : ""}" data-infra-toggle="skill" data-resource-id="${item.id}"></button></div><p class="resource-card-copy">${escapeHTML(item.description)}</p><div class="resource-card-meta">${item.tags.map(tag => `<span>${tag}</span>`).join("")}</div><div class="resource-card-actions"><button class="resource-action primary-action" data-skill-action="use" data-resource-id="${item.id}">▷ 使用</button><button class="resource-action" data-skill-action="download" data-resource-id="${item.id}">${iconSVG("download")}下载</button><button class="resource-action" data-infra-detail="skill" data-resource-id="${item.id}">⊙ 查看</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有符合条件的技能</div>'}</div></div>`;
     }
 
     function renderSourceCards(kind, title, description, action) {
       const items = infrastructureData[kind];
       const filtered = items.filter(infrastructureMatches);
       const isMcp = kind === "mcps";
-      return `<div class="resource-shell">${infrastructureHeader(title, description, action, isMcp ? "mcp" : "datasource")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索${isMcp ? " MCP" : "资源"}..."></label><button class="resource-filter active">全部类型</button><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>← 返回工作台</button></div>${filtered.length ? `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card">${isMcp ? `<div class="resource-card-head"><span class="resource-card-icon">⌘</span><div class="resource-card-title"><strong>${escapeHTML(item.name)}</strong><span>${item.transport}</span></div><button class="resource-switch ${item.enabled ? "on" : ""}" data-infra-toggle="mcp" data-resource-id="${item.id}"></button></div>` : `<div class="resource-source-type">${item.type}</div><h3>${escapeHTML(item.name)}</h3>`}<p>${escapeHTML(item.description)}</p><div class="resource-code">⌁ ${escapeHTML(isMcp ? item.endpoint : item.uri)}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${item.enabled ? isMcp ? "已连接" : "已启用" : "已停用"}</button><button data-infra-detail="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${isMcp ? `${item.tools} 个工具` : `${item.references} 处引用`} ›</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有符合条件的资源</div>'}</div></div>`;
+      const datasourcePresentation = {
+        "ds-01": { name: "AEOLUS_01", description: "Aeolus 示例地址：analytics.example.invalid", uri: "Aeolus 数据集：AEOLUS_01" },
+        "ds-02": { name: "AEOLUS_02 · 消费券钱效分析看板", description: "数据集：COUPON_EFFICIENCY_01", uri: "Aeolus 数据集：AEOLUS_02" }
+      };
+      const displayValue = (item, field) => isMcp
+        ? item[field]
+        : datasourcePresentation[item.id]?.[field] || item[field];
+      return `<div class="resource-shell">${infrastructureHeader(title, description, action, isMcp ? "mcp" : "datasource")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索${isMcp ? " MCP" : "资源"}..."></label><button class="resource-filter active">全部类型</button><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button></div>${filtered.length ? `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card">${isMcp ? `<div class="resource-card-head"><span class="resource-card-icon">⌘</span><div class="resource-card-title"><strong>${escapeHTML(item.name)}</strong><span>${item.transport}</span></div><button class="resource-switch ${item.enabled ? "on" : ""}" data-infra-toggle="mcp" data-resource-id="${item.id}"></button></div>` : `<div class="resource-source-type">${item.type}</div><h3>${escapeHTML(displayValue(item, "name"))}</h3>`}<p>${escapeHTML(displayValue(item, "description"))}</p><div class="resource-code">⌁ ${escapeHTML(isMcp ? item.endpoint : displayValue(item, "uri"))}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${item.enabled ? isMcp ? "已连接" : "已启用" : "已停用"}</button><button data-infra-detail="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${isMcp ? `${item.tools} 个工具` : `${item.references} 处引用`} ›</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有符合条件的资源</div>'}</div></div>`;
     }
 
     function renderLarkTabs() {
@@ -21187,7 +22580,7 @@
     function renderLarkGroups() {
       const query = infrastructureState.larkQuery.trim().toLowerCase();
       const groups = infrastructureData.larkGroups.filter(group => !query || group.name.toLowerCase().includes(query));
-      return `<div class="resource-toolbar lark-resource-toolbar"><label class="resource-search"><input data-lark-group-search value="${escapeHTML(infrastructureState.larkQuery)}" placeholder="搜索飞书群..." aria-label="搜索飞书群"></label><button class="resource-filter active">全部群聊</button><span class="lark-group-count">已关联 ${infrastructureData.larkGroups.length} 个 Mock 群聊</span><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>← 返回工作台</button></div>${groups.length ? `<div class="resource-card-grid lark-resource-grid">${groups.map(group => `<article class="resource-card lark-resource-card"><div class="resource-card-head"><span class="resource-card-icon lark-resource-avatar">飞</span><div class="resource-card-title"><strong>${escapeHTML(group.name)}</strong><span>券策略 Agent 已加入</span></div><span class="resource-status">已关联</span></div><p class="resource-card-copy">${group.members} 名合成成员 · ${group.tasks.length} 个独立任务 · ${group.schedules.length} 个定时任务</p><div class="resource-card-meta"><span>${escapeHTML(group.replyMode)}</span><span>Mock 群聊协作</span></div><div class="resource-card-actions"><button class="resource-action primary-action" data-lark-group-action="tasks" data-lark-group-id="${group.id}">独立任务</button><button class="resource-action" data-lark-group-action="schedules" data-lark-group-id="${group.id}">定时任务</button><button class="resource-action" data-lark-group-action="settings" data-lark-group-id="${group.id}">会话设置</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有匹配的飞书群聊</div>'}`;
+      return `<div class="resource-toolbar lark-resource-toolbar"><label class="resource-search"><input data-lark-group-search value="${escapeHTML(infrastructureState.larkQuery)}" placeholder="搜索飞书群..." aria-label="搜索飞书群"></label><button class="resource-filter active">全部群聊</button><span class="lark-group-count">已关联 ${infrastructureData.larkGroups.length} 个合成群聊</span><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button></div>${groups.length ? `<div class="resource-card-grid lark-resource-grid">${groups.map(group => `<article class="resource-card lark-resource-card"><div class="resource-card-head"><span class="resource-card-icon lark-resource-avatar">飞</span><div class="resource-card-title"><strong>${escapeHTML(group.name)}</strong><span>券策略 Agent 已加入</span></div><span class="resource-status">已关联</span></div><p class="resource-card-copy">${group.members} 名合成成员 · ${group.tasks.length} 个独立任务 · ${group.schedules.length} 个定时任务</p><div class="resource-card-meta"><span>${escapeHTML(group.replyMode)}</span><span>合成群聊协作</span></div><div class="resource-card-actions"><button class="resource-action primary-action" data-lark-group-action="tasks" data-lark-group-id="${group.id}">独立任务</button><button class="resource-action" data-lark-group-action="schedules" data-lark-group-id="${group.id}">定时任务</button><button class="resource-action" data-lark-group-action="settings" data-lark-group-id="${group.id}">会话设置</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有匹配的飞书群聊</div>'}`;
     }
 
     function getLarkSectionCards(sectionKey) {
@@ -21197,21 +22590,21 @@
       const taskCount = infrastructureData.larkGroups.reduce((total, group) => total + group.tasks.length, 0);
       const scheduleCount = infrastructureData.larkGroups.reduce((total, group) => total + group.schedules.length, 0);
       return [
-        ["群聊覆盖", `脱敏 Mock：${groupCount} 个合成群聊，${memberCount} 名合成成员。`],
-        ["任务概况", `脱敏 Mock：${taskCount} 个独立任务，${scheduleCount} 个定时任务。`],
-        ["近 7 日使用", "脱敏 Mock：37 次合成问答，计划确认率 73%。"]
+        ["群聊覆盖", `${groupCount} 个合成群聊，${memberCount} 名合成成员。`],
+        ["任务概况", `${taskCount} 个独立任务，${scheduleCount} 个定时任务。`],
+        ["近 7 日使用", "37 次合成问答，计划确认率 73%。"]
       ];
     }
 
     function renderLarkConfigSection() {
       const section = larkSectionData[infrastructureState.larkSection] || larkSectionData.custom;
       const cards = getLarkSectionCards(infrastructureState.larkSection);
-      return `<div class="resource-toolbar lark-resource-toolbar"><p class="lark-resource-description">${escapeHTML(section.description)}</p><span class="resource-toolbar-spacer"></span><span class="resource-status">配置正常</span><button class="resource-filter" data-infra-back>← 返回工作台</button></div><div class="resource-card-grid lark-resource-grid">${cards.map((card, index) => `<article class="resource-card lark-config-resource-card"><div class="resource-card-head"><span class="resource-card-icon">${index + 1}</span><div class="resource-card-title"><strong>${escapeHTML(card[0])}</strong><span>${escapeHTML(section.title)}</span></div></div><p class="resource-card-copy">${escapeHTML(card[1])}</p><div class="resource-card-actions"><button class="resource-action" data-lark-config-edit="${escapeHTML(card[0])}">查看配置</button></div></article>`).join("")}</div>`;
+      return `<div class="resource-toolbar lark-resource-toolbar"><p class="lark-resource-description">${escapeHTML(section.description)}</p><span class="resource-toolbar-spacer"></span><span class="resource-status">配置正常</span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button></div><div class="resource-card-grid lark-resource-grid">${cards.map((card, index) => `<article class="resource-card lark-config-resource-card"><div class="resource-card-head"><span class="resource-card-icon">${index + 1}</span><div class="resource-card-title"><strong>${escapeHTML(card[0])}</strong><span>${escapeHTML(section.title)}</span></div></div><p class="resource-card-copy">${escapeHTML(card[1])}</p><div class="resource-card-actions"><button class="resource-action" data-lark-config-edit="${escapeHTML(card[0])}">查看配置</button></div></article>`).join("")}</div>`;
     }
 
     function renderLarkBotView() {
       const content = infrastructureState.larkSection === "groups" ? renderLarkGroups() : renderLarkConfigSection();
-      return `<div class="resource-shell">${infrastructureHeader("飞书机器人", "管理券策略 Agent 关联的飞书群聊、助理配置与协作能力。", "新建飞书群聊", "lark", "blue")}<div class="resource-content"><div class="pre-mock-banner"><b>MOCK</b>脱敏 Mock · 当前群聊、成员和任务统计均为不可反推的合成样本，不对应任何真实组织或线上数据。</div>${renderLarkTabs()}${content}</div></div>`;
+      return `<div class="resource-shell">${infrastructureHeader("飞书机器人", "管理券策略 Agent 关联的飞书群聊、助理配置与协作能力。", "新建飞书群聊", "lark", "blue")}<div class="resource-content"><div class="pre-mock-banner"><b>使用边界</b>当前群聊、成员和任务统计均为不可反推的合成样本，不对应任何组织或线上数据。</div>${renderLarkTabs()}${content}</div></div>`;
     }
 
     function renderInfrastructureView() {
@@ -21221,10 +22614,10 @@
         : infrastructureState.activeView === "skill"
           ? renderSkillView()
           : infrastructureState.activeView === "datasource"
-            ? renderSourceCards("datasources", "DataSource", "统一维护结构化数据源，帮助 Agent 稳定获取业务数据上下文。", "新建数据源")
+            ? renderSourceCards("datasources", "数据源", "统一维护结构化数据源，帮助 Agent 稳定获取业务数据上下文。", "新建数据源")
             : infrastructureState.activeView === "lark"
               ? renderLarkBotView()
-              : renderSourceCards("mcps", "MCP", "管理 Agent 可调用的 MCP Server、传输协议和工具授权。", "新建 MCP");
+              : renderSourceCards("mcps", "MCP", "管理 Agent 可调用的 MCP 服务、传输协议和工具授权。", "新建 MCP");
     }
 
     function syncWorkspaceEntryState(activeEntry) {
@@ -21329,8 +22722,8 @@
       const sectionTitle = document.getElementById("midKpiSectionTitle");
       const titleCopy = sectionTitle.querySelector("div");
       titleCopy.innerHTML = evidence
-        ? `<h4>当前核心指标监控</h4><span>${escapeHTML(context.festival)} ${escapeHTML(context.waveLabel)} · 目标、核销、预算与钱效</span>`
-        : `<h4>当前核心指标监控</h4><span>${escapeHTML(context.label)} · 暂无证据</span>`;
+        ? `<strong class="mid-kpi-workspace-label">当前波次指标</strong><span>${escapeHTML(context.festival)} ${escapeHTML(context.waveLabel)} · 目标、核销、预算与钱效</span>`
+        : `<strong class="mid-kpi-workspace-label">当前波次指标</strong><span>${escapeHTML(context.label)} · 暂无证据</span>`;
       document.getElementById("midKpis").innerHTML = (evidence?.kpis || [
         { label: "券引导支付 GMV" },
         { label: "用户核销率", tone: "green" },
@@ -21389,7 +22782,7 @@
             data-ask-summary="${escapeHTML(evidence ? `${context.label}：${trend.paragraphs.map(item => item.join("")).join(" ")}` : `${context.label}：暂无同口径核销趋势`)}"
             data-ask-questions="当前核销变化由哪些因素驱动？|哪些点位需要调整？|按日期和面额继续下钻"
             ${evidence ? "" : 'disabled aria-disabled="true"'}
-          >✦ 追问</button>
+          >${iconSVG("ask")}追问</button>
         </div>
         ${trend ? `
           <div class="ai-copy">${trend.paragraphs.map(item => `<p><strong>${escapeHTML(item[0])}</strong> ${escapeHTML(item[1])}</p>`).join("")}</div>
@@ -21413,7 +22806,7 @@
       });
       if (!dimension) {
         document.getElementById("midRedemptionDimensionHeader").textContent = "维度";
-        document.getElementById("midRedemptionRows").innerHTML = `<tr><td colspan="7">${escapeHTML(context.label)} 暂无领取 / 核销拆解证据。</td></tr>`;
+        document.getElementById("midRedemptionRows").innerHTML = `<tr><td colspan="7">${escapeHTML(context.label)} 暂无领取与核销拆解证据。</td></tr>`;
         document.getElementById("midRedemptionFeedback").textContent = "未引用其他活动、年份或波次的拆解数据。";
         delete table.dataset.dimension;
         setMidEvidenceAskState(root, false, `${context.label}：暂无领取核销拆解证据`);
@@ -21480,7 +22873,7 @@
           <div class="ai-head"><span class="spark">AI</span>钱效结论</div>
           <button class="workbench-ask" data-workbench-ask="mid" data-ask-context="消费券实验结论"
             data-ask-summary="${escapeHTML(`${context.label}：${experiment.insight}`)}"
-            data-ask-questions="为什么当前券组最优？|扩量风险是什么？|如何保留有效对照？">✦ 追问</button>
+            data-ask-questions="为什么当前券组最优？|扩量风险是什么？|如何保留有效对照？">${iconSVG("ask")}追问</button>
         </div>
         <div class="ai-copy"><p>${escapeHTML(experiment.insight)}</p></div>`;
     }
@@ -22437,7 +23830,7 @@
                 data-ask-summary="${escapeHTML(recommendation.conclusion)}"
                 data-ask-questions="${escapeHTML(recommendation.questions.join("|"))}"
                 ${recommendation.available ? "" : "disabled aria-disabled=\"true\""}
-              >✦ 独立追问</button>
+              >${iconSVG("ask")}独立追问</button>
               <button
                 class="mid-recommendation-toggle"
                 data-mid-recommendation-action="toggle"
@@ -22647,7 +24040,7 @@
           before: `${displayValue(context.waveLabel)}；${displayValue(profile.currentStrategy?.channels)}`,
           after: batches.map(batch => `${formatBatchField(batch, "endpoint")} · ${formatBatchField(batch, "time")} · ${formatBatchField(batch, "issueWindow")}`).join("；"),
           basis: `仅使用 ${displayValue(context.label)} 的同口径批次与归因窗口`,
-          impact: `按当前 profile 拆分 ${batches.length} 个脱敏批次/任务`,
+          impact: `按当前策略数据拆分 ${batches.length} 个脱敏批次/任务`,
           risk: guardrails.find(item => /流速|库存|核销|重复/.test(item)) || "跨端归因单独核算，重复触达触发回滚"
         },
         {
@@ -22746,7 +24139,7 @@
           || `暂无数据：${context.label} 未提供同口径实验对比周期`;
         const dataEvidence = dimension
           ? `${displayValue(action.basis)}；${dimension.feedback}`
-          : "暂无数据：当前 profile 未提供该调整点的拆解证据";
+          : "暂无数据：当前策略数据未提供该调整点的拆解证据";
         const experimentEvidence = evidence?.experiment?.insight
           || arms.map(item => `${displayValue(item.id)} ${displayValue(item.share)}`).join(" / ")
           || "暂无数据";
@@ -22766,10 +24159,10 @@
             <div class="mid-current-detail-evidence">
               <div><b>数据依据</b><span>${escapeHTML(dataEvidence)}</span></div>
               <div><b>实验依据</b><span>${escapeHTML(experimentEvidence)}</span></div>
-              <div><b>巡检依据</b><span>暂无数据（当前 profile 未提供执行巡检结果）</span></div>
+              <div><b>巡检依据</b><span>暂无数据（当前策略数据未提供执行巡检结果）</span></div>
             </div>
             <div class="mid-current-source-row">
-              <span class="mid-source-label">消费券策略快照（脱敏 Mock）</span>
+              <span class="mid-source-label">消费券策略快照</span>
               <span class="mid-source-label">不可点击 · 当前上下文 ${escapeHTML(context.key)}</span>
             </div>
           </div>`;
@@ -22788,7 +24181,7 @@
               data-mid-current-adjustment="${escapeHTML(row.key)}"
               aria-expanded="${expanded}"
               aria-controls="${detailId}"
-            >${expanded ? "收起行内详情" : "展开行内详情"}</button>` : ""}
+            >${expanded ? "收起行内详情" : "展开行内详情"}${iconSVG("expand")}</button>` : ""}
           </div>
           <div class="mid-current-transition">
             <div class="mid-current-transition-card">
@@ -22804,7 +24197,7 @@
           <div class="mid-current-adjustment-meta">
             <div><b>决策依据</b><span>${escapeHTML(row.basis)}</span></div>
             <div><b>预估影响</b><span>${escapeHTML(row.impact)}</span></div>
-            <div><b>风险 / 止损</b><span>${escapeHTML(row.risk)}</span></div>
+            <div><b>风险与止损</b><span>${escapeHTML(row.risk)}</span></div>
           </div>
           ${inlineDetail}
         </div>`;
@@ -23133,8 +24526,8 @@
       const conclusion = isAudience ? getMid38AudienceConclusion() : getMid38ChannelConclusion();
       const facts = isAudience ? [
         { targetKey: "年轻中高消费力女性", label: "年轻中高女性", value: "55%", note: "核销 UV 占比" },
-        { targetKey: "年长中高消费力女性", label: "年长中高女性", value: "+2pp", note: "GMV 份额 VS 预算" },
-        { targetKey: "年轻低消费力女性", label: "年轻低消费女性", value: "-4pp", note: "核销份额 VS 领券" }
+        { targetKey: "年长中高消费力女性", label: "年长中高女性", value: "+2pp", note: "GMV 份额对比预算" },
+        { targetKey: "年轻低消费力女性", label: "年轻低消费女性", value: "-4pp", note: "核销份额对比领券" }
       ] : [
         { targetKey: "会场", label: "会场", value: "95.2%", note: "领券 UV 占比" },
         { targetKey: "卡券红包页", label: "卡券红包页", value: "45%", note: "用户核销率" },
@@ -23432,7 +24825,7 @@
                   data-ask-summary="${escapeHTML(recommendationSummary)}"
                   data-ask-questions="三条建议的优先级如何排序？|哪些证据支持当前建议？|灰度验证需要关注哪些护栏？"
                   aria-label="独立追问当前波次 AI 策略调优建议"
-                  ${disabled}>✦ 独立追问</button>
+                  ${disabled}>${iconSVG("ask")}独立追问</button>
                 <button class="${adopted ? "ghost" : "primary"}"
                   data-mid-current-ai-action="${adopted ? "cancel-adoption" : "adopt"}"
                   aria-pressed="${adopted}"
@@ -23483,7 +24876,7 @@
               data-ask-type="current" data-ask-context="38节第一波调优"
               data-ask-summary="${escapeHTML(getMid38SourceSummary())}"
               data-ask-questions="总结当前券批次的真实表现|解释人群调优依据|解释渠道调优依据|列出当前缺失数据"
-              ${contract.available ? "" : 'disabled aria-disabled="true"'}>✦ 独立追问</button>
+              ${contract.available ? "" : 'disabled aria-disabled="true"'}>${iconSVG("ask")}独立追问</button>
             <button class="mid-recommendation-continue" data-mid-recommendation-action="continue"
               data-mid-recommendation-key="current"
               data-ask-context="38节第一波调优"
@@ -23539,7 +24932,7 @@
           <div class="mid-candidate-actions">
             <button class="mid-candidate-expand" type="button" data-mid-wave-expand="${escapeHTML(planKey)}"
               aria-expanded="${expanded}" aria-controls="midNextWavePlanPanel">
-              <span>${expanded ? "正在查看方案详情" : "展开方案详情"}</span><i aria-hidden="true">↓</i>
+              <span>${expanded ? "正在查看方案详情" : "展开方案详情"}</span>${iconSVG("expand")}
             </button>
           </div>
         </div>`;
@@ -23876,7 +25269,8 @@
       midNextWaveBasisToggle.disabled = false;
       midNextWaveBasisToggle.setAttribute("aria-disabled", "false");
       midNextWaveBasisToggle.setAttribute("aria-expanded", String(expanded));
-      midNextWaveBasisToggle.querySelector("strong").textContent = expanded ? "收起依据" : "展开依据";
+      midNextWaveBasisToggle.querySelector("strong").innerHTML =
+        `${expanded ? "收起依据" : "展开依据"}${iconSVG("expand")}`;
       midNextWaveBasisContent.hidden = !expanded;
       document.getElementById("midNextWaveBasisMeta").textContent =
         `${displayValue(plan.label)} · 38节节奏预算、618渠道成本与等级分层`;
@@ -23890,7 +25284,7 @@
             data-ask-context="${escapeHTML(`${displayValue(plan.label)}方案`)}"
             data-ask-summary="${escapeHTML(displayValue(plan.decision))}"
             data-ask-questions="为什么选择这套方案？|这套方案的预算和券档如何调整？|哪些护栏触发时必须回滚？"
-            ${businessEvidence ? "" : 'disabled aria-disabled="true"'}>✦ 方案级独立追问</button>
+            ${businessEvidence ? "" : 'disabled aria-disabled="true"'}>${iconSVG("ask")}方案级独立追问</button>
           <button class="mid-recommendation-continue" data-mid-recommendation-action="continue"
             data-mid-recommendation-key="next" data-mid-plan-key="${escapeHTML(midCampaignViewState.next.selectedPlan)}"
             data-ask-context="${escapeHTML(`${displayValue(plan.label)}方案`)}"
@@ -23934,17 +25328,17 @@
         midNextWaveBatchContent.innerHTML = `<div class="mid-wave-table-wrap" tabindex="0" role="region"
           aria-label="下一波次券批次投放计划"><table class="mid-wave-table">
           <caption class="visually-hidden">下一波次券批次投放计划</caption>
-          <thead><tr><th>批次别名</th><th>时点</th><th>端口</th><th>券类型</th><th>券档 / 任务</th><th>发放形式</th><th>发放窗口</th><th>使用窗口</th><th>限领 / 频控</th><th>预算动作</th><th>目标</th></tr></thead>
+          <thead><tr><th>批次别名</th><th>时点</th><th>端口</th><th>券类型</th><th>券档与任务</th><th>发放形式</th><th>发放窗口</th><th>使用窗口</th><th>限领与频控</th><th>预算动作</th><th>目标</th></tr></thead>
           <tbody>${batches.map(item => `<tr>
             <td data-label="批次别名"><span class="mid-wave-batch-code">${escapeHTML(formatBatchField(item, "code"))}</span></td>
             <td data-label="时点">${escapeHTML(formatBatchField(item, "time"))}</td>
             <td data-label="端口">${escapeHTML(formatBatchField(item, "endpoint"))}</td>
             <td data-label="券类型">${escapeHTML(formatBatchField(item, "couponType"))}</td>
-            <td data-label="券档 / 任务">${escapeHTML(formatBatchField(item, "tier"))}</td>
+            <td data-label="券档与任务">${escapeHTML(formatBatchField(item, "tier"))}</td>
             <td data-label="发放形式">${escapeHTML(formatBatchField(item, "distributionForm"))}</td>
             <td data-label="发放窗口">${escapeHTML(formatBatchField(item, "issueWindow"))}</td>
             <td data-label="使用窗口">${escapeHTML(formatBatchField(item, "useWindow"))}</td>
-            <td data-label="限领 / 频控">${escapeHTML(formatBatchField(item, "limit"))}</td>
+            <td data-label="限领与频控">${escapeHTML(formatBatchField(item, "limit"))}</td>
             <td data-label="预算动作"><span class="mid-wave-budget-move">${escapeHTML(formatBatchField(item, "budget"))}</span></td>
             <td data-label="目标">${escapeHTML(formatBatchField(item, "objective"))}</td>
           </tr>`).join("")}</tbody>
@@ -23956,18 +25350,18 @@
       midNextWaveBatchContent.innerHTML = `<div class="mid-wave-table-wrap" tabindex="0" role="region"
         aria-label="下一波次场域投放计划"><table class="mid-wave-table">
         <caption class="visually-hidden">下一波次场域投放计划</caption>
-        <thead><tr><th>时点</th><th>端口</th><th>券类型</th><th>券档 / 任务</th><th>发放形式</th><th>目标人群</th><th>投放场域</th><th>发放窗口</th><th>使用窗口</th><th>限领 / 频控</th><th>预算动作</th><th>目标</th></tr></thead>
+        <thead><tr><th>时点</th><th>端口</th><th>券类型</th><th>券档与任务</th><th>发放形式</th><th>目标人群</th><th>投放场域</th><th>发放窗口</th><th>使用窗口</th><th>限领与频控</th><th>预算动作</th><th>目标</th></tr></thead>
         <tbody>${batches.map(item => `<tr>
           <td data-label="时点">${escapeHTML(formatBatchField(item, "time"))}</td>
           <td data-label="端口">${escapeHTML(formatBatchField(item, "endpoint"))}</td>
           <td data-label="券类型">${escapeHTML(formatBatchField(item, "couponType"))}</td>
-          <td data-label="券档 / 任务">${escapeHTML(formatBatchField(item, "tier"))}</td>
+          <td data-label="券档与任务">${escapeHTML(formatBatchField(item, "tier"))}</td>
           <td data-label="发放形式">${escapeHTML(formatBatchField(item, "distributionForm"))}</td>
           <td data-label="目标人群">${escapeHTML(formatBatchField(item, "audience"))}</td>
           <td data-label="投放场域">${escapeHTML(formatBatchField(item, "venue"))}</td>
           <td data-label="发放窗口">${escapeHTML(formatBatchField(item, "issueWindow"))}</td>
           <td data-label="使用窗口">${escapeHTML(formatBatchField(item, "useWindow"))}</td>
-          <td data-label="限领 / 频控">${escapeHTML(formatBatchField(item, "limit"))}</td>
+          <td data-label="限领与频控">${escapeHTML(formatBatchField(item, "limit"))}</td>
           <td data-label="预算动作"><span class="mid-wave-budget-move">${escapeHTML(formatBatchField(item, "budget"))}</span></td>
           <td data-label="目标">${escapeHTML(formatBatchField(item, "objective"))}</td>
         </tr>`).join("")}</tbody>
@@ -24407,7 +25801,7 @@
       const aovYoy = gmvYoy - dacYoy;
       baseline.metrics = [metric(pct(gmvYoy), "GMV 同比"), metric(pct(dacYoy), "DAC 同比"), metric(pct(aovYoy), "客单同比")];
       baseline.evidence = `${sampleNote}加权后，DAC 解释约 ${Math.round(dacYoy / Math.max(gmvYoy, .1) * 100)}% 的 GMV 同比增幅`;
-      baseline.summary = `AI 小结：基于当前 ${sampleCount} 场参考促重算，自然水位仍主要由支付用户规模驱动；样本变化后 GMV / DAC / 客单同比已同步更新。`;
+      baseline.summary = `AI 小结：基于当前 ${sampleCount} 场参考促重算，自然水位仍主要由支付用户规模驱动；样本变化后 GMV、DAC 与客单同比已同步更新。`;
       baseline.detail = {
         headers: ["窗口", "GMV 同比", "DAC 同比", "客单同比", "样本"],
         rows: [["活动前 15—20 天", pct(gmvYoy), pct(dacYoy), pct(aovYoy), sampleNote], ["去年同期", "基准 100", "基准 100", "基准 100", "同日历口径"]]
@@ -25876,12 +27270,11 @@
             <b>第${index + 1}波 · ${escapeHTML(wave.objective)}</b>
             <span>${escapeHTML(wave.cycle)} · 当前波次券组配置</span>
           </div>
-          <em>W${String(index + 1).padStart(2, "0")} · ${wave.coupons.length} 组</em>
         </header>
         <div class="pre-timeline-coupon-grid">
           ${Object.entries(labels).map(([groupType, label]) => {
             const records = wave.coupons.filter(coupon => coupon.groupType === groupType);
-            return `<article class="pre-timeline-coupon-group">
+            return `<article class="pre-timeline-coupon-group" tabindex="0" role="region" aria-label="${escapeHTML(label)}券组，可滚动">
               <h4>${escapeHTML(label)}<span>${records.length ? `${records.length} 组` : "未配置"}</span></h4>
               ${records.length ? records.map(preRenderSourceCouponRecord).join("") : `<div class="pre-timeline-coupon-empty">本波次不配置</div>`}
             </article>`;
@@ -26087,6 +27480,7 @@
               aria-controls="preTrendContext"
             >
               <title>${series.labels[index]} · ${series.label}同比 ${preFormatSignedPercent(value)}</title>
+              <circle class="pre-chart-point-hit" cx="${xs[index].toFixed(1)}" cy="${ys[index].toFixed(1)}" r="27"></circle>
               <circle class="pre-chart-point-halo" cx="${xs[index].toFixed(1)}" cy="${ys[index].toFixed(1)}" r="9"></circle>
               <circle class="pre-chart-point-dot" cx="${xs[index].toFixed(1)}" cy="${ys[index].toFixed(1)}" r="5" fill="#fff" stroke="${series.color}" stroke-width="3"></circle>
               <text x="${xs[index].toFixed(1)}" y="214" text-anchor="middle">${series.labels[index]}</text>
@@ -26329,7 +27723,7 @@
           data-ask-context="促前证据收敛"
           data-ask-summary="${escapeHTML(conclusion)}"
           data-ask-questions="证据如何支持这个收敛结论？|哪些假设必须在本期重新验证？|生成进入策略共创前的检查清单"
-        >✦ 追问</button>`;
+        >${iconSVG("ask")}追问</button>`;
     }
 
     function preVisibleInsights(insights) {
@@ -26352,8 +27746,8 @@
               <button
                 class="workbench-ask"
                 data-pre-insight-ask="${insight.key}"
-              >✦ 追问</button>
-              <button class="pre-insight-toggle" data-pre-insight-expand="${insight.key}" aria-expanded="${expanded}">${expanded ? "收起证据" : "展开证据"}</button>
+              >${iconSVG("ask")}追问</button>
+              <button class="pre-insight-toggle" data-pre-insight-expand="${insight.key}" aria-expanded="${expanded}">${iconSVG("expand")}${expanded ? "收起证据" : "展开证据"}</button>
             </div>
           </div>
           <h4>${escapeHTML(insight.title)}</h4>
@@ -26525,7 +27919,7 @@
         <section class="case-card case-problem-card">
           <div class="case-card-head">
             <div>
-              <div class="case-step-kicker">Case ready · 问题重述</div>
+              <div class="case-step-kicker">案例已就绪 · 问题重述</div>
               <h3>先确认要解决的决策问题</h3>
             </div>
             <span class="tag">累计两天</span>
@@ -26551,7 +27945,7 @@
         <section class="case-card case-plan-card">
           <div class="case-card-head">
             <div>
-              <div class="case-step-kicker">Step 0 / 6 · 分析门禁</div>
+              <div class="case-step-kicker">步骤 0 / 6 · 分析门禁</div>
               <h3>确认分析计划</h3>
               <p>计划确认后，Agent 才会逐步生成分析和候选策略。</p>
             </div>
@@ -26650,7 +28044,7 @@
       return `
         <aside class="ai-summary" data-ai-context="${type}" data-context-summary="${title}">
           <div class="ai-summary-head"><span class="spark">AI</span>${title}</div>
-          <button class="ask-trigger" data-ask-type="${type}" aria-label="追问${title}">✦ 追问</button>
+          <button class="ask-trigger" data-ask-type="${type}" aria-label="追问${title}">${iconSVG("ask")}追问</button>
           <div class="ai-summary-grid">
             <div class="ai-summary-item"><b>结论</b><span>${conclusion}</span></div>
             <div class="ai-summary-item"><b>依据</b><span>${evidence}</span></div>
@@ -26688,7 +28082,7 @@
     function renderOverallStage() {
       const metrics = budgetCaseData.overall.map(metric => `
         <article class="overall-metric" data-ai-context="overall" data-context-summary="${metric.label}：V1 ${metric.v1}，V15 ${metric.v15}">
-          <button class="ask-trigger" data-ask-type="overall" aria-label="追问${metric.label}">✦ 追问</button>
+          <button class="ask-trigger" data-ask-type="overall" aria-label="追问${metric.label}">${iconSVG("ask")}追问</button>
           <div class="metric-name">${metric.label}</div>
           <div class="metric-pair">
             <div class="metric-version"><span>V1</span><strong>${metric.v1}</strong></div>
@@ -26701,7 +28095,7 @@
         <section class="case-card stage-reveal" id="overallStage">
           <div class="case-card-head">
             <div>
-              <div class="case-step-kicker">Step 2 / 6 · 总体策略对比</div>
+              <div class="case-step-kicker">步骤 2 / 6 · 总体策略对比</div>
               <h3>先判断总体效率，再解释增量差异</h3>
               <p>累计两天 · 同一活动周期 · V1 / V15 对照</p>
             </div>
@@ -26817,14 +28211,14 @@
           <td>${segment.v1.subsidy}</td><td>${segment.v15.subsidy}</td>
           <td class="roi-key">${segment.v1.roi}</td><td class="roi-key">${segment.v15.roi}</td>
           <td>${segment.v1.rate}</td><td>${segment.v15.rate}</td>
-          <td><button class="ask-trigger" data-ask-type="segment" aria-label="追问${segment.name}">✦</button></td>
+          <td><button class="ask-trigger" data-ask-type="segment" aria-label="追问${segment.name}">${iconSVG("ask")}</button></td>
         </tr>
       `).join("");
       return `
         <section class="case-card stage-reveal" id="segmentStage">
           <div class="case-card-head">
             <div>
-              <div class="case-step-kicker">Step 3 / 6 · 人群下钻</div>
+              <div class="case-step-kicker">步骤 3 / 6 · 人群下钻</div>
               <h3>L4、L5 与 jp/t8 的同口径比较</h3>
               <p>先分清效率、规模、成本和支付表现，避免把结构差异当成策略效果。</p>
             </div>
@@ -26857,7 +28251,7 @@
         <section class="case-card stage-reveal" id="scaleStage">
           <div class="case-card-head">
             <div>
-              <div class="case-step-kicker">Step 4 / 6 · 规模归因</div>
+              <div class="case-step-kicker">步骤 4 / 6 · 规模归因</div>
               <h3>把效率效应与人群池规模分开</h3>
               <p>兑换比接近时，总增量首先受可覆盖人数约束。</p>
             </div>
@@ -26866,14 +28260,14 @@
           <div class="case-card-body">
             <div class="scale-grid">
               <article class="scale-card focus" data-ai-context="scale" data-context-summary="jp/t8 重点人群规模 6,400 万">
-                <button class="ask-trigger" data-ask-type="scale" aria-label="追问 jp/t8 人群规模">✦ 追问</button>
+                <button class="ask-trigger" data-ask-type="scale" aria-label="追问 jp/t8 人群规模">${iconSVG("ask")}追问</button>
                 <strong>jp/t8 重点人群</strong>
                 <span class="scale-number">${budgetCaseData.populations.focus.display}</span>
                 <small>约为大盘 L4-L5 人群池的 80%</small>
                 <div class="scale-track"><i style="width:80%"></i></div>
               </article>
               <article class="scale-card" data-ai-context="scale" data-context-summary="大盘 L4-L5 人群规模 8,000 万">
-                <button class="ask-trigger" data-ask-type="scale" aria-label="追问大盘 L4-L5 人群规模">✦ 追问</button>
+                <button class="ask-trigger" data-ask-type="scale" aria-label="追问大盘 L4-L5 人群规模">${iconSVG("ask")}追问</button>
                 <strong>大盘 L4-L5</strong>
                 <span class="scale-number">${budgetCaseData.populations.l45.display}</span>
                 <small>比 jp/t8 多约 1,600 万，可覆盖规模高 20%</small>
@@ -26980,7 +28374,7 @@
       return `
         <div class="candidate-grid" id="candidateGrid">
           <article class="candidate-card recommended" data-ai-context="decision" data-context-summary="推荐：大盘 L1-L5 部分人群算法覆盖">
-            <button class="ask-trigger" data-ask-type="decision" aria-label="追问推荐候选">✦ 追问</button>
+            <button class="ask-trigger" data-ask-type="decision" aria-label="追问推荐候选">${iconSVG("ask")}追问</button>
             <span class="candidate-badge">推荐候选</span>
             <h4>大盘 L1-L5 部分人群算法覆盖</h4>
             <p>不再用单一 L45 或 jp/t8 硬标签二选一，由算法按预期增量排序，在预算容量内选择人群。</p>
@@ -26992,7 +28386,7 @@
             </div>
           </article>
           <article class="candidate-card" data-ai-context="decision" data-context-summary="备选：jp/t8 保底加剩余预算算法分配">
-            <button class="ask-trigger" data-ask-type="decision" aria-label="追问保量备选">✦ 追问</button>
+            <button class="ask-trigger" data-ask-type="decision" aria-label="追问保量备选">${iconSVG("ask")}追问</button>
             <span class="candidate-badge">业务保量备选</span>
             <h4>jp/t8 保底 + 剩余预算算法分配</h4>
             <p>当业务必须保证重点人群触达时，为 jp/t8 设置保底层，再把剩余预算交给大盘算法。</p>
@@ -27012,7 +28406,7 @@
         <section class="case-card stage-reveal" id="budgetStage">
           <div class="case-card-head">
             <div>
-              <div class="case-step-kicker">Step 5 / 6 · 预算权衡</div>
+              <div class="case-step-kicker">步骤 5 / 6 · 预算权衡</div>
               <h3>把“发谁”转化为预算容量约束</h3>
               <p>仅输入可覆盖人数进行案例测算，不换算未提供的预算金额或单人成本。</p>
             </div>
@@ -27031,7 +28425,7 @@
             </div>
             ${renderCoverageResults(budgetCaseState.budgetCoverage)}
             <div class="case-actions">
-              <button class="ask-trigger" data-ask-type="budget">✦ 追问预算分配</button>
+              <button class="ask-trigger" data-ask-type="budget">${iconSVG("ask")}追问预算分配</button>
               <button class="ghost" id="calculateCoverage">更新覆盖测算</button>
             </div>
             <div class="parameter-note">参数化判断：兑换比接近时，预算越紧越应依赖算法按预期增量排序；若必须保证重点人群触达，则设置 jp/t8 保底层，再将剩余预算交给算法。</div>
@@ -27055,14 +28449,14 @@
           <span class="risk-icon">!</span>
           <span>${risk}</span>
           <button class="risk-confirm" data-confirm-risk="${index}">标记已确认</button>
-          <button class="ask-trigger" data-ask-type="risk" aria-label="追问风险${index + 1}">✦</button>
+          <button class="ask-trigger" data-ask-type="risk" aria-label="追问风险${index + 1}">${iconSVG("ask")}</button>
         </div>
       `).join("");
       return `
         <section class="case-card stage-reveal" id="riskStage">
           <div class="case-card-head">
             <div>
-              <div class="case-step-kicker">Step 6 / 6 · 风险校验</div>
+              <div class="case-step-kicker">步骤 6 / 6 · 风险校验</div>
               <h3>人工确认前的证据与止损门槛</h3>
               <p>所有风险确认后才能生成最终候选，不代表风险已经消失。</p>
             </div>
@@ -27138,7 +28532,7 @@
       document.getElementById("caseMainStream").insertAdjacentHTML("beforeend", `
         <section class="final-decision stage-reveal" id="caseFinalDecision" data-ai-context="decision" data-context-summary="最终推荐：大盘 L1-L5 部分人群算法覆盖">
           <div class="ai-summary-head"><span class="spark">AI</span>最终候选结论</div>
-          <button class="ask-trigger" data-ask-type="decision" style="float:right;margin-top:-25px">✦ 追问结论</button>
+          <button class="ask-trigger" data-ask-type="decision" style="float:right;margin-top:-25px">${iconSVG("ask")}追问结论</button>
           <h3>推荐：大盘 L1-L5 中由算法选择部分人群覆盖</h3>
           <p>V1 与 V15 的总体和人群兑换比均接近；V15 总体增量偏低主要受 jp/t8 约 6,400 万人群规模约束，不能解释为其兑换效率显著更差。当前数据无法无条件证明 V1 或 V15 胜出。</p>
           <div class="decision-points">
@@ -27570,7 +28964,7 @@
             </div>
             <div class="artifact-actions">
               <button data-case-action="view-artifact">查看报告</button>
-              <button data-case-action="download-artifact">下载</button>
+              <button data-case-action="download-artifact">${iconSVG("download")}下载</button>
             </div>
           </div>` : "";
       }
@@ -27630,7 +29024,7 @@
         </span>
         <span class="dock-file-actions">
           <button data-dock-action="view">查看</button>
-          <button data-dock-action="download">下载</button>
+          <button data-dock-action="download">${iconSVG("download")}下载</button>
         </span>` : "";
     }
 
@@ -27712,7 +29106,7 @@
         return `<div class="risk-item ${confirmed ? "confirmed" : ""}" data-risk-index="${index}" data-ai-context="risk" data-context-summary="${escapeHTML(risk)}">
           <span class="risk-icon">${confirmed ? "✓" : "!"}</span><span>${escapeHTML(risk)}</span>
           <button class="risk-confirm" data-confirm-aime-risk="${index}" ${confirmed ? "disabled" : ""}>${confirmed ? "已确认" : "标记已确认"}</button>
-          <button class="ask-trigger" data-ask-type="risk" aria-label="追问风险${index + 1}">✦</button>
+          <button class="ask-trigger" data-ask-type="risk" aria-label="追问风险${index + 1}">${iconSVG("ask")}</button>
         </div>`;
       }).join("");
       const final = budgetCaseState.candidateGenerated ? `
@@ -27780,14 +29174,13 @@
         const isEntering = !renderedReportSectionIds.has(section.id);
         renderedReportSectionIds.add(section.id);
         return `<section class="report-section${isEntering ? " is-entering" : ""}" id="${sectionDomId}">
-          <div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-hide-report-section="${section.id}" aria-label="从报告中隐藏${escapeHTML(section.title)}">×</button></div>
+          <div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-hide-report-section="${section.id}" aria-label="从报告中隐藏${escapeHTML(section.title)}">${iconSVG("close")}</button></div>
           <p class="report-section-lead">${escapeHTML(sectionLeads[section.id])}</p>
           ${content}
         </section>`;
       }).join("");
       reportDocument.innerHTML = `
         <header class="report-cover">
-          <div class="report-cover-eyebrow">Mid-campaign strategy report</div>
           <h2>${escapeHTML(budgetCaseState.reportTitle)}</h2>
           <p>最后一波次 X 覆盖人群决策 · 累计两天案例数据</p>
           <div class="report-meta"><span>${completeCount} / 6 章节完成</span><span>累计两天案例数据</span></div>
@@ -27845,7 +29238,7 @@
 
     function applyReportCustomization() {
       const title = reportTitleInput.value.trim();
-      budgetCaseState.reportTitle = title || "促中预算紧张 · V1 / V15 策略分析";
+      budgetCaseState.reportTitle = title || "促中预算紧张 · V1 与 V15 策略分析";
       const checked = new Set(Array.from(reportCustomizeSections.querySelectorAll("[data-customize-section]:checked")).map(input => input.dataset.customizeSection));
       if (!checked.size) {
         showToast("报告至少保留一个章节");
@@ -28058,7 +29451,7 @@
       caseComposerSend.disabled = budgetCaseState.isResponding;
       caseComposerStatus.textContent = budgetCaseState.introStatus === "thinking"
         ? "Agent 正在理解需求并编排执行步骤…"
-        : budgetCaseState.isResponding ? "Agent 正在分析…" : "Enter 发送 · Shift+Enter 换行";
+        : budgetCaseState.isResponding ? "Agent 正在分析…" : "回车发送 · Shift + 回车换行";
     }
 
     function autoResizeComposer() {
@@ -28089,7 +29482,7 @@
         addCaseMessage(createCaseMessage(
           "assistant",
           "text",
-          `<p><strong>确认写入灰度候选？</strong></p><p>该操作只记录候选决策与审计状态，不会调用线上发券、预算或人群配置接口。真实执行仍需业务 Owner、预算审批、灰度对照与止损监控。</p>`,
+          `<p><strong>确认写入灰度候选？</strong></p><p>该操作只记录候选决策与审计状态，不会调用线上发券、预算或人群配置接口。后续执行仍需业务负责人、预算审批、灰度对照与止损监控。</p>`,
           [
             { id: "final-confirm-candidate", label: "确认记录为待审批", primary: true },
             { id: "cancel-confirm-candidate", label: "取消" }
@@ -28194,7 +29587,7 @@
       return `<!doctype html><html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>${escapeHTML(budgetCaseState.reportTitle)}</title><style>
         *{box-sizing:border-box}body{margin:0;background:#eef1f5;color:#293142;font:14px/1.65 -apple-system,BlinkMacSystemFont,"PingFang SC","Microsoft YaHei",sans-serif}
         .report-document{width:min(1120px,calc(100% - 40px));margin:20px auto;padding:32px;border:1px solid #dfe4eb;border-radius:10px;background:#fff;box-shadow:0 6px 30px rgba(31,43,63,.08)}
-        .report-cover{padding-bottom:20px;border-bottom:1px solid #e6e9ef}.report-cover-eyebrow{color:#3157e6;font-size:11px;font-weight:700;letter-spacing:.12em}.report-cover h2{margin:7px 0 0;font-size:28px}.report-cover p{margin:7px 0 0;color:#777f8f}.report-meta{display:flex;gap:8px;margin-top:12px}.report-meta span{padding:4px 8px;border-radius:5px;background:#f1f3f6;font-size:11px}
+        .report-cover{padding-bottom:20px;border-bottom:1px solid #e6e9ef}.report-cover h2{margin:7px 0 0;font-size:28px}.report-cover p{margin:7px 0 0;color:#777f8f}.report-meta{display:flex;gap:8px;margin-top:12px}.report-meta span{padding:4px 8px;border-radius:5px;background:#f1f3f6;font-size:11px}
         .report-section{padding:24px 0}.report-section+.report-section{border-top:1px solid #eceff3}.report-section-head{display:flex;align-items:center;gap:8px}.report-section-no{padding:3px 7px;border-radius:5px;color:#3157e6;background:#eef2ff;font-size:11px;font-weight:700}.report-section-head h3{margin:0;font-size:18px}.report-section-lead{margin:6px 0 16px 36px;color:#808797;font-size:12px}
         .strategy-grid,.overall-grid,.scale-grid,.candidate-grid,.decision-points,.ai-summary-grid,.coverage-result{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.strategy-card,.overall-metric,.scale-card,.candidate-card,.decision-point,.ai-summary-item,.coverage-cell{padding:14px;border:1px solid #e1e5ec;border-radius:8px;background:#fafbfc}
         .strategy-card p,.candidate-card p,.decision-point span,.ai-summary-item span{margin:5px 0 0;color:#687181;font-size:12px}.replacement-note,.parameter-note{margin-top:10px;padding:10px;border-left:3px solid #42b28e;background:#eef9f5}
@@ -28469,7 +29862,7 @@
       preAddMessage(preCreateMessage(
         "assistant",
         "insight",
-        "<p><strong>治理门禁已全部满足。</strong>角色确认、主预算申请、专项子预算、活动立项和保密协议均为独立 Mock 完成态，现在可以生成待审批策略包；不会触发真实申请或发布。</p>",
+        "<p><strong>治理门禁已全部满足。</strong>角色确认、主预算申请、专项子预算、活动立项和保密协议均已独立完成，现在可以生成待审批策略包；不会触发申请或发布。</p>",
         [{ id: "finalize-pre-strategy", label: "生成待审批策略包", primary: true }],
         "governance"
       ));
@@ -28577,7 +29970,7 @@
         body = `<p>待审批策略包和七章 HTML 报告已生成，可在右侧预览或下载。</p>
           <div class="artifact-card">
             <div class="artifact-main"><span class="artifact-icon">HTML</span><div class="artifact-copy"><strong>${escapeHTML(preCaseState.artifact.name)}</strong><span>${escapeHTML(preCaseState.artifact.sizeLabel)} · ${escapeHTML(preCaseData.mockLabel)} · ${escapeHTML(preCaseState.artifact.createdAt)}</span></div></div>
-            <div class="artifact-actions"><button data-pre-action="view-pre-artifact">查看报告</button><button data-pre-action="download-pre-artifact">下载</button></div>
+            <div class="artifact-actions"><button data-pre-action="view-pre-artifact">查看报告</button><button data-pre-action="download-pre-artifact">${iconSVG("download")}下载</button></div>
           </div>`;
       }
       const actions = (message.actions || []).filter(action => preIsActionAvailable(action.id)).map(action => `
@@ -28625,7 +30018,7 @@
       preCaseArtifactDock.innerHTML = artifact ? `
         <span class="dock-file-icon">HTML</span>
         <span class="dock-file-copy"><strong>${escapeHTML(artifact.name)}</strong><span>${escapeHTML(artifact.sizeLabel)} · 待审批策略包 · ${escapeHTML(preCaseData.mockLabel)} · ${escapeHTML(artifact.createdAt)}</span></span>
-        <span class="dock-file-actions"><button data-pre-dock-action="view">查看</button><button data-pre-dock-action="download">下载</button></span>` : "";
+        <span class="dock-file-actions"><button data-pre-dock-action="view">查看</button><button data-pre-dock-action="download">${iconSVG("download")}下载</button></span>` : "";
     }
 
     function prePromptSuggestions() {
@@ -28648,7 +30041,7 @@
       preCaseComposerSend.disabled = preCaseState.isResponding;
       preCaseComposerStatus.textContent = preCaseState.introStatus === "thinking"
         ? "Agent 正在理解需求并编排执行步骤…"
-        : preCaseState.isResponding ? "Agent 正在分析数据…" : "Enter 发送 · Shift+Enter 换行";
+        : preCaseState.isResponding ? "Agent 正在分析数据…" : "回车发送 · Shift + 回车换行";
     }
 
     function preAutoResizeComposer() {
@@ -28685,7 +30078,7 @@
       ];
       return `<aside class="pre-insight" data-ai-context="${escapeHTML(type)}" data-context-summary="${escapeHTML(title)}">
         <div class="pre-insight-head"><span class="spark">AI</span>${escapeHTML(title)}
-          <button class="ask-trigger" data-pre-ask-type="${escapeHTML(type)}" data-ask-context="${escapeHTML(title)}" data-ask-summary="${escapeHTML(conclusion)}">✦ 追问</button>
+          <button class="ask-trigger" data-pre-ask-type="${escapeHTML(type)}" data-ask-context="${escapeHTML(title)}" data-ask-summary="${escapeHTML(conclusion)}">${iconSVG("ask")}追问</button>
         </div>
         <div class="pre-insight-grid">${items.map(([label, value]) => `<div class="pre-insight-item"><b>${label}</b><span>${value}</span></div>`).join("")}</div>
       </aside>`;
@@ -28830,7 +30223,7 @@
       const subRows = preCaseData.subcategories.map(item => `<tr><td>${item.parent} / ${item.name}</td><td>${item.gmvIndex}</td><td>+${item.dac}%</td><td>${item.aov >= 0 ? "+" : ""}${item.aov}%</td><td>${item.audience}</td><td>${item.tier}</td></tr>`).join("");
       const digital = categories.find(item => item.category === "数码家电");
       const food = categories.find(item => item.category === "食品生鲜");
-      return `<div class="pre-toolbar"><span class="hint">P1 原值口径：活动前日均 VS 历史活动期日均</span><button class="pre-inline-action" data-pre-toggle-category aria-expanded="${preCaseState.categoryExpanded}">${preCaseState.categoryExpanded ? "收起二级类目" : "下钻二级类目"}</button></div>
+      return `<div class="pre-toolbar"><span class="hint">P1 原值口径：活动前日均对比历史活动期日均</span><button class="pre-inline-action" data-pre-toggle-category aria-expanded="${preCaseState.categoryExpanded}">${preCaseState.categoryExpanded ? "收起二级类目" : "下钻二级类目"}</button></div>
         <div class="pre-category-compare" role="img" aria-label="P1 分类目活动前和活动期日均 GMV 对比">${comparison}<div class="pre-timeseries-legend"><span><i style="background:#aeb8ca"></i>活动前日均</span><span class="weekend"><i></i>活动期日均</span></div></div>
         <div class="pre-table-scroll"><table class="pre-category-table" aria-label="P1 分类目活动前与活动期日均原值"><thead><tr><th>一级类目</th><th>前 GMV</th><th>前 DAC</th><th>前客单</th><th>期 GMV</th><th>期 DAC</th><th>期客单</th><th>放大系数</th><th>DAC 拉动</th><th>客单拉动</th><th>增量 / 贡献</th><th>优先级</th><th>券档映射</th></tr></thead>
         <tbody>${categoryRows}</tbody></table></div>
@@ -28871,7 +30264,7 @@
     }
 
     function preRenderExperimentSection() {
-      return `<div style="overflow:auto"><table class="pre-experiment-table"><thead><tr><th>实验 ID</th><th>方案</th><th>实验人群</th><th>人均 GMV</th><th>增量 GMV</th><th>人均增量</th><th>补贴</th><th>ROI</th><th>p-value</th><th>显著性</th></tr></thead>
+      return `<div style="overflow:auto"><table class="pre-experiment-table"><thead><tr><th>实验 ID</th><th>方案</th><th>实验人群</th><th>人均 GMV</th><th>增量 GMV</th><th>人均增量</th><th>补贴</th><th>ROI</th><th>p 值</th><th>显著性</th></tr></thead>
         <tbody>${preCaseData.experiments.map(item => `<tr><td>${item.id}</td><td>${item.plan}</td><td>${item.audience}</td><td>${item.perUserGmv}</td><td>${item.incrementalGmv}</td><td>${item.perUserIncrement}</td><td>${item.subsidy}</td><td>${item.roi}</td><td>${item.p}</td><td><span class="sig">${item.significance}</span></td></tr>`).join("")}</tbody></table></div>
         <div class="pre-competitor-grid">${preCaseData.competitors.map((item, index) => `<article class="pre-competitor-card ${index === 2 ? "medium" : ""}"><strong>${item.name} · ${item.level}</strong><p>主档：${item.tier}<br>折扣：${item.discount}<br>会员：${item.member}<br>频次：${item.cadence}<br>方向：${item.direction}</p></article>`).join("")}</div>
         ${preRenderInsight(
@@ -28943,16 +30336,16 @@
     function preRenderGovernanceSection() {
       const roles = preCaseData.governance.map((item, index) => {
         const confirmed = preCaseState.governanceConfirmed.has(index);
-        return `<div class="pre-governance-item ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.role}</strong><span>${item.item}</span><span class="pre-governance-status">${confirmed ? "Mock 已确认" : item.status}</span></div><button data-pre-confirm-role="${index}" ${confirmed ? "disabled" : ""} aria-label="${confirmed ? `${item.role}已确认` : `模拟确认${item.role}`}">${confirmed ? "已确认" : "Mock 确认"}</button></div>`;
+        return `<div class="pre-governance-item ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.role}</strong><span>${item.item}</span><span class="pre-governance-status">${confirmed ? "已模拟确认" : item.status}</span></div><button data-pre-confirm-role="${index}" ${confirmed ? "disabled" : ""} aria-label="${confirmed ? `${item.role}已确认` : `模拟确认${item.role}`}">${confirmed ? "已确认" : "模拟确认"}</button></div>`;
       }).join("");
       const processes = preCaseData.governanceProcesses.map((item, index) => {
         const confirmed = preCaseState.governanceProcessConfirmed.has(item.key);
-        return `<div class="pre-governance-item process ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.name}</strong><span>${item.detail}</span><span class="pre-governance-status">${confirmed ? item.complete : item.pending}</span></div><button data-pre-confirm-governance-process="${item.key}" ${confirmed ? "disabled" : ""} aria-label="${confirmed ? `${item.name}${item.complete}` : `模拟完成${item.name}`}">${confirmed ? "已满足" : "Mock 满足"}</button></div>`;
+        return `<div class="pre-governance-item process ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.name}</strong><span>${item.detail}</span><span class="pre-governance-status">${confirmed ? item.complete : item.pending}</span></div><button data-pre-confirm-governance-process="${item.key}" ${confirmed ? "disabled" : ""} aria-label="${confirmed ? `${item.name}${item.complete}` : `模拟完成${item.name}`}">${confirmed ? "已满足" : "模拟满足"}</button></div>`;
       }).join("");
       const recommended = preRecommendedCandidate();
-      const final = preCaseState.packageGenerated && recommended ? `<div class="pre-final"><h3>${recommended.name} · 待审批策略包</h3><p>预算上限 ${(preCaseState.budgetCap / 10000).toFixed(2)} 亿下方案可行；角色确认、主预算申请、专项子预算、活动立项与保密协议均为独立 Mock 满足态。当前仅生成待审批产物，不触发真实配置。</p></div>` : "";
+      const final = preCaseState.packageGenerated && recommended ? `<div class="pre-final"><h3>${recommended.name} · 待审批策略包</h3><p>预算上限 ${(preCaseState.budgetCap / 10000).toFixed(2)} 亿下方案可行；角色确认、主预算申请、专项子预算、活动立项与保密协议均已独立满足。当前仅生成待审批产物，不触发线上配置。</p></div>` : "";
       const blocker = recommended ? "" : `<div class="pre-budget-blocker" role="alert"><strong>预算门禁未通过</strong>无可行候选，治理状态不可用于绕过预算硬约束，待审批策略包保持阻断。</div>`;
-      return `<div class="pre-mock-banner"><b>L4 Mock</b>角色确认不等于预算申请、立项或协议完成；以下状态彼此独立，且均不触发真实流程。</div>${blocker}
+      return `<div class="pre-mock-banner"><b>L4 参与边界</b>角色确认不等于预算申请、立项或协议完成；以下状态彼此独立，且均不触发线上流程。</div>${blocker}
         <section class="pre-governance-group" aria-label="角色确认">
           <div class="pre-governance-group-head"><div><b>角色确认</b><span>4 类角色分别确认分析与执行边界</span></div><span>${preCaseState.governanceConfirmed.size} / ${preCaseData.governance.length}</span></div>
           <div class="pre-governance-list">${roles}</div>
@@ -28965,7 +30358,7 @@
           "治理与落地洞察",
           preGovernanceReady() ? "预算可行且全部治理门禁已满足，可以生成待审批策略包。" : "角色确认与四类独立流程必须全部满足，任一缺失都阻断策略包。",
           `角色 ${preCaseState.governanceConfirmed.size} / ${preCaseData.governance.length}；独立流程 ${preCaseState.governanceProcessConfirmed.size} / ${preCaseData.governanceProcesses.length}；预算可行：${recommended ? "是" : "否"}。`,
-          "主预算申请、专项子预算、活动立项和保密协议拥有独立 Mock 状态，不能用角色确认替代。",
+          "主预算申请、专项子预算、活动立项和保密协议拥有独立演示状态，不能用角色确认替代。",
           "待审批状态不代表真实审批已经完成。",
           preGovernanceReady() ? "生成自包含脱敏 HTML 待审批策略包。" : "逐项完成剩余门禁，或先放宽预算至最低可行值。",
           "governance"
@@ -29013,9 +30406,9 @@
         else if (section.status === "queued") content = `<div class="report-placeholder">章节已进入队列，等待数据计算。</div>`;
         const isEntering = !renderedPreReportSectionIds.has(section.id);
         renderedPreReportSectionIds.add(section.id);
-        return `<section class="report-section${isEntering ? " is-entering" : ""}" id="${sectionDomId}"><div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-pre-hide-section="${section.id}" aria-label="从促前报告中隐藏${escapeHTML(section.title)}">×</button></div><p class="report-section-lead">${leads[section.id]}</p>${content}</section>`;
+        return `<section class="report-section${isEntering ? " is-entering" : ""}" id="${sectionDomId}"><div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3><button class="report-section-remove" data-pre-hide-section="${section.id}" aria-label="从促前报告中隐藏${escapeHTML(section.title)}">${iconSVG("close")}</button></div><p class="report-section-lead">${leads[section.id]}</p>${content}</section>`;
       }).join("");
-      preReportDocument.innerHTML = `<header class="report-cover"><div class="report-cover-eyebrow">Pre-campaign strategy report · anonymized mock</div><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignId} · ${preCaseData.profile.period} · ${escapeHTML(preCaseData.mockLabel)}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>${preCaseData.profile.siteCode}</span><span>${total} 步分析</span><span>未触发真实配置</span></div></header>${sections}`;
+      preReportDocument.innerHTML = `<header class="report-cover"><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignId} · ${preCaseData.profile.period} · ${escapeHTML(preCaseData.mockLabel)}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>${preCaseData.profile.siteCode}</span><span>${total} 步分析</span><span>未触发真实配置</span></div></header>${sections}`;
       preReportCanvasWrap.scrollTop = previousScrollTop;
     }
 
@@ -29122,7 +30515,7 @@
         showToast("当前没有可行方案，治理与策略包保持阻断");
         return;
       }
-      preGenerateChapter("governance", `<p>治理已拆为两组独立门禁：策略/财务/业务/安全角色确认，以及主预算申请、专项子预算、活动立项、保密协议四个 Mock 流程状态。角色确认不等于流程完成，全部满足后才允许生成待审批策略包。</p>`, [
+      preGenerateChapter("governance", `<p>治理已拆为两组独立门禁：策略/财务/业务/安全角色确认，以及主预算申请、专项子预算、活动立项、保密协议四个独立流程状态。角色确认不等于流程完成，全部满足后才允许生成待审批策略包。</p>`, [
         { id: "show-pre-governance", label: "查看确认清单", primary: true }
       ], "needs-input");
     }
@@ -29215,13 +30608,13 @@
       const rowSummary = rows.map(row =>
         `${row.name}：领取率 ${row.claimRate}%，领后核销 ${row.redeemRate}%，ROI ${row.roi}，预算占比 ${row.budgetShare}%，诊断为${row.diagnosis}`
       ).join("；");
-      return `按${labels[dimension]}读取当前 channel/audience/tier rows：${rowSummary}。以上均为${preCaseData.mockLabel}，不替代当期实时数据。`;
+      return `按${labels[dimension]}读取当前渠道、人群与面额明细：${rowSummary}。以上均为${preCaseData.mockLabel}，不替代当期实时数据。`;
     }
 
     function preAnswerQuestion(type, question) {
       let answer = preCaseData.answers[type] || preCaseData.answers.goal;
       if (/当前还缺|缺哪些|缺失数据/.test(question)) answer = `暂无数据项包括：${preCaseData.missingData.join("；")}。`;
-      else if (/(实时曝光|点击|CTR|库存|履约|小时级|毛利|利润)/.test(question)) answer = `暂无数据：当前脱敏 Mock 未提供该字段。需要补充指标原值、时间窗口、维度口径和来源后才能计算，不使用固定模板补值。`;
+      else if (/(实时曝光|点击|CTR|库存|履约|小时级|毛利|利润)/.test(question)) answer = `暂无数据：当前脱敏样例未提供该字段。需要补充指标原值、时间窗口、维度口径和来源后才能计算，不使用固定模板补值。`;
       else if (type === "baseline") answer = preAnswerBaselineQuestion(question);
       else if (type === "category") answer = preAnswerCategoryQuestion(question);
       else if (type === "funnel") answer = preAnswerFunnelQuestion(question);
@@ -29288,7 +30681,7 @@
           return;
         }
         preCaseState.packagePrepared = true;
-        preAddMessage(preCreateMessage("assistant", "insight", `<p><strong>${recommended.name}已通过当前 Mock 门禁。</strong>预算、波次、结算口径和治理状态已同步，下一步仅生成待审批策略包，不调用真实申请、立项或发布接口。</p>`, [
+        preAddMessage(preCreateMessage("assistant", "insight", `<p><strong>${recommended.name}已通过当前演示门禁。</strong>预算、波次、结算口径和治理状态已同步，下一步仅生成待审批策略包，不调用申请、立项或发布接口。</p>`, [
           { id: "confirm-pre-package", label: "生成待审批策略包", primary: true },
           { id: "ask-pre-plan", label: "继续追问方案" }
         ], "governance"));
@@ -29497,7 +30890,7 @@
       return [{
         sourceId: `mock:${activity.key}:${recommendationKey}:${safeSubject}`,
         name: `${displayValue(activity.festival)} · ${displayValue(subjectLabel)}策略快照`,
-        type: "脱敏 Mock"
+        type: "脱敏样例"
       }];
     }
 
@@ -29995,7 +31388,7 @@
       const budgetBoundary = constraints.newTierBudgetWan > 0
         ? `至少放宽 ${constraints.newTierBudgetWan} 万总预算，或允许等额回收现有渠道预算`
         : "放宽冲突约束、降低动作规模，或恢复原方案";
-      return `累计约束冲突：${conflicts.join("；")}。本轮 patch 未应用；可执行边界：${budgetBoundary}。`;
+      return `累计约束冲突：${conflicts.join("；")}。本轮调整未应用；可执行边界：${budgetBoundary}。`;
     }
 
     function findConfigurationChannel(configuration, question) {
@@ -30465,16 +31858,16 @@
           ...channelPatches.map(patch => `${patch.name}累计 ${patch.label}`)
         ].filter(Boolean);
         const changeExplanation = patchLabels.length
-          ? `累计 patch：${patchLabels.join("、")}；量级按合计变化 ${formatCumulativeAdjustment(cumulativeDelta, "%")} 重算，ROI 按同口径边际折减重算`
-          : "无会话 patch；沿用候选汇总漏斗的批次角色权重分摊";
+          ? `累计调整：${patchLabels.join("、")}；量级按合计变化 ${formatCumulativeAdjustment(cumulativeDelta, "%")} 重算，ROI 按同口径边际折减重算`
+          : "无会话调整；沿用候选汇总漏斗的批次角色权重分摊";
         return [batch.roleKey, normalizeStructuredData({
           exposure: formatMockVolume(funnel.exposure * weight * volumeFactor),
           claimed: formatMockVolume(funnel.claimed * weight * volumeFactor),
           redeemed: formatMockVolume(funnel.redeemed * weight * volumeFactor),
           incrementalGmv: formatMockGmv(totalIncrementalGmv * weight * volumeFactor),
           roi: formatMockRoi(totalRoi * roiFactor),
-          evidenceType: "脱敏 Mock 派生",
-          metricScope: "候选汇总漏斗按批次角色权重分摊；曝光以候选发放量作为 Mock 代理；会话人群与渠道累计 patch 联合重算",
+          evidenceType: "脱敏样例派生",
+          metricScope: "候选汇总漏斗按批次角色权重分摊；曝光以候选发放量作为样例代理；会话人群与渠道累计调整联合重算",
           changeExplanation
         })];
       }));
@@ -30768,7 +32161,7 @@
       }
       const records = matched.length ? matched : drill.records;
       const sessionState = session
-        ? `；当前会话 V${session.version} 已累计 ${session.appliedPatches.length} 轮 patch：${describeRecommendationConfiguration(session)}`
+        ? `；当前会话 V${session.version} 已累计 ${session.appliedPatches.length} 轮调整：${describeRecommendationConfiguration(session)}`
         : "";
       return {
         missing: false,
@@ -31102,7 +32495,7 @@
               <div><b>批次协议</b><span>${escapeHTML(context.batchProtocol?.aliasPattern)} · ${escapeHTML(context.batchProtocol?.missingPolicy)}</span></div>
             </div>
           </div>
-          <div class="message-callout">会话保存 original/current configuration、applied patches、constraints 与 turn history；可连续调整或恢复原方案。</div>`;
+          <div class="message-callout">会话保存原始配置、当前配置、调整记录、约束与对话历史；可连续调整或恢复原方案。</div>`;
       }
       return `
         <p>已从策略工作台带入当前系统推荐，后续调整将沿用这份方案上下文。</p>
@@ -31160,7 +32553,7 @@
           } else if (/实验|对照|止损/.test(question)) {
             advice = `当前版本沿用联合护栏：${session.currentConfiguration.guardrails.join("、")}。`;
           } else if (/预算|迁移|比例/.test(question)) {
-            advice = `当前预算动作读取 V${session.version} 配置：${session.currentConfiguration.budget.action}，准备金 ${session.currentConfiguration.budget.reserve}；后续只按已记录 patch 重算。`;
+            advice = `当前预算动作读取 V${session.version} 配置：${session.currentConfiguration.budget.action}，准备金 ${session.currentConfiguration.budget.reserve}；后续只按已记录调整重算。`;
           } else {
             advice = `已读取当前版本：${describeRecommendationConfiguration(session)}。`;
           }
@@ -31182,7 +32575,7 @@
             <li>当前配置：${escapeHTML(describeRecommendationConfiguration(session))}。</li>
             <li>指标与风险重算：${escapeHTML(summarizeRecommendationImpact(session))}。</li>
             <li>累计约束：${escapeHTML(constraintSummary)}。</li>
-            <li>已应用 patch ${session.appliedPatches.length} 轮，已记录 turn ${session.turnHistory.length} 轮；输入“恢复原方案”可重置配置。</li>
+            <li>已应用 ${session.appliedPatches.length} 轮调整，已记录 ${session.turnHistory.length} 轮对话；输入“恢复原方案”可重置配置。</li>
           </ul>`;
       }
       if (context.evidenceOnly && /自然水位|GMV|DAC|客单/.test(question)) {
@@ -31456,8 +32849,8 @@
               `${code}-${record.roleKey}-${field}`
             );
           });
-          assert(record.evidenceType === "脱敏 Mock 派生", `${code}-${record.roleKey}-mock-label`);
-          assert(/口径|分摊|Mock/.test(record.metricScope), `${code}-${record.roleKey}-metric-scope`);
+          assert(record.evidenceType === "脱敏样例派生", `${code}-${record.roleKey}-sample-label`);
+          assert(/口径|分摊|样例/.test(record.metricScope), `${code}-${record.roleKey}-metric-scope`);
         });
         const beforeFocus = focusEvidence(beforeDrill);
         if (index > 0) {
@@ -31483,14 +32876,14 @@
         });
         assert(
           afterFocus.changeExplanation !== beforeFocus.changeExplanation
-          && /累计 patch/.test(afterFocus.changeExplanation),
+          && /累计调整/.test(afterFocus.changeExplanation),
           `${code}-change-explanation`
         );
         const readResult = readStructuredEvidence(
           { contextKey: session.contextKey, solutionSession: session },
           "按人群、券档和渠道查看三维证据"
         );
-        assert(readResult && !readResult.missing && /脱敏 Mock 派生/.test(readResult.text), `${code}-read-evidence`);
+        assert(readResult && !readResult.missing && /脱敏样例派生/.test(readResult.text), `${code}-read-evidence`);
       });
 
       const unknownCombination = readStructuredEvidence(
@@ -31686,7 +33079,6 @@
         newChatMainStream.innerHTML = `
           <div class="new-conversation-empty">
             <div class="new-conversation-mark" aria-hidden="true">${renderCouponAgentIcon()}</div>
-            <div class="new-conversation-eyebrow">NEW STRATEGY CONVERSATION</div>
             <h2>你好，我是券策略 Agent</h2>
             <p>告诉我你正处于促前、促中还是复盘阶段，以及本次目标或约束。我会先澄清问题并生成一份可确认的分析计划。</p>
             <div class="new-conversation-starters">
@@ -31714,7 +33106,7 @@
           : newChatState.context ? "Agent 正在评估方案调整影响…" : "Agent 正在梳理目标与约束…"
         : newChatState.solutionSession
           ? `已绑定「${newChatState.context.label}」· V${newChatState.solutionSession.version}`
-          : newChatState.context ? `已绑定「${newChatState.context.label}」` : "Enter 发送 · Shift+Enter 换行";
+          : newChatState.context ? `已绑定「${newChatState.context.label}」` : "回车发送 · Shift + 回车换行";
       if (scrollToBottom) newChatScroll.scrollTop = newChatScroll.scrollHeight;
     }
 
@@ -32098,7 +33490,7 @@
         primary.disabled = true;
         modalBody.querySelectorAll("[data-picker-tab]").forEach(button => button.classList.toggle("active", button.dataset.pickerTab === tab));
         if (tab === "local") {
-          picker.innerHTML = `<div class="resource-field"><label for="knowledgeFile">选择本地文件</label><input id="knowledgeFile" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.md,image/*"><small>当前 Demo 记录文件名并创建脱敏资源。</small></div>`;
+          picker.innerHTML = `<div class="resource-field"><label for="knowledgeFile">选择本地文件</label><input id="knowledgeFile" type="file" accept=".pdf,.doc,.docx,.xls,.xlsx,.csv,.txt,.md,image/*"><small>当前演示仅记录文件名并创建脱敏资源。</small></div>`;
           document.getElementById("knowledgeFile").addEventListener("change", event => {
             const file = event.target.files?.[0];
             infrastructureState.modalSelection = file ? { name: file.name, type: "本地文件" } : null;
@@ -32128,23 +33520,23 @@
     }
 
     function openSkillCreate(trigger) {
-      beginResourceModal("新建 / 上传技能", trigger);
-      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">创建用户技能并补充用途说明，保存后默认启用。</p><div class="resource-field"><label for="skillName">Skill 名称 *</label><input id="skillName" placeholder="例如 coupon-wave-planner"></div><div class="resource-field"><label for="skillDescription">能力说明 *</label><textarea id="skillDescription" placeholder="描述该 Skill 解决的问题、输入和输出。"></textarea></div><div class="resource-field"><label for="skillTags">标签</label><input id="skillTags" placeholder="大促, 资管, 目标测算"></div></div>`;
+      beginResourceModal("新建或上传技能", trigger);
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">创建用户技能并补充用途说明，保存后默认启用。</p><div class="resource-field"><label for="skillName">技能名称 *</label><input id="skillName" placeholder="例如 波次规划助手"></div><div class="resource-field"><label for="skillDescription">能力说明 *</label><textarea id="skillDescription" placeholder="描述该技能解决的问题、输入和输出。"></textarea></div><div class="resource-field"><label for="skillTags">标签</label><input id="skillTags" placeholder="大促, 资管, 目标测算"></div></div>`;
       addResourceModalActions("创建技能", () => {
         const name = document.getElementById("skillName").value.trim();
         const description = document.getElementById("skillDescription").value.trim();
-        if (!name || !description) return showToast("请填写 Skill 名称和能力说明");
+        if (!name || !description) return showToast("请填写技能名称和能力说明");
         const tags = document.getElementById("skillTags").value.split(/[,，]/).map(tag => tag.trim()).filter(Boolean);
         infrastructureData.skills.unshift({ id: `sk-${Date.now()}`, name, source: "user", description, enabled: true, tags: tags.length ? tags : ["其他"], content: description });
         closeModal();
         renderInfrastructureView();
-        showToast(`Skill“${name}”已创建并启用`);
+        showToast(`技能“${name}”已创建并启用`);
       });
     }
 
     function openDatasourceCreate(trigger) {
       beginResourceModal("新建数据源", trigger);
-      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">通过 URL 解析并创建资源级数据源。</p><div class="resource-field"><label>Aeolus</label><small>Connect metrics data through an Aeolus dataset or dashboard identifier.</small></div><div class="resource-field"><label for="datasourceUrl">Aeolus URL *</label><div class="resource-inline-field"><input id="datasourceUrl" placeholder="https://aeolus.mock.invalid/dataset/AEOLUS_MOCK_01"><button class="resource-secondary" id="parseDatasource">⌕ 解析</button></div></div><div class="resource-parse-result" id="datasourceResult"><div><b id="datasourceParsedName">Aeolus</b><span>资源名称</span></div><div><b>Aeolus</b><span>数据源类型</span></div><div><b>权限正常</b><span>解析状态</span></div></div></div>`;
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">通过地址解析并创建资源级数据源。</p><div class="resource-field"><label>Aeolus</label><small>通过 Aeolus 数据集或看板标识连接指标数据。</small></div><div class="resource-field"><label for="datasourceUrl">Aeolus 地址 *</label><div class="resource-inline-field"><input id="datasourceUrl" placeholder="https://aeolus.example.invalid/dataset/AEOLUS_01"><button class="resource-secondary" id="parseDatasource">⌕ 解析</button></div></div><div class="resource-parse-result" id="datasourceResult"><div><b id="datasourceParsedName">Aeolus</b><span>资源名称</span></div><div><b>Aeolus</b><span>数据源类型</span></div><div><b>权限正常</b><span>解析状态</span></div></div></div>`;
       let parsed = null;
       const primary = addResourceModalActions("创建", () => {
         if (!parsed) return;
@@ -32155,9 +33547,9 @@
       }, true);
       document.getElementById("parseDatasource").addEventListener("click", () => {
         const url = document.getElementById("datasourceUrl").value.trim();
-        if (!/^https?:\/\//i.test(url)) return showToast("请输入完整的 Aeolus URL");
+        if (!/^https?:\/\//i.test(url)) return showToast("请输入完整的 Aeolus 地址");
         const id = (url.match(/(\d{5,})/) || [])[1] || String(Date.now()).slice(-7);
-        parsed = { id: `ds-${Date.now()}`, name: `Aeolus ${id}`, type: "Aeolus", description: `Aeolus URL: ${new URL(url).hostname}`, uri: `aeolus:url:${id}${Date.now().toString(16).slice(-8)}`, enabled: true, references: 0 };
+        parsed = { id: `ds-${Date.now()}`, name: `Aeolus ${id}`, type: "Aeolus", description: `Aeolus 地址：${new URL(url).hostname}`, uri: `aeolus:url:${id}${Date.now().toString(16).slice(-8)}`, enabled: true, references: 0 };
         document.getElementById("datasourceParsedName").textContent = parsed.name;
         document.getElementById("datasourceResult").classList.add("show");
         primary.disabled = false;
@@ -32167,7 +33559,7 @@
 
     function openMcpCreate(trigger) {
       beginResourceModal("新建 MCP", trigger);
-      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">配置 MCP Server。测试只验证演示状态，不会向外部地址发送请求。</p><div class="resource-field"><label for="mcpName">名称 *</label><input id="mcpName" placeholder="例如 ECOP 指标查询"></div><div class="resource-field"><label for="mcpTransport">传输协议 *</label><select id="mcpTransport"><option>Streamable HTTP</option><option>SSE</option></select></div><div class="resource-field"><label for="mcpUrl">Server URL *</label><div class="resource-inline-field"><input id="mcpUrl" placeholder="https://mcp.example.net/server"><button class="resource-secondary" id="testMcp">测试连接</button></div></div><div class="resource-field"><label for="mcpToken">Authorization（可选）</label><input id="mcpToken" type="password" autocomplete="new-password" placeholder="Bearer token"></div><div class="resource-parse-result" id="mcpResult"><div><b>连接正常</b><span>Server 状态</span></div><div><b>8 个工具</b><span>工具发现</span></div><div><b>待创建</b><span>当前状态</span></div></div></div>`;
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">配置 MCP 服务。测试只验证演示状态，不会向外部地址发送请求。</p><div class="resource-field"><label for="mcpName">名称 *</label><input id="mcpName" placeholder="例如 ECOP 指标查询"></div><div class="resource-field"><label for="mcpTransport">传输协议 *</label><select id="mcpTransport"><option>Streamable HTTP</option><option>SSE</option></select></div><div class="resource-field"><label for="mcpUrl">服务地址 *</label><div class="resource-inline-field"><input id="mcpUrl" placeholder="https://mcp.example.net/server"><button class="resource-secondary" id="testMcp">测试连接</button></div></div><div class="resource-field"><label for="mcpToken">授权信息（可选）</label><input id="mcpToken" type="password" autocomplete="new-password" placeholder="输入访问令牌"></div><div class="resource-parse-result" id="mcpResult"><div><b>连接正常</b><span>服务状态</span></div><div><b>8 个工具</b><span>工具发现</span></div><div><b>待创建</b><span>当前状态</span></div></div></div>`;
       let tested = null;
       const primary = addResourceModalActions("创建 MCP", () => {
         if (!tested) return;
@@ -32179,12 +33571,12 @@
       document.getElementById("testMcp").addEventListener("click", event => {
         const name = document.getElementById("mcpName").value.trim();
         const endpoint = document.getElementById("mcpUrl").value.trim();
-        if (!name || !/^https?:\/\//i.test(endpoint)) return showToast("请填写名称和完整的 Server URL");
+        if (!name || !/^https?:\/\//i.test(endpoint)) return showToast("请填写名称和完整的服务地址");
         const button = event.currentTarget;
         button.textContent = "连接中...";
         button.disabled = true;
         setTimeout(() => {
-          tested = { id: `mcp-${Date.now()}`, name, transport: document.getElementById("mcpTransport").value, description: "新建的 MCP Server，已完成连接与工具发现测试。", endpoint, enabled: true, tools: 8 };
+          tested = { id: `mcp-${Date.now()}`, name, transport: document.getElementById("mcpTransport").value, description: "新建的 MCP 服务，已完成连接与工具发现测试。", endpoint, enabled: true, tools: 8 };
           document.getElementById("mcpResult").classList.add("show");
           primary.disabled = false;
           button.textContent = "重新测试";
@@ -32197,12 +33589,12 @@
     function openLarkGroupCreate(trigger) {
       beginResourceModal("新建飞书群聊", trigger);
       const candidates = [
-        { name: "Mock 日常协作群 C", members: 13 },
-        { name: "Mock 活动联调群 D", members: 24 },
-        { name: "Mock 实验校验群 E", members: 9 }
+        { name: "日常协作群 C", members: 13 },
+        { name: "活动联调群 D", members: 24 },
+        { name: "实验校验群 E", members: 9 }
       ].filter(candidate => !infrastructureData.larkGroups.some(group => group.name === candidate.name));
       infrastructureState.modalSelection = null;
-      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">选择一个脱敏 Mock 合成群，将券策略 Agent 添加到群聊。当前不会真实邀请机器人。</p><div class="resource-picker-list">${candidates.map((candidate, index) => `<button class="resource-picker-item" data-lark-candidate="${index}"><b>♣</b><span>${escapeHTML(candidate.name)} · ${candidate.members} 名合成成员</span></button>`).join("") || '<div class="resource-empty">暂无其他 Mock 合成群聊</div>'}</div></div>`;
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">选择一个脱敏合成群，将券策略 Agent 添加到群聊。当前不会邀请机器人进入线上群聊。</p><div class="resource-picker-list">${candidates.map((candidate, index) => `<button class="resource-picker-item" data-lark-candidate="${index}"><b>♣</b><span>${escapeHTML(candidate.name)} · ${candidate.members} 名合成成员</span></button>`).join("") || '<div class="resource-empty">暂无其他合成群聊</div>'}</div></div>`;
       const primary = addResourceModalActions("添加到群聊", () => {
         const selected = infrastructureState.modalSelection;
         if (!selected) return;
@@ -32239,16 +33631,16 @@
       const actionTitle = action === "tasks" ? "独立任务" : action === "schedules" ? "定时任务" : "会话设置";
       beginResourceModal(`${group.name} · ${actionTitle}`, trigger);
       if (action === "tasks") {
-        modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">查看由该 Mock 群聊独立触发的 Agent 合成任务。</p>${renderLarkGroupItems(group.tasks, "该 Mock 群聊暂无独立任务")}</div>`;
+        modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">查看由该合成群聊独立触发的 Agent 任务。</p>${renderLarkGroupItems(group.tasks, "该合成群聊暂无独立任务")}</div>`;
         modalActions.append(actionButton("关闭", "resource-primary", closeModal));
         return;
       }
       if (action === "schedules") {
-        modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">查看该 Mock 群聊已配置的合成定时任务。</p>${renderLarkGroupItems(group.schedules, "该 Mock 群聊暂无定时任务")}</div>`;
+        modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">查看该合成群聊已配置的定时任务。</p>${renderLarkGroupItems(group.schedules, "该合成群聊暂无定时任务")}</div>`;
         modalActions.append(actionButton("关闭", "resource-primary", closeModal));
         return;
       }
-      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">管理机器人在该 Mock 群聊中的响应范围和上下文读取方式。</p><div class="resource-field"><label for="larkReplyMode">回复方式</label><select id="larkReplyMode"><option ${group.replyMode === "仅 @机器人时回复" ? "selected" : ""}>仅 @机器人时回复</option><option ${group.replyMode === "群内问题自动识别" ? "selected" : ""}>群内问题自动识别</option><option ${group.replyMode === "暂停群内回复" ? "selected" : ""}>暂停群内回复</option></select></div><div class="resource-field"><label for="larkContextRange">会话上下文</label><select id="larkContextRange"><option ${group.contextRange === "最近 20 条消息" ? "selected" : ""}>最近 20 条消息</option><option ${group.contextRange === "仅当前话题" ? "selected" : ""}>仅当前话题</option><option ${group.contextRange === "不读取历史消息" ? "selected" : ""}>不读取历史消息</option></select></div><div class="resource-field"><label>安全边界</label><div class="resource-code">不执行真实发券、预算或人群配置变更</div></div></div>`;
+      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">管理机器人在该合成群聊中的响应范围和上下文读取方式。</p><div class="resource-field"><label for="larkReplyMode">回复方式</label><select id="larkReplyMode"><option ${group.replyMode === "仅 @机器人时回复" ? "selected" : ""}>仅 @机器人时回复</option><option ${group.replyMode === "群内问题自动识别" ? "selected" : ""}>群内问题自动识别</option><option ${group.replyMode === "暂停群内回复" ? "selected" : ""}>暂停群内回复</option></select></div><div class="resource-field"><label for="larkContextRange">会话上下文</label><select id="larkContextRange"><option ${group.contextRange === "最近 20 条消息" ? "selected" : ""}>最近 20 条消息</option><option ${group.contextRange === "仅当前话题" ? "selected" : ""}>仅当前话题</option><option ${group.contextRange === "不读取历史消息" ? "selected" : ""}>不读取历史消息</option></select></div><div class="resource-field"><label>安全边界</label><div class="resource-code">不执行线上发券、预算或人群配置变更</div></div></div>`;
       modalActions.append(
         actionButton("解除关联", "ghost", () => {
           const index = infrastructureData.larkGroups.findIndex(item => item.id === group.id);
@@ -32276,7 +33668,7 @@
       const item = collection?.find(entry => entry.id === id);
       if (!item) return;
       beginResourceModal(item.name, trigger);
-      const rows = kind === "skill" ? [["来源",item.source === "system" ? "系统内置" : "用户技能"],["状态",item.enabled ? "已启用" : "已停用"],["标签",item.tags.join(" / ")],["能力内容",item.content]] : kind === "datasource" ? [["类型",item.type],["状态",item.enabled ? "已启用" : "已停用"],["资源 URI",item.uri]] : kind === "mcp" ? [["传输协议",item.transport],["状态",item.enabled ? "已连接" : "已停用"],["Server URL",item.endpoint],["工具数",`${item.tools} 个`]] : [["类型",item.type],["添加者",item.owner],["修改时间",item.updatedAt]];
+      const rows = kind === "skill" ? [["来源",item.source === "system" ? "系统内置" : "用户技能"],["状态",item.enabled ? "已启用" : "已停用"],["标签",item.tags.join(" / ")],["能力内容",item.content]] : kind === "datasource" ? [["类型",item.type],["状态",item.enabled ? "已启用" : "已停用"],["资源标识",item.uri]] : kind === "mcp" ? [["传输协议",item.transport],["状态",item.enabled ? "已连接" : "已停用"],["服务地址",item.endpoint],["工具数",`${item.tools} 个`]] : [["类型",item.type],["添加者",item.owner],["修改时间",item.updatedAt]];
       modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">${escapeHTML(item.description || "该资源已纳入 Agent 基础架构管理。")}</p>${rows.map(row => `<div class="resource-field"><label>${escapeHTML(row[0])}</label><div class="resource-code">${escapeHTML(row[1])}</div></div>`).join("")}</div>`;
       modalActions.append(actionButton("关闭", "resource-primary", closeModal));
     }
@@ -32291,7 +33683,7 @@
       anchor.download = `${skill.name}.md`;
       anchor.click();
       URL.revokeObjectURL(url);
-      showToast(`Skill“${skill.name}”已开始下载`);
+      showToast(`技能“${skill.name}”已开始下载`);
     }
 
     function renderMidCurrentRecommendationDetails(contract) {
@@ -32380,7 +33772,7 @@
 
       if (type === "case-adopt") {
         modalTitle.textContent = "确认灰度候选";
-        modalBody.innerHTML = '<div class="risk">该操作只记录候选决策与审计状态，不会调用线上发券、预算或人群配置接口。真实执行仍需业务 Owner、预算审批、灰度对照与止损监控。</div>';
+        modalBody.innerHTML = '<div class="risk">该操作只记录候选决策与审计状态，不会调用线上发券、预算或人群配置接口。后续执行仍需业务负责人、预算审批、灰度对照与止损监控。</div>';
         modalActions.append(
           actionButton("取消", "ghost", closeModal),
           actionButton("确认记录为待审批", "primary", () => {
@@ -32395,7 +33787,7 @@
         );
       } else if (type === "adopt") {
         modalTitle.textContent = `写入灰度候选 · ${midContext.festival}`;
-        modalBody.innerHTML = `<div class="risk"><b>${escapeHTML(`${midContract.context.year} ${midContract.context.campaign} · ${midContract.context.waveLabel} · ${midContract.context.endpointLabel} · ${midContract.context.periodLabel}`)}</b><br>当前三条建议仅记录“采纳”状态并生成同上下文审计快照，不会调用线上发券、预算、人群或渠道配置接口。真实执行仍需业务 Owner、预算审批与灰度验证。</div>`;
+        modalBody.innerHTML = `<div class="risk"><b>${escapeHTML(`${midContract.context.year} ${midContract.context.campaign} · ${midContract.context.waveLabel} · ${midContract.context.endpointLabel} · ${midContract.context.periodLabel}`)}</b><br>当前三条建议仅记录“采纳”状态并生成同上下文审计快照，不会调用线上发券、预算、人群或渠道配置接口。后续执行仍需业务负责人、预算审批与灰度验证。</div>`;
         modalActions.append(
           actionButton("取消", "ghost", closeModal),
           actionButton("确认写入候选", "primary", () => {
@@ -32706,7 +34098,7 @@
       const larkGroupAction = event.target.closest("[data-lark-group-action]");
       if (larkGroupAction) return openLarkGroupDetail(larkGroupAction.dataset.larkGroupAction, larkGroupAction.dataset.larkGroupId, larkGroupAction);
       const larkConfigEdit = event.target.closest("[data-lark-config-edit]");
-      if (larkConfigEdit) return showToast(`${larkConfigEdit.dataset.larkConfigEdit}为静态 Demo 配置`);
+      if (larkConfigEdit) return showToast(`${larkConfigEdit.dataset.larkConfigEdit}为静态演示配置`);
       const create = event.target.closest("[data-infra-new]");
       if (create) return openResourceCreate(create.dataset.infraNew, create);
       if (event.target.closest("[data-infra-back]")) return exitInfrastructureView();
@@ -32740,7 +34132,7 @@
         const skill = infrastructureData.skills.find(item => item.id === skillAction.dataset.resourceId);
         if (!skill) return;
         if (skillAction.dataset.skillAction === "download") return downloadSkill(skill.id);
-        showToast(skill.enabled ? `Skill“${skill.name}”已加入当前 Agent 上下文` : `请先启用 Skill“${skill.name}”`);
+        showToast(skill.enabled ? `技能“${skill.name}”已加入当前 Agent 上下文` : `请先启用技能“${skill.name}”`);
       }
     });
 
