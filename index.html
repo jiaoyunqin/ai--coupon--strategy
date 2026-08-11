@@ -9524,50 +9524,6 @@
       line-height: 1.8;
     }
 
-    .new-conversation-starters {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 10px;
-      margin-top: 27px;
-      text-align: left;
-    }
-
-    .new-conversation-starter {
-      min-height: 92px;
-      padding: 13px 14px;
-      border: 1px solid #e0e5ef;
-      border-radius: 11px;
-      color: #3d4658;
-      background: rgba(255, 255, 255, .9);
-      box-shadow: 0 5px 18px rgba(32, 44, 72, .035);
-      transition: border-color .18s, box-shadow .18s, transform .18s;
-    }
-
-    .new-conversation-starter:hover,
-    .new-conversation-starter:focus-visible {
-      border-color: #bbc8eb;
-      box-shadow: 0 9px 24px rgba(49, 87, 230, .08);
-      outline: none;
-      transform: translateY(-2px);
-    }
-
-    .new-conversation-starter b,
-    .new-conversation-starter span {
-      display: block;
-    }
-
-    .new-conversation-starter b {
-      margin-bottom: 7px;
-      color: #35405a;
-      font-size: 10px;
-    }
-
-    .new-conversation-starter span {
-      color: #7c8596;
-      font-size: 9px;
-      line-height: 1.55;
-    }
-
     .new-chat-example-list {
       margin-top: 20px;
       text-align: left;
@@ -19576,7 +19532,6 @@
       :where(.pre-dashboard, #dashboard, .case-view) :where(
         .pre-strategy-candidates,
         .mid-wave-candidate-grid,
-        .new-conversation-starters,
         .report-workspace
       ) {
         grid-template-columns: minmax(0, 1fr);
@@ -28675,7 +28630,7 @@
       Object.freeze({ key: "all", label: "全部" }),
       Object.freeze({ key: "pre", label: "促前" }),
       Object.freeze({ key: "mid", label: "促中" }),
-      Object.freeze({ key: "post", label: "促后" })
+      Object.freeze({ key: "post", label: "复盘" })
     ]);
 
     const newChatSkillDetailFields = Object.freeze({
@@ -42694,7 +42649,7 @@
       return {
         pre: "促前",
         mid: "促中",
-        post: "促后"
+        post: "复盘"
       }[stage] || "策略";
     }
 
@@ -42889,14 +42844,7 @@
           <div class="new-conversation-empty">
             <div class="new-conversation-mark" aria-hidden="true">${renderCouponAgentIcon()}</div>
             <h2>你好，我是券策略 Agent</h2>
-            <p>告诉我你正处于促前、促中还是复盘阶段，以及本次目标或约束。我会先澄清问题并生成一份可确认的分析计划。</p>
-            <div class="new-conversation-starters">
-              ${newChatStarters.map(item => `
-                <button class="new-conversation-starter" data-new-chat-starter="${escapeHTML(item.prompt)}">
-                  <b>${escapeHTML(item.label)}</b>
-                  <span>${escapeHTML(item.description)}</span>
-                </button>`).join("")}
-            </div>
+            <p>描述你的目标、约束或当前异常，我会先确认分析计划。</p>
             <div class="new-chat-composer-mount" id="newChatComposerMount"></div>
             ${renderNewChatExampleList()}
             ${renderNewChatTemplateLibrary()}
@@ -43998,11 +43946,7 @@
       const template = event.target.closest("[data-new-chat-template]");
       if (template) {
         useNewChatTemplate(template.dataset.newChatTemplate);
-        return;
       }
-      const starter = event.target.closest("[data-new-chat-starter]");
-      if (!starter) return;
-      replaceNewChatComposerValue(starter.dataset.newChatStarter);
     });
     newChatPromptChips.addEventListener("click", event => {
       const prompt = event.target.closest("[data-new-chat-prompt]");
