@@ -4325,6 +4325,113 @@
       overscroll-behavior: contain;
     }
 
+    body.template-detail-modal-open {
+      overflow: hidden;
+    }
+
+    .modal.template-detail-modal {
+      display: grid;
+      width: min(820px, 94vw);
+      max-height: min(760px, calc(100dvh - 48px));
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      border: 1px solid rgba(213, 220, 233, .88);
+      border-radius: 18px;
+      box-shadow:
+        0 28px 80px rgba(15, 25, 48, .25),
+        0 3px 12px rgba(15, 25, 48, .08);
+    }
+
+    .modal.template-detail-modal .modal-head {
+      min-height: 76px;
+      height: auto;
+      gap: 18px;
+      padding: 15px 22px;
+      background: linear-gradient(135deg, #f8faff 0%, #fff 68%);
+    }
+
+    .modal.template-detail-modal .modal-head h3 {
+      display: flex;
+      min-width: 0;
+      align-items: center;
+      gap: 10px;
+      color: #232c3d;
+      font-size: 18px;
+      line-height: 1.4;
+    }
+
+    .modal.template-detail-modal .modal-head h3 > span:last-child {
+      overflow-wrap: anywhere;
+    }
+
+    .modal.template-detail-modal .modal-body {
+      min-height: 0;
+      padding: 24px;
+      overflow: auto;
+      overscroll-behavior: contain;
+    }
+
+    .template-detail {
+      display: grid;
+      gap: 22px;
+    }
+
+    .template-detail-section {
+      display: grid;
+      gap: 9px;
+    }
+
+    .template-detail-section h4 {
+      color: #2d374b;
+      font-size: 13px;
+      font-weight: 750;
+      letter-spacing: .01em;
+    }
+
+    .template-detail-description {
+      color: #68758b;
+      font-size: 13px;
+      line-height: 1.75;
+    }
+
+    .template-detail-analysis {
+      padding: 18px 20px;
+      border: 1px solid #dce4f2;
+      border-radius: 12px;
+      background:
+        linear-gradient(145deg, rgba(240, 244, 255, .94), rgba(249, 251, 255, .98));
+      box-shadow: inset 3px 0 0 rgba(49, 87, 230, .72);
+    }
+
+    .template-detail-analysis p {
+      color: #3e4d67;
+      font-size: 13px;
+      line-height: 1.9;
+      white-space: pre-wrap;
+      overflow-wrap: anywhere;
+    }
+
+    .modal.template-detail-modal .modal-actions {
+      flex-wrap: wrap;
+      padding: 16px 22px 20px;
+      border-top: 1px solid #e8ecf3;
+      background: #fbfcff;
+    }
+
+    .template-detail-action {
+      min-width: 116px;
+      height: 40px;
+      padding-inline: 18px;
+      border-radius: 10px;
+      font-weight: 700;
+    }
+
+    .template-detail-schedule:disabled {
+      color: #7d8798;
+      border-color: #e0e4eb;
+      background: #f2f4f7;
+      opacity: 1;
+    }
+
     .strategy-detail {
       display: grid;
       gap: 16px;
@@ -10385,12 +10492,13 @@
       z-index: 24;
       bottom: calc(100% + 8px);
       left: 0;
-      width: min(340px, calc(100vw - 48px));
-      padding: 7px;
-      border: 1px solid var(--color-border-default);
-      border-radius: var(--radius-lg);
-      background: var(--color-surface-default);
-      box-shadow: var(--shadow-medium);
+      width: min(280px, calc(100vw - 48px));
+      padding: 11px 13px;
+      overflow: hidden;
+      border: 1px solid #e1e5eb;
+      border-radius: 17px;
+      background: #fff;
+      box-shadow: 0 14px 36px rgba(31, 38, 51, .13), 0 2px 8px rgba(31, 38, 51, .05);
     }
 
     .new-chat-add-menu[hidden] {
@@ -10405,58 +10513,78 @@
     .new-chat-add-option {
       display: grid;
       width: 100%;
-      min-height: 44px;
-      grid-template-columns: 26px minmax(0, 1fr);
-      gap: 8px;
+      min-height: 50px;
+      grid-template-columns: 16px minmax(0, 1fr);
+      gap: 9px;
       align-items: center;
-      padding: 6px 8px;
+      padding: 4px 6px;
       border: 0;
-      border-radius: var(--radius-md);
-      color: var(--color-text-primary);
+      border-radius: 9px;
+      color: #111318;
       text-align: left;
       background: transparent;
+      transition: color .16s ease, background .16s ease;
     }
 
     .new-chat-add-option:hover,
     .new-chat-add-option[aria-current="true"] {
-      background: var(--blue-soft);
+      background: #f6f7f9;
     }
 
     .new-chat-add-option:active {
-      background: color-mix(in srgb, var(--blue-soft) 72%, var(--color-border-default));
+      background: #eef0f3;
     }
 
-    .new-chat-add-option > b {
-      display: grid;
-      width: 26px;
-      height: 26px;
-      place-items: center;
-      border-radius: 7px;
-      color: var(--blue);
-      background: #edf2ff;
-      font-size: 12px;
+    .new-chat-add-option-icon {
+      display: block;
+      width: 16px;
+      height: 16px;
+      margin-top: 0;
+      color: #111318;
+    }
+
+    .new-chat-add-option-icon svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.75;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .new-chat-add-option > span:last-child {
+      min-width: 0;
     }
 
     .new-chat-add-option strong,
     .new-chat-add-option small {
       display: block;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
     .new-chat-add-option strong {
-      font-size: var(--font-size-body);
+      color: #111318;
+      font-size: 13px;
+      font-weight: 650;
+      line-height: 1.35;
     }
 
     .new-chat-add-option small {
-      margin-top: 1px;
-      color: var(--color-text-secondary);
-      font-size: var(--font-size-micro);
-      font-weight: 500;
+      margin-top: 3px;
+      color: #747d8d;
+      font-size: 11px;
+      font-weight: 450;
+      line-height: 1.4;
     }
 
     .new-chat-add-panel {
-      margin-top: 7px;
-      padding: 10px;
-      border-top: 1px solid var(--color-border-default);
+      margin-top: 5px;
+      padding: 10px 0 1px;
+      border-top: 1px solid #eceef2;
     }
 
     .new-chat-add-panel:empty {
@@ -10642,36 +10770,39 @@
     }
 
     .new-chat-skill-trigger {
-      display: inline-flex;
-      min-height: 27px;
-      align-items: center;
-      gap: 5px;
-      padding: 0 9px;
-      border: 1px solid transparent;
-      border-radius: 7px;
-      color: var(--color-text-secondary);
-      background: var(--color-surface-section);
-      font-weight: 680;
-      white-space: nowrap;
+      display: grid;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      place-items: center;
+      padding: 0;
+      border: 1px solid #dce1e8;
+      border-radius: 11px;
+      color: #20242b;
+      background: #f5f6f8;
+      transition: border-color .16s ease, background .16s ease, box-shadow .16s ease;
     }
 
-    .new-chat-skill-trigger::before {
-      width: 7px;
-      height: 7px;
-      border: 2px solid currentColor;
-      border-radius: 2px;
-      content: "";
-      transform: rotate(45deg);
+    .new-chat-skill-trigger svg {
+      display: block;
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
     .new-chat-skill-trigger:is(:hover, :focus-visible, [aria-expanded="true"]) {
-      border-color: var(--color-border-strong);
-      color: var(--blue);
-      background: var(--blue-soft);
+      border-color: #cfd5de;
+      color: #111318;
+      background: #eef0f3;
+      box-shadow: 0 1px 3px rgba(24, 29, 38, .06);
     }
 
     .new-chat-skill-trigger:active:not(:disabled) {
-      background: color-mix(in srgb, var(--blue-soft) 72%, var(--color-border-default));
+      background: #e7e9ed;
     }
 
     .new-chat-skill-tags {
@@ -10722,271 +10853,360 @@
     .new-chat-workbench .case-composer > .new-chat-skill-menu {
       position: fixed;
       z-index: 180;
-      width: min(680px, calc(100vw - 32px));
-      max-height: min(580px, calc(100vh - 32px));
+      display: grid;
+      width: min(640px, calc(100vw - 32px));
+      height: min(380px, calc(100dvh - 24px));
+      min-height: 280px;
+      grid-template-columns: minmax(0, 317px) minmax(0, 317px);
+      gap: 6px;
       margin: 0;
-      overflow: hidden;
-      border: 1px solid var(--color-border-subtle);
-      border-radius: var(--radius-lg);
-      background: var(--color-surface-default);
-      box-shadow: 0 22px 60px rgba(24, 35, 58, .2);
+      overflow: visible;
+      border: 0;
+      color: #15171b;
+      background: transparent;
     }
 
-    .new-chat-skill-menu[hidden] {
+    .new-chat-workbench .case-composer > .new-chat-skill-menu[hidden] {
       display: none;
     }
 
+    .new-chat-workbench .case-composer > .new-chat-skill-menu:not(.has-detail) {
+      width: min(317px, calc(100vw - 32px));
+      grid-template-columns: minmax(0, 317px);
+    }
+
+    .new-chat-skill-picker {
+      display: grid;
+      min-width: 0;
+      height: 100%;
+      grid-template-rows: 50px minmax(0, 1fr) 46px;
+      overflow: hidden;
+      border: 1px solid #dfe3e8;
+      border-radius: 18px;
+      background: #fff;
+      box-shadow: 0 15px 40px rgba(26, 32, 43, .13), 0 2px 9px rgba(26, 32, 43, .05);
+    }
+
     .new-chat-skill-menu-head {
-      padding: 14px 15px 12px;
-      border-bottom: 1px solid var(--color-border-default);
-      background: linear-gradient(145deg, #f5f8ff, #fff);
-    }
-
-    .new-chat-skill-menu-head strong,
-    .new-chat-skill-menu-head span {
-      display: block;
-    }
-
-    .new-chat-skill-menu-head strong {
-      color: var(--color-text-heading);
-      font-size: var(--font-size-card);
-    }
-
-    .new-chat-skill-menu-head > span {
-      margin-top: 3px;
-      color: var(--color-text-secondary);
-      font-size: var(--font-size-caption);
+      display: flex;
+      align-items: stretch;
+      padding: 0 8px;
+      background: #fff;
     }
 
     .new-chat-skill-search {
+      display: flex;
+      width: 100%;
+      min-width: 0;
+      align-items: center;
+      gap: 8px;
+      padding: 0 10px;
+      border-bottom: 1px solid #e5e8ec;
+      color: #a4adbb;
+    }
+
+    .new-chat-skill-search svg {
       display: block;
-      margin-top: 10px;
+      width: 16px;
+      height: 16px;
+      flex: 0 0 16px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.8;
+      stroke-linecap: round;
     }
 
     .new-chat-skill-search input {
+      min-width: 0;
       width: 100%;
-      min-height: 36px;
-      padding: 0 10px;
-      border: 1px solid var(--color-border-default);
-      border-radius: var(--radius-md);
-      color: var(--color-text-primary);
-      background: #fff;
+      height: 100%;
+      padding: 0;
+      border: 0;
+      color: #20242b;
+      background: transparent;
       outline: none;
+      font: 500 14px/1.4 var(--font);
+      font-size: 14px !important;
+      appearance: none;
     }
 
-    .new-chat-skill-search input:focus {
-      border-color: #94a9dc;
-      box-shadow: 0 0 0 3px rgba(49, 87, 230, .09);
+    .new-chat-skill-search input::placeholder {
+      color: #a8b0bd;
+      opacity: 1;
     }
 
-    .new-chat-skill-menu-body {
-      display: grid;
-      grid-template-columns: 280px minmax(0, 1fr);
-      min-height: 308px;
-      max-height: 390px;
+    .new-chat-skill-search input::-webkit-search-cancel-button {
+      display: none;
     }
 
     .new-chat-skill-list {
       min-width: 0;
       overflow-y: auto;
-      padding: 8px;
-      border-right: 1px solid var(--color-border-default);
-      background: var(--color-surface-subtle);
+      padding: 7px 8px 6px;
+      background: #fff;
       scrollbar-width: thin;
+      scrollbar-color: #d8dce2 transparent;
     }
 
     .new-chat-skill-entry + .new-chat-skill-entry {
-      margin-top: 3px;
+      margin-top: 1px;
     }
 
-    .new-chat-skill-item {
-      display: grid;
+    .new-chat-workbench .new-chat-skill-item {
+      display: flex;
       width: 100%;
-      min-height: 60px;
-      grid-template-columns: 20px minmax(0, 1fr);
+      min-height: 38px !important;
+      align-items: center;
       gap: 8px;
-      align-items: start;
-      padding: 9px;
-      border: 1px solid transparent;
-      border-radius: var(--radius-md);
-      color: var(--color-text-primary);
+      padding: 0 9px;
+      border: 0;
+      border-radius: 11px;
+      color: #17191e;
       text-align: left;
       background: transparent;
+      transition: background .14s ease;
     }
 
     .new-chat-skill-item:is(:hover, :focus-visible, .is-focused) {
-      border-color: var(--color-border-strong);
-      background: var(--color-surface-default);
+      background: #f4f5f7;
       outline: none;
     }
 
     .new-chat-skill-item:active {
-      background: var(--blue-soft);
+      background: #edeff2;
     }
 
     .new-chat-skill-check {
       display: grid;
-      width: 18px;
-      height: 18px;
+      width: 17px;
+      height: 17px;
+      flex: 0 0 17px;
       place-items: center;
-      margin-top: 1px;
-      border: 1px solid #bdc6d5;
+      border: 1px solid #c6cbd2;
       border-radius: 5px;
       color: transparent;
       background: #fff;
       font-size: 11px;
+      font-weight: 760;
       line-height: 1;
     }
 
     .new-chat-skill-item[aria-pressed="true"] .new-chat-skill-check {
       color: #fff;
-      border-color: var(--blue);
-      background: var(--blue);
+      border-color: #24282f;
+      background: #24282f;
     }
 
     .new-chat-skill-item.is-system .new-chat-skill-check {
-      color: var(--blue);
-      border-color: var(--color-border-strong);
-      background: var(--blue-soft);
+      color: #fff;
+      border-color: #c4c6c9;
+      background: #c4c6c9;
     }
 
     .new-chat-skill-item-copy {
+      display: flex;
       min-width: 0;
+      align-items: center;
+      gap: 6px;
     }
 
     .new-chat-skill-item-copy strong {
-      display: block;
+      min-width: 0;
       overflow: hidden;
       color: inherit;
-      font-size: var(--font-size-body);
+      font-size: 13px;
+      font-weight: 580;
+      letter-spacing: -.01em;
+      line-height: 1.35;
       text-overflow: ellipsis;
       white-space: nowrap;
     }
 
     .new-chat-skill-badges {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 4px;
-      margin-top: 5px;
+      display: inline-flex;
+      flex: 0 0 auto;
+      align-items: center;
     }
 
     .new-chat-skill-badge {
-      padding: 2px 6px;
-      border-radius: var(--radius-pill);
-      color: #667287;
-      background: #edf0f4;
-      font-size: var(--font-size-micro);
-      font-weight: 700;
-    }
-
-    .new-chat-skill-badge.recommended {
-      color: #176f59;
-      background: #e7f6f0;
-    }
-
-    .new-chat-skill-badge.system {
-      color: #3157ad;
-      background: #eaf0ff;
+      padding: 1px 5px;
+      border: 1px solid #d9dee6;
+      border-radius: 5px;
+      color: #707988;
+      background: #f7f8fa;
+      font-size: 10px;
+      font-weight: 520;
+      line-height: 1.35;
     }
 
     .new-chat-skill-detail {
-      min-width: 0;
-      overflow-y: auto;
-      padding: 16px;
-      scrollbar-width: thin;
-    }
-
-    .new-chat-skill-detail-label {
-      color: var(--blue);
-      font-size: var(--font-size-micro);
-      font-weight: 800;
-      letter-spacing: .08em;
-    }
-
-    .new-chat-skill-detail h3 {
-      margin-top: 6px;
-      color: var(--color-text-heading);
-    }
-
-    .new-chat-skill-detail > p {
-      margin-top: 10px;
-      color: var(--color-text-secondary);
-      line-height: 1.65;
-    }
-
-    .new-chat-skill-detail-tags {
       display: flex;
-      flex-wrap: wrap;
-      gap: 5px;
-      margin-top: 11px;
+      min-width: 0;
+      height: calc(100% - 58px);
+      margin-top: 48px;
+      overflow: hidden;
+      flex-direction: column;
+      border: 1px solid #dfe3e8;
+      border-radius: 18px;
+      color: #15171b;
+      background: #fff;
+      box-shadow: 0 15px 40px rgba(26, 32, 43, .13), 0 2px 9px rgba(26, 32, 43, .05);
     }
 
-    .new-chat-skill-detail-tags span {
-      padding: 4px 7px;
-      border-radius: var(--radius-pill);
-      color: #596a8e;
-      background: #f0f3f9;
-      font-size: var(--font-size-micro);
-      font-weight: 700;
+    .new-chat-skill-detail-notice {
+      display: flex;
+      min-height: 40px;
+      align-items: center;
+      gap: 7px;
+      padding: 0 16px;
+      color: #737c8c;
+      font-size: 12px;
+      font-weight: 560;
+      line-height: 1.4;
     }
 
-    .new-chat-skill-detail-content {
-      margin-top: 13px;
-      padding: 10px 11px;
-      border: 1px solid var(--color-border-default);
-      border-radius: var(--radius-md);
-      color: var(--color-text-secondary);
-      background: var(--color-surface-subtle);
-      line-height: 1.6;
+    .new-chat-skill-detail-notice svg {
+      display: block;
+      width: 14px;
+      height: 14px;
+      flex: 0 0 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
     }
 
-    .new-chat-skill-detail-lock {
-      margin-top: 12px;
-      padding: 8px 10px;
-      border: 1px solid #cbd7ef;
-      border-radius: var(--radius-md);
-      color: #3157ad;
-      background: #f1f5ff;
-      font-size: var(--font-size-caption);
-      font-weight: 700;
+    .new-chat-skill-detail-body {
+      display: flex;
+      min-height: 0;
+      flex: 1;
+      flex-direction: column;
+      padding: 13px 16px 0;
+      overflow: hidden;
+    }
+
+    .new-chat-skill-detail-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .new-chat-skill-detail-title h3 {
+      margin: 0;
+      color: #111318;
+      font-size: 15px !important;
+      font-weight: 670;
+      letter-spacing: -.02em;
+      line-height: 1.35;
+    }
+
+    .new-chat-skill-verified {
+      display: grid;
+      width: 16px;
+      height: 18px;
+      flex: 0 0 16px;
+      place-items: center;
+      color: #fff;
+    }
+
+    .new-chat-skill-verified svg {
+      display: block;
+      width: 100%;
+      height: 100%;
+    }
+
+    .new-chat-skill-detail-meta {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 7px;
+      color: #747d8d;
+      font-size: 12px;
+      line-height: 1.4;
+    }
+
+    .new-chat-skill-detail-meta i {
+      width: 1px;
+      height: 16px;
+      background: #d9dde3;
+    }
+
+    .new-chat-skill-detail-category {
+      align-self: flex-start;
+      margin-top: 7px;
+      padding: 2px 6px;
+      border: 1px solid #d9dee6;
+      border-radius: 5px;
+      color: #6f7888;
+      background: #fafbfc;
+      font-size: 11px;
+      line-height: 1.35;
+    }
+
+    .new-chat-skill-detail-description {
+      margin: 7px 0 0;
+      overflow: hidden;
+      color: #70798a;
+      font-size: 12px !important;
+      line-height: 1.48;
+    }
+
+    .new-chat-skill-detail-creator {
+      display: flex;
+      min-height: 36px;
+      flex: 0 0 36px;
+      align-items: center;
+      gap: 6px;
+      margin-top: auto;
+      color: #747d8d;
+      font-size: 11px;
+      line-height: 1.4;
+    }
+
+    .new-chat-skill-detail-creator b {
+      color: #6fd3cf;
+      font-size: 15px;
+      font-weight: 500;
+      line-height: 1;
     }
 
     .new-chat-skill-empty {
       display: grid;
-      min-height: 260px;
+      min-height: 100%;
       place-items: center;
       padding: 24px;
-      color: var(--color-text-secondary);
+      color: #858d9a;
       text-align: center;
-      font-size: var(--font-size-body);
+      font-size: 15px;
       line-height: 1.6;
     }
 
     .new-chat-skill-menu-foot {
       display: flex;
-      justify-content: flex-end;
-      padding: 9px 12px;
-      border-top: 1px solid var(--color-border-default);
+      align-items: center;
+      padding: 0 15px;
+      border-top: 1px solid #e5e8ec;
       background: #fff;
     }
 
     .new-chat-skill-add {
-      min-height: 32px;
-      padding: 0 11px;
-      border: 1px solid #c4d1ef;
-      border-radius: var(--radius-md);
-      color: #3157ad;
-      background: #f3f6ff;
-      font-weight: 700;
+      padding: 4px 0;
+      border: 0;
+      color: #788190;
+      background: transparent;
+      font-size: 12px;
+      font-weight: 520;
+      line-height: 1.4;
     }
 
     .new-chat-skill-add:is(:hover, :focus-visible) {
-      border-color: var(--color-border-strong);
-      background: var(--blue-soft);
+      color: #24282f;
+      background: transparent;
     }
 
     .new-chat-skill-add:active {
-      background: color-mix(in srgb, var(--blue-soft) 68%, var(--color-border-default));
+      color: #111318;
     }
 
     .new-chat-model-picker {
@@ -11166,31 +11386,12 @@
       .new-chat-workbench .case-composer > .new-chat-skill-menu {
         right: var(--space-md);
         left: var(--space-md) !important;
-        width: auto;
-        max-height: calc(100dvh - 2 * var(--space-md));
-        overflow-y: auto;
+        width: auto !important;
+        height: min(380px, calc(100dvh - 2 * var(--space-md)));
+        grid-template-columns: minmax(0, 1fr);
       }
 
-      .new-chat-skill-menu-body {
-        display: block;
-        min-height: 0;
-        max-height: none;
-      }
-
-      .new-chat-skill-list {
-        max-height: min(54dvh, 430px);
-        border-right: 0;
-      }
-
-      .new-chat-skill-detail.is-inline {
-        margin: 4px 0 8px;
-        padding: 12px;
-        border: 1px solid var(--color-border-default);
-        border-radius: var(--radius-md);
-        background: var(--color-surface-default);
-      }
-
-      .new-chat-skill-detail:not(.is-inline) {
+      .new-chat-skill-detail {
         display: none;
       }
 
@@ -13706,6 +13907,51 @@
         padding: 12px;
       }
 
+      .modal.template-detail-modal {
+        width: 100%;
+        max-height: calc(100dvh - 24px);
+        border-radius: 14px;
+      }
+
+      .modal.template-detail-modal .modal-head {
+        min-height: 68px;
+        padding: 12px 14px;
+      }
+
+      .modal.template-detail-modal .modal-head h3 {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 6px;
+        font-size: 16px;
+      }
+
+      .modal.template-detail-modal .modal-body {
+        padding: 18px 16px;
+      }
+
+      .template-detail {
+        gap: 18px;
+      }
+
+      .template-detail-analysis {
+        padding: 15px 16px;
+      }
+
+      .modal.template-detail-modal .modal-actions {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding: 14px 16px 16px;
+      }
+
+      .template-detail-action {
+        width: 100%;
+        min-width: 0;
+      }
+
+      .template-detail-use {
+        grid-column: 1 / -1;
+      }
+
       .modal.strategy-detail-modal {
         width: min(100%, 560px);
       }
@@ -13719,6 +13965,12 @@
       .strategy-detail-metrics,
       .strategy-detail-guardrails {
         grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .modal.template-detail-modal {
+        animation: none;
       }
     }
 
@@ -23309,16 +23561,22 @@
                         <div class="new-chat-add-menu" id="newChatAddMenu" role="dialog" aria-label="添加上下文" hidden>
                           <div class="new-chat-add-options">
                             <button type="button" class="new-chat-add-option" data-new-chat-add-panel="link" aria-expanded="false" aria-controls="newChatAddPanel">
-                              <b aria-hidden="true">链</b>
-                              <span><strong>粘贴链接</strong><small>记录 http(s) 链接，不抓取内容</small></span>
+                              <span class="new-chat-add-option-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M10.2 13.8a4.5 4.5 0 0 0 6.36.04l2.28-2.28a4.5 4.5 0 0 0-6.36-6.36l-1.3 1.3"></path><path d="M13.8 10.2a4.5 4.5 0 0 0-6.36-.04l-2.28 2.28a4.5 4.5 0 0 0 6.36 6.36l1.3-1.3"></path></svg>
+                              </span>
+                              <span><strong>粘贴链接</strong><small>风神/飞书/TEA/Libra/Coral/D...</small></span>
                             </button>
                             <button type="button" class="new-chat-add-option" data-new-chat-add-panel="resource" aria-expanded="false" aria-controls="newChatAddPanel">
-                              <b aria-hidden="true">资</b>
-                              <span><strong>接入资源</strong><small>选择已启用的知识库或数据源</small></span>
+                              <span class="new-chat-add-option-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="7.5" ry="3"></ellipse><path d="M4.5 5v5c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3V5"></path><path d="M4.5 10v5c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-5"></path><path d="M4.5 15v4c0 1.66 3.36 3 7.5 3s7.5-1.34 7.5-3v-4"></path></svg>
+                              </span>
+                              <span><strong>接入资源</strong><small>选择有权限的风神数据集</small></span>
                             </button>
                             <button type="button" class="new-chat-add-option" data-new-chat-add-panel="file" aria-expanded="false" aria-controls="newChatAddPanel">
-                              <b aria-hidden="true">文</b>
-                              <span><strong>上传本地文件</strong><small>仅记录文件名、大小和类型</small></span>
+                              <span class="new-chat-add-option-icon" aria-hidden="true">
+                                <svg viewBox="0 0 24 24"><path d="M12 15V3"></path><path d="m7.5 7.5 4.5-4.5 4.5 4.5"></path><path d="M5 13v6.5h14V13"></path></svg>
+                              </span>
+                              <span><strong>上传本地文件</strong><small>不限文件类型，单文件≤200 ...</small></span>
                             </button>
                           </div>
                           <div class="new-chat-add-panel" id="newChatAddPanel"></div>
@@ -23333,7 +23591,12 @@
                         aria-haspopup="dialog"
                         aria-expanded="false"
                         aria-controls="newChatSkillMenu"
-                      >技能</button>
+                      >
+                        <svg viewBox="0 0 24 24" aria-hidden="true">
+                          <path d="M13.4 2.8 5.8 13h5.7l-.9 8.2L18.2 11h-5.7l.9-8.2Z"></path>
+                        </svg>
+                        <span class="visually-hidden">技能</span>
+                      </button>
                       <div class="new-chat-skill-tags" id="newChatSkillTags" role="group" aria-label="已选可选技能"></div>
                       <div class="new-chat-context-list" id="newChatContextItems" role="list" aria-label="已添加上下文"></div>
                     </div>
@@ -28639,7 +28902,100 @@
       tags: "tags"
     });
 
-    const newChatDefaultSkillIds = Object.freeze(["sk-01", "sk-02", "sk-03"]);
+    const newChatComposerSkills = Object.freeze([
+      Object.freeze({
+        id: "composer-lark-message-context",
+        name: "lark-message-context",
+        displayName: "飞书消息上下文",
+        official: true,
+        systemPreset: true,
+        detail: Object.freeze({
+          skillId: "9538",
+          category: "数据分析",
+          description: "Use when user needs grounded Lark/Feishu message evidence from group chats, direct/P2P conversations, threads, replies, message resources, media inventories, incident summaries, decisions, owners, actions, or personal reply sweeps. For an unscoped request to search, summarize, or review messages, first establish the target scope and time range.",
+          creator: "iDA",
+          systemNotice: "系统预置技能，不可取消勾选。"
+        })
+      }),
+      Object.freeze({
+        id: "composer-ida-find-skills",
+        name: "ida-find-skills",
+        displayName: "ida-find-skills",
+        official: true,
+        systemPreset: true
+      }),
+      Object.freeze({
+        id: "composer-ida-skill-creator",
+        name: "ida-skill-creator",
+        displayName: "ida-skill-creator",
+        official: true,
+        systemPreset: true
+      }),
+      Object.freeze({
+        id: "composer-lark-whiteboard",
+        name: "lark-whiteboard",
+        displayName: "飞书画板",
+        official: true,
+        systemPreset: true
+      }),
+      Object.freeze({
+        id: "composer-scheduled-task",
+        name: "scheduled-task",
+        displayName: "定时任务",
+        official: true,
+        systemPreset: true
+      }),
+      Object.freeze({
+        id: "composer-ida-approval",
+        name: "ida-approval",
+        displayName: "ida-approval",
+        official: true,
+        systemPreset: false
+      }),
+      Object.freeze({
+        id: "composer-lark-base",
+        name: "lark-base",
+        displayName: "飞书多维表格",
+        official: true,
+        systemPreset: false
+      }),
+      Object.freeze({
+        id: "composer-meego-skill",
+        name: "meego-skill",
+        displayName: "meego-skill",
+        official: true,
+        systemPreset: false
+      }),
+      Object.freeze({
+        id: "composer-lark-contact",
+        name: "lark-contact",
+        displayName: "飞书通讯录",
+        official: true,
+        systemPreset: false,
+        detail: Object.freeze({
+          skillId: "2258",
+          category: "协同办公",
+          description: "飞书通讯录：查询组织架构、人员信息和搜索员工。获取当前用户或指定用户的详细信息、通过关键词搜索员工（姓名/邮箱/手机号）。当用户需要查看个人信息、查找同事 open_id 或联系方式、按姓名搜索员工、查询部门结构时使用。",
+          creator: "iDA"
+        })
+      }),
+      Object.freeze({
+        id: "composer-lark-sheets",
+        name: "lark-sheets",
+        displayName: "飞书表格",
+        official: true,
+        systemPreset: false
+      }),
+      Object.freeze({
+        id: "composer-lark-im",
+        name: "lark-im",
+        displayName: "飞书消息",
+        official: true,
+        systemPreset: false
+      })
+    ]);
+
+    const newChatDefaultSkillIds = Object.freeze(newChatComposerSkills.map(skill => skill.id));
 
     const newChatModelOptions = Object.freeze([
       Object.freeze({ group: "券策略模型", value: "luna-max", label: "GPT-5.6-Luna Max", default: true }),
@@ -42454,60 +42810,76 @@
     }
 
     function newChatSkillCatalog() {
-      return infrastructureData.skills.filter(skill => skill.composer);
-    }
-
-    function newChatSkillTypeLabel(skill) {
-      if (skill.composer.systemPreset) return "系统预置";
-      if (skill.composer.recommended) return "推荐技能";
-      return "可选技能";
+      return newChatComposerSkills;
     }
 
     function newChatSkillRenderTags() {
-      const selectedSkills = newChatSkillCatalog().filter(skill =>
-        !skill.composer.systemPreset && newChatState.selectedSkillIds.has(skill.id)
-      );
-      newChatSkillTags.innerHTML = selectedSkills.map(skill => `
-        <button
-          type="button"
-          class="new-chat-skill-tag"
-          data-new-chat-skill-remove="${skill.id}"
-          aria-label="移除技能：${escapeHTML(skill.composer.displayName)}"
-          ${newChatState.isResponding ? "disabled" : ""}
-        ><span>${escapeHTML(skill.composer.displayName)}</span><b aria-hidden="true">×</b></button>
-      `).join("");
+      newChatSkillTags.innerHTML = "";
     }
 
     function newChatSkillPositionMenu() {
       if (newChatSkillMenu.hidden) return;
       const triggerRect = newChatSkillTrigger.getBoundingClientRect();
-      const menuWidth = Math.min(680, window.innerWidth - 32);
-      const left = Math.max(16, Math.min(triggerRect.left, window.innerWidth - menuWidth - 16));
-      const top = window.innerWidth <= 760
-        ? 16
-        : Math.max(16, triggerRect.top - newChatSkillMenu.offsetHeight - 8);
+      const edge = window.innerWidth <= 760 ? 12 : 16;
+      const gap = 10;
+      const sidebarRight = document.querySelector(".sidebar")?.getBoundingClientRect().right || 0;
+      const minLeft = Math.max(edge, sidebarRight + gap);
+      const preferredWidth = newChatSkillMenu.classList.contains("has-detail") ? 640 : 317;
+      const menuWidth = Math.min(preferredWidth, window.innerWidth - minLeft - edge);
+      const menuHeight = newChatSkillMenu.offsetHeight;
+      const naturalLeft = Math.max(minLeft, Math.min(triggerRect.left, window.innerWidth - menuWidth - edge));
+      const previousLeft = Number.parseFloat(newChatSkillMenu.style.left);
+      const left = newChatSkillMenu.dataset.positioned === "true" && Number.isFinite(previousLeft)
+        ? Math.max(minLeft, Math.min(previousLeft, window.innerWidth - menuWidth - edge))
+        : naturalLeft;
+      const above = triggerRect.top - menuHeight - gap;
+      const below = triggerRect.bottom + gap;
+      const top = above >= edge
+        ? above
+        : Math.max(edge, Math.min(below, window.innerHeight - menuHeight - edge));
       newChatSkillMenu.style.width = `${menuWidth}px`;
       newChatSkillMenu.style.left = `${left}px`;
       newChatSkillMenu.style.top = `${top}px`;
+      newChatSkillMenu.dataset.positioned = "true";
     }
 
-    function newChatSkillRenderDetail(skill, inline = false) {
-      if (!skill) {
-        return '<div class="new-chat-skill-empty">搜索结果为空，暂无技能详情</div>';
-      }
-      const detailFields = skill.composer.detailFields;
+    function newChatSkillRenderDetail(skill) {
+      if (!skill?.detail) return "";
+      const detail = skill.detail;
       return `
-        <section class="new-chat-skill-detail ${inline ? "is-inline" : ""}" aria-label="${escapeHTML(skill.composer.displayName)}技能详情" aria-live="polite">
-          <span class="new-chat-skill-detail-label">${newChatSkillTypeLabel(skill)}</span>
-          <h3>${escapeHTML(skill.composer.displayName)}</h3>
-          <p>${escapeHTML(skill[detailFields.description])}</p>
-          <div class="new-chat-skill-detail-tags">
-            ${(skill[detailFields.tags] || []).map(tag => `<span>${escapeHTML(tag)}</span>`).join("")}
+        <section class="new-chat-skill-detail" aria-label="${escapeHTML(skill.displayName)}技能详情" aria-live="polite">
+          ${detail.systemNotice ? `
+            <div class="new-chat-skill-detail-notice">
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="12" cy="12" r="8.5"></circle>
+                <path d="M12 10.5v5"></path>
+                <path d="M12 7.3h.01"></path>
+              </svg>
+              <span>${escapeHTML(detail.systemNotice)}</span>
+            </div>` : ""}
+          <div class="new-chat-skill-detail-body">
+            <div class="new-chat-skill-detail-title">
+              <h3>${escapeHTML(skill.displayName)}</h3>
+              <span class="new-chat-skill-verified" aria-label="官方认证">
+                <svg viewBox="0 0 20 22" aria-hidden="true">
+                  <path d="M10 1.5 17.5 4v6.2c0 4.8-3 8.4-7.5 10.3C5.5 18.6 2.5 15 2.5 10.2V4L10 1.5Z" fill="#6fd3cf"></path>
+                  <path d="m7 10.7 2 2.1 4.1-4.4" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"></path>
+                </svg>
+              </span>
+            </div>
+            <div class="new-chat-skill-detail-meta">
+              <span>ID:${escapeHTML(detail.skillId)}</span>
+              <i aria-hidden="true"></i>
+              <span>${escapeHTML(skill.name)}</span>
+            </div>
+            <span class="new-chat-skill-detail-category">${escapeHTML(detail.category)}</span>
+            <p class="new-chat-skill-detail-description">${escapeHTML(detail.description)}</p>
+            <div class="new-chat-skill-detail-creator">
+              <span>创建者：</span>
+              <b aria-hidden="true">🐳</b>
+              <span>${escapeHTML(detail.creator)}</span>
+            </div>
           </div>
-          <div class="new-chat-skill-detail-content">${escapeHTML(skill[detailFields.content])}</div>
-          ${skill.composer.systemPreset
-            ? '<div class="new-chat-skill-detail-lock">系统预置，不可取消</div>'
-            : ""}
         </section>`;
     }
 
@@ -42515,12 +42887,11 @@
       const normalizedQuery = query.trim().toLowerCase();
       const catalog = newChatSkillCatalog();
       const filtered = catalog.filter(skill => {
-        const fields = skill.composer.detailFields;
         const searchText = [
-          skill.composer.displayName,
+          skill.displayName,
           skill.name,
-          skill[fields.description],
-          ...(skill[fields.tags] || [])
+          skill.detail?.category || "",
+          skill.detail?.description || ""
         ].join(" ").toLowerCase();
         return !normalizedQuery || searchText.includes(normalizedQuery);
       });
@@ -42530,28 +42901,32 @@
         || null;
       newChatSkillMenu.dataset.query = query;
       newChatSkillMenu.dataset.focusedSkillId = focusedSkill?.id || "";
-      const inlineDetails = window.innerWidth <= 760;
-      newChatSkillMenu.dataset.inlineDetails = String(inlineDetails);
+      newChatSkillMenu.classList.toggle("has-detail", Boolean(focusedSkill?.detail));
       newChatSkillMenu.innerHTML = `
-        <div class="new-chat-skill-menu-head">
-          <strong>选择技能</strong>
-          <span>当前场景建议使用以下技能</span>
-          <label class="new-chat-skill-search">
-            <span class="visually-hidden">搜索技能</span>
-            <input
-              type="search"
-              value="${escapeHTML(query)}"
-              placeholder="搜索技能名称、说明或标签"
-              data-new-chat-skill-search
-              aria-label="搜索技能"
-            >
-          </label>
-        </div>
-        <div class="new-chat-skill-menu-body">
+        <div class="new-chat-skill-picker">
+          <div class="new-chat-skill-menu-head">
+            <label class="new-chat-skill-search">
+              <span class="visually-hidden">搜索技能</span>
+              <svg viewBox="0 0 24 24" aria-hidden="true">
+                <circle cx="10.5" cy="10.5" r="6.5"></circle>
+                <path d="m15.4 15.4 4.1 4.1"></path>
+              </svg>
+              <input
+                type="search"
+                value="${query ? escapeHTML(query) : ""}"
+                placeholder="搜索技能"
+                autocomplete="off"
+                autocapitalize="none"
+                spellcheck="false"
+                data-new-chat-skill-search
+                aria-label="搜索技能"
+              >
+            </label>
+          </div>
           <div class="new-chat-skill-list" role="list" aria-label="技能列表">
             ${filtered.length ? filtered.map(skill => {
               const selected = newChatState.selectedSkillIds.has(skill.id);
-              const systemPreset = skill.composer.systemPreset;
+              const systemPreset = skill.systemPreset;
               const focused = skill.id === focusedSkill?.id;
               return `
                 <div class="new-chat-skill-entry" role="listitem">
@@ -42561,28 +42936,41 @@
                     data-new-chat-skill-id="${skill.id}"
                     aria-pressed="${selected}"
                     aria-disabled="${systemPreset}"
-                    aria-label="${escapeHTML(skill.composer.displayName)}，${systemPreset ? "系统预置，不可取消" : selected ? "已选择" : "未选择"}"
+                    aria-label="${escapeHTML(skill.displayName)}，${systemPreset ? "系统预置，不可取消" : selected ? "已选择" : "未选择"}"
                   >
-                    <span class="new-chat-skill-check" aria-hidden="true">${systemPreset ? "◆" : "✓"}</span>
+                    <span class="new-chat-skill-check" aria-hidden="true">✓</span>
                     <span class="new-chat-skill-item-copy">
-                      <strong>${escapeHTML(skill.composer.displayName)}</strong>
-                      <span class="new-chat-skill-badges">
-                        ${skill.composer.recommended ? '<span class="new-chat-skill-badge recommended">推荐</span>' : ""}
-                        ${systemPreset ? '<span class="new-chat-skill-badge system">系统预置</span>' : ""}
-                        ${selected && !systemPreset ? '<span class="new-chat-skill-badge">已选</span>' : ""}
-                      </span>
+                      <strong>${escapeHTML(skill.displayName)}</strong>
+                      ${skill.official
+                        ? '<span class="new-chat-skill-badges"><span class="new-chat-skill-badge">官方</span></span>'
+                        : ""}
                     </span>
                   </button>
-                  ${inlineDetails && focused ? newChatSkillRenderDetail(skill, true) : ""}
                 </div>`;
-            }).join("") : '<div class="new-chat-skill-empty">没有匹配的技能<br>换个名称、说明或标签试试</div>'}
+            }).join("") : '<div class="new-chat-skill-empty">没有匹配的技能</div>'}
           </div>
-          ${inlineDetails ? "" : newChatSkillRenderDetail(focusedSkill)}
+          <div class="new-chat-skill-menu-foot">
+            <button type="button" class="new-chat-skill-add" data-new-chat-skill-add>添加新技能 →</button>
+          </div>
         </div>
-        <div class="new-chat-skill-menu-foot">
-          <button type="button" class="new-chat-skill-add" data-new-chat-skill-add>添加新技能</button>
-        </div>`;
+        ${newChatSkillRenderDetail(focusedSkill)}`;
       requestAnimationFrame(newChatSkillPositionMenu);
+    }
+
+    function newChatSkillFocusItem(skillId) {
+      const skill = newChatSkillCatalog().find(item => item.id === skillId);
+      if (!skill || newChatSkillMenu.dataset.focusedSkillId === skillId) return;
+      newChatSkillMenu.dataset.focusedSkillId = skillId;
+      newChatSkillMenu.querySelectorAll("[data-new-chat-skill-id]").forEach(item => {
+        item.classList.toggle("is-focused", item.dataset.newChatSkillId === skillId);
+      });
+      newChatSkillMenu.querySelector(".new-chat-skill-detail")?.remove();
+      newChatSkillMenu.classList.toggle("has-detail", Boolean(skill.detail));
+      if (skill.detail) {
+        newChatSkillMenu.querySelector(".new-chat-skill-picker")
+          ?.insertAdjacentHTML("afterend", newChatSkillRenderDetail(skill));
+      }
+      newChatSkillPositionMenu();
     }
 
     function newChatSkillSyncMenu() {
@@ -42594,6 +42982,10 @@
         newChatSkillRenderMenu();
       } else if (!isOpen) {
         newChatSkillMenu.innerHTML = "";
+        newChatSkillMenu.style.removeProperty("width");
+        newChatSkillMenu.style.removeProperty("left");
+        newChatSkillMenu.style.removeProperty("top");
+        delete newChatSkillMenu.dataset.positioned;
       }
     }
 
@@ -42623,14 +43015,16 @@
       if (menu === "skill") {
         newChatSkillRenderMenu();
         requestAnimationFrame(() => {
-          newChatSkillMenu.querySelector("[data-new-chat-skill-search]")?.focus();
+          const input = newChatSkillMenu.querySelector("[data-new-chat-skill-search]");
+          input?.focus();
+          if (input) input.value = newChatSkillMenu.dataset.query || "";
         });
       }
     }
 
     function newChatSkillToggle(skillId) {
       const skill = newChatSkillCatalog().find(item => item.id === skillId);
-      if (!skill || skill.composer.systemPreset || newChatState.isResponding) return;
+      if (!skill || skill.systemPreset || newChatState.isResponding) return;
       if (newChatState.selectedSkillIds.has(skillId)) {
         newChatState.selectedSkillIds.delete(skillId);
       } else {
@@ -42686,12 +43080,12 @@
                   type="button"
                   class="new-chat-template-button"
                   data-new-chat-template="${template.id}"
-                  aria-label="使用模板：${escapeHTML(template.title)}"
+                  aria-label="查看模版详情：${escapeHTML(template.title)}"
                 >
                   <span class="new-chat-template-stage ${template.stage}">${getNewChatTemplateStageLabel(template.stage)}</span>
                   <strong>${escapeHTML(template.title)}</strong>
                   <p>${escapeHTML(template.description)}</p>
-                  <span class="new-chat-template-action" aria-hidden="true">使用模板</span>
+                  <span class="new-chat-template-action" aria-hidden="true">查看详情</span>
                 </button>
               </article>`).join("")}
           </div>
@@ -43232,18 +43626,116 @@
       const trigger = modalReturnFocus;
       deactivateStrategyModalFocusBoundary();
       modal.classList.remove("show");
-      modal.querySelector(".modal").classList.remove("resource-modal", "strategy-detail-modal");
+      modal.querySelector(".modal").classList.remove(
+        "resource-modal",
+        "strategy-detail-modal",
+        "template-detail-modal"
+      );
+      document.body.classList.remove("template-detail-modal-open");
       infrastructureState.modalSelection = null;
       modalReturnFocus = null;
-      if (restoreFocus !== false && trigger && document.contains(trigger)) trigger.focus();
+      if (restoreFocus !== false && trigger && document.contains(trigger)) {
+        trigger.focus({ preventScroll: true });
+      }
     }
 
     function actionButton(label, className, handler) {
       const button = document.createElement("button");
+      button.type = "button";
       button.className = className;
       button.textContent = label;
-      button.addEventListener("click", handler);
+      if (typeof handler === "function") button.addEventListener("click", handler);
       return button;
+    }
+
+    function renderNewChatTemplateDetail(template) {
+      return `
+        <div class="template-detail">
+          <section class="template-detail-section">
+            <h4>模版描述</h4>
+            <p class="template-detail-description">${escapeHTML(template.description)}</p>
+          </section>
+          <section class="template-detail-section">
+            <h4>分析模版</h4>
+            <div class="template-detail-analysis">
+              <p>${escapeHTML(template.question)}</p>
+            </div>
+          </section>
+        </div>`;
+    }
+
+    async function writeNewChatTemplateToClipboard(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return true;
+        } catch {
+          // Fall back for browsers or embedded previews that deny clipboard permission.
+        }
+      }
+      const fallback = document.createElement("textarea");
+      fallback.value = text;
+      fallback.setAttribute("readonly", "");
+      fallback.style.position = "fixed";
+      fallback.style.inset = "0 auto auto -9999px";
+      fallback.style.opacity = "0";
+      modal.append(fallback);
+      fallback.select();
+      const copied = document.execCommand("copy");
+      fallback.remove();
+      return copied;
+    }
+
+    function openNewChatTemplateDetail(templateId, trigger = document.activeElement) {
+      const template = newChatTemplates.find(item => item.id === templateId);
+      if (!template) return;
+
+      const modalPanel = modal.querySelector(".modal");
+      const stageClass = ["mid", "post"].includes(template.stage) ? template.stage : "";
+      modalReturnFocus = trigger;
+      modalPanel.classList.remove("resource-modal", "strategy-detail-modal");
+      modalPanel.classList.add("template-detail-modal");
+      modalTitle.innerHTML = `
+        <span class="new-chat-template-stage ${stageClass}">${getNewChatTemplateStageLabel(template.stage)}</span>
+        <span>${escapeHTML(template.title)}</span>`;
+      modalBody.innerHTML = renderNewChatTemplateDetail(template);
+      modalActions.innerHTML = "";
+
+      const copyButton = actionButton(
+        "复制模版",
+        "ghost template-detail-action template-detail-copy",
+        async event => {
+          const button = event.currentTarget;
+          try {
+            const copied = await writeNewChatTemplateToClipboard(template.question);
+            showToast(copied ? "模版已复制" : "复制失败，请手动复制");
+          } catch {
+            showToast("复制失败，请手动复制");
+          } finally {
+            button.focus({ preventScroll: true });
+          }
+        }
+      );
+      const scheduleButton = actionButton(
+        "创建定时任务",
+        "ghost template-detail-action template-detail-schedule"
+      );
+      scheduleButton.disabled = true;
+      scheduleButton.setAttribute("aria-label", "创建定时任务，暂不可用");
+      const useButton = actionButton(
+        "使用模版",
+        "primary template-detail-action template-detail-use",
+        () => {
+          closeModal(false);
+          useNewChatTemplate(template.id);
+        }
+      );
+      modalActions.append(copyButton, scheduleButton, useButton);
+
+      document.body.classList.add("template-detail-modal-open");
+      modal.classList.add("show");
+      document.getElementById("modalClose").focus({ preventScroll: true });
+      activateStrategyModalFocusBoundary();
     }
 
     function beginResourceModal(title, trigger) {
@@ -43251,7 +43743,8 @@
       modalTitle.textContent = title;
       modalBody.innerHTML = "";
       modalActions.innerHTML = "";
-      modal.querySelector(".modal").classList.remove("strategy-detail-modal");
+      modal.querySelector(".modal").classList.remove("strategy-detail-modal", "template-detail-modal");
+      document.body.classList.remove("template-detail-modal-open");
       modal.querySelector(".modal").classList.add("resource-modal");
       modal.classList.add("show");
     }
@@ -43560,7 +44053,12 @@
       }
       modalReturnFocus = trigger;
       modalActions.innerHTML = "";
-      modal.querySelector(".modal").classList.remove("resource-modal", "strategy-detail-modal");
+      modal.querySelector(".modal").classList.remove(
+        "resource-modal",
+        "strategy-detail-modal",
+        "template-detail-modal"
+      );
+      document.body.classList.remove("template-detail-modal-open");
 
       if (type === "case-adopt") {
         modalTitle.textContent = "确认灰度候选";
@@ -43945,7 +44443,7 @@
       }
       const template = event.target.closest("[data-new-chat-template]");
       if (template) {
-        useNewChatTemplate(template.dataset.newChatTemplate);
+        openNewChatTemplateDetail(template.dataset.newChatTemplate, template);
       }
     });
     newChatPromptChips.addEventListener("click", event => {
@@ -43980,8 +44478,19 @@
       requestAnimationFrame(() => {
         const input = newChatSkillMenu.querySelector("[data-new-chat-skill-search]");
         input?.focus();
+        if (input) input.value = newChatSkillMenu.dataset.query || "";
         input?.setSelectionRange(cursor, cursor);
       });
+    });
+    newChatSkillMenu.addEventListener("mouseover", event => {
+      const item = event.target.closest("[data-new-chat-skill-id]");
+      if (!item) return;
+      newChatSkillFocusItem(item.dataset.newChatSkillId);
+    });
+    newChatSkillMenu.addEventListener("focusin", event => {
+      const item = event.target.closest("[data-new-chat-skill-id]");
+      if (!item) return;
+      newChatSkillFocusItem(item.dataset.newChatSkillId);
     });
     newChatSkillMenu.addEventListener("click", event => {
       if (event.target.closest("[data-new-chat-skill-add]")) {
@@ -43992,10 +44501,15 @@
       if (!item) return;
       const skillId = item.dataset.newChatSkillId;
       newChatSkillToggle(skillId);
-      newChatSkillRenderMenu(newChatSkillMenu.dataset.query || "", skillId);
-      requestAnimationFrame(() => {
-        newChatSkillMenu.querySelector(`[data-new-chat-skill-id="${skillId}"]`)?.focus();
-      });
+      const skill = newChatSkillCatalog().find(candidate => candidate.id === skillId);
+      const selected = newChatState.selectedSkillIds.has(skillId);
+      item.setAttribute("aria-pressed", String(selected));
+      item.setAttribute(
+        "aria-label",
+        `${skill.displayName}，${skill.systemPreset ? "系统预置，不可取消" : selected ? "已选择" : "未选择"}`
+      );
+      newChatSkillFocusItem(skillId);
+      item.focus();
     });
     newChatComposerSend.addEventListener("click", () => submitNewChatQuestion(newChatComposerInput.value));
     newChatComposerModel.addEventListener("change", () => {
@@ -45517,15 +46031,7 @@
     window.addEventListener("resize", () => {
       positionAskPanel();
       if (newChatState.openMenu !== "skill") return;
-      const inlineDetails = String(window.innerWidth <= 760);
-      if (newChatSkillMenu.dataset.inlineDetails !== inlineDetails) {
-        newChatSkillRenderMenu(
-          newChatSkillMenu.dataset.query || "",
-          newChatSkillMenu.dataset.focusedSkillId || ""
-        );
-      } else {
-        newChatSkillPositionMenu();
-      }
+      newChatSkillPositionMenu();
     });
     window.addEventListener("beforeunload", () => {
       releaseReportArtifact();
