@@ -46522,7 +46522,7 @@
       preAddMessage(preCreateMessage(
         "assistant",
         "insight",
-        "<p><strong>治理门禁已全部满足。</strong>角色确认、主预算申请、专项子预算、活动立项和保密协议均已独立完成，现在可以生成待审批策略包；不会触发申请或发布。</p>",
+        "<p>所有确认项均已完成，现在可以生成待审批策略包。</p>",
         [{ id: "finalize-pre-strategy", label: "生成待审批策略包", primary: true }],
         "governance"
       ));
@@ -47167,35 +47167,34 @@
     function preRenderGovernanceControls() {
       const roles = preCaseData.governance.map((item, index) => {
         const confirmed = preCaseState.governanceConfirmed.has(index);
-        return `<div class="pre-governance-item ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.role}</strong><span>${item.item}</span><span class="pre-governance-status">${confirmed ? "已模拟确认" : item.status}</span></div><button type="button" data-pre-confirm-role="${index}" ${confirmed ? "disabled aria-disabled=\"true\"" : ""} aria-label="${confirmed ? `${item.role}已确认` : `模拟确认${item.role}`}">${confirmed ? "已确认" : "模拟确认"}</button></div>`;
+        return `<div class="pre-governance-item ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.role}</strong><span>${item.item}</span><span class="pre-governance-status">${confirmed ? "已确认" : item.status}</span></div><button type="button" data-pre-confirm-role="${index}" ${confirmed ? "disabled aria-disabled=\"true\"" : ""} aria-label="${confirmed ? `${item.role}已确认` : `确认${item.role}`}">${confirmed ? "已确认" : "确认"}</button></div>`;
       }).join("");
       const processes = preCaseData.governanceProcesses.map((item, index) => {
         const confirmed = preCaseState.governanceProcessConfirmed.has(item.key);
-        return `<div class="pre-governance-item process ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.name}</strong><span>${item.detail}</span><span class="pre-governance-status">${confirmed ? item.complete : item.pending}</span></div><button type="button" data-pre-confirm-governance-process="${item.key}" ${confirmed ? "disabled aria-disabled=\"true\"" : ""} aria-label="${confirmed ? `${item.name}${item.complete}` : `模拟完成${item.name}`}">${confirmed ? "已满足" : "模拟满足"}</button></div>`;
+        return `<div class="pre-governance-item process ${confirmed ? "confirmed" : ""}"><i>${confirmed ? "✓" : String(index + 1)}</i><div><strong>${item.name}</strong><span>${item.detail}</span><span class="pre-governance-status">${confirmed ? item.complete : item.pending}</span></div><button type="button" data-pre-confirm-governance-process="${item.key}" ${confirmed ? "disabled aria-disabled=\"true\"" : ""} aria-label="${confirmed ? `${item.name}${item.complete}` : `完成${item.name}`}">${confirmed ? "已完成" : "完成"}</button></div>`;
       }).join("");
       return `<section class="pre-governance-group" aria-label="角色确认">
           <div class="pre-governance-group-head"><div><b>角色确认</b><span>4 类角色分别确认分析与执行边界</span></div><span>${preCaseState.governanceConfirmed.size} / ${preCaseData.governance.length}</span></div>
           <div class="pre-governance-list">${roles}</div>
         </section>
-        <section class="pre-governance-group" aria-label="独立流程门禁">
-          <div class="pre-governance-group-head"><div><b>独立流程门禁</b><span>主预算 / 子预算 / 立项 / NDA 不与角色确认合并</span></div><span>${preCaseState.governanceProcessConfirmed.size} / ${preCaseData.governanceProcesses.length}</span></div>
+        <section class="pre-governance-group" aria-label="审批准备">
+          <div class="pre-governance-group-head"><div><b>审批准备</b><span>主预算 / 子预算 / 立项 / NDA</span></div><span>${preCaseState.governanceProcessConfirmed.size} / ${preCaseData.governanceProcesses.length}</span></div>
           <div class="pre-governance-list">${processes}</div>
         </section>`;
     }
 
     function preRenderGovernanceSection() {
       const selected = preSelectedCandidate();
-      const final = preCaseState.packageGenerated && selected ? `<div class="pre-final"><h3>${selected.name} · 待审批策略包</h3><p>预算上限 ${(preCaseState.budgetCap / 10000).toFixed(2)} 亿下方案可行；角色确认、主预算申请、专项子预算、活动立项与保密协议均已独立满足。当前仅生成待审批产物，不触发线上配置。</p></div>` : "";
+      const final = preCaseState.packageGenerated && selected ? `<div class="pre-final"><h3>${selected.name} · 待审批策略包</h3><p>预算上限 ${(preCaseState.budgetCap / 10000).toFixed(2)} 亿下方案可行；角色确认、主预算申请、专项子预算、活动立项与保密协议均已完成。</p></div>` : "";
       const blocker = selected ? "" : `<div class="pre-budget-blocker" role="alert"><strong>预算门禁未通过</strong>无可行候选，治理状态不可用于绕过预算硬约束，待审批策略包保持阻断。</div>`;
-      return `<div class="pre-data-boundary"><b>L4 参与边界</b>角色确认不等于预算申请、立项或协议完成；以下状态彼此独立，且均不触发线上流程。</div>${blocker}
-        ${preRenderGovernanceControls()}${final}
+      return `${blocker}${preRenderGovernanceControls()}${final}
         ${preRenderInsight(
           "治理与落地洞察",
-          preGovernanceReady() ? "预算可行且全部治理门禁已满足，可以生成待审批策略包。" : "角色确认与四类独立流程必须全部满足，任一缺失都阻断策略包。",
+          preGovernanceReady() ? "预算与审批准备均已完成，可以生成待审批策略包。" : "请完成角色确认和审批准备。",
           `当前方案 ${selected?.name || "无"}；角色 ${preCaseState.governanceConfirmed.size} / ${preCaseData.governance.length}；独立流程 ${preCaseState.governanceProcessConfirmed.size} / ${preCaseData.governanceProcesses.length}；预算可行：${selected ? "是" : "否"}。`,
-          "主预算申请、专项子预算、活动立项和保密协议拥有独立演示状态，不能用角色确认替代。",
+          "主预算申请、专项子预算、活动立项和保密协议需分别完成。",
           "待审批状态不代表真实审批已经完成。",
-          preGovernanceReady() ? "生成自包含脱敏 HTML 待审批策略包。" : "逐项完成剩余门禁，或先放宽预算至最低可行值。",
+          preGovernanceReady() ? "生成待审批策略包。" : "完成剩余确认项，或调整预算约束。",
           "governance"
         )}`;
     }
@@ -47218,14 +47217,13 @@
       preGovernanceConfirmationPanel.innerHTML = `
         <header class="pre-governance-confirmation-head">
           <div class="pre-governance-confirmation-title">
-            <strong id="preGovernanceConfirmationTitle">第 7 章治理确认</strong>
-            <span>该区域位于正式报告正文之外；全部门禁满足并最终确认后，第 7 章才会一次性写入报告。</span>
+            <strong id="preGovernanceConfirmationTitle">审批前确认</strong>
           </div>
           <button type="button" class="pre-governance-confirmation-close" data-pre-close-governance-panel data-core-icon="close" data-core-icon-only="true" aria-label="关闭治理确认区"></button>
         </header>
         <div class="pre-governance-confirmation-body">${preRenderGovernanceControls()}</div>
         <footer class="pre-governance-confirmation-foot" role="status" aria-live="polite">
-          <span>${ready ? "8 项治理门禁已全部满足，可以继续生成待审批策略包。" : `已完成 ${completed} / ${total} 项；角色确认和独立流程缺一不可。`}</span>
+          <span>${ready ? "所有确认项均已完成，可以生成待审批策略包。" : `已完成 ${completed} / ${total} 项。`}</span>
           ${ready ? '<button type="button" data-pre-governance-action="finalize">生成待审批策略包</button>' : ""}
         </footer>`;
       preGovernanceConfirmationPanel.hidden = !preCaseState.governancePanelOpen;
@@ -47437,13 +47435,13 @@
             preCaseState.reportRecalculationPhase = "";
             preCaseState.reportRecalculationSectionIds.clear();
             preCaseState.reportUpdateReason = "";
-            preCaseState.reportNotice = `已原位更新 ${sectionIds.length} 个章节`;
+            preCaseState.reportNotice = "方案已更新";
             preRenderWorkspace();
             const actions = preNextActions();
             if (actions.length) {
-              preAddMessage(preCreateMessage("assistant", "insight", `<p>受影响章节已按最新约束重新计算并在原位置更新，共 ${sectionIds.length} 章；报告中未追加重复章节。</p>`, actions, "goal"));
+              preAddMessage(preCreateMessage("assistant", "insight", "<p>相关结论已按最新约束更新。</p>", actions, "goal"));
             }
-            showToast(`已原位更新 ${sectionIds.length} 个报告章节`);
+            showToast("方案已更新");
           }, DEMO_TIMING.chapterWrite);
         }, DEMO_TIMING.chapterAnalyze);
       }, DEMO_TIMING.chapterQueue);
@@ -47489,9 +47487,9 @@
       preCaseState.conversationGate = "executing";
       launchCaseReport(preCaseWorkbench, preCaseReportPane, preReportBackdrop);
       preCommitSection("goal");
-      preCaseState.messages.push(preCreateMessage("user", "text", `确认七步分析计划，预算申请上限按 ${preCaseState.budgetCap.toLocaleString()} 万元。`));
+      preCaseState.messages.push(preCreateMessage("user", "text", `确认按以上步骤继续，预算申请上限为 ${preCaseState.budgetCap.toLocaleString()} 万元。`));
       const total = preAggregateBaseline(preCaseData.baselineSeries.daily);
-      preGenerateChapter("baseline", `<p><strong>P0 大盘水位结论：</strong>20 天原值汇总 GMV ${total.currentGmv.toFixed(1)} 亿、同比 +${total.gmvYoy.toFixed(1)}%；DAC ${total.currentDac.toLocaleString()} 万、同比 +${total.dacYoy.toFixed(1)}%；客单 ¥${total.currentAov}、同比 +${total.aovYoy.toFixed(1)}%。先扩大有效支付用户，不提前给最终券方案。</p>`, [
+      preGenerateChapter("baseline", `<p><strong>大盘水位：</strong>20 天原值汇总 GMV ${total.currentGmv.toFixed(1)} 亿、同比 +${total.gmvYoy.toFixed(1)}%；DAC ${total.currentDac.toLocaleString()} 万、同比 +${total.dacYoy.toFixed(1)}%；客单 ¥${total.currentAov}、同比 +${total.aovYoy.toFixed(1)}%。建议优先扩大有效支付用户。</p>`, [
         { id: "continue-pre-category", label: "继续分析类目爆发", primary: true },
         { id: "ask-pre-baseline", label: "追问大盘水位" }
       ]);
@@ -47502,7 +47500,7 @@
       const food = preCaseData.categories.find(item => item.category === "食品生鲜");
       const digitalMetrics = preCategoryMetrics(digital);
       const foodMetrics = preCategoryMetrics(food);
-      preGenerateChapter("category", `<p><strong>P1 类目需求结论：</strong>数码家电活动前/活动期日均 GMV ${digital.pre.gmv.toFixed(2)} → ${digital.during.gmv.toFixed(2)} 亿，放大 ${digitalMetrics.amplification.toFixed(2)}×；食品生鲜 ${food.pre.gmv.toFixed(2)} → ${food.during.gmv.toFixed(2)} 亿，放大 ${foodMetrics.amplification.toFixed(2)}×。二者均为 S 级，但驱动机制不同。</p>`, [
+      preGenerateChapter("category", `<p><strong>类目机会：</strong>数码家电活动前/活动期日均 GMV ${digital.pre.gmv.toFixed(2)} → ${digital.during.gmv.toFixed(2)} 亿，放大 ${digitalMetrics.amplification.toFixed(2)}×；食品生鲜 ${food.pre.gmv.toFixed(2)} → ${food.during.gmv.toFixed(2)} 亿，放大 ${foodMetrics.amplification.toFixed(2)}×。二者均为 S 级，但驱动机制不同。</p>`, [
         { id: "continue-pre-funnel", label: "继续复盘领取核销", primary: true },
         { id: "ask-pre-category", label: "追问类目优先级" }
       ]);
