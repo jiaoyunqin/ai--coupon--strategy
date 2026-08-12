@@ -21401,6 +21401,134 @@
       font-size: var(--font-size-caption) !important;
     }
 
+    #preCaseReportPane {
+      grid-template-rows: auto auto minmax(0, 1fr);
+    }
+
+    #preReportQueueMode,
+    #preReportFocusMode {
+      display: none;
+    }
+
+    #preCaseReportPane .pre-report-queue {
+      grid-row: 2;
+      min-width: 0;
+      overflow-x: auto;
+      overflow-y: hidden;
+      border-right: 0;
+      border-bottom: 1px solid var(--color-border-default);
+      background: color-mix(in srgb, var(--color-surface-subtle) 72%, var(--color-surface-default));
+      scrollbar-width: none;
+    }
+
+    #preCaseReportPane .pre-report-queue::-webkit-scrollbar {
+      display: none;
+    }
+
+    #preCaseReportPane .pre-report-queue .report-queue-list {
+      display: flex;
+      width: max-content;
+      min-width: 100%;
+      align-items: center;
+      gap: 0;
+      padding: 6px 10px;
+    }
+
+    #preCaseReportPane .pre-report-queue li {
+      display: flex;
+      flex: 0 0 auto;
+      align-items: center;
+    }
+
+    #preCaseReportPane .pre-report-queue li:not(:last-child)::after {
+      width: 16px;
+      height: 1px;
+      margin: 0 3px;
+      background: var(--color-border-default);
+      content: "";
+    }
+
+    #preCaseReportPane .pre-report-queue .report-queue-item {
+      display: inline-flex;
+      width: auto;
+      min-height: 28px;
+      align-items: center;
+      gap: 6px;
+      padding: 3px 6px;
+      border-radius: var(--radius-pill);
+      color: var(--color-text-secondary);
+      white-space: nowrap;
+    }
+
+    #preCaseReportPane .pre-report-queue .report-queue-item:hover,
+    #preCaseReportPane .pre-report-queue .report-queue-item:focus-visible {
+      border-color: var(--color-border-default);
+      background: var(--color-surface-default);
+    }
+
+    #preCaseReportPane .pre-report-queue .report-queue-item.active {
+      border-color: color-mix(in srgb, #3b9e78 68%, var(--color-border-default));
+      background: color-mix(in srgb, #3b9e78 6%, var(--color-surface-default));
+      box-shadow: 0 0 0 1px color-mix(in srgb, #3b9e78 8%, transparent);
+    }
+
+    #preCaseReportPane .pre-report-queue .queue-index {
+      width: 17px;
+      height: 17px;
+      flex: 0 0 17px;
+      border-radius: 50%;
+      font-size: 7px !important;
+    }
+
+    #preCaseReportPane .pre-report-queue .queue-copy {
+      min-width: 0;
+    }
+
+    #preCaseReportPane .pre-report-queue .queue-copy strong {
+      color: #707a89;
+      font-size: 8px !important;
+      font-weight: 560;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    #preCaseReportPane .pre-report-queue .complete .queue-copy strong,
+    #preCaseReportPane .pre-report-queue .active .queue-copy strong {
+      color: #4f5f5a;
+    }
+
+    #preCaseReportPane .pre-report-queue .queue-copy span {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0 0 0 0);
+      clip-path: inset(50%);
+      white-space: nowrap;
+    }
+
+    #preReportWorkspace,
+    #preReportFilePreview {
+      grid-row: 3;
+      grid-column: 1;
+      min-height: 0;
+    }
+
+    #preReportWorkspace,
+    #preCaseReportPane.report-focus #preReportWorkspace {
+      grid-template-columns: minmax(0, 1fr);
+      transition: none;
+    }
+
+    #preReportFilePreview {
+      position: relative;
+      inset: auto;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+    }
+
     .case-view .report-section-no {
       min-height: var(--space-xl);
       padding: 0 var(--space-sm);
@@ -26891,11 +27019,11 @@
                 </div>
               </aside>
 
+              <nav class="report-queue pre-report-queue" id="preReportQueue" aria-label="促前报告章节生成队列">
+                <ol class="report-queue-list" id="preReportQueueList"></ol>
+              </nav>
+
               <div class="report-workspace" id="preReportWorkspace">
-                <nav class="report-queue" aria-label="促前报告章节生成队列">
-                  <div class="report-queue-head">促前生成队列</div>
-                  <ol class="report-queue-list" id="preReportQueueList"></ol>
-                </nav>
                 <div class="report-canvas-wrap" id="preReportCanvasWrap">
                   <aside
                     class="pre-governance-confirmation"
@@ -26912,7 +27040,7 @@
 
               <div class="report-file-preview" id="preReportFilePreview" aria-label="促前生成文件预览">
                 <div class="file-preview-bar">
-                  <button class="report-tool" id="preFilePreviewBack" data-core-icon="back">返回生成队列</button>
+                  <button class="report-tool" id="preFilePreviewBack" data-core-icon="back">返回报告</button>
                   <strong id="preFilePreviewName">促前券档位设计_策略与预算规划.html</strong>
                   <div class="report-toolbar-actions">
                     <button class="report-tool" id="preFilePreviewDownload" data-core-icon="download" aria-disabled="true" disabled title="七章全部完成且无需更新后可下载">下载 HTML</button>
