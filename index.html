@@ -52003,7 +52003,7 @@
       workspace.classList.add("case-workspace-active");
       preCaseView.classList.add("active");
       preSyncCaseGoalConstraintsFromDashboard();
-      syncCaseReportGate(preCaseWorkbench, preCaseReportPane, false);
+      syncCaseReportGate(preCaseWorkbench, preCaseReportPane, !preCaseState.planConfirmed);
       preInitializeConversation();
       preRenderConversation();
       preRenderWorkspace();
