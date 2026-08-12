@@ -31237,7 +31237,6 @@
       id: "CMP_26M06_A",
       title: "促前券档位设计",
       question: "请结合历史复盘、近期大盘水位、类目需求、实验钱效和竞对变化，设计 3+X / 4+X 券档、人群、渠道、发放节奏与预算方案。",
-      sampleLabel: "脱敏样例",
       profile: {
         campaignAlias: "年中大促规划",
         siteAlias: "综合业务场",
@@ -42916,7 +42915,7 @@
             <span>${item.detail}</span>
           </article>`).join("")}
         </div>
-        <nav class="pre-execution-handoff-actions" aria-label="执行系统入口（脱敏展示）">
+        <nav class="pre-execution-handoff-actions" aria-label="执行系统入口">
           ${entryLabels.map(label => `<span class="pre-execution-handoff-placeholder" aria-label="${escapeHTML(label)}入口已脱敏，不可跳转">${escapeHTML(label)} · 入口已脱敏</span>`).join("")}
         </nav>
       </section>`;
@@ -44042,8 +44041,8 @@
               <div><b>${escapeHTML(insight.evidence)}</b><span>历史证据 · 当前 ${references.length} 场样本</span></div>
               <div><b>${escapeHTML(insight.boundary)}</b><span>适用条件 / 限制</span></div>
             </div>
-            <div class="pre-insight-source"><span>来源：${escapeHTML(insight.source)} · ${escapeHTML(preCaseData.sampleLabel)}</span><span>证据已展开 · 不可跳转</span></div>`
-            : `<div class="pre-insight-collapsed-note"><span>${escapeHTML(insight.source)} · ${escapeHTML(preCaseData.sampleLabel)}</span><span>展开查看证据与适用边界 · 不可跳转</span></div>`}
+            <div class="pre-insight-source"><span>来源：${escapeHTML(insight.source)}</span><span>证据已展开</span></div>`
+            : `<div class="pre-insight-collapsed-note"><span>${escapeHTML(insight.source)}</span><span>展开查看证据与适用边界</span></div>`}
         </article>`;
     }
 
@@ -45480,9 +45479,9 @@
         if (section.status === "complete" || section.status === "needs-input") {
           content = renderReportSectionContent(section.id);
         } else if (section.status === "generating") {
-          content = `<div class="report-placeholder generating"><div><i></i>Agent 正在生成本章节，完成后将自动写入报告。</div></div>`;
+          content = '<div class="report-placeholder generating"><div><i></i>正在分析，请稍候。</div></div>';
         } else if (section.status === "queued") {
-          content = `<div class="report-placeholder">章节已进入生成队列，等待前序步骤完成。</div>`;
+          content = '<div class="report-placeholder">等待前序分析完成。</div>';
         }
         const isEntering = !renderedReportSectionIds.has(section.id);
         renderedReportSectionIds.add(section.id);
@@ -45566,7 +45565,7 @@
 
     function addGenerationProgress(sectionId, label) {
       const progress = createCaseMessage("assistant", "progress", "", [], sectionId);
-      progress.steps = ["进入队列", "读取案例数据", "写入报告"];
+      progress.steps = ["整理问题", "分析数据", "生成结论"];
       progress.phase = 0;
       addCaseMessage(progress);
       return progress;
@@ -45652,7 +45651,7 @@
     function openRiskAnalysis() {
       generateReportChapter(
         "decision",
-        `<p>风险清单已写入右侧报告。请逐项确认显著性、人群结构、预算参数、算法挤占和上线监控边界。</p><div class="message-callout">风险确认表示业务已知悉，不代表风险消失，也不会触发线上配置。</div>`,
+        "<p>还需要确认显著性、人群结构、预算参数、算法挤占和上线监控边界。</p>",
         [{ id: "show-report", label: "查看风险清单", primary: true }],
         "needs-input"
       );
@@ -46542,7 +46541,7 @@
       preCaseState.conversationGate = "collect-goal";
       preCaseState.isResponding = true;
       const progress = preCreateMessage("assistant", "progress", "", [], "goal");
-      progress.steps = ["理解增长目标", "核对数据与约束", "编排执行步骤"];
+      progress.steps = ["理解增长目标", "核对数据与约束", "准备分析"];
       progress.phase = 0;
       preAddMessage(progress);
       preUpdateComposer();
@@ -46578,7 +46577,7 @@
       return `<div class="chat-plan">${preCaseData.plan.slice(0, visibleSteps).map((step, index) => {
         const section = preCaseState.reportSections[index];
         const state = section.status === "complete" ? "done" : ["queued", "generating", "writing", "needs-input"].includes(section.status) ? "active" : "";
-        const label = section.status === "complete" ? "已完成" : section.status === "queued" ? "排队中" : section.status === "generating" ? "分析中" : section.status === "writing" ? "写入中" : section.status === "needs-input" ? "待确认" : "待执行";
+        const label = section.status === "complete" ? "已完成" : section.status === "queued" ? "准备中" : section.status === "generating" ? "分析中" : section.status === "writing" ? "整理中" : section.status === "needs-input" ? "待确认" : "待执行";
         return `<div class="chat-plan-row ${state}"><b>${section.status === "complete" ? "✓" : String(index + 1).padStart(2, "0")}</b><span>${escapeHTML(step)}</span><em>${label}</em></div>`;
       }).join("")}</div>`;
     }
@@ -46594,7 +46593,7 @@
       if (actionId === "continue-pre-funnel") return preGetSection("funnel").status === "locked";
       if (actionId === "continue-pre-experiment") return preGetSection("experiment").status === "locked";
       if (actionId === "continue-pre-plan") return preGetSection("plan").status === "locked" && preCaseState.conversationGate === "choose-preference";
-      if (actionId === "continue-pre-governance") return preCaseState.conversationGate === "ready-governance" && preGetSection("governance").status === "locked" && Boolean(preRecommendedCandidate());
+      if (actionId === "continue-pre-governance") return preCaseState.conversationGate === "ready-governance" && preGetSection("governance").status === "locked" && Boolean(preSelectedCandidate());
       if (actionId === "finalize-pre-strategy") return preGovernanceReady() && !prePendingUpdateSections().length && !preCaseState.packagePrepared && !preCaseState.packageGenerated;
       if (actionId === "confirm-pre-package") return preCaseState.packagePrepared && !prePendingUpdateSections().length && !preCaseState.packageGenerated && !preCaseState.confirmationPending;
       if (["final-confirm-pre-package", "cancel-confirm-pre-package"].includes(actionId)) return preCaseState.confirmationPending;
@@ -46890,7 +46889,7 @@
           <article class="pre-metric-card"><span>异常点 · 需单列复核</span><strong>${daily.filter(row => row.anomaly).length} 个</strong><em>${daily.filter(row => row.anomaly).map(row => row.date).join(" / ")}</em></article>
         </div>
         <div class="pre-analysis-toolbar"><strong>逐日趋势 · ${preCaseData.baselineSeries.window}</strong>
-          <div class="pre-analysis-tabs" role="tablist" aria-label="P0 趋势指标">
+          <div class="pre-analysis-tabs" role="tablist" aria-label="大盘趋势指标">
             ${["gmv", "dac", "aov"].map(key => {
               const selected = metricKey === key;
               return `<button role="tab" aria-selected="${selected}" tabindex="${selected ? "0" : "-1"}" class="${selected ? "active" : ""}" data-pre-baseline-metric="${key}">${preBaselineMetricConfig(key).label}</button>`;
@@ -46902,9 +46901,9 @@
           <div class="pre-timeseries-legend"><span><i></i>工作日</span><span class="weekend"><i></i>周末</span><span class="anomaly"><i></i>异常点</span><span>当前指标：${metric.label}（${metric.unit}）</span></div>
         </div>
         <div class="pre-series-summary-grid">${dayTypes.map(row => `<div class="pre-series-summary"><b>${row.label} · ${row.label === "周末" ? "6 天" : "14 天"}</b><span>GMV ${row.currentGmv.toFixed(2)} 亿，同比 ${signed(row.gmvYoy)}；DAC ${row.currentDac} 万，同比 ${signed(row.dacYoy)}；客单 ¥${row.currentAov}，同比 ${signed(row.aovYoy)}</span></div>`).join("")}</div>
-        <div class="pre-table-scroll"><table class="pre-budget-table" aria-label="P0 周度 GMV DAC 客单汇总"><thead><tr><th>周</th><th>GMV 本期 / 同期（亿）</th><th>同比</th><th>DAC 本期 / 同期（万）</th><th>同比</th><th>客单本期 / 同期</th><th>同比</th></tr></thead><tbody>${weeklyRows}</tbody></table></div>
+        <div class="pre-table-scroll"><table class="pre-budget-table" aria-label="周度 GMV DAC 客单汇总"><thead><tr><th>周</th><th>GMV 本期 / 同期（亿）</th><th>同比</th><th>DAC 本期 / 同期（万）</th><th>同比</th><th>客单本期 / 同期</th><th>同比</th></tr></thead><tbody>${weeklyRows}</tbody></table></div>
         <div class="pre-analysis-toolbar"><strong>逐日原值与异常点</strong><span class="hint">客单 = GMV × 10,000 / DAC；四舍五入到元</span></div>
-        <div class="pre-table-scroll compact"><table class="pre-budget-table" aria-label="P0 近 20 天逐日原值"><thead><tr><th>日期</th><th>类型</th><th>GMV</th><th>同期</th><th>同比</th><th>DAC</th><th>同期</th><th>同比</th><th>客单</th><th>同期</th><th>同比</th><th>异常点</th></tr></thead><tbody>${dailyRows}</tbody></table></div>
+        <div class="pre-table-scroll compact"><table class="pre-budget-table" aria-label="近 20 天逐日数据"><thead><tr><th>日期</th><th>类型</th><th>GMV</th><th>同期</th><th>同比</th><th>DAC</th><th>同期</th><th>同比</th><th>客单</th><th>同期</th><th>同比</th><th>异常点</th></tr></thead><tbody>${dailyRows}</tbody></table></div>
         <div class="pre-attribution">${attribution.map(item => `<div class="pre-attribution-row"><span>${item.label} ${signed(item.value)}</span><div class="pre-attribution-track"><i style="width:${item.width}%"></i></div><b>${item.note}</b></div>`).join("")}</div>
         ${preRenderInsight(
           "大盘水位洞察",
@@ -46938,9 +46937,9 @@
       const subRows = preCaseData.subcategories.map(item => `<tr><td>${item.parent} / ${item.name}</td><td>${item.gmvIndex}</td><td>+${item.dac}%</td><td>${item.aov >= 0 ? "+" : ""}${item.aov}%</td><td>${item.audience}</td><td>${item.tier}</td></tr>`).join("");
       const digital = categories.find(item => item.category === "数码家电");
       const food = categories.find(item => item.category === "食品生鲜");
-      return `<div class="pre-toolbar"><span class="hint">P1 原值口径：活动前日均对比历史活动期日均</span><button class="pre-inline-action" data-pre-toggle-category aria-expanded="${preCaseState.categoryExpanded}">${preCaseState.categoryExpanded ? "收起二级类目" : "下钻二级类目"}</button></div>
-        <div class="pre-category-compare" role="img" aria-label="P1 分类目活动前和活动期日均 GMV 对比">${comparison}<div class="pre-timeseries-legend"><span><i style="background:#aeb8ca"></i>活动前日均</span><span class="weekend"><i></i>活动期日均</span></div></div>
-        <div class="pre-table-scroll"><table class="pre-category-table" aria-label="P1 分类目活动前与活动期日均原值"><thead><tr><th>一级类目</th><th>前 GMV</th><th>前 DAC</th><th>前客单</th><th>期 GMV</th><th>期 DAC</th><th>期客单</th><th>放大系数</th><th>DAC 拉动</th><th>客单拉动</th><th>增量 / 贡献</th><th>优先级</th><th>券档映射</th></tr></thead>
+      return `<div class="pre-toolbar"><span class="hint">活动前日均对比历史活动期日均</span><button class="pre-inline-action" data-pre-toggle-category aria-expanded="${preCaseState.categoryExpanded}">${preCaseState.categoryExpanded ? "收起二级类目" : "下钻二级类目"}</button></div>
+        <div class="pre-category-compare" role="img" aria-label="分类目活动前和活动期日均 GMV 对比">${comparison}<div class="pre-timeseries-legend"><span><i style="background:#aeb8ca"></i>活动前日均</span><span class="weekend"><i></i>活动期日均</span></div></div>
+        <div class="pre-table-scroll"><table class="pre-category-table" aria-label="分类目活动前与活动期日均数据"><thead><tr><th>一级类目</th><th>前 GMV</th><th>前 DAC</th><th>前客单</th><th>期 GMV</th><th>期 DAC</th><th>期客单</th><th>放大系数</th><th>DAC 拉动</th><th>客单拉动</th><th>增量 / 贡献</th><th>优先级</th><th>券档映射</th></tr></thead>
         <tbody>${categoryRows}</tbody></table></div>
         <div class="pre-data-note">复算口径：放大系数 = 活动期日均 GMV / 活动前日均 GMV；增量贡献 = 类目日均增量 / 全盘日均增量 ${preCaseData.categoryMarketIncrementGmv.toFixed(1)} 亿。其余类目贡献 6%。</div>
         <div class="pre-subcategory" ${preCaseState.categoryExpanded ? "" : "hidden"}><strong>二级类目需求强度与券档映射</strong><div style="overflow:auto;margin-top:8px"><table class="pre-category-table"><thead><tr><th>二级类目</th><th>GMV 指数</th><th>DAC</th><th>客单</th><th>目标人群</th><th>建议券档</th></tr></thead><tbody>${subRows}</tbody></table></div></div>
@@ -47157,7 +47156,7 @@
           "八波次按领券、使用和有效期组织；动态机制归入具体波次，渠道矩阵只使用当前确认端口与波次。",
           "实时货盘、库存、履约和正式预算批复仍为待补，不得据此直接上线。",
           preCaseState.planOutputStage === "channel" || preCaseState.planOutputStage === "channel-skipped"
-            ? "进入角色与独立流程治理门禁。"
+            ? "进入审批前确认。"
             : "确认券批次，并决定是否生成渠道与人群策略。",
           "plan"
         )}
@@ -47186,7 +47185,7 @@
     function preRenderGovernanceSection() {
       const selected = preSelectedCandidate();
       const final = preCaseState.packageGenerated && selected ? `<div class="pre-final"><h3>${selected.name} · 待审批策略包</h3><p>预算上限 ${(preCaseState.budgetCap / 10000).toFixed(2)} 亿下方案可行；角色确认、主预算申请、专项子预算、活动立项与保密协议均已完成。</p></div>` : "";
-      const blocker = selected ? "" : `<div class="pre-budget-blocker" role="alert"><strong>预算门禁未通过</strong>无可行候选，治理状态不可用于绕过预算硬约束，待审批策略包保持阻断。</div>`;
+      const blocker = selected ? "" : '<div class="pre-budget-blocker" role="alert"><strong>预算约束未满足</strong>当前没有可行候选，请先调整预算或目标。</div>';
       return `${blocker}${preRenderGovernanceControls()}${final}
         ${preRenderInsight(
           "治理与落地洞察",
@@ -47324,16 +47323,16 @@
       const recalculatingCount = preCaseState.reportRecalculationSectionIds.size;
       const executionCopy = recalculatingCount
         ? preCaseState.reportRecalculationPhase === "queued"
-          ? `${recalculatingCount} 个待更新章节已进入重新计算队列。`
+          ? `正在准备更新 ${recalculatingCount} 个章节。`
           : preCaseState.reportRecalculationPhase === "generating"
             ? `正在重新分析 ${recalculatingCount} 个受影响章节。`
-            : `正在原位写入 ${recalculatingCount} 个更新章节。`
+            : `正在更新 ${recalculatingCount} 个章节。`
         : executing
         ? executing.status === "queued"
-          ? `${executing.title}已进入队列，完成后写入报告。`
+          ? `正在准备${executing.title}。`
           : executing.status === "generating"
-            ? `正在分析${executing.title}，完成后写入报告。`
-            : `正在将${executing.title}写入报告。`
+            ? `正在分析${executing.title}。`
+            : `正在生成${executing.title}。`
         : "";
       const execution = executionCopy
         ? `<div class="pre-report-execution" role="status"><i></i><span>${escapeHTML(executionCopy)}</span></div>`
@@ -47357,7 +47356,7 @@
         category: "比较活动前窗口与历史活动期，识别需求类目和券档适配。",
         funnel: "按人群、渠道、面额拆解发放、领取、核销和钱效链路。",
         experiment: "用券组实验验证钱效，并将竞对变化作为压力信号。",
-        plan: "以模块 02 样式呈现三套候选、八波次券组、批次微调及渠道与人群策略。",
+        plan: "呈现三套候选、八波次券组、批次微调及渠道与人群策略。",
         governance: "完成团队拉齐、预算申请、立项和保密协议状态。"
       };
       const committedSections = preCommittedSections();
@@ -47372,7 +47371,7 @@
         return `<section class="report-section${isEntering ? " is-entering" : ""}" id="${sectionDomId}" data-report-status="${section.reportStatus}"><div class="report-section-head"><span class="report-section-no">${String(index + 1).padStart(2, "0")}</span><h3>${escapeHTML(section.title)}</h3>${updateState}<button class="report-section-remove" data-pre-hide-section="${section.id}" aria-label="从促前报告中隐藏${escapeHTML(section.title)}">${iconSVG("close")}</button></div><p class="report-section-lead">${leads[section.id]}</p>${section.committedHTML || preSectionContent(section.id)}</section>`;
       }).join("");
       const generatedAt = [...preCaseState.reportSections].reverse().find(section => section.completedAt)?.completedAt || "刚刚";
-      preReportDocument.innerHTML = `${updateNotice}${execution}<header class="report-cover"><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignAlias} · ${preCaseData.profile.period} · ${escapeHTML(preCaseData.sampleLabel)}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>更新于 ${escapeHTML(generatedAt)}</span><span>${preCaseData.profile.siteAlias}</span><span>${total} 步分析</span><span>未触发线上配置</span></div></header>${sections}`;
+      preReportDocument.innerHTML = `${updateNotice}${execution}<header class="report-cover"><h2>${escapeHTML(preCaseState.reportTitle)}</h2><p>${preCaseData.profile.campaignAlias} · ${preCaseData.profile.period}</p><div class="report-meta"><span>${preCompletedCount()} / ${total} 章节完成</span><span>更新于 ${escapeHTML(generatedAt)}</span><span>${preCaseData.profile.siteAlias}</span><span>${total} 步分析</span></div></header>${sections}`;
       preReportCanvasWrap.scrollTop = previousScrollTop;
     }
 
@@ -47399,7 +47398,7 @@
 
     function preGenerationProgress(sectionId) {
       const progress = preCreateMessage("assistant", "progress", "", [], sectionId);
-      progress.steps = ["进入队列", "读取脱敏数据", "计算与写入"];
+      progress.steps = ["整理问题", "分析数据", "生成结论"];
       progress.phase = 0;
       preAddMessage(progress);
       return progress;
@@ -47462,7 +47461,7 @@
           preUpdateMessage(progress.id, { phase: 2 });
           setTimeout(() => {
             if (finalStatus === "complete") preCommitSection(sectionId);
-            else preSetSectionStatus(sectionId, finalStatus, "等待全部治理门禁");
+            else preSetSectionStatus(sectionId, finalStatus, "等待确认");
             const index = preCaseState.messages.findIndex(message => message.id === progress.id);
             if (index >= 0) preCaseState.messages.splice(index, 1);
             preAddMessage(preCreateMessage("assistant", "insight", resultHTML, actions, sectionId));
@@ -47573,7 +47572,7 @@
       }
       preCaseState.conversationGate = "governance";
       preCaseState.governancePanelOpen = true;
-      preGenerateChapter("governance", `<p>治理已拆为两组独立门禁：策略/财务/业务/安全角色确认，以及主预算申请、专项子预算、活动立项、保密协议四个独立流程状态。角色确认不等于流程完成，全部满足后才允许生成待审批策略包。</p>`, [
+      preGenerateChapter("governance", "<p>生成待审批策略包前，请完成角色确认、预算申请、活动立项和保密协议。</p>", [
         { id: "show-pre-governance", label: "查看确认清单", primary: true }
       ], "needs-input");
     }
@@ -47590,7 +47589,7 @@
 
     function preNextActions() {
       if (preCaseState.conversationGate === "collect-goal") return [{ id: "use-pre-goal-example", label: "使用示例目标" }];
-      if (preCaseState.conversationGate === "confirm-assumptions") return [{ id: "confirm-pre-assumptions", label: "按历史样例继续", primary: true }];
+      if (preCaseState.conversationGate === "confirm-assumptions") return [{ id: "confirm-pre-assumptions", label: "先按历史表现测算", primary: true }];
       if (!preCaseState.planConfirmed && preCaseState.conversationGate === "confirm-plan") return [{ id: "confirm-pre-plan", label: "确认计划并分析大盘水位", primary: true }];
       if (preGetSection("baseline").status === "complete" && preGetSection("category").status === "locked") return [{ id: "continue-pre-category", label: "继续分析类目爆发", primary: true }];
       if (preGetSection("category").status === "complete" && preGetSection("funnel").status === "locked") return [{ id: "continue-pre-funnel", label: "继续复盘领取核销", primary: true }];
@@ -47598,7 +47597,7 @@
       if (preCaseState.conversationGate === "choose-preference") return [{ id: "choose-preference-balanced", label: "优先均衡增长", primary: true }];
       if (preCaseState.conversationGate === "refine-batches") return [{ id: "confirm-pre-batches", label: "采用当前方案并确认券批次", primary: true }];
       if (preCaseState.conversationGate === "confirm-channel") return [{ id: "confirm-pre-channel", label: "需要渠道与人群策略", primary: true }, { id: "skip-pre-channel", label: "暂不需要" }];
-      if (preCaseState.conversationGate === "ready-governance" && preGetSection("plan").status === "complete" && preGetSection("governance").status === "locked" && preSelectedCandidate()) return [{ id: "continue-pre-governance", label: "进入治理确认", primary: true }];
+      if (preCaseState.conversationGate === "ready-governance" && preGetSection("plan").status === "complete" && preGetSection("governance").status === "locked" && preSelectedCandidate()) return [{ id: "continue-pre-governance", label: "进入审批前确认", primary: true }];
       if (preGetSection("governance").status === "needs-input" && preGovernanceReady()) return [{ id: "finalize-pre-strategy", label: "生成待审批策略包", primary: true }];
       if (preReportProgressState().isFinalReady && preGovernanceReady() && !preCaseState.packageGenerated) return [{ id: "finalize-pre-strategy", label: "重新生成待审批策略包", primary: true }];
       return [];
@@ -47627,7 +47626,7 @@
     function preAnswerCategoryQuestion(question) {
       const matched = preCaseData.categories.find(item => question.includes(item.category));
       if (!matched && /(母婴|图书|汽车|医药|宠物|旅行)/.test(question)) {
-        return "暂无数据：当前 P1 脱敏原值未覆盖该类目，需要补充活动前/活动期日均 GMV、DAC、客单及全盘增量后才能计算。";
+        return "当前没有该类目的数据。请补充活动前和活动期的日均 GMV、DAC、客单及全盘增量后再计算。";
       }
       const item = matched || preCaseData.categories.find(category => category.priority === "S");
       const metrics = preCategoryMetrics(item);
@@ -47671,13 +47670,13 @@
       const rowSummary = rows.map(row =>
         `${row.name}：领取率 ${row.claimRate}%，领后核销 ${row.redeemRate}%，ROI ${row.roi}，预算占比 ${row.budgetShare}%，诊断为${row.diagnosis}`
       ).join("；");
-      return `按${labels[dimension]}读取当前渠道、人群与面额明细：${rowSummary}。以上均为${preCaseData.sampleLabel}，不替代当期实时数据。`;
+      return `按${labels[dimension]}读取当前渠道、人群与面额明细：${rowSummary}。正式决策前请结合当期数据复核。`;
     }
 
     function preAnswerQuestion(type, question) {
       let answer = preCaseData.answers[type] || preCaseData.answers.goal;
       if (/当前还缺|缺哪些|缺失数据/.test(question)) answer = `暂无数据项包括：${preCaseData.missingData.join("；")}。`;
-      else if (/(实时曝光|点击|CTR|库存|履约|小时级|毛利|利润)/.test(question)) answer = `暂无数据：当前脱敏样例未提供该字段。需要补充指标原值、时间窗口、维度口径和来源后才能计算，不使用固定模板补值。`;
+      else if (/(实时曝光|点击|CTR|库存|履约|小时级|毛利|利润)/.test(question)) answer = "当前还没有这项数据。请补充指标值、时间范围和统计口径后再计算。";
       else if (type === "goal") {
         const constraints = preGetCaseGoalConstraints();
         answer = `当前目标门禁为：支付 GMV ${constraints.totalGmv.min}–${constraints.totalGmv.max} 亿，增量 GMV ${constraints.incrementalGmv.min}–${constraints.incrementalGmv.max} 亿，预算 ${(constraints.budget.min / 10000).toFixed(2)}–${(constraints.budget.max / 10000).toFixed(2)} 亿，ROI 不低于 ${constraints.roiFloor ?? preCaseData.profile.roiFloor}，CAC 不高于 ${constraints.cacCap} 元。`;
@@ -47848,7 +47847,7 @@
            <div class="pre-series-summary"><b>当前波次</b><span>${escapeHTML(wave?.name || "一波次")} · ${escapeHTML(wave?.cycle || "暂无数据")}；通发 ${groups.general}、储备 ${groups.reserve}、定向/特殊 ${groups.targeted}、动态 ${groups.dynamic} 组。</span></div>
          </div>
          <div class="message-callout"><strong>已确认微调：</strong>${escapeHTML(text)}</div>
-         <p><strong>AI 概括：</strong>高门槛券继续限制在高客单、高意向组合，5% 准备金只承接需求超预期或主投库存缺口，不扩大泛发。</p>
+         <p>高门槛券继续限制在高客单、高意向组合，5% 准备金只承接需求超预期或主投库存缺口，不扩大泛发。</p>
          <p><strong>是否需要我进行渠道与人群策略设计？</strong>你可以直接回复需要，并指定端口和波次。</p>`,
         [
           { id: "confirm-pre-channel", label: "需要渠道与人群策略", primary: true },
@@ -47887,9 +47886,8 @@
       if (negative) {
         preRunGuidedReply(
           "plan",
-          `<p><strong>本轮暂不生成渠道与人群策略。</strong>第 6 章已记录该待补项，不会伪造渠道矩阵；券批次方案保持有效。</p>
-           <p><strong>AI 概括：</strong>当前可先进入治理确认，后续补充渠道时会在第 6 章原位置更新。</p>`,
-          [{ id: "continue-pre-governance", label: "进入独立治理门禁", primary: true }]
+          "<p>好的，本轮先保留券批次方案，渠道与人群策略后续再补充。</p>",
+          [{ id: "continue-pre-governance", label: "进入审批前确认", primary: true }]
         );
         return true;
       }
@@ -47907,9 +47905,8 @@
            <div class="pre-series-summary"><b>策略规模</b><span>${rows.length} 条策略行；固定阵地 ${channelCounts["固定阵地"]}、灵活加码 ${channelCounts["灵活加码"]}、会场引流 ${channelCounts["会场引流"]} 个渠道位。</span></div>
            <div class="pre-series-summary"><b>重点对象</b><span>普惠与中高潜负责基础规模；数码家电高意向承接 3000-420；已领未用人群进入临期催用。</span></div>
          </div>
-         <p><strong>AI 概括：</strong>会场和卡券页承担稳定领取，搜索承接高意图增量，Push/灵活渠道优先用于召回与催用；冲突、缺数和降级项已在矩阵中单独标记。</p>
-         <div class="message-callout">完整渠道矩阵和执行交接已写入右侧第 6 章；所有入口均为脱敏展示，未触发线上配置。</div>`,
-        [{ id: "continue-pre-governance", label: "进入独立治理门禁", primary: true }]
+         <p>会场和卡券页承担稳定领取，搜索承接高意图增量，Push 和灵活渠道优先用于召回与催用；冲突、缺数和降级项已单独标记。</p>`,
+        [{ id: "continue-pre-governance", label: "进入审批前确认", primary: true }]
       );
       return true;
     }
@@ -47933,7 +47930,7 @@
         if (!result.valid) {
           preRunGuidedReply(
             "goal",
-            `<p><strong>已记录本轮输入，还缺：</strong>${escapeHTML(result.missing.join("、"))}。缺项补齐前不会开始七步分析。</p>`
+            `<p><strong>还需要补充：</strong>${escapeHTML(result.missing.join("、"))}。</p>`
           );
           return true;
         }
@@ -47993,7 +47990,7 @@
       }
       const type = preInferQuestionType(trimmed);
       const progress = preCreateMessage("assistant", "progress", "", [], type);
-      progress.steps = ["理解问题", "定位脱敏数据", "计算并回答"];
+      progress.steps = ["理解问题", "查找相关数据", "生成回答"];
       progress.phase = 0;
       preAddMessage(progress);
       preCaseState.isResponding = true;
@@ -48018,7 +48015,7 @@
         preSubmitQuestion("支付 GMV 目标 120—125 亿，增量 GMV 6.6—7.5 亿，预算 1.08—1.28 亿，CAC 不超过 20 元。");
       }
       if (actionId === "confirm-pre-assumptions") {
-        preSubmitQuestion("先按历史样例继续，实时货盘和库存标记为待补，不作为当前测算输入。");
+        preSubmitQuestion("先按历史表现测算，实时货盘和库存暂不纳入。");
       }
       if (actionId === "choose-preference-efficiency") {
         preSubmitQuestion("优先钱效，ROI 不能低于 6.2。");
@@ -48057,11 +48054,11 @@
       if (actionId === "finalize-pre-strategy") {
         const selected = preSelectedCandidate();
         if (!preGovernanceReady() || !selected || prePendingUpdateSections().length) {
-          showToast(prePendingUpdateSections().length ? "请先重新计算待更新章节" : "预算可行性或治理门禁尚未全部满足");
+          showToast(prePendingUpdateSections().length ? "请先更新方案" : "还有确认项未完成");
           return;
         }
         preCaseState.packagePrepared = true;
-        preAddMessage(preCreateMessage("assistant", "insight", `<p><strong>${selected.name}已通过当前演示门禁。</strong>预算、波次、结算口径和治理状态已同步，下一步仅生成待审批策略包，不调用申请、立项或发布接口。</p>`, [
+        preAddMessage(preCreateMessage("assistant", "insight", `<p><strong>${selected.name}</strong>的预算、波次和审批准备均已确认，可以生成待审批策略包。</p>`, [
           { id: "confirm-pre-package", label: "生成待审批策略包", primary: true },
           { id: "ask-pre-plan", label: "继续追问方案" }
         ], "governance"));
@@ -48072,7 +48069,7 @@
       }
       if (actionId === "confirm-pre-package") {
         preCaseState.confirmationPending = true;
-        preAddMessage(preCreateMessage("assistant", "text", "<p><strong>确认生成待审批策略包？</strong></p><p>只生成脱敏 HTML 产物和审计状态，不调用真实预算、立项或策略发布接口。</p>", [
+        preAddMessage(preCreateMessage("assistant", "text", "<p><strong>确认生成待审批策略包？</strong></p>", [
           { id: "final-confirm-pre-package", label: "确认生成", primary: true },
           { id: "cancel-confirm-pre-package", label: "取消" }
         ], "governance"));
@@ -48095,7 +48092,7 @@
         preCaseState.approvalStatus = "待审批";
         preCloseGovernancePanel(false);
         preCommitSection("governance", "待审批策略包已生成", () => {
-          preAddMessage(preCreateMessage("system", "system", "待审批策略包已生成；未提交真实 ECOP、预算或立项流程。"));
+          preAddMessage(preCreateMessage("system", "system", "待审批策略包已生成。"));
           preCreateArtifact();
           preRenderWorkspace();
           showToast("促前待审批策略包已生成");
