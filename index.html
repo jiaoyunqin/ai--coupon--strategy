@@ -33114,7 +33114,10 @@
       reportRecalculationToken: 0,
       reportReturnFocus: null,
       governancePanelOpen: false,
-      governanceReturnFocus: null
+      governanceReturnFocus: null,
+      runToken: 0,
+      pendingTimers: new Set(),
+      pendingFrames: new Set()
     };
 
     const budgetCaseState = {
@@ -33147,7 +33150,12 @@
       hiddenSections: new Set(),
       artifact: null,
       isResponding: false,
-      reportReturnFocus: null
+      reportReturnFocus: null,
+      confirmationPending: false,
+      riskReadyMessageAdded: false,
+      runToken: 0,
+      pendingTimers: new Set(),
+      pendingFrames: new Set()
     };
 
     const preCaseInitialReportSections = Object.freeze(
@@ -33156,6 +33164,44 @@
     const budgetCaseInitialReportSections = Object.freeze(
       budgetCaseState.reportSections.map(section => Object.freeze({ ...section }))
     );
+
+    function invalidateDemoRun(state) {
+      state.pendingTimers.forEach(timer => clearTimeout(timer));
+      state.pendingTimers.clear();
+      state.pendingFrames.forEach(frame => cancelAnimationFrame(frame));
+      state.pendingFrames.clear();
+      state.runToken += 1;
+    }
+
+    function scheduleDemoTimeout(state, callback, delay) {
+      const runToken = state.runToken;
+      const timer = setTimeout(() => {
+        state.pendingTimers.delete(timer);
+        if (runToken !== state.runToken) return;
+        callback();
+      }, delay);
+      state.pendingTimers.add(timer);
+      return timer;
+    }
+
+    function scheduleDemoFrame(state, callback) {
+      const runToken = state.runToken;
+      const frame = requestAnimationFrame(() => {
+        state.pendingFrames.delete(frame);
+        if (runToken !== state.runToken) return;
+        callback();
+      });
+      state.pendingFrames.add(frame);
+      return frame;
+    }
+
+    function scheduleBudgetCaseTimeout(callback, delay) {
+      return scheduleDemoTimeout(budgetCaseState, callback, delay);
+    }
+
+    function schedulePreCaseTimeout(callback, delay) {
+      return scheduleDemoTimeout(preCaseState, callback, delay);
+    }
 
 
     const newChatStarters = [
@@ -37288,6 +37334,13 @@
       const runButton = actionButton("立即执行", "primary", event => {
         runScheduledTaskNow(task.id, true, event.currentTarget);
       });
+      runButton.addEventListener("keydown", event => {
+        if (event.key !== "Enter" && event.key !== " " && event.code !== "Space") return;
+        event.preventDefault();
+        event.stopPropagation();
+        if (event.repeat) return;
+        runScheduledTaskNow(task.id, true, event.currentTarget);
+      });
       runButton.dataset.scheduledDetailExecute = task.id;
       runButton.disabled = task.status === "exception";
       if (runButton.disabled) {
@@ -37625,11 +37678,9 @@
       if (!runId || !task) return false;
       scheduledTaskState.detailReturnRunId = null;
       renderScheduledTaskDetailModal(task);
-      requestAnimationFrame(() => {
-        const returnFocus = findScheduledRunReturnFocus(runId)
-          || findScheduledTaskDetailReturnFocus(task.id);
-        returnFocus?.focus({ preventScroll: true });
-      });
+      const returnFocus = findScheduledRunReturnFocus(runId)
+        || findScheduledTaskDetailReturnFocus(task.id);
+      returnFocus?.focus({ preventScroll: true });
       return true;
     }
 
@@ -37646,11 +37697,9 @@
         actionButton("关闭", "primary", closeModal)
       );
       if (focusArtifact) {
-        requestAnimationFrame(() => {
-          modalBody
-            .querySelector("[data-scheduled-run-artifact]")
-            ?.focus({ preventScroll: true });
-        });
+        modalBody
+          .querySelector("[data-scheduled-run-artifact]")
+          ?.focus({ preventScroll: true });
       }
     }
 
@@ -37790,9 +37839,9 @@
       if (session.caseKey === "inspection") {
         enterCouponInspectionHistory();
       } else if (session.caseKey === "pre") {
-        enterPreCase();
+        restartPreCaseDemo();
       } else if (session.caseKey === "budget") {
-        enterBudgetCase();
+        restartBudgetCaseDemo();
       }
       selectHistoryItem(session.title);
       showToast(`已打开历史对话：${session.title}`);
@@ -45858,22 +45907,22 @@
       stream.insertAdjacentHTML("beforeend", '<div class="analysis-generating" id="caseGenerating"><i></i><span>正在校验 V1/V15 策略规则与累计两天数据口径…</span></div>');
       updateCasePlanStates();
 
-      setTimeout(() => {
+      scheduleBudgetCaseTimeout(() => {
         budgetCaseState.currentStep = 1;
         updateCasePlanStates();
         document.querySelector("#caseGenerating span").textContent = "总体口径已校验，正在比较 GMV、补贴、兑换比和支付费率…";
         stream.insertAdjacentHTML("beforeend", renderOverallStage());
-        setTimeout(() => {
+        scheduleBudgetCaseTimeout(() => {
           budgetCaseState.currentStep = 2;
           updateCasePlanStates();
           document.querySelector("#caseGenerating span").textContent = "总体对比完成，正在下钻 L4、L5 与 jp/t8 重点人群…";
           stream.insertAdjacentHTML("beforeend", renderSegmentStage());
-          setTimeout(() => {
+          scheduleBudgetCaseTimeout(() => {
             budgetCaseState.currentStep = 3;
             updateCasePlanStates();
             document.querySelector("#caseGenerating span").textContent = "人群效率已对齐，正在拆分人群池规模效应…";
             stream.insertAdjacentHTML("beforeend", renderScaleStage());
-            setTimeout(() => {
+            scheduleBudgetCaseTimeout(() => {
               budgetCaseState.currentStep = 4;
               updateCasePlanStates();
               document.getElementById("caseGenerating").remove();
@@ -46027,7 +46076,7 @@
     function renderBudgetDecisionStage() {
       const stream = document.getElementById("caseMainStream");
       stream.insertAdjacentHTML("beforeend", renderBudgetStage());
-      setTimeout(() => {
+      scheduleBudgetCaseTimeout(() => {
         budgetCaseState.currentStep = 5;
         updateCasePlanStates();
         stream.insertAdjacentHTML("beforeend", renderRiskStage());
@@ -46063,7 +46112,7 @@
       if (budgetCaseState.risksConfirmed.size < budgetCaseData.risks.length) {
         showToast("请先逐项确认风险边界");
         document.getElementById("riskStage").classList.add("pulse");
-        setTimeout(() => document.getElementById("riskStage").classList.remove("pulse"), 700);
+        scheduleBudgetCaseTimeout(() => document.getElementById("riskStage")?.classList.remove("pulse"), 700);
         return;
       }
       if (budgetCaseState.candidateGenerated) {
@@ -46321,13 +46370,13 @@
       feed.scrollTop = feed.scrollHeight;
       const steps = document.querySelectorAll(`#${recordId} .feed-process-step`);
       steps.forEach((step, index) => {
-        setTimeout(() => {
+        scheduleBudgetCaseTimeout(() => {
           steps.forEach((item, itemIndex) => {
             item.classList.toggle("done", itemIndex < index);
             item.classList.toggle("active", itemIndex === index);
           });
           if (index === steps.length - 1) {
-            setTimeout(() => {
+            scheduleBudgetCaseTimeout(() => {
               steps.forEach(item => {
                 item.classList.remove("active");
                 item.classList.add("done");
@@ -46365,7 +46414,7 @@
       }
       target.scrollIntoView({ behavior: "smooth", block: "center" });
       target.classList.add("context-highlight");
-      setTimeout(() => target.classList.remove("context-highlight"), 1300);
+      scheduleBudgetCaseTimeout(() => target.classList.remove("context-highlight"), 1300);
     }
 
     function addQuestionToPlan(question) {
@@ -46383,7 +46432,7 @@
       }
       target.scrollIntoView({ behavior: "smooth", block: "center" });
       target.classList.add("context-highlight");
-      setTimeout(() => target.classList.remove("context-highlight"), 1300);
+      scheduleBudgetCaseTimeout(() => target.classList.remove("context-highlight"), 1300);
       if (!document.getElementById("caseFinalDecision")) showToast("请先确认风险，再生成候选策略");
     }
 
@@ -46437,11 +46486,11 @@
       addCaseMessage(progress);
       updateComposerState();
 
-      setTimeout(() => {
+      scheduleBudgetCaseTimeout(() => {
         updateCaseMessage(progress.id, { phase: 1 });
-        setTimeout(() => {
+        scheduleBudgetCaseTimeout(() => {
           updateCaseMessage(progress.id, { phase: 2 });
-          setTimeout(() => {
+          scheduleBudgetCaseTimeout(() => {
             const progressIndex = budgetCaseState.messages.findIndex(message => message.id === progress.id);
             if (progressIndex >= 0) budgetCaseState.messages.splice(progressIndex, 1);
             addCaseMessage(createCaseMessage(
@@ -46459,7 +46508,7 @@
             const revealNextStep = () => {
               if (plan.visibleSteps < budgetCaseData.plan.length) {
                 updateCaseMessage(plan.id, { visibleSteps: plan.visibleSteps + 1 });
-                setTimeout(revealNextStep, DEMO_TIMING.introStep);
+                scheduleBudgetCaseTimeout(revealNextStep, DEMO_TIMING.introStep);
                 return;
               }
               budgetCaseState.introStatus = "ready";
@@ -46473,7 +46522,7 @@
               });
               updateComposerState();
             };
-            setTimeout(revealNextStep, DEMO_TIMING.introStep);
+            scheduleBudgetCaseTimeout(revealNextStep, DEMO_TIMING.introStep);
           }, DEMO_TIMING.introPlan);
         }, DEMO_TIMING.introScope);
       }, DEMO_TIMING.introUnderstand);
@@ -46773,7 +46822,7 @@
       if (next) {
         budgetCaseState.reportReturnFocus = trigger || document.activeElement;
         renderReportCustomizePanel();
-        requestAnimationFrame(() => reportTitleInput.focus());
+        scheduleDemoFrame(budgetCaseState, () => reportTitleInput.focus());
       } else if (budgetCaseState.reportReturnFocus) {
         budgetCaseState.reportReturnFocus.focus();
         budgetCaseState.reportReturnFocus = null;
@@ -46821,12 +46870,12 @@
       const progress = addGenerationProgress(sectionId, section.title);
       budgetCaseState.isResponding = true;
       updateComposerState();
-      setTimeout(() => {
+      scheduleBudgetCaseTimeout(() => {
         setReportSectionStatus(sectionId, "generating");
         updateCaseMessage(progress.id, { phase: 1 });
-        setTimeout(() => {
+        scheduleBudgetCaseTimeout(() => {
           updateCaseMessage(progress.id, { phase: 2 });
-          setTimeout(() => {
+          scheduleBudgetCaseTimeout(() => {
             setReportSectionStatus(sectionId, finalStatus, finalStatus === "needs-input" ? "等待业务确认风险" : undefined);
             const index = budgetCaseState.messages.findIndex(message => message.id === progress.id);
             if (index >= 0) budgetCaseState.messages.splice(index, 1);
@@ -46976,11 +47025,11 @@
       addCaseMessage(progress);
       budgetCaseState.isResponding = true;
       updateComposerState();
-      setTimeout(() => {
+      scheduleBudgetCaseTimeout(() => {
         updateCaseMessage(progress.id, { phase: 1 });
-        setTimeout(() => {
+        scheduleBudgetCaseTimeout(() => {
           updateCaseMessage(progress.id, { phase: 2 });
-          setTimeout(() => {
+          scheduleBudgetCaseTimeout(() => {
             const messageIndex = budgetCaseState.messages.findIndex(message => message.id === progress.id);
             if (messageIndex >= 0) budgetCaseState.messages.splice(messageIndex, 1);
             const answer = renderQuestionAnswer(type, trimmed, {
@@ -47417,11 +47466,11 @@
       preAddMessage(progress);
       preCaseState.isResponding = true;
       preUpdateComposer();
-      setTimeout(() => {
+      schedulePreCaseTimeout(() => {
         preUpdateMessage(progress.id, { phase: 1 });
-        setTimeout(() => {
+        schedulePreCaseTimeout(() => {
           preUpdateMessage(progress.id, { phase: 2 });
-          setTimeout(() => {
+          schedulePreCaseTimeout(() => {
             const index = preCaseState.messages.findIndex(message => message.id === progress.id);
             if (index >= 0) preCaseState.messages.splice(index, 1);
             preAddMessage(preCreateMessage("assistant", "insight", html, actions, contextType));
@@ -47443,7 +47492,7 @@
       const revealNextStep = () => {
         if (plan.visibleSteps < preCaseData.plan.length) {
           preUpdateMessage(plan.id, { visibleSteps: plan.visibleSteps + 1 });
-          setTimeout(revealNextStep, DEMO_TIMING.introStep);
+          schedulePreCaseTimeout(revealNextStep, DEMO_TIMING.introStep);
           return;
         }
         preCaseState.introStatus = "ready";
@@ -47458,7 +47507,7 @@
         });
         preUpdateComposer();
       };
-      setTimeout(revealNextStep, DEMO_TIMING.introStep);
+      schedulePreCaseTimeout(revealNextStep, DEMO_TIMING.introStep);
     }
 
     function preCompletedCount() {
@@ -47552,7 +47601,9 @@
       section.reportStatus = "pending";
       if (dependency) section.dependency = dependency;
       preRenderWorkspace();
+      const runToken = preCaseState.runToken;
       queueMicrotask(() => {
+        if (runToken !== preCaseState.runToken) return;
         section.reportStatus = "complete";
         section.committedHTML = preSectionContent(id);
         section.updateReason = "";
@@ -47561,7 +47612,7 @@
         preRenderWorkspace();
         if (typeof onCommitted === "function") onCommitted(section);
         const notice = preCaseState.reportNotice;
-        setTimeout(() => {
+        schedulePreCaseTimeout(() => {
           if (preCaseState.reportNotice !== notice) return;
           preCaseState.reportNotice = "";
           if (preCaseState.activeView === "pre-case") preRenderWorkspace();
@@ -47789,11 +47840,11 @@
       preAddMessage(progress);
       preUpdateComposer();
 
-      setTimeout(() => {
+      schedulePreCaseTimeout(() => {
         preUpdateMessage(progress.id, { phase: 1 });
-        setTimeout(() => {
+        schedulePreCaseTimeout(() => {
           preUpdateMessage(progress.id, { phase: 2 });
-          setTimeout(() => {
+          schedulePreCaseTimeout(() => {
             const progressIndex = preCaseState.messages.findIndex(message => message.id === progress.id);
             if (progressIndex >= 0) preCaseState.messages.splice(progressIndex, 1);
             preAddMessage(preCreateMessage(
@@ -48490,7 +48541,7 @@
       preSetReportFocus(false);
       preOpenReport();
       preRenderGovernancePanel();
-      requestAnimationFrame(() => {
+      scheduleDemoFrame(preCaseState, () => {
         preGovernanceConfirmationPanel.scrollIntoView({
           behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "auto" : "smooth",
           block: "start"
@@ -48506,7 +48557,7 @@
       const returnFocus = preCaseState.governanceReturnFocus;
       preCaseState.governanceReturnFocus = null;
       if (!restoreFocus) return;
-      requestAnimationFrame(() => {
+      scheduleDemoFrame(preCaseState, () => {
         if (returnFocus?.isConnected && !returnFocus.disabled) {
           returnFocus.focus({ preventScroll: true });
           return;
@@ -48517,13 +48568,46 @@
     }
 
     function preFocusNextGovernanceControl() {
-      requestAnimationFrame(() => {
+      scheduleDemoFrame(preCaseState, () => {
         const next = preGovernanceConfirmationPanel.querySelector(
           '[data-pre-confirm-role]:not(:disabled), [data-pre-confirm-governance-process]:not(:disabled)'
         ) || preGovernanceConfirmationPanel.querySelector('[data-pre-governance-action="finalize"]')
           || preGovernanceConfirmationPanel.querySelector("[data-pre-close-governance-panel]");
         next?.focus({ preventScroll: true });
       });
+    }
+
+    function preOpenGovernanceProcessConfirmation(process, trigger) {
+      if (!process || preCaseState.governanceProcessConfirmed.has(process.key)) return;
+      const completesGovernance = process.key === "nda"
+        && preCaseState.governanceConfirmed.size === preCaseData.governance.length
+        && preCaseState.governanceProcessConfirmed.size === preCaseData.governanceProcesses.length - 1
+        && Boolean(preSelectedCandidate())
+        && !prePendingUpdateSections().length;
+      modalReturnFocus = trigger || document.activeElement;
+      modalTitle.textContent = "操作确认";
+      modalBody.innerHTML = `<p class="modal-copy">确认已完成“${escapeHTML(process.name)}”并记录${escapeHTML(process.complete)}状态？${completesGovernance ? "确认后将完成审批前确认并生成待审批策略包。" : ""}</p>`;
+      modalActions.innerHTML = "";
+      setSharedModalKind("pre-governance-confirm");
+      document.body.classList.remove("template-detail-modal-open");
+      const confirmButton = actionButton("确认完成", "primary", () => {
+        closeModal(false);
+        preCaseState.governanceProcessConfirmed.add(process.key);
+        preRenderWorkspace();
+        if (preGovernanceReady() && !prePendingUpdateSections().length) {
+          preFinalizeStrategyPackage();
+          return;
+        }
+        preMaybeAnnounceGovernanceReady();
+        preFocusNextGovernanceControl();
+      });
+      modalActions.append(
+        actionButton("取消", "ghost", closeModal),
+        confirmButton
+      );
+      modal.classList.add("show");
+      activateStrategyModalFocusBoundary();
+      scheduleDemoFrame(preCaseState, () => confirmButton.focus({ preventScroll: true }));
     }
 
     function preConfirmGovernanceControl(control) {
@@ -48536,7 +48620,12 @@
         const process = control.closest("[data-pre-confirm-governance-process]");
         if (!process) return false;
         const key = process.dataset.preConfirmGovernanceProcess;
-        if (!preCaseData.governanceProcesses.some(item => item.key === key)) return false;
+        const processDefinition = preCaseData.governanceProcesses.find(item => item.key === key);
+        if (!processDefinition) return false;
+        if (key === "nda") {
+          preOpenGovernanceProcessConfirmation(processDefinition, process);
+          return true;
+        }
         preCaseState.governanceProcessConfirmed.add(key);
       }
       preRenderWorkspace();
@@ -48655,15 +48744,15 @@
       preCaseState.reportRecalculationSectionIds = new Set(sectionIds);
       preCaseState.reportRecalculationPhase = "queued";
       preRenderWorkspace();
-      setTimeout(() => {
+      schedulePreCaseTimeout(() => {
         if (token !== preCaseState.reportRecalculationToken) return;
         preCaseState.reportRecalculationPhase = "generating";
         preRenderWorkspace();
-        setTimeout(() => {
+        schedulePreCaseTimeout(() => {
           if (token !== preCaseState.reportRecalculationToken) return;
           preCaseState.reportRecalculationPhase = "writing";
           preRenderWorkspace();
-          setTimeout(() => {
+          schedulePreCaseTimeout(() => {
             if (token !== preCaseState.reportRecalculationToken) return;
             const updatedAt = new Date().toLocaleTimeString("zh-CN", { hour: "2-digit", minute: "2-digit" });
             sectionIds.forEach(id => {
@@ -48696,13 +48785,13 @@
       const progress = preGenerationProgress(sectionId);
       preCaseState.isResponding = true;
       preUpdateComposer();
-      setTimeout(() => {
+      schedulePreCaseTimeout(() => {
         preSetSectionStatus(sectionId, "generating");
         preUpdateMessage(progress.id, { phase: 1 });
-        setTimeout(() => {
+        schedulePreCaseTimeout(() => {
           preSetSectionStatus(sectionId, "writing");
           preUpdateMessage(progress.id, { phase: 2 });
-          setTimeout(() => {
+          schedulePreCaseTimeout(() => {
             if (finalStatus === "complete") preCommitSection(sectionId);
             else preSetSectionStatus(sectionId, finalStatus, "等待确认");
             const index = preCaseState.messages.findIndex(message => message.id === progress.id);
@@ -49238,11 +49327,11 @@
       preAddMessage(progress);
       preCaseState.isResponding = true;
       preUpdateComposer();
-      setTimeout(() => {
+      schedulePreCaseTimeout(() => {
         preUpdateMessage(progress.id, { phase: 1 });
-        setTimeout(() => {
+        schedulePreCaseTimeout(() => {
           preUpdateMessage(progress.id, { phase: 2 });
-          setTimeout(() => {
+          schedulePreCaseTimeout(() => {
             const index = preCaseState.messages.findIndex(message => message.id === progress.id);
             if (index >= 0) preCaseState.messages.splice(index, 1);
             preAddMessage(preCreateMessage("assistant", "insight", `<p>${escapeHTML(preAnswerQuestion(type, trimmed))}</p>`, preNextActions(), type));
@@ -49251,6 +49340,23 @@
           }, DEMO_TIMING.questionAnswer);
         }, DEMO_TIMING.questionLocate);
       }, DEMO_TIMING.questionUnderstand);
+    }
+
+    function preFinalizeStrategyPackage() {
+      preCaseState.confirmationPending = false;
+      preCaseState.packagePrepared = false;
+      preCaseState.packageGenerated = true;
+      preCaseState.approvalStatus = "待审批";
+      preCloseGovernancePanel(false);
+      preCommitSection("governance", "待审批策略包已生成", () => {
+        preAddMessage(preCreateMessage("system", "system", "待审批策略包已生成。"));
+        preCreateArtifact();
+        preRenderWorkspace();
+        showToast("促前待审批策略包已生成");
+        scheduleDemoFrame(preCaseState, () => {
+          preCaseArtifactDock.querySelector('[data-pre-dock-action="view"]')?.focus({ preventScroll: true });
+        });
+      });
     }
 
     function preHandleAction(actionId, trigger) {
@@ -49305,7 +49411,7 @@
           { id: "confirm-pre-package", label: "生成待审批策略包", primary: true },
           { id: "ask-pre-plan", label: "继续追问方案" }
         ], "governance"));
-        requestAnimationFrame(() => {
+        scheduleDemoFrame(preCaseState, () => {
           const actions = preCaseMainStream.querySelectorAll('[data-pre-action="confirm-pre-package"]');
           actions[actions.length - 1]?.focus({ preventScroll: true });
         });
@@ -49316,7 +49422,7 @@
           { id: "final-confirm-pre-package", label: "确认生成", primary: true },
           { id: "cancel-confirm-pre-package", label: "取消" }
         ], "governance"));
-        requestAnimationFrame(() => {
+        scheduleDemoFrame(preCaseState, () => {
           const actions = preCaseMainStream.querySelectorAll('[data-pre-action="final-confirm-pre-package"]');
           actions[actions.length - 1]?.focus({ preventScroll: true });
         });
@@ -49329,20 +49435,7 @@
           preRenderWorkspace();
           return;
         }
-        preCaseState.confirmationPending = false;
-        preCaseState.packagePrepared = false;
-        preCaseState.packageGenerated = true;
-        preCaseState.approvalStatus = "待审批";
-        preCloseGovernancePanel(false);
-        preCommitSection("governance", "待审批策略包已生成", () => {
-          preAddMessage(preCreateMessage("system", "system", "待审批策略包已生成。"));
-          preCreateArtifact();
-          preRenderWorkspace();
-          showToast("促前待审批策略包已生成");
-          requestAnimationFrame(() => {
-            preCaseArtifactDock.querySelector('[data-pre-dock-action="view"]')?.focus({ preventScroll: true });
-          });
-        });
+        preFinalizeStrategyPackage();
       }
       if (actionId === "cancel-confirm-pre-package") {
         preCaseState.confirmationPending = false;
@@ -49435,7 +49528,7 @@
       if (next) {
         preCaseState.reportReturnFocus = trigger || document.activeElement;
         preRenderCustomize();
-        requestAnimationFrame(() => preReportTitleInput.focus());
+        scheduleDemoFrame(preCaseState, () => preReportTitleInput.focus());
       } else if (preCaseState.reportReturnFocus) {
         preCaseState.reportReturnFocus.focus();
         preCaseState.reportReturnFocus = null;
@@ -52927,7 +53020,9 @@
     }
 
     function resetPreCaseDemoState() {
+      invalidateDemoRun(preCaseState);
       preReleaseArtifact();
+      closeAskPanel(false);
       Object.assign(preCaseState, {
         activeView: "dashboard",
         initialized: false,
@@ -52994,16 +53089,31 @@
       renderedPreCaseMessageIds.clear();
       renderedPreReportSectionIds.clear();
       preCaseReportPane.classList.remove("report-focus", "is-fullscreen", "mobile-open");
+      preCaseReportPane.classList.remove("is-launching");
       preReportCustomizePanel.classList.remove("show");
+      document.getElementById("preReportCustomize").setAttribute("aria-expanded", "false");
       preReportFilePreview.classList.remove("show");
       preReportPreviewFrame.srcdoc = "";
+      preReportBackdrop.classList.remove("show", "mobile");
       preGovernanceConfirmationPanel.hidden = true;
       preGovernanceConfirmationPanel.setAttribute("aria-hidden", "true");
       preGovernanceConfirmationPanel.innerHTML = "";
+      preCaseComposerInput.value = "";
+      preCaseComposerInput.disabled = false;
+      preCaseComposerSend.disabled = false;
+      preCaseComposerInput.style.height = "auto";
+      preCaseComposerStatus.textContent = "回车发送 · Shift + 回车换行";
+      preCaseChatScroll.scrollTop = 0;
+      preReportCanvasWrap.scrollTop = 0;
+      syncCaseReportGate(preCaseWorkbench, preCaseReportPane, true);
+      preRenderConversation();
+      preRenderWorkspace();
     }
 
     function resetBudgetCaseDemoState() {
+      invalidateDemoRun(budgetCaseState);
       releaseReportArtifact();
+      closeAskPanel(false);
       Object.assign(budgetCaseState, {
         activeView: "dashboard",
         introStatus: "idle",
@@ -53034,9 +53144,23 @@
       renderedCaseMessageIds.clear();
       renderedReportSectionIds.clear();
       caseReportPane.classList.remove("report-focus", "is-fullscreen", "mobile-open");
+      caseReportPane.classList.remove("is-launching");
       reportCustomizePanel.classList.remove("show");
+      document.getElementById("reportCustomize").setAttribute("aria-expanded", "false");
       reportFilePreview.classList.remove("show");
       reportPreviewFrame.srcdoc = "";
+      reportBackdrop.classList.remove("show", "mobile");
+      caseComposerInput.value = "";
+      caseComposerInput.disabled = false;
+      caseComposerSend.disabled = false;
+      caseComposerInput.style.height = "auto";
+      caseComposerStatus.textContent = "回车发送 · Shift + 回车换行";
+      caseChatScroll.scrollTop = 0;
+      reportCanvasWrap.scrollTop = 0;
+      syncCaseReportGate(caseWorkbench, caseReportPane, true);
+      renderCaseProgress();
+      renderCaseConversation();
+      renderReportWorkspace();
     }
 
     function normalizeDemoQuestion(value) {
@@ -53053,17 +53177,25 @@
       return "";
     }
 
+    function restartPreCaseDemo() {
+      resetPreCaseDemoState();
+      enterPreCase();
+    }
+
+    function restartBudgetCaseDemo() {
+      resetBudgetCaseDemoState();
+      enterBudgetCase();
+    }
+
     function launchNewChatDemoCase(caseKey) {
       if (caseKey === "pre") {
-        resetPreCaseDemoState();
-        enterPreCase();
+        restartPreCaseDemo();
         syncWorkspaceEntryState("new-chat");
         showToast("已从新建对话复刻促前券档位设计链路");
         return;
       }
       if (caseKey === "budget") {
-        resetBudgetCaseDemoState();
-        enterBudgetCase();
+        restartBudgetCaseDemo();
         syncWorkspaceEntryState("new-chat");
         showToast("已从新建对话复刻促中预算紧张链路");
       }
@@ -53163,10 +53295,11 @@
     }
 
     function launchCaseReport(workbench, reportPane, backdrop) {
+      const state = workbench === preCaseWorkbench ? preCaseState : budgetCaseState;
       syncCaseReportGate(workbench, reportPane, false);
       reportPane.classList.remove("is-launching");
-      requestAnimationFrame(() => reportPane.classList.add("is-launching"));
-      setTimeout(() => reportPane.classList.remove("is-launching"), 520);
+      scheduleDemoFrame(state, () => reportPane.classList.add("is-launching"));
+      scheduleDemoTimeout(state, () => reportPane.classList.remove("is-launching"), 520);
       if (window.innerWidth <= 1024) {
         reportPane.classList.add("mobile-open");
         backdrop.classList.add("show", "mobile");
@@ -53499,6 +53632,21 @@
       verifyFocusTrapAfterKey(container, target, reverse, current);
     }
 
+    function trapSharedModalFocus(event, container) {
+      if (event.key !== "Tab" || !container?.isConnected) return;
+      const focusable = getFocusableElements(container);
+      const current = document.activeElement;
+      event.preventDefault();
+      if (!focusable.length) {
+        focusTrapContainer(container);
+        return;
+      }
+
+      const target = getFocusTrapTarget(focusable, event.shiftKey, current);
+      if (target) target.focus({ preventScroll: true });
+      else focusTrapContainer(container);
+    }
+
     function setStrategyModalBackgroundInert(active) {
       if (active) {
         if (strategyModalBackgroundState.length) return;
@@ -53590,6 +53738,7 @@
       const modalKind = panel.dataset.modalKind || "";
       const taskModalOpen = modalKind === "task";
       const scheduledModalOpen = modalKind === "scheduled";
+      const preGovernanceConfirmationOpen = modalKind === "pre-governance-confirm";
       if (
         scheduledModalOpen
         && restoreFocus !== false
@@ -53619,6 +53768,10 @@
       modalReturnFocus = null;
       if (taskModalOpen) resetTaskTemplateTransientState();
       if (scheduledModalOpen && !preserveScheduledDraft) resetScheduledTaskTransientState();
+      if (preGovernanceConfirmationOpen) {
+        modalBody.innerHTML = "";
+        modalActions.innerHTML = "";
+      }
       if (returnToScheduledBuilder) {
         scheduledTaskState.returnFromTemplate = false;
         beginScheduledTaskModal(scheduledBuilderTrigger);
@@ -54567,7 +54720,11 @@
     });
 
     strategyInspirationButton.addEventListener("click", openStrategyInspiration);
-    newChatButton.addEventListener("click", () => enterNewChat());
+    newChatButton.addEventListener("click", () => {
+      resetPreCaseDemoState();
+      resetBudgetCaseDemoState();
+      enterNewChat();
+    });
     scheduledTaskButton.addEventListener("click", () => {
       if (infrastructureState.activeView === "scheduled-task") {
         window.scrollTo({ top: 0, behavior: "smooth" });
@@ -54827,7 +54984,7 @@
         }
       }
       if (event.key === "Tab") {
-        trapFocus(event, modal.querySelector(".modal"));
+        trapSharedModalFocus(event, modal.querySelector(".modal"));
       }
     }, true);
 
@@ -55904,10 +56061,10 @@
           enterCouponInspectionHistory();
           showToast("已打开券业务数据巡检历史会话");
         } else if (button.dataset.history === "促中预算紧张") {
-          enterBudgetCase();
+          restartBudgetCaseDemo();
           showToast("已进入促中预算紧张案例");
         } else if (button.dataset.history === "促前券档位设计") {
-          enterPreCase();
+          restartPreCaseDemo();
           showToast("已进入促前券档位设计案例");
         }
       });
