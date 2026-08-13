@@ -26836,6 +26836,1520 @@
       }
     }
 
+    /* Conversation completion and reusable experience capture. */
+    .case-view .case-completion-action {
+      display: inline-flex !important;
+      width: auto !important;
+      min-width: max-content !important;
+      height: var(--control-height-standard) !important;
+      min-height: var(--control-height-standard) !important;
+      align-items: center;
+      gap: 7px;
+      padding: 0 12px !important;
+      border-color: #b9c8fa !important;
+      border-radius: 9px !important;
+      color: var(--blue) !important;
+      background: #fff !important;
+      font-size: 10px !important;
+      font-weight: 760;
+    }
+
+    .case-view .case-completion-action[hidden] {
+      display: none !important;
+    }
+
+    .case-view .case-completion-action:hover,
+    .case-view .case-completion-action:focus-visible {
+      border-color: #7893ef !important;
+      color: #2348cb !important;
+      background: #f7f9ff !important;
+    }
+
+    .case-completion-action.is-saved {
+      border-color: #bce2d5 !important;
+      color: #17866b !important;
+      background: #f2fbf7 !important;
+    }
+
+    .case-completion-action.is-confirmed {
+      border-color: #c9d4ea !important;
+      color: #4f638a !important;
+      background: #f7f9fc !important;
+    }
+
+    .case-completion-action svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.9;
+    }
+
+    .experience-capture-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 128;
+      display: none;
+      background: rgba(23, 31, 49, .18);
+      backdrop-filter: blur(1.5px);
+    }
+
+    .experience-capture-backdrop.show {
+      display: block;
+      animation: experience-fade-in .18s ease both;
+    }
+
+    body.experience-drawer-open {
+      overflow: hidden;
+    }
+
+    .experience-capture-drawer {
+      position: fixed;
+      top: 0;
+      right: 0;
+      z-index: 130;
+      display: grid;
+      width: min(560px, calc(100vw - 24px));
+      height: 100dvh;
+      grid-template-rows: auto auto minmax(0, 1fr) auto;
+      color: #1f2a3d;
+      background: #fff;
+      box-shadow: -18px 0 50px rgba(28, 39, 66, .17);
+      transform: translateX(104%);
+      visibility: hidden;
+      transition: transform .24s cubic-bezier(.22, .78, .28, 1), visibility 0s linear .24s;
+    }
+
+    .experience-capture-drawer.show {
+      transform: translateX(0);
+      visibility: visible;
+      transition-delay: 0s;
+    }
+
+    .experience-drawer-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 25px 26px 18px;
+    }
+
+    .experience-overline {
+      display: block;
+      margin-bottom: 7px;
+      color: #4765cc;
+      font-size: 10px;
+      font-weight: 780;
+      letter-spacing: .03em;
+    }
+
+    .experience-drawer-head h2 {
+      margin: 0;
+      color: #182236;
+      font-size: 22px;
+      font-weight: 780;
+      line-height: 1.28;
+      letter-spacing: -.025em;
+    }
+
+    .experience-drawer-head p {
+      margin: 8px 0 0;
+      color: #7b879b;
+      font-size: 11px;
+      line-height: 1.55;
+    }
+
+    .experience-icon-button {
+      display: inline-grid;
+      width: 32px;
+      height: 32px;
+      flex: 0 0 32px;
+      place-items: center;
+      border: 0;
+      border-radius: 9px;
+      color: #748097;
+      background: #f3f5f8;
+    }
+
+    .experience-icon-button svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-width: 1.8;
+    }
+
+    .experience-stepper {
+      display: grid;
+      grid-template-columns: auto minmax(34px, 1fr) auto minmax(34px, 1fr) auto;
+      align-items: center;
+      padding: 0 26px 18px;
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .experience-step {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      color: #a0a9b9;
+      font-size: 10px;
+      font-weight: 670;
+      white-space: nowrap;
+    }
+
+    .experience-step i {
+      display: inline-grid;
+      width: 23px;
+      height: 23px;
+      place-items: center;
+      border-radius: 50%;
+      color: #8e9aae;
+      background: #eef1f5;
+      font-size: 9px;
+      font-style: normal;
+    }
+
+    .experience-step.active {
+      color: #3157e6;
+    }
+
+    .experience-step.active i {
+      color: #3157e6;
+      background: #eaf0ff;
+    }
+
+    .experience-step-line {
+      height: 1px;
+      margin: 0 10px;
+      background: #dce2eb;
+    }
+
+    .experience-drawer-scroll {
+      min-height: 0;
+      overflow: auto;
+      overscroll-behavior: contain;
+      scrollbar-gutter: stable;
+    }
+
+    .experience-section {
+      padding: 20px 26px;
+      border-bottom: 1px solid #edf0f4;
+    }
+
+    .experience-section-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 12px;
+    }
+
+    .experience-section-head strong,
+    .experience-section-head span {
+      display: block;
+    }
+
+    .experience-section-head strong {
+      color: #263147;
+      font-size: 13px;
+    }
+
+    .experience-section-head span {
+      margin-top: 3px;
+      color: #9099a8;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .experience-text-action {
+      display: inline-flex;
+      min-height: 28px;
+      align-items: center;
+      padding: 0 4px;
+      border: 0;
+      color: #3157e6;
+      background: transparent;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .experience-preview {
+      padding: 15px;
+      border: 1px solid #dce3ee;
+      border-radius: 12px;
+      background: linear-gradient(145deg, #fff, #fbfcff);
+      box-shadow: 0 4px 18px rgba(36, 50, 78, .035);
+    }
+
+    .experience-preview-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .experience-ai-tag {
+      padding: 4px 8px;
+      border-radius: 999px;
+      color: #17866b;
+      background: #e8f8f2;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .experience-confidence {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: #7e8a9e;
+      font-size: 8px;
+    }
+
+    .experience-confidence i {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #20a879;
+    }
+
+    .experience-preview h3 {
+      margin: 13px 0 0;
+      color: #1f2a3e;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .experience-preview > p {
+      margin: 7px 0 0;
+      color: #667389;
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    .experience-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .experience-preview-grid > div {
+      min-width: 0;
+      padding: 9px 10px;
+      border-radius: 8px;
+      background: #f4f6f9;
+    }
+
+    .experience-preview-grid span,
+    .experience-preview-grid strong {
+      display: block;
+    }
+
+    .experience-preview-grid span {
+      color: #919baa;
+      font-size: 8px;
+    }
+
+    .experience-preview-grid strong {
+      margin-top: 4px;
+      overflow: hidden;
+      color: #354158;
+      font-size: 9px;
+      line-height: 1.5;
+      text-overflow: ellipsis;
+    }
+
+    .experience-source-assets {
+      display: grid;
+      gap: 7px;
+      margin-top: 12px;
+      padding-top: 11px;
+      border-top: 1px solid #edf0f4;
+    }
+
+    .experience-source-row {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      gap: 9px;
+      align-items: center;
+    }
+
+    .experience-source-icon {
+      display: inline-grid;
+      width: 28px;
+      height: 28px;
+      place-items: center;
+      border-radius: 7px;
+      color: #4765cc;
+      background: #edf2ff;
+      font-size: 7px;
+      font-weight: 800;
+    }
+
+    .experience-source-copy {
+      min-width: 0;
+    }
+
+    .experience-source-copy strong,
+    .experience-source-copy small {
+      display: block;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .experience-source-copy strong {
+      color: #46536a;
+      font-size: 9px;
+    }
+
+    .experience-source-copy small {
+      margin-top: 2px;
+      color: #929baa;
+      font-size: 8px;
+    }
+
+    .experience-source-row button {
+      min-height: 26px;
+      padding: 0 5px;
+      border: 0;
+      color: #3157e6;
+      background: transparent;
+      font-size: 8px;
+      font-weight: 680;
+    }
+
+    .experience-edit-form {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+    }
+
+    .experience-edit-form label {
+      display: grid;
+      gap: 5px;
+      color: #68758a;
+      font-size: 8px;
+      font-weight: 680;
+    }
+
+    .experience-edit-form label.full {
+      grid-column: 1 / -1;
+    }
+
+    .experience-edit-form :is(input, textarea) {
+      width: 100%;
+      min-width: 0;
+      border: 1px solid #dce2ec;
+      border-radius: 8px;
+      color: #354159;
+      background: #fbfcfe;
+      font: 550 10px/1.55 var(--font);
+    }
+
+    .experience-edit-form input {
+      height: 34px;
+      padding: 0 9px;
+    }
+
+    .experience-edit-form textarea {
+      min-height: 70px;
+      padding: 8px 9px;
+      resize: vertical;
+    }
+
+    .experience-scope-list {
+      display: grid;
+      gap: 8px;
+    }
+
+    .experience-scope-option {
+      position: relative;
+      display: grid;
+      min-height: 62px;
+      grid-template-columns: 18px 34px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      padding: 10px 12px;
+      border: 1px solid #dfe4ec;
+      border-radius: 10px;
+      background: #fff;
+      cursor: pointer;
+    }
+
+    .experience-scope-option.selected {
+      border-color: #8dd5c1;
+      background: #f2fbf8;
+      box-shadow: 0 0 0 2px rgba(32, 168, 121, .07);
+    }
+
+    .experience-scope-option input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .experience-radio {
+      display: inline-grid;
+      width: 18px;
+      height: 18px;
+      place-items: center;
+      border: 1px solid #c7cfdb;
+      border-radius: 50%;
+      background: #fff;
+    }
+
+    .experience-scope-option.selected .experience-radio {
+      border: 5px solid #20a879;
+    }
+
+    .experience-scope-icon,
+    .knowledge-card-icon,
+    .experience-success-asset-icon {
+      display: inline-grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border-radius: 9px;
+      color: #6a4ac9;
+      background: #f3edff;
+    }
+
+    .experience-scope-icon.project,
+    .knowledge-card-icon,
+    .experience-success-asset-icon.knowledge {
+      color: #17866b;
+      background: #e8f8f2;
+    }
+
+    .experience-scope-icon svg,
+    .knowledge-card-icon svg,
+    .experience-success-asset-icon svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .experience-scope-copy strong,
+    .experience-scope-copy small {
+      display: block;
+    }
+
+    .experience-scope-copy strong {
+      color: #334057;
+      font-size: 10px;
+    }
+
+    .experience-scope-copy small {
+      margin-top: 3px;
+      color: #8792a5;
+      font-size: 8px;
+    }
+
+    .experience-recommended {
+      padding: 4px 7px;
+      border-radius: 999px;
+      color: #17866b;
+      background: #ddf5ec;
+      font-size: 7px;
+      font-style: normal;
+      font-weight: 750;
+    }
+
+    .experience-destination {
+      display: grid;
+      grid-template-columns: 28px minmax(0, 1fr) auto;
+      gap: 9px;
+      align-items: center;
+      margin-top: 8px;
+      padding: 9px 11px;
+      border-radius: 9px;
+      color: #5f6d83;
+      background: #f7f9fc;
+    }
+
+    .experience-destination svg {
+      width: 16px;
+      height: 16px;
+      fill: none;
+      stroke: #5e6f8e;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .experience-destination small,
+    .experience-destination strong {
+      display: block;
+    }
+
+    .experience-destination small {
+      color: #929baa;
+      font-size: 7px;
+    }
+
+    .experience-destination strong {
+      margin-top: 2px;
+      color: #536078;
+      font-size: 9px;
+    }
+
+    .experience-destination button {
+      border: 0;
+      color: #3157e6;
+      background: transparent;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .experience-template-option {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .experience-template-copy strong,
+    .experience-template-copy small {
+      display: block;
+    }
+
+    .experience-template-copy strong {
+      color: #334057;
+      font-size: 10px;
+    }
+
+    .experience-template-copy small {
+      margin-top: 3px;
+      color: #8792a5;
+      font-size: 8px;
+      line-height: 1.5;
+    }
+
+    .experience-template-icon,
+    .experience-success-asset-icon.template {
+      color: #3157e6;
+      background: #ebefff;
+    }
+
+    .experience-toggle {
+      position: relative;
+      width: 34px;
+      height: 20px;
+    }
+
+    .experience-toggle input {
+      position: absolute;
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .experience-toggle i {
+      display: block;
+      width: 34px;
+      height: 20px;
+      border-radius: 999px;
+      background: #cbd2dd;
+      transition: background .16s ease;
+    }
+
+    .experience-toggle i::after {
+      display: block;
+      width: 16px;
+      height: 16px;
+      margin: 2px;
+      border-radius: 50%;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(20, 27, 48, .22);
+      content: "";
+      transition: transform .16s ease;
+    }
+
+    .experience-toggle input:checked + i {
+      background: #3157e6;
+    }
+
+    .experience-toggle input:checked + i::after {
+      transform: translateX(14px);
+    }
+
+    .experience-template-fields {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 5px;
+      margin: 9px 0 0 44px;
+    }
+
+    .experience-template-fields span {
+      padding: 4px 7px;
+      border-radius: 6px;
+      color: #718097;
+      background: #f0f3f7;
+      font-size: 7px;
+    }
+
+    .experience-safety-note {
+      display: grid;
+      grid-template-columns: 30px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      margin: 16px 26px 20px;
+      padding: 11px 12px;
+      border-radius: 10px;
+      color: #50617e;
+      background: #f1f5ff;
+    }
+
+    .experience-safety-note > svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: #5270bd;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .experience-safety-note strong,
+    .experience-safety-note small {
+      display: block;
+    }
+
+    .experience-safety-note strong {
+      font-size: 9px;
+    }
+
+    .experience-safety-note small {
+      margin-top: 3px;
+      color: #72819a;
+      font-size: 8px;
+      line-height: 1.45;
+    }
+
+    .experience-safety-check {
+      color: #20a879;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .experience-drawer-footer {
+      display: grid;
+      grid-template-columns: minmax(132px, .9fr) minmax(122px, .78fr) minmax(188px, 1.22fr);
+      gap: 9px;
+      padding: 13px 26px max(13px, env(safe-area-inset-bottom));
+      border-top: 1px solid #e7ebf1;
+      background: rgba(255, 255, 255, .96);
+      box-shadow: 0 -8px 24px rgba(26, 38, 65, .05);
+      backdrop-filter: blur(10px);
+    }
+
+    .experience-drawer-footer button {
+      min-height: 40px;
+      border: 1px solid #dce2eb;
+      border-radius: 9px;
+      color: #5d6b82;
+      background: #f7f8fa;
+      font-size: 10px;
+      font-weight: 730;
+    }
+
+    .experience-drawer-footer .confirm-only {
+      border-color: #b9c8ea;
+      color: #41577f;
+      background: #fff;
+    }
+
+    .experience-drawer-footer .confirm-only:hover,
+    .experience-drawer-footer .confirm-only:focus-visible {
+      border-color: #7893c5;
+      color: #2f466f;
+      background: #f6f8fc;
+    }
+
+    .experience-drawer-footer .primary {
+      border-color: #3157e6;
+      color: #fff;
+      background: #3157e6;
+      box-shadow: 0 8px 18px rgba(49, 87, 230, .18);
+    }
+
+    .experience-drawer-footer .primary.is-loading {
+      color: rgba(255, 255, 255, .82);
+    }
+
+    .experience-spinner {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      margin-right: 7px;
+      border: 2px solid rgba(255, 255, 255, .4);
+      border-top-color: #fff;
+      border-radius: 50%;
+      vertical-align: -2px;
+      animation: experience-spin .7s linear infinite;
+    }
+
+    .modal.experience-success-modal {
+      width: min(610px, 92vw);
+      border-radius: 22px;
+      box-shadow: 0 30px 90px rgba(22, 31, 52, .28);
+    }
+
+    .modal.experience-confirmation-modal {
+      display: grid;
+      width: min(580px, 92vw);
+      max-height: min(760px, calc(100dvh - 40px));
+      grid-template-rows: auto minmax(0, 1fr) auto;
+      border-radius: 20px;
+      box-shadow: 0 30px 90px rgba(22, 31, 52, .28);
+    }
+
+    .modal.experience-success-modal .modal-head {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      min-height: 0;
+      padding: 0;
+      overflow: hidden;
+      border: 0;
+      clip: rect(0 0 0 0);
+    }
+
+    .modal.experience-confirmation-modal .modal-head {
+      height: 54px;
+      padding: 0 18px;
+    }
+
+    .modal.experience-confirmation-modal .modal-head h3 {
+      color: #2e3a50;
+      font-size: 13px !important;
+    }
+
+    .modal.experience-confirmation-modal .modal-body {
+      min-height: 0;
+      padding: 24px 30px 18px;
+      overflow: auto;
+      text-align: center;
+    }
+
+    .modal.experience-confirmation-modal .modal-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 9px;
+      padding: 13px 30px 24px;
+      border-top: 1px solid #edf0f4;
+    }
+
+    .modal.experience-confirmation-modal .modal-actions button {
+      min-height: 40px;
+      border-radius: 9px;
+      font-size: 10px;
+      font-weight: 720;
+    }
+
+    .modal.experience-success-modal .modal-body {
+      padding: 30px 36px 18px;
+      text-align: center;
+    }
+
+    .modal.experience-success-modal .modal-actions {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+      padding: 0 36px 32px;
+    }
+
+    .modal.experience-success-modal .modal-actions button {
+      min-height: 44px;
+      border-radius: 10px;
+      font-size: 11px;
+      font-weight: 720;
+    }
+
+    .experience-success-orbit {
+      display: inline-grid;
+      width: 76px;
+      height: 76px;
+      place-items: center;
+      margin: 0 auto 13px;
+      border: 1px dashed #9edbc9;
+      border-radius: 50%;
+      background: #eef9f6;
+    }
+
+    .experience-success-orbit span {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: #20a879;
+      font-size: 24px;
+      box-shadow: 0 0 0 10px rgba(32, 168, 121, .08);
+    }
+
+    .experience-success-content h2 {
+      margin: 9px 0 0;
+      color: #192338;
+      font-size: 22px;
+      line-height: 1.35;
+      letter-spacing: -.025em;
+    }
+
+    .experience-success-content > p {
+      margin: 8px 0 0;
+      color: #748096;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .experience-success-assets {
+      margin-top: 20px;
+      overflow: hidden;
+      border: 1px solid #e0e5ed;
+      border-radius: 12px;
+      text-align: left;
+    }
+
+    .experience-success-asset {
+      display: grid;
+      grid-template-columns: 34px minmax(0, 1fr) auto;
+      gap: 10px;
+      align-items: center;
+      min-height: 60px;
+      padding: 10px 13px;
+    }
+
+    .experience-success-asset + .experience-success-asset {
+      border-top: 1px solid #e7eaf0;
+    }
+
+    .experience-success-asset strong,
+    .experience-success-asset small {
+      display: block;
+    }
+
+    .experience-success-asset strong {
+      color: #344158;
+      font-size: 10px;
+    }
+
+    .experience-success-asset small {
+      margin-top: 3px;
+      color: #8993a3;
+      font-size: 8px;
+    }
+
+    .experience-success-asset > b {
+      color: #20a879;
+      font-size: 16px;
+    }
+
+    .experience-confirmation-record {
+      display: grid;
+      gap: 1px;
+      margin-top: 17px;
+      overflow: hidden;
+      border: 1px solid #dfe5ed;
+      border-radius: 11px;
+      text-align: left;
+      background: #e9edf3;
+    }
+
+    .experience-confirmation-record > div {
+      display: grid;
+      grid-template-columns: 94px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      min-height: 40px;
+      padding: 8px 12px;
+      background: #fff;
+    }
+
+    .experience-confirmation-record span {
+      color: #8792a4;
+      font-size: 8px;
+    }
+
+    .experience-confirmation-record strong {
+      overflow: hidden;
+      color: #46536a;
+      font-size: 9px;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .experience-nps {
+      margin-top: 18px;
+      padding: 15px;
+      border: 1px solid #dfe5ee;
+      border-radius: 12px;
+      text-align: left;
+      background: #f8faff;
+    }
+
+    .experience-nps-head strong,
+    .experience-nps-head span {
+      display: block;
+    }
+
+    .experience-nps-head strong {
+      color: #334057;
+      font-size: 11px;
+    }
+
+    .experience-nps-head span {
+      margin-top: 3px;
+      color: #8490a3;
+      font-size: 8px;
+      line-height: 1.5;
+    }
+
+    .experience-nps-scores {
+      display: grid;
+      grid-template-columns: repeat(11, minmax(25px, 1fr));
+      gap: 4px;
+      margin-top: 11px;
+    }
+
+    .experience-nps-score {
+      min-width: 0;
+      height: 30px;
+      padding: 0;
+      border: 1px solid #d8dfeb;
+      border-radius: 6px;
+      color: #647187;
+      background: #fff;
+      font-size: 8px !important;
+      font-weight: 700;
+    }
+
+    .experience-nps-score:hover,
+    .experience-nps-score:focus-visible {
+      border-color: #8da2d7;
+      color: #3157ad;
+      background: #f3f6ff;
+    }
+
+    .experience-nps-score.is-selected {
+      border-color: #3157e6;
+      color: #fff;
+      background: #3157e6;
+      box-shadow: 0 3px 8px rgba(49, 87, 230, .16);
+    }
+
+    .experience-nps-scale {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 5px;
+      color: #98a1b0;
+      font-size: 7px;
+    }
+
+    .experience-nps textarea {
+      width: 100%;
+      min-height: 56px;
+      margin-top: 11px;
+      padding: 8px 9px;
+      border: 1px solid #dce2eb;
+      border-radius: 8px;
+      color: #46536a;
+      background: #fff;
+      font: 500 9px/1.55 var(--font);
+      resize: vertical;
+    }
+
+    /* Knowledge playbook linked to captured experience. */
+    .knowledge-shell {
+      width: min(100%, 1380px);
+      margin: 0 auto;
+      padding: 28px 34px 52px;
+    }
+
+    .knowledge-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .knowledge-head h2 {
+      margin: 0;
+      color: #202b40;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .knowledge-head p {
+      margin: 5px 0 0;
+      color: #8691a2;
+      font-size: 10px;
+    }
+
+    .knowledge-new {
+      min-height: 34px;
+      padding: 0 13px;
+      border: 1px solid #3157e6;
+      border-radius: 8px;
+      color: #fff;
+      background: #3157e6;
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .knowledge-hero {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px;
+      align-items: end;
+      margin-top: 18px;
+      padding: 21px 24px;
+      border: 1px solid #dfe5f2;
+      border-radius: 14px;
+      background:
+        radial-gradient(circle at 92% 10%, rgba(32, 168, 121, .13), transparent 24%),
+        linear-gradient(115deg, #eef2ff 0%, #f7f0ff 46%, #edf9f6 100%);
+      overflow: hidden;
+    }
+
+    .knowledge-hero-copy em {
+      display: block;
+      color: #5571ce;
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 800;
+      letter-spacing: .12em;
+    }
+
+    .knowledge-hero-copy h3 {
+      margin: 8px 0 0;
+      color: #21304b;
+      font-size: 18px;
+      line-height: 1.35;
+    }
+
+    .knowledge-hero-copy p {
+      margin: 6px 0 0;
+      color: #6c7890;
+      font-size: 9px;
+    }
+
+    .knowledge-stats {
+      display: grid;
+      grid-template-columns: repeat(3, 78px);
+      gap: 7px;
+    }
+
+    .knowledge-stat {
+      padding: 10px;
+      border: 1px solid rgba(255, 255, 255, .72);
+      border-radius: 10px;
+      background: rgba(255, 255, 255, .72);
+      backdrop-filter: blur(8px);
+    }
+
+    .knowledge-stat strong,
+    .knowledge-stat span {
+      display: block;
+    }
+
+    .knowledge-stat strong {
+      color: #25334c;
+      font-size: 15px;
+    }
+
+    .knowledge-stat span {
+      margin-top: 2px;
+      color: #7f8a9d;
+      font-size: 7px;
+    }
+
+    .knowledge-toolbar {
+      display: grid;
+      grid-template-columns: minmax(220px, 1fr) auto auto;
+      gap: 10px;
+      align-items: center;
+      margin-top: 14px;
+    }
+
+    .knowledge-search {
+      position: relative;
+      min-width: 0;
+    }
+
+    .knowledge-search svg {
+      position: absolute;
+      top: 50%;
+      left: 11px;
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: #929baa;
+      stroke-linecap: round;
+      stroke-width: 1.7;
+      transform: translateY(-50%);
+      pointer-events: none;
+    }
+
+    .knowledge-search input {
+      width: 100%;
+      height: 36px;
+      padding: 0 12px 0 34px;
+      border: 1px solid #dfe4ec;
+      border-radius: 8px;
+      color: #3f4b61;
+      background: #fff;
+      font: 550 9px/1 var(--font);
+    }
+
+    .knowledge-filter-group {
+      display: inline-flex;
+      gap: 3px;
+      padding: 3px;
+      border: 1px solid #e0e5ed;
+      border-radius: 8px;
+      background: #f3f5f8;
+    }
+
+    .knowledge-filter-group button {
+      min-height: 28px;
+      padding: 0 9px;
+      border: 0;
+      border-radius: 6px;
+      color: #718097;
+      background: transparent;
+      font-size: 8px;
+      font-weight: 650;
+    }
+
+    .knowledge-filter-group button.active {
+      color: #3157ad;
+      background: #fff;
+      box-shadow: 0 2px 6px rgba(32, 44, 72, .07);
+    }
+
+    .knowledge-back {
+      min-height: 34px;
+      padding: 0 10px;
+      border: 1px solid #dfe4ec;
+      border-radius: 8px;
+      color: #68758a;
+      background: #fff;
+      font-size: 8px;
+      font-weight: 670;
+    }
+
+    .knowledge-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 11px;
+      margin-top: 12px;
+    }
+
+    .knowledge-card {
+      display: flex;
+      min-width: 0;
+      min-height: 228px;
+      flex-direction: column;
+      padding: 14px;
+      border: 1px solid #dfe4ec;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 5px 18px rgba(30, 42, 70, .035);
+      transition: border-color .16s ease, box-shadow .16s ease, transform .16s ease;
+    }
+
+    .knowledge-card:hover,
+    .knowledge-card:focus-within {
+      border-color: #c7d2e7;
+      box-shadow: 0 10px 28px rgba(30, 42, 70, .075);
+      transform: translateY(-1px);
+    }
+
+    .knowledge-card.is-new {
+      border-color: #9dd8c7;
+      box-shadow: 0 0 0 2px rgba(32, 168, 121, .07), 0 10px 28px rgba(30, 42, 70, .06);
+    }
+
+    .knowledge-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+
+    .knowledge-status {
+      padding: 4px 7px;
+      border-radius: 999px;
+      color: #17866b;
+      background: #e8f8f2;
+      font-size: 7px;
+      font-weight: 740;
+    }
+
+    .knowledge-status.standard {
+      color: #60708c;
+      background: #f0f3f7;
+    }
+
+    .knowledge-more {
+      border: 0;
+      color: #8993a3;
+      background: transparent;
+      font-size: 14px;
+      letter-spacing: .08em;
+    }
+
+    .knowledge-card-icon {
+      margin-top: 12px;
+    }
+
+    .knowledge-card h3 {
+      margin: 10px 0 0;
+      color: #2d394f;
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .knowledge-card > p {
+      display: -webkit-box;
+      margin: 6px 0 0;
+      overflow: hidden;
+      color: #748096;
+      font-size: 8px;
+      line-height: 1.6;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
+    }
+
+    .knowledge-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-top: 9px;
+    }
+
+    .knowledge-tags span {
+      padding: 3px 6px;
+      border-radius: 5px;
+      color: #778398;
+      background: #f2f4f7;
+      font-size: 7px;
+    }
+
+    .knowledge-template-link {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 7px;
+      align-items: center;
+      width: 100%;
+      margin-top: 10px;
+      padding: 7px 8px;
+      border: 0;
+      border-radius: 7px;
+      color: #4f63a3;
+      text-align: left;
+      background: #f1f4ff;
+    }
+
+    .knowledge-template-link b {
+      display: inline-grid;
+      width: 22px;
+      height: 22px;
+      place-items: center;
+      border-radius: 6px;
+      color: #3157e6;
+      background: #e3e9ff;
+      font-size: 9px;
+    }
+
+    .knowledge-template-link span {
+      overflow: hidden;
+      font-size: 7px;
+      font-weight: 650;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+    }
+
+    .knowledge-card-foot {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: auto;
+      padding-top: 11px;
+      border-top: 1px solid #edf0f4;
+      color: #818c9e;
+      font-size: 7px;
+    }
+
+    .knowledge-author {
+      display: inline-grid;
+      width: 20px;
+      height: 20px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: #6074c5;
+      font-size: 7px;
+      font-weight: 750;
+    }
+
+    .knowledge-card-foot button {
+      margin-left: auto;
+      border: 0;
+      color: #3157e6;
+      background: transparent;
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .knowledge-empty {
+      display: grid;
+      min-height: 260px;
+      place-items: center;
+      margin-top: 12px;
+      border: 1px dashed #dce2eb;
+      border-radius: 12px;
+      color: #8792a4;
+      background: #fafbfc;
+      font-size: 10px;
+    }
+
+    .knowledge-detail-hero {
+      padding: 14px;
+      border: 1px solid #dce4ee;
+      border-radius: 10px;
+      background: #f8faff;
+    }
+
+    .knowledge-detail-hero h4 {
+      margin: 0;
+      color: #2f3b52;
+      font-size: 13px;
+    }
+
+    .knowledge-detail-hero p {
+      margin: 6px 0 0;
+      color: #6f7c91;
+      font-size: 9px;
+      line-height: 1.65;
+    }
+
+    .knowledge-detail-hero + .task-detail-grid .task-detail-item.full {
+      grid-column: 1 / -1;
+    }
+
+    @keyframes experience-fade-in {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+
+    @keyframes experience-spin {
+      to { transform: rotate(360deg); }
+    }
+
+    @media (max-width: 1080px) {
+      .knowledge-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+    }
+
+    @media (max-width: 760px) {
+      .experience-capture-drawer {
+        width: 100vw;
+      }
+
+      .experience-drawer-head,
+      .experience-section {
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      .experience-stepper {
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      .experience-preview-grid,
+      .experience-edit-form,
+      .knowledge-grid,
+      .knowledge-toolbar,
+      .knowledge-hero {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .experience-edit-form label.full {
+        grid-column: auto;
+      }
+
+      .experience-safety-note {
+        margin-right: 20px;
+        margin-left: 20px;
+      }
+
+      .experience-drawer-footer {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        padding-right: 20px;
+        padding-left: 20px;
+      }
+
+      .experience-drawer-footer .primary {
+        grid-column: 1 / -1;
+      }
+
+      .modal.experience-success-modal .modal-body {
+        padding: 26px 22px 16px;
+      }
+
+      .modal.experience-success-modal .modal-actions {
+        grid-template-columns: minmax(0, 1fr);
+        padding: 0 22px 24px;
+      }
+
+      .modal.experience-confirmation-modal .modal-body {
+        padding: 20px 18px 16px;
+      }
+
+      .modal.experience-confirmation-modal .modal-actions {
+        padding: 12px 18px 20px;
+      }
+
+      .experience-nps-scores {
+        gap: 3px;
+      }
+
+      .knowledge-shell {
+        padding: 24px 20px 44px;
+      }
+
+      .knowledge-head {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .knowledge-stats {
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .experience-capture-backdrop,
+      .experience-capture-drawer,
+      .experience-spinner,
+      .knowledge-card {
+        animation: none !important;
+        transition: none !important;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -27863,7 +29377,21 @@
                   <strong id="preCaseTitle">促前券档位设计</strong>
                 </div>
                 <div class="case-chat-actions">
-                  <button class="case-header-icon case-template-action" id="preCreateTaskTemplate" hidden>沉淀为任务模版</button>
+                  <button
+                    class="case-header-icon case-template-action case-completion-action"
+                    id="preCreateTaskTemplate"
+                    type="button"
+                    data-experience-kind="pre"
+                    aria-haspopup="dialog"
+                    aria-controls="experienceCaptureDrawer"
+                    hidden
+                  >
+                    <svg viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+                      <circle cx="9" cy="9" r="7"></circle>
+                      <path d="m5.7 9.1 2.1 2.1 4.6-4.8"></path>
+                    </svg>
+                    <span data-experience-action-label>标记任务完成</span>
+                  </button>
                   <button class="case-header-icon case-mobile-report" id="preOpenCaseReport" aria-label="查看促前渐进式报告">查看报告</button>
                   <button class="case-header-icon" id="preBackToDashboard" data-core-icon="back" data-core-icon-only="true" aria-label="回到促前规划工作台"></button>
                 </div>
@@ -27967,7 +29495,21 @@
                   <strong id="budgetCaseTitle">促中预算紧张</strong>
                 </div>
                 <div class="case-chat-actions">
-                  <button class="case-header-icon case-template-action" id="budgetCreateTaskTemplate" hidden>沉淀为任务模版</button>
+                  <button
+                    class="case-header-icon case-template-action case-completion-action"
+                    id="budgetCreateTaskTemplate"
+                    type="button"
+                    data-experience-kind="budget"
+                    aria-haspopup="dialog"
+                    aria-controls="experienceCaptureDrawer"
+                    hidden
+                  >
+                    <svg viewBox="0 0 18 18" aria-hidden="true" focusable="false">
+                      <circle cx="9" cy="9" r="7"></circle>
+                      <path d="m5.7 9.1 2.1 2.1 4.6-4.8"></path>
+                    </svg>
+                    <span data-experience-action-label>标记任务完成</span>
+                  </button>
                   <button class="case-header-icon case-mobile-report" id="openCaseReport" aria-label="查看渐进式报告">查看报告</button>
                   <button class="case-header-icon" id="backToDashboard" data-core-icon="back" data-core-icon-only="true" aria-label="回到促中调优工作台"></button>
                 </div>
@@ -28060,6 +29602,16 @@
     </main>
   </div>
 
+  <div class="experience-capture-backdrop" id="experienceCaptureBackdrop" aria-hidden="true"></div>
+  <aside
+    class="experience-capture-drawer"
+    id="experienceCaptureDrawer"
+    role="dialog"
+    aria-modal="true"
+    aria-hidden="true"
+    aria-labelledby="experienceCaptureTitle"
+  ></aside>
+
   <div class="modal-wrap" id="modal">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-head">
@@ -28145,7 +29697,7 @@
       });
     }
 
-    const coreVisualScopes = ".sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover";
+    const coreVisualScopes = ".sidebar, .pre-dashboard, #dashboard, .case-view, .infra-management, .modal-wrap, .ask-popover, .experience-capture-drawer";
     let coreVisualLanguageFrame = 0;
 
     function applyCoreFontFloor() {
@@ -33725,6 +35277,93 @@
     const customTaskTemplates = [];
     const taskTemplateHistory = [];
     const taskTemplateInstances = [];
+    const experienceKnowledgeEntries = [
+      {
+        id: "knowledge-budget-attribution",
+        status: "项目标准",
+        statusTone: "standard",
+        title: "预算消耗异动归因方法",
+        summary: "从流量、券效率和转化链路三个层次定位预算消耗波动，形成可验证的归因路径。",
+        category: "数据分析",
+        method: "流量 × 券效率 × 转化链路三层归因",
+        evidence: "28 次复用 · 89% 成功",
+        boundary: "活动口径一致，且预算与支付链路数据完整",
+        tags: ["预算", "归因分析"],
+        scope: "project",
+        createdBy: "陈",
+        reuseCount: 28,
+        successRate: "89%",
+        templateId: "task-mid-budget-progress-digest",
+        templateTitle: "预算消耗进度简报",
+        sourceKind: "",
+        conversationTitle: "预算消耗异动归因分析",
+        artifactName: "预算消耗异动归因方法.md",
+        createdAt: "2026-08-10 16:36",
+        isNew: false
+      },
+      {
+        id: "knowledge-audience-segmentation",
+        status: "已验证",
+        statusTone: "",
+        title: "节前高潜人群圈选框架",
+        summary: "组合用户消费力、品类偏好与近期意图信号，形成高潜用户分层与触达策略。",
+        category: "促销策略",
+        method: "消费力 × 品类偏好 × 近期意图",
+        evidence: "19 次复用 · 84% 成功",
+        boundary: "适用于促前蓄水和首波放量",
+        tags: ["人群策略", "节前营销"],
+        scope: "project",
+        createdBy: "林",
+        reuseCount: 19,
+        successRate: "84%",
+        templateId: "task-pre-audience-segmentation",
+        templateTitle: "人群分层策略",
+        sourceKind: "",
+        conversationTitle: "节前高潜人群圈选",
+        artifactName: "节前高潜人群圈选框架.html",
+        createdAt: "2026-08-08 11:20",
+        isNew: false
+      },
+      {
+        id: "knowledge-tier-experiment",
+        status: "待复核",
+        statusTone: "standard",
+        title: "券档位 AB 实验设计",
+        summary: "针对不同客单区间设计券档实验，统一实验分组、观测周期和止损标准。",
+        category: "产品方法",
+        method: "单变量券档实验 + 联合护栏",
+        evidence: "7 次复用 · 待验证",
+        boundary: "需保留稳定对照组并满足显著性要求",
+        tags: ["实验设计", "券策略"],
+        scope: "project",
+        createdBy: "周",
+        reuseCount: 7,
+        successRate: "待验证",
+        templateId: "task-pre-tier-design",
+        templateTitle: "券档位与面额体系设计",
+        sourceKind: "",
+        conversationTitle: "券档位 AB 实验设计",
+        artifactName: "券档位AB实验设计.md",
+        createdAt: "2026-08-05 09:18",
+        isNew: false
+      }
+    ];
+    const experienceCompletionTraces = [];
+    const experienceNpsFeedback = [];
+    const experienceCaptureState = {
+      currentKind: null,
+      scope: "project",
+      createTemplate: true,
+      draft: null,
+      editing: false,
+      saving: false,
+      returnFocus: null,
+      savedKinds: new Map(),
+      confirmedKinds: new Map(),
+      selectedEntryId: null,
+      activeTraceId: null,
+      npsScore: null
+    };
 
     function emptyTaskTemplateDraft() {
       return {
@@ -34042,6 +35681,8 @@
     const preReportCustomizePanel = document.getElementById("preReportCustomizePanel");
     const preReportCustomizeSections = document.getElementById("preReportCustomizeSections");
     const preReportTitleInput = document.getElementById("preReportTitleInput");
+    const experienceCaptureBackdrop = document.getElementById("experienceCaptureBackdrop");
+    const experienceCaptureDrawer = document.getElementById("experienceCaptureDrawer");
     let activeAskContext = null;
     let activeAskTrigger = null;
     let modalReturnFocus = null;
@@ -34124,7 +35765,10 @@
       skillTags: new Set(),
       modalSelection: null,
       larkSection: "groups",
-      larkQuery: ""
+      larkQuery: "",
+      knowledgeScope: "all",
+      knowledgeCategory: "all",
+      knowledgeHighlightId: null
     };
 
     const scheduledCurrentUserTarget = Object.freeze({
@@ -34658,12 +36302,117 @@
       return status && (!query || Object.values(item).some(value => String(value).toLowerCase().includes(query)));
     }
 
+    function knowledgeBookIcon() {
+      return `<svg viewBox="0 0 20 20" aria-hidden="true" focusable="false"><path d="M3 4.2c2.6-.7 4.7-.2 7 1.4v10.2c-2.3-1.6-4.4-2.1-7-1.4V4.2Z"></path><path d="M17 4.2c-2.6-.7-4.7-.2-7 1.4v10.2c2.3-1.6 4.4-2.1 7-1.4V4.2Z"></path></svg>`;
+    }
+
+    function knowledgeEntryMatches(entry) {
+      const query = infrastructureState.query.trim().toLowerCase();
+      const searchable = [
+        entry.title,
+        entry.summary,
+        entry.category,
+        entry.method,
+        entry.evidence,
+        ...(entry.tags || [])
+      ].join(" ").toLowerCase();
+      return (
+        (infrastructureState.knowledgeScope === "all" || entry.scope === infrastructureState.knowledgeScope)
+        && (infrastructureState.knowledgeCategory === "all" || entry.category === infrastructureState.knowledgeCategory)
+        && (!query || searchable.includes(query))
+      );
+    }
+
+    function renderKnowledgeEntryCard(entry) {
+      const linkedTemplate = entry.templateId ? findTaskTemplate(entry.templateId) : null;
+      const highlighted = infrastructureState.knowledgeHighlightId === entry.id;
+      const scopeLabel = entry.scope === "personal" ? "个人知识" : "项目知识";
+      return `
+        <article class="knowledge-card ${entry.isNew || highlighted ? "is-new" : ""}"
+          data-knowledge-card="${escapeHTML(entry.id)}" tabindex="-1">
+          <div class="knowledge-card-top">
+            <span class="knowledge-status ${escapeHTML(entry.statusTone || "")}">${escapeHTML(entry.status)}</span>
+            <button class="knowledge-more" type="button" data-knowledge-detail="${escapeHTML(entry.id)}"
+              aria-label="查看${escapeHTML(entry.title)}详情">···</button>
+          </div>
+          <span class="knowledge-card-icon">${knowledgeBookIcon()}</span>
+          <h3>${escapeHTML(entry.title)}</h3>
+          <p>${escapeHTML(entry.summary)}</p>
+          <div class="knowledge-tags">
+            ${(entry.tags || []).map(tag => `<span>${escapeHTML(tag)}</span>`).join("")}
+            <span>${scopeLabel}</span>
+          </div>
+          ${linkedTemplate ? `
+            <button class="knowledge-template-link" type="button" data-knowledge-use="${escapeHTML(entry.id)}">
+              <b>模</b><span>已关联任务模版 · ${escapeHTML(linkedTemplate.title)}</span>
+            </button>` : ""}
+          <div class="knowledge-card-foot">
+            <span class="knowledge-author">${escapeHTML(entry.createdBy || "AI")}</span>
+            <span>${escapeHTML(entry.reuseCount
+              ? `${entry.reuseCount} 次复用 · ${entry.successRate}${String(entry.successRate).includes("%") ? " 成功" : ""}`
+              : "刚刚沉淀 · 待验证")}</span>
+            <button type="button" data-knowledge-detail="${escapeHTML(entry.id)}">${linkedTemplate ? "查看详情" : "查看"}</button>
+          </div>
+        </article>`;
+    }
+
     function renderKnowledgeView() {
-      const items = infrastructureData.knowledge;
-      const filtered = items.filter(item => infrastructureMatches(item) && (infrastructureState.type === "all" || item.type === infrastructureState.type));
-      const table = `<div class="resource-table-card"><div class="resource-table-title">▱ 知识库</div><table class="resource-table"><thead><tr><th style="width:40%">名称</th><th>添加者</th><th>修改时间</th><th>状态</th><th>引用</th><th></th></tr></thead><tbody>${filtered.map(item => `<tr><td><div class="resource-name"><span class="resource-name-icon">${item.type === "飞书表格" ? "▦" : item.type === "本地文件" ? "↥" : "▱"}</span><span><strong>${escapeHTML(item.name)}</strong><small>${escapeHTML(item.type)}</small></span></div></td><td>${escapeHTML(item.owner)}</td><td>${escapeHTML(item.updatedAt)}</td><td><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button></td><td>${item.references} 处引用</td><td><button class="resource-row-action" data-infra-detail="knowledge" data-resource-id="${item.id}">›</button></td></tr>`).join("")}</tbody></table></div>`;
-      const cards = `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card"><div class="resource-source-type">${item.type}</div><h3>${escapeHTML(item.name)}</h3><p>${escapeHTML(item.owner)} · ${item.updatedAt}</p><div class="resource-code">▱ 知识资源：${item.id}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="knowledge" data-resource-id="${item.id}">${item.enabled ? "已启用" : "已停用"}</button><button data-infra-detail="knowledge" data-resource-id="${item.id}">${item.references} 处引用 ›</button></div></article>`).join("")}</div>`;
-      return `<div class="resource-shell">${infrastructureHeader("知识库", "统一维护可复用的文档、文件和知识库资源，启用后即可被策略 Agent 引用。", "新建知识资源", "knowledge")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索资源..."></label>${["all","飞书文档","飞书表格","本地文件"].map(type => `<button class="resource-filter ${infrastructureState.type === type ? "active" : ""}" data-infra-type="${type}">${type === "all" ? "全部类型" : type}</button>`).join("")}<span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button><div class="resource-view-toggle"><button class="${infrastructureState.viewMode === "table" ? "active" : ""}" data-infra-layout="table">▤</button><button class="${infrastructureState.viewMode === "grid" ? "active" : ""}" data-infra-layout="grid">▦</button></div></div>${filtered.length ? infrastructureState.viewMode === "table" ? table : cards : '<div class="resource-empty">没有符合条件的知识资源</div>'}</div></div>`;
+      const filtered = experienceKnowledgeEntries.filter(knowledgeEntryMatches);
+      const totalAssets = infrastructureData.knowledge.length + experienceKnowledgeEntries.length;
+      const scopeFilters = [
+        ["all", "全部"],
+        ["project", "项目知识"],
+        ["personal", "个人知识"]
+      ];
+      const categoryFilters = [
+        ["all", "全部"],
+        ["促销策略", "促销策略"],
+        ["数据分析", "数据分析"],
+        ["产品方法", "产品方法"]
+      ];
+      return `
+        <div class="resource-shell">
+          <div class="knowledge-shell">
+            <header class="knowledge-head">
+              <div><h2>知识库</h2><p>按业务场景组织经验，让团队可以检索、理解和直接复用。</p></div>
+              <button class="knowledge-new" type="button" data-infra-new="knowledge">＋ 新建知识</button>
+            </header>
+            <section class="knowledge-hero" aria-labelledby="knowledgePlaybookTitle">
+              <div class="knowledge-hero-copy">
+                <em>DATA INTELLIGENCE PLAYBOOK</em>
+                <h3 id="knowledgePlaybookTitle">把一次成功，变成团队可复用的能力</h3>
+                <p>经验条目保留来源、证据与适用边界，并可关联可直接运行的任务模版。</p>
+              </div>
+              <div class="knowledge-stats" aria-label="知识资产概览">
+                <div class="knowledge-stat"><strong>${totalAssets}</strong><span>知识资产</span></div>
+                <div class="knowledge-stat"><strong>86%</strong><span>复用成功率</span></div>
+                <div class="knowledge-stat"><strong>4.2h</strong><span>次均节省</span></div>
+              </div>
+            </section>
+            <div class="knowledge-toolbar" role="search">
+              <label class="knowledge-search">
+                <span class="visually-hidden">搜索知识条目</span>
+                <svg viewBox="0 0 18 18" aria-hidden="true"><circle cx="7.5" cy="7.5" r="4.5"></circle><path d="m11 11 4 4"></path></svg>
+                <input data-infra-search type="search" value="${escapeFormValue(infrastructureState.query)}"
+                  placeholder="搜索业务场景、方法或产物">
+              </label>
+              <div class="knowledge-filter-group" aria-label="知识范围">
+                ${scopeFilters.map(([key, label]) => `<button type="button"
+                  class="${infrastructureState.knowledgeScope === key ? "active" : ""}"
+                  data-knowledge-scope="${key}">${label}</button>`).join("")}
+              </div>
+              <button class="knowledge-back" type="button" data-infra-back>${iconSVG("back")}返回工作台</button>
+            </div>
+            <div class="knowledge-filter-group" aria-label="知识分类" style="margin-top:10px">
+              ${categoryFilters.map(([key, label]) => `<button type="button"
+                class="${infrastructureState.knowledgeCategory === key ? "active" : ""}"
+                data-knowledge-category="${key}">${label}</button>`).join("")}
+            </div>
+            ${filtered.length
+              ? `<div class="knowledge-grid" role="list" aria-label="经验知识条目">${filtered.map(renderKnowledgeEntryCard).join("")}</div>`
+              : '<div class="knowledge-empty">没有符合当前筛选条件的经验条目</div>'}
+          </div>
+        </div>`;
     }
 
     function renderSkillView() {
@@ -35954,6 +37703,747 @@
         return;
       }
       openTaskTemplateEditor(null, trigger, taskDraftFromConversation(kind));
+    }
+
+    function experienceScopeIcon(kind) {
+      if (kind === "project") {
+        return `<svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 4.2c2.6-.7 4.7-.2 7 1.4v10.2c-2.3-1.6-4.4-2.1-7-1.4V4.2Z"></path><path d="M17 4.2c-2.6-.7-4.7-.2-7 1.4v10.2c2.3-1.6 4.4-2.1 7-1.4V4.2Z"></path></svg>`;
+      }
+      return `<svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="7" r="3"></circle><path d="M4.5 16c.5-3 2.3-4.5 5.5-4.5s5 1.5 5.5 4.5"></path></svg>`;
+    }
+
+    function experienceTemplateIcon() {
+      return `<svg viewBox="0 0 20 20" aria-hidden="true"><rect x="3" y="3" width="14" height="14" rx="2"></rect><path d="M7 7h2v2H7zM11 7h2v2h-2zM7 11h2v2H7zM11 11h2v2h-2z"></path></svg>`;
+    }
+
+    function experienceDraftForKind(kind) {
+      const now = new Date();
+      const createdAt = now.toLocaleString("zh-CN", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).replace(/\//g, "-");
+      if (kind === "budget") {
+        return {
+          kind,
+          conversationId: budgetCaseData.id,
+          conversationTitle: budgetCaseData.title,
+          title: "末波次预算紧张人群保障策略",
+          summary: "预算容量受限时，不在 V1/V15 硬标签中二选一；优先按预期增量排序覆盖，并保留重点人群保量备选。",
+          scenario: "促中预算紧张调优",
+          method: "算法排序覆盖 + jp/t8 保底备选",
+          evidence: "V1 / V15 兑换比 6.32 / 6.24",
+          boundary: "需补齐预算容量、单人成本与显著性",
+          confidence: 91,
+          category: "促销策略",
+          tags: ["预算调优", "人群保障", "末波次"],
+          artifactName: budgetCaseState.artifact?.name || "促中预算紧张_V1-V15策略分析报告.html",
+          artifactMeta: budgetCaseState.artifact
+            ? `${budgetCaseState.artifact.sizeLabel} · ${budgetCaseState.artifact.createdAt} 生成`
+            : "最终策略结论已归档",
+          templateTitle: "末波次预算紧张人群策略生成",
+          templateFields: ["活动", "券波次/场次", "预算可覆盖人数", "风险偏好"],
+          createdAt
+        };
+      }
+      return {
+        kind,
+        conversationId: preCaseData.id,
+        conversationTitle: preCaseData.title,
+        title: "高门槛券活动人群策略设计",
+        summary: "面向促前券活动，在预算受限场景下识别高客单、高意向人群，并保留风险准备金。",
+        scenario: "促前券档位与人群策略",
+        method: "高客单 × 高意向双重圈选",
+        evidence: "ROI 6.52 · 增量 GMV 6.60 亿",
+        boundary: "预算受限、主投库存稳定",
+        confidence: 92,
+        category: "促销策略",
+        tags: ["促前策略", "人群圈选", "预算规划"],
+        artifactName: preCaseState.artifact?.name || "促前券档位设计_策略与预算规划.html",
+        artifactMeta: preCaseState.artifact
+          ? `${preCaseState.artifact.sizeLabel} · ${preCaseState.artifact.createdAt} 生成`
+          : "最终策略结论已归档",
+        templateTitle: "促前高门槛人群策略生成",
+        templateFields: ["活动目标", "预算上限", "活动时间", "目标人群"],
+        createdAt
+      };
+    }
+
+    function syncExperienceActionButton(kind) {
+      const button = document.getElementById(kind === "budget"
+        ? "budgetCreateTaskTemplate"
+        : "preCreateTaskTemplate");
+      if (!button) return;
+      const saved = experienceCaptureState.savedKinds.has(kind);
+      const confirmed = experienceCaptureState.confirmedKinds.has(kind);
+      button.classList.toggle("is-saved", saved);
+      button.classList.toggle("is-confirmed", confirmed && !saved);
+      const label = button.querySelector("[data-experience-action-label]");
+      if (label) {
+        label.textContent = saved
+          ? "已沉淀经验"
+          : confirmed
+            ? "已确认结果"
+            : "标记任务完成";
+      }
+      button.setAttribute(
+        "aria-label",
+        saved
+          ? "查看已沉淀经验"
+          : confirmed
+            ? "查看已确认执行结果"
+            : "标记任务完成并确认执行结果"
+      );
+    }
+
+    function isExperienceActionAvailable(kind) {
+      if (kind === "budget") {
+        const budgetSection = getReportSection("budget");
+        const decisionSection = getReportSection("decision");
+        return budgetCaseState.candidateGenerated
+          || budgetCaseState.currentStep >= 4
+          || ["complete", "needs-input", "generating"].includes(budgetSection?.status)
+          || ["complete", "needs-input", "generating"].includes(decisionSection?.status);
+      }
+      return preCaseState.packageGenerated
+        || (
+          Boolean(preSelectedCandidate())
+          && ["candidates", "batches", "channel", "channel-skipped"].includes(preCaseState.planOutputStage)
+        );
+    }
+
+    function syncExperienceActionVisibility(kind) {
+      const button = document.getElementById(kind === "budget"
+        ? "budgetCreateTaskTemplate"
+        : "preCreateTaskTemplate");
+      if (!button) return;
+      button.hidden = !isExperienceActionAvailable(kind);
+    }
+
+    function renderExperiencePreview(draft) {
+      if (experienceCaptureState.editing) {
+        return `
+          <div class="experience-edit-form">
+            <label class="full">经验标题
+              <input data-experience-field="title" value="${escapeFormValue(draft.title)}">
+            </label>
+            <label class="full">经验摘要
+              <textarea data-experience-field="summary">${escapeFormValue(draft.summary)}</textarea>
+            </label>
+            <label>业务场景
+              <input data-experience-field="scenario" value="${escapeFormValue(draft.scenario)}">
+            </label>
+            <label>核心方法
+              <input data-experience-field="method" value="${escapeFormValue(draft.method)}">
+            </label>
+            <label>效果证据
+              <input data-experience-field="evidence" value="${escapeFormValue(draft.evidence)}">
+            </label>
+            <label>适用边界
+              <input data-experience-field="boundary" value="${escapeFormValue(draft.boundary)}">
+            </label>
+          </div>`;
+      }
+      return `
+        <div class="experience-preview">
+          <div class="experience-preview-meta">
+            <span class="experience-ai-tag">AI 生成 · 待确认</span>
+            <span class="experience-confidence"><i></i>可信度 ${draft.confidence}%</span>
+          </div>
+          <h3>${escapeHTML(draft.title)}</h3>
+          <p>${escapeHTML(draft.summary)}</p>
+          <div class="experience-preview-grid">
+            <div><span>业务场景</span><strong>${escapeHTML(draft.scenario)}</strong></div>
+            <div><span>核心方法</span><strong>${escapeHTML(draft.method)}</strong></div>
+            <div><span>效果证据</span><strong>${escapeHTML(draft.evidence)}</strong></div>
+            <div><span>适用边界</span><strong>${escapeHTML(draft.boundary)}</strong></div>
+          </div>
+          <div class="experience-source-assets">
+            <div class="experience-source-row">
+              <span class="experience-source-icon">HTML</span>
+              <span class="experience-source-copy">
+                <strong>${escapeHTML(draft.artifactName)}</strong>
+                <small>${escapeHTML(draft.artifactMeta)}</small>
+              </span>
+              <button type="button" data-experience-action="artifact">查看产物</button>
+            </div>
+            <div class="experience-source-row">
+              <span class="experience-source-icon">话</span>
+              <span class="experience-source-copy">
+                <strong>对话存档 · ${escapeHTML(draft.conversationTitle)}</strong>
+                <small>${escapeHTML(draft.createdAt)} · 已保留完整上下文</small>
+              </span>
+              <button type="button" data-experience-action="conversation">查看原对话</button>
+            </div>
+          </div>
+        </div>`;
+    }
+
+    function renderExperienceDrawer() {
+      const draft = experienceCaptureState.draft;
+      if (!draft) {
+        experienceCaptureDrawer.innerHTML = "";
+        return;
+      }
+      const projectSelected = experienceCaptureState.scope === "project";
+      const primaryLabel = experienceCaptureState.saving
+        ? "正在生成知识条目…"
+        : projectSelected
+          ? "沉淀到项目知识库"
+          : "保存到个人知识";
+      experienceCaptureDrawer.innerHTML = `
+        <header class="experience-drawer-head">
+          <div>
+            <span class="experience-overline">AI 已完成初步整理</span>
+            <h2 id="experienceCaptureTitle">沉淀这次成功经验</h2>
+            <p>任务已完成 · 系统检测到有可复用的方法与效果证据</p>
+          </div>
+          <button class="experience-icon-button" type="button" data-experience-action="close"
+            aria-label="关闭经验沉淀" ${experienceCaptureState.saving ? "disabled" : ""}>
+            <svg viewBox="0 0 16 16" aria-hidden="true"><path d="m3.5 3.5 9 9M12.5 3.5l-9 9"></path></svg>
+          </button>
+        </header>
+        <div class="experience-stepper" aria-label="经验沉淀步骤">
+          <span class="experience-step active"><i>1</i>确认经验</span>
+          <b class="experience-step-line"></b>
+          <span class="experience-step ${experienceCaptureState.scope ? "active" : ""}"><i>2</i>选择范围</span>
+          <b class="experience-step-line"></b>
+          <span class="experience-step"><i>3</i>完成</span>
+        </div>
+        <div class="experience-drawer-scroll">
+          <section class="experience-section">
+            <div class="experience-section-head">
+              <div><strong>经验卡</strong><span>系统已从对话、产物和反馈中自动生成</span></div>
+              <button class="experience-text-action" type="button"
+                data-experience-action="${experienceCaptureState.editing ? "finish-edit" : "edit"}">
+                ${experienceCaptureState.editing ? "完成编辑" : "编辑"}
+              </button>
+            </div>
+            ${renderExperiencePreview(draft)}
+          </section>
+          <section class="experience-section">
+            <div class="experience-section-head">
+              <div><strong>保存范围</strong><span>经验可保存为个人知识，也可供项目成员检索和复用</span></div>
+            </div>
+            <div class="experience-scope-list">
+              <label class="experience-scope-option ${projectSelected ? "" : "selected"}">
+                <input type="radio" name="experienceScope" value="personal" ${projectSelected ? "" : "checked"}>
+                <i class="experience-radio"></i>
+                <span class="experience-scope-icon">${experienceScopeIcon("personal")}</span>
+                <span class="experience-scope-copy"><strong>仅自己可见</strong><small>保存在个人知识中，可稍后分享</small></span>
+              </label>
+              <label class="experience-scope-option ${projectSelected ? "selected" : ""}">
+                <input type="radio" name="experienceScope" value="project" ${projectSelected ? "checked" : ""}>
+                <i class="experience-radio"></i>
+                <span class="experience-scope-icon project">${experienceScopeIcon("project")}</span>
+                <span class="experience-scope-copy"><strong>项目知识库</strong><small>团队成员可检索、引用和复用</small></span>
+                <em class="experience-recommended">推荐</em>
+              </label>
+            </div>
+            ${projectSelected ? `
+              <div class="experience-destination">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M2.5 6h6l1.5 2h7.5v8.5h-15V6Z"></path><path d="M2.5 6V3.5h6L10 6"></path></svg>
+                <span><small>保存到</small><strong>项目知识库 / 促销策略 / 优质实践</strong></span>
+                <button type="button" data-experience-action="destination">更改</button>
+              </div>` : ""}
+          </section>
+          <section class="experience-section">
+            <label class="experience-template-option">
+              <span class="experience-scope-icon experience-template-icon">${experienceTemplateIcon()}</span>
+              <span class="experience-template-copy">
+                <strong>同时生成任务模版</strong>
+                <small>自动提取可变输入，下次只需补充活动上下文即可运行</small>
+              </span>
+              <span class="experience-toggle">
+                <input type="checkbox" data-experience-template-toggle ${experienceCaptureState.createTemplate ? "checked" : ""}>
+                <i></i>
+              </span>
+            </label>
+            ${experienceCaptureState.createTemplate ? `
+              <div class="experience-template-fields">
+                ${draft.templateFields.map(field => `<span>${escapeHTML(field)}</span>`).join("")}
+              </div>` : ""}
+          </section>
+          <section class="experience-safety-note">
+            <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 2.5 16 5v4.6c0 3.6-2.3 6.4-6 7.9-3.7-1.5-6-4.3-6-7.9V5l6-2.5Z"></path><path d="m7.2 10 1.8 1.8 3.8-4"></path></svg>
+            <span><strong>发布前检查</strong><small>已隐藏个人信息；预算和策略数据将遵循所选知识范围权限。</small></span>
+            <b class="experience-safety-check">✓</b>
+          </section>
+        </div>
+        <footer class="experience-drawer-footer">
+          <button class="confirm-only" type="button" data-experience-action="confirm-only"
+            aria-label="仅确认接受本次执行结果，不保存知识"
+            title="不保存知识，仅记录结果确认" ${experienceCaptureState.saving ? "disabled" : ""}>仅确认执行结果</button>
+          <button type="button" data-experience-action="draft" ${experienceCaptureState.saving ? "disabled" : ""}>暂存为个人草稿</button>
+          <button class="primary ${experienceCaptureState.saving ? "is-loading" : ""}" type="button"
+            data-experience-action="save" ${experienceCaptureState.saving ? "disabled" : ""}>
+            ${experienceCaptureState.saving ? '<i class="experience-spinner"></i>' : ""}${primaryLabel}
+          </button>
+        </footer>`;
+    }
+
+    let experienceBackgroundState = [];
+
+    function setExperienceBackgroundInert(active) {
+      if (active) {
+        if (experienceBackgroundState.length) return;
+        experienceBackgroundState = Array.from(document.body.children)
+          .filter(element => (
+            element instanceof HTMLElement
+            && element !== experienceCaptureDrawer
+            && element !== experienceCaptureBackdrop
+            && element !== toast
+          ))
+          .map(element => ({ element, wasInert: element.inert }));
+        experienceBackgroundState.forEach(({ element }) => {
+          element.inert = true;
+        });
+        return;
+      }
+      experienceBackgroundState.forEach(({ element, wasInert }) => {
+        element.inert = wasInert;
+      });
+      experienceBackgroundState = [];
+    }
+
+    function openExperienceCapture(kind, trigger = document.activeElement) {
+      if (!isExperienceActionAvailable(kind)) {
+        showToast("形成可接受的策略结果后即可标记完成");
+        return;
+      }
+      const savedEntryId = experienceCaptureState.savedKinds.get(kind);
+      const savedEntry = experienceKnowledgeEntries.find(entry => entry.id === savedEntryId);
+      experienceCaptureState.currentKind = kind;
+      experienceCaptureState.scope = savedEntry?.scope || "project";
+      experienceCaptureState.createTemplate = savedEntry ? Boolean(savedEntry.templateId) : true;
+      experienceCaptureState.draft = savedEntry
+        ? {
+            ...experienceDraftForKind(kind),
+            ...cloneTaskData(savedEntry),
+            templateFields: experienceDraftForKind(kind).templateFields
+          }
+        : experienceDraftForKind(kind);
+      experienceCaptureState.editing = false;
+      experienceCaptureState.saving = false;
+      experienceCaptureState.returnFocus = trigger;
+      renderExperienceDrawer();
+      experienceCaptureBackdrop.classList.add("show");
+      experienceCaptureBackdrop.setAttribute("aria-hidden", "false");
+      experienceCaptureDrawer.classList.add("show");
+      experienceCaptureDrawer.setAttribute("aria-hidden", "false");
+      document.body.classList.add("experience-drawer-open");
+      setExperienceBackgroundInert(true);
+      requestAnimationFrame(() => {
+        experienceCaptureDrawer.querySelector('[data-experience-action="close"]')?.focus({ preventScroll: true });
+      });
+    }
+
+    function closeExperienceDrawer(restoreFocus = true) {
+      const trigger = experienceCaptureState.returnFocus;
+      experienceCaptureState.saveToken = Number(experienceCaptureState.saveToken || 0) + 1;
+      experienceCaptureState.saving = false;
+      experienceCaptureBackdrop.classList.remove("show");
+      experienceCaptureBackdrop.setAttribute("aria-hidden", "true");
+      experienceCaptureDrawer.classList.remove("show");
+      experienceCaptureDrawer.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("experience-drawer-open");
+      setExperienceBackgroundInert(false);
+      if (restoreFocus && trigger?.isConnected) {
+        requestAnimationFrame(() => trigger.focus({ preventScroll: true }));
+      }
+    }
+
+    function collectExperienceEdits() {
+      experienceCaptureDrawer.querySelectorAll("[data-experience-field]").forEach(field => {
+        const key = field.dataset.experienceField;
+        if (key) experienceCaptureState.draft[key] = field.value.trim();
+      });
+    }
+
+    function experienceTemplateFromDraft(draft, scope) {
+      const template = taskDraftFromConversation(draft.kind);
+      template.title = draft.templateTitle;
+      template.description = draft.summary;
+      template.scenario = draft.scenario;
+      template.status = "enabled";
+      template.visibility = scope === "project" ? "workspace" : "private";
+      template.origin = {
+        type: "experience",
+        conversationId: draft.conversationId,
+        conversationTitle: draft.conversationTitle
+      };
+      if (draft.kind === "pre") {
+        template.instruction = "针对{活动}，结合{活动目标}、{预算上限}、{活动时间}与{目标人群}，设计高门槛券的人群圈选、预算边界、效果证据和风险准备金。";
+        template.variables = [
+          taskVariable("活动", "activity", { description: "本次任务对应的活动", fromContext: true }),
+          taskVariable("活动目标", "text", { description: "活动规模或钱效目标", defaultValue: "兼顾规模与钱效" }),
+          taskVariable("预算上限", "number", { description: "本次活动预算上限", defaultValue: "11500" }),
+          taskVariable("活动时间", "date", { description: "活动开始与结束时间", defaultValue: "当前活动周期" }),
+          taskVariable("目标人群", "text", { description: "需要重点圈选的人群", defaultValue: "高客单、高意向人群" })
+        ];
+      }
+      template.internalVersion = 1;
+      return template;
+    }
+
+    function ensureExperienceTaskTemplate(draft, scope) {
+      const existingIndex = customTaskTemplates.findIndex(template =>
+        template.origin?.type === "experience"
+        && template.origin.conversationId === draft.conversationId
+      );
+      const next = experienceTemplateFromDraft(draft, scope);
+      if (existingIndex >= 0) {
+        const existing = customTaskTemplates[existingIndex];
+        next.id = existing.id;
+        next.internalVersion = Number(existing.internalVersion || 1) + 1;
+        customTaskTemplates.splice(existingIndex, 1, next);
+        return next;
+      }
+      next.id = `task-experience-${draft.kind}-${Date.now()}`;
+      customTaskTemplates.unshift(next);
+      return next;
+    }
+
+    function persistExperienceCapture({ asDraft = false } = {}) {
+      const draft = experienceCaptureState.draft;
+      const scope = asDraft ? "personal" : experienceCaptureState.scope;
+      const generatedTemplate = experienceCaptureState.createTemplate && !asDraft
+        ? ensureExperienceTaskTemplate(draft, scope)
+        : null;
+      const existingEntryId = experienceCaptureState.savedKinds.get(draft.kind);
+      const existingIndex = experienceKnowledgeEntries.findIndex(entry => entry.id === existingEntryId);
+      const previous = existingIndex >= 0 ? experienceKnowledgeEntries[existingIndex] : null;
+      const entry = {
+        id: previous?.id || `knowledge-experience-${draft.kind}-${Date.now()}`,
+        status: asDraft ? "个人草稿" : "新沉淀 · 已验证",
+        statusTone: asDraft ? "standard" : "",
+        title: draft.title,
+        summary: draft.summary,
+        category: draft.category,
+        method: draft.method,
+        evidence: draft.evidence,
+        boundary: draft.boundary,
+        tags: [...draft.tags],
+        scope,
+        createdBy: "AI",
+        reuseCount: previous?.reuseCount || 0,
+        successRate: previous?.successRate || "待验证",
+        templateId: generatedTemplate?.id || (experienceCaptureState.createTemplate ? previous?.templateId || null : null),
+        templateTitle: generatedTemplate?.title || (experienceCaptureState.createTemplate ? previous?.templateTitle || "" : ""),
+        sourceKind: draft.kind,
+        conversationTitle: draft.conversationTitle,
+        artifactName: draft.artifactName,
+        createdAt: draft.createdAt,
+        isNew: true
+      };
+      if (existingIndex >= 0) experienceKnowledgeEntries.splice(existingIndex, 1);
+      experienceKnowledgeEntries.unshift(entry);
+      experienceCaptureState.savedKinds.set(draft.kind, entry.id);
+      experienceCaptureState.selectedEntryId = entry.id;
+      syncExperienceActionButton(draft.kind);
+      return { entry, generatedTemplate, asDraft };
+    }
+
+    function experienceConfirmationTime(date = new Date()) {
+      return date.toLocaleString("zh-CN", {
+        year: "numeric",
+        month: "2-digit",
+        day: "2-digit",
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false
+      }).replace(/\//g, "-");
+    }
+
+    function persistExecutionConfirmation() {
+      const draft = experienceCaptureState.draft;
+      const confirmedAt = new Date();
+      const existingTraceId = experienceCaptureState.confirmedKinds.get(draft.kind);
+      const existingIndex = experienceCompletionTraces.findIndex(trace => trace.id === existingTraceId);
+      const previous = existingIndex >= 0 ? experienceCompletionTraces[existingIndex] : null;
+      const trace = {
+        id: previous?.id || `task-confirmation-${draft.kind}-${Date.now()}`,
+        displayId: previous?.displayId || `CONF-${String(Date.now()).slice(-6)}`,
+        kind: draft.kind,
+        conversationId: draft.conversationId,
+        conversationTitle: draft.conversationTitle,
+        resultTitle: draft.title,
+        resultSnapshot: cloneTaskData({
+          title: draft.title,
+          summary: draft.summary,
+          scenario: draft.scenario,
+          method: draft.method,
+          evidence: draft.evidence,
+          boundary: draft.boundary,
+          artifactName: draft.artifactName
+        }),
+        status: "accepted",
+        storage: "none",
+        confirmedAt: confirmedAt.toISOString(),
+        confirmedAtLabel: experienceConfirmationTime(confirmedAt),
+        npsScore: previous?.npsScore ?? null,
+        npsComment: previous?.npsComment || "",
+        feedbackAt: previous?.feedbackAt || null
+      };
+      if (existingIndex >= 0) experienceCompletionTraces.splice(existingIndex, 1);
+      experienceCompletionTraces.unshift(trace);
+      experienceCaptureState.confirmedKinds.set(draft.kind, trace.id);
+      experienceCaptureState.activeTraceId = trace.id;
+      experienceCaptureState.npsScore = trace.npsScore;
+      syncExperienceActionButton(draft.kind);
+      return trace;
+    }
+
+    function experienceNpsCategory(score) {
+      if (score >= 9) return "promoter";
+      if (score >= 7) return "passive";
+      return "detractor";
+    }
+
+    function showExecutionConfirmationSuccess(trace) {
+      experienceCaptureState.activeTraceId = trace.id;
+      experienceCaptureState.npsScore = trace.npsScore;
+      modalReturnFocus = experienceCaptureState.returnFocus;
+      modalTitle.textContent = "执行结果已确认";
+      setSharedModalKind("experience-confirm", "experience-confirmation-modal");
+      modalBody.innerHTML = `
+        <div class="experience-success-content">
+          <div class="experience-success-orbit"><span>✓</span></div>
+          <span class="experience-overline">任务已留痕</span>
+          <h2>执行结果已确认</h2>
+          <p>已记录确认时间和结果快照；本次确认未创建个人草稿、知识条目或任务模版。</p>
+          <div class="experience-confirmation-record" aria-label="执行结果确认记录">
+            <div><span>确认状态</span><strong>已接受本次执行结果</strong></div>
+            <div><span>执行结果</span><strong>${escapeHTML(trace.resultTitle)}</strong></div>
+            <div><span>确认时间</span><strong>${escapeHTML(trace.confirmedAtLabel)}</strong></div>
+            <div><span>留痕编号</span><strong>${escapeHTML(trace.displayId)}</strong></div>
+          </div>
+          <section class="experience-nps" aria-labelledby="experienceNpsTitle">
+            <div class="experience-nps-head">
+              <strong id="experienceNpsTitle">NPS 反馈（可选）</strong>
+              <span>你有多大可能推荐本次执行结果？</span>
+            </div>
+            <div class="experience-nps-scores" role="radiogroup" aria-label="NPS 评分，0 到 10 分">
+              ${Array.from({ length: 11 }, (_, score) => `
+                <button type="button" class="experience-nps-score ${trace.npsScore === score ? "is-selected" : ""}"
+                  data-experience-nps-score="${score}" role="radio"
+                  aria-checked="${trace.npsScore === score}" aria-label="${score} 分">${score}</button>`).join("")}
+            </div>
+            <div class="experience-nps-scale"><span>0 · 完全不推荐</span><span>10 · 非常推荐</span></div>
+            <textarea data-experience-nps-comment aria-label="补充反馈（选填）"
+              placeholder="补充反馈（选填）">${escapeFormValue(trace.npsComment || "")}</textarea>
+          </section>
+        </div>`;
+      modalActions.innerHTML = "";
+      const submit = actionButton(trace.npsScore === null ? "提交反馈" : "更新反馈", "primary", submitExperienceNpsFeedback);
+      submit.dataset.experienceNpsSubmit = "";
+      submit.disabled = trace.npsScore === null;
+      modalActions.append(
+        actionButton("暂不反馈", "ghost", closeModal),
+        submit
+      );
+      modal.classList.add("show");
+      activateStrategyModalFocusBoundary();
+      requestAnimationFrame(() => {
+        modalBody.querySelector(".experience-nps-score")?.focus({ preventScroll: true });
+      });
+    }
+
+    function confirmExecutionResultOnly() {
+      if (experienceCaptureState.saving || !experienceCaptureState.draft) return;
+      collectExperienceEdits();
+      const trace = persistExecutionConfirmation();
+      closeExperienceDrawer(false);
+      showExecutionConfirmationSuccess(trace);
+    }
+
+    function handleExperienceFeedbackModalClick(event) {
+      const scoreButton = event.target.closest("[data-experience-nps-score]");
+      if (!scoreButton) return;
+      const score = Number(scoreButton.dataset.experienceNpsScore);
+      if (!Number.isInteger(score) || score < 0 || score > 10) return;
+      experienceCaptureState.npsScore = score;
+      modalBody.querySelectorAll("[data-experience-nps-score]").forEach(button => {
+        const selected = Number(button.dataset.experienceNpsScore) === score;
+        button.classList.toggle("is-selected", selected);
+        button.setAttribute("aria-checked", String(selected));
+      });
+      const submit = modalActions.querySelector("[data-experience-nps-submit]");
+      if (submit) {
+        submit.disabled = false;
+        submit.textContent = "提交反馈";
+      }
+    }
+
+    function submitExperienceNpsFeedback() {
+      const score = experienceCaptureState.npsScore;
+      const trace = experienceCompletionTraces.find(item => item.id === experienceCaptureState.activeTraceId);
+      if (!trace || !Number.isInteger(score)) {
+        showToast("请先选择 0—10 分");
+        return;
+      }
+      const comment = modalBody.querySelector("[data-experience-nps-comment]")?.value.trim() || "";
+      const feedbackAt = new Date().toISOString();
+      const feedback = {
+        id: `nps-feedback-${trace.kind}-${Date.now()}`,
+        traceId: trace.id,
+        conversationId: trace.conversationId,
+        score,
+        category: experienceNpsCategory(score),
+        comment,
+        feedbackAt
+      };
+      const existingIndex = experienceNpsFeedback.findIndex(item => item.traceId === trace.id);
+      if (existingIndex >= 0) experienceNpsFeedback.splice(existingIndex, 1);
+      experienceNpsFeedback.unshift(feedback);
+      trace.npsScore = score;
+      trace.npsComment = comment;
+      trace.feedbackAt = feedbackAt;
+      closeModal();
+      showToast(`已提交 ${score} 分反馈`);
+    }
+
+    function openKnowledgeEntryFromSuccess(entry) {
+      closeModal(false);
+      openInfrastructureView("knowledge");
+      infrastructureState.knowledgeScope = entry.scope;
+      infrastructureState.knowledgeCategory = "all";
+      infrastructureState.knowledgeHighlightId = entry.id;
+      infrastructureState.query = "";
+      renderInfrastructureView();
+      requestAnimationFrame(() => {
+        const card = infraManagement.querySelector(`[data-knowledge-card="${CSS.escape(entry.id)}"]`);
+        card?.scrollIntoView({ block: "center", behavior: "smooth" });
+        card?.focus({ preventScroll: true });
+      });
+    }
+
+    function showExperienceSuccess(result) {
+      const { entry, generatedTemplate, asDraft } = result;
+      const personal = entry.scope === "personal";
+      modalReturnFocus = experienceCaptureState.returnFocus;
+      modalTitle.textContent = personal ? "个人经验已保存" : "经验沉淀完成";
+      setSharedModalKind("experience", "experience-success-modal");
+      modalBody.innerHTML = `
+        <div class="experience-success-content">
+          <div class="experience-success-orbit"><span>✓</span></div>
+          <span class="experience-overline">${asDraft ? "已保存" : "沉淀完成"}</span>
+          <h2>${personal ? "经验已保存到个人知识" : "这次成功，已经成为团队经验"}</h2>
+          <p>${personal
+            ? "内容仅自己可见，可在确认后再分享至项目知识库。"
+            : generatedTemplate
+              ? "经验已进入项目知识库，并关联了一个可直接运行的任务模版。"
+              : "经验已进入项目知识库，团队成员现在可以检索、引用和复用。"
+          }</p>
+          <div class="experience-success-assets">
+            <div class="experience-success-asset">
+              <span class="experience-success-asset-icon knowledge">${knowledgeBookIcon()}</span>
+              <span><strong>知识条目</strong><small>${escapeHTML(entry.title)}</small></span>
+              <b>✓</b>
+            </div>
+            ${generatedTemplate ? `
+              <div class="experience-success-asset">
+                <span class="experience-success-asset-icon template">${experienceTemplateIcon()}</span>
+                <span><strong>任务模版</strong><small>${escapeHTML(generatedTemplate.title)}</small></span>
+                <b>✓</b>
+              </div>` : ""}
+          </div>
+        </div>`;
+      modalActions.innerHTML = "";
+      modalActions.append(
+        actionButton("留在对话", "ghost", closeModal),
+        actionButton("查看知识条目", "primary", () => openKnowledgeEntryFromSuccess(entry))
+      );
+      modal.classList.add("show");
+      activateStrategyModalFocusBoundary();
+      requestAnimationFrame(() => modalActions.querySelector(".primary")?.focus({ preventScroll: true }));
+    }
+
+    function saveExperienceCapture(options = {}) {
+      if (experienceCaptureState.saving || !experienceCaptureState.draft) return;
+      collectExperienceEdits();
+      experienceCaptureState.saving = true;
+      const saveToken = Number(experienceCaptureState.saveToken || 0) + 1;
+      experienceCaptureState.saveToken = saveToken;
+      renderExperienceDrawer();
+      setTimeout(() => {
+        if (
+          experienceCaptureState.saveToken !== saveToken
+          || !experienceCaptureDrawer.classList.contains("show")
+        ) return;
+        const result = persistExperienceCapture(options);
+        experienceCaptureState.saving = false;
+        closeExperienceDrawer(false);
+        showExperienceSuccess(result);
+      }, 900);
+    }
+
+    function openExperienceArtifact(kind, trigger = null) {
+      closeExperienceDrawer(false);
+      if (kind === "pre") {
+        preOpenArtifact(trigger || document.getElementById("preCreateTaskTemplate"));
+        return;
+      }
+      openArtifactPreview(trigger || document.getElementById("budgetCreateTaskTemplate"));
+    }
+
+    function openExperienceConversation(kind) {
+      if (!kind) {
+        showToast("该知识条目没有可跳转的原对话");
+        return;
+      }
+      closeExperienceDrawer(false);
+      if (kind === "pre") {
+        enterPreCase();
+        selectHistoryItem(preCaseData.title);
+        document.title = "券策略 Agent · 促前券档位设计";
+      } else {
+        enterBudgetCase();
+        selectHistoryItem(budgetCaseData.title);
+        document.title = "券策略 Agent · 促中预算紧张";
+      }
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    function openKnowledgeEntryDetail(entryId, trigger = document.activeElement) {
+      const entry = experienceKnowledgeEntries.find(item => item.id === entryId);
+      if (!entry) return;
+      modalReturnFocus = trigger;
+      modalTitle.textContent = entry.title;
+      setSharedModalKind("resource", "resource-modal");
+      modalBody.innerHTML = `
+        <div class="knowledge-detail-hero">
+          <h4>${escapeHTML(entry.title)}</h4>
+          <p>${escapeHTML(entry.summary)}</p>
+        </div>
+        <div class="task-detail-grid" style="margin-top:10px">
+          <div class="task-detail-item"><b>业务分类</b><span>${escapeHTML(entry.category)}</span></div>
+          <div class="task-detail-item"><b>保存范围</b><span>${entry.scope === "personal" ? "个人知识" : "项目知识库"}</span></div>
+          <div class="task-detail-item"><b>核心方法</b><span>${escapeHTML(entry.method)}</span></div>
+          <div class="task-detail-item"><b>效果证据</b><span>${escapeHTML(entry.evidence)}</span></div>
+          <div class="task-detail-item full"><b>适用边界</b><span>${escapeHTML(entry.boundary)}</span></div>
+          <div class="task-detail-item full"><b>来源存档</b><span>${escapeHTML(entry.conversationTitle)} · ${escapeHTML(entry.createdAt)}</span><small>${escapeHTML(entry.artifactName)}</small></div>
+        </div>`;
+      modalActions.innerHTML = "";
+      modalActions.append(actionButton("关闭", "ghost", closeModal));
+      if (entry.sourceKind) {
+        modalActions.append(actionButton("查看原对话", "ghost", () => {
+          closeModal(false);
+          openExperienceConversation(entry.sourceKind);
+        }));
+      }
+      if (entry.templateId && findTaskTemplate(entry.templateId)) {
+        modalActions.append(actionButton("查看任务模版", "primary", () => {
+          closeModal(false);
+          openTaskTemplateDetail(entry.templateId, trigger);
+        }));
+      }
+      modal.classList.add("show");
+      activateStrategyModalFocusBoundary();
+      requestAnimationFrame(() => document.getElementById("modalClose")?.focus({ preventScroll: true }));
     }
 
     function mergeTaskContextOption(catalog, activity, waves = []) {
@@ -37916,7 +40406,18 @@
           : null);
       document.querySelectorAll(".history-item").forEach(item => item.classList.remove("active"));
       document.querySelectorAll("[data-infra-view]").forEach(button => button.classList.toggle("active", button.dataset.infraView === view));
-      Object.assign(infrastructureState, { activeView: view, query: "", status: "all", type: "all", skillSource: "all", larkSection: "groups", larkQuery: "" });
+      Object.assign(infrastructureState, {
+        activeView: view,
+        query: "",
+        status: "all",
+        type: "all",
+        skillSource: "all",
+        larkSection: "groups",
+        larkQuery: "",
+        knowledgeScope: "all",
+        knowledgeCategory: "all",
+        knowledgeHighlightId: null
+      });
       infrastructureState.skillTags.clear();
       infraManagement.classList.add("active");
       renderInfrastructureView();
@@ -37924,7 +40425,9 @@
         ? "券策略 Agent · 任务模版"
         : view === "scheduled-task"
           ? "券策略 Agent · 定时任务"
-          : document.title;
+          : view === "knowledge"
+            ? "券策略 Agent · 知识库"
+            : document.title;
       window.scrollTo({ top: 0 });
     }
 
@@ -45670,6 +48173,8 @@
       });
       syncCasePlanAdditions();
       renderCaseProgress();
+      syncExperienceActionVisibility("budget");
+      syncExperienceActionButton("budget");
     }
 
     function renderOverallStage() {
@@ -46613,7 +49118,8 @@
       budgetCaseState.messages.forEach(message => renderedCaseMessageIds.add(message.id));
       renderCasePromptChips();
       renderArtifactDock();
-      document.getElementById("budgetCreateTaskTemplate").hidden = !budgetCaseState.candidateGenerated;
+      syncExperienceActionVisibility("budget");
+      syncExperienceActionButton("budget");
       if (scrollToBottom) caseChatScroll.scrollTop = caseChatScroll.scrollHeight;
     }
 
@@ -47935,7 +50441,8 @@
       preCaseState.messages.forEach(message => renderedPreCaseMessageIds.add(message.id));
       preRenderPromptChips();
       preRenderArtifactDock();
-      document.getElementById("preCreateTaskTemplate").hidden = !preCaseState.packageGenerated;
+      syncExperienceActionVisibility("pre");
+      syncExperienceActionButton("pre");
       if (scrollToBottom) preCaseChatScroll.scrollTop = preCaseChatScroll.scrollHeight;
     }
 
@@ -48726,6 +51233,8 @@
       preReportDocument.querySelectorAll('[role="tablist"]').forEach(tablist => syncRovingTablist(tablist));
       preSyncReportTools();
       preRenderPromptChips();
+      syncExperienceActionVisibility("pre");
+      syncExperienceActionButton("pre");
     }
 
     function preGenerationProgress(sectionId) {
@@ -53484,7 +55993,9 @@
       "strategy-detail-modal",
       "template-detail-modal",
       "task-modal",
-      "scheduled-task-modal"
+      "scheduled-task-modal",
+      "experience-success-modal",
+      "experience-confirmation-modal"
     ]);
 
     function setSharedModalKind(kind, className = "") {
@@ -54563,6 +57074,29 @@
     });
 
     infraManagement.addEventListener("click", event => {
+      const knowledgeDetail = event.target.closest("[data-knowledge-detail]");
+      if (knowledgeDetail) {
+        return openKnowledgeEntryDetail(knowledgeDetail.dataset.knowledgeDetail, knowledgeDetail);
+      }
+      const knowledgeUse = event.target.closest("[data-knowledge-use]");
+      if (knowledgeUse) {
+        const entry = experienceKnowledgeEntries.find(item => item.id === knowledgeUse.dataset.knowledgeUse);
+        const template = entry?.templateId ? findTaskTemplate(entry.templateId) : null;
+        if (!template) return showToast("该经验尚未关联可运行任务模版");
+        return openTaskTemplateDetail(template.id, knowledgeUse);
+      }
+      const knowledgeScope = event.target.closest("[data-knowledge-scope]");
+      if (knowledgeScope) {
+        infrastructureState.knowledgeScope = knowledgeScope.dataset.knowledgeScope;
+        infrastructureState.knowledgeHighlightId = null;
+        return renderInfrastructureView();
+      }
+      const knowledgeCategory = event.target.closest("[data-knowledge-category]");
+      if (knowledgeCategory) {
+        infrastructureState.knowledgeCategory = knowledgeCategory.dataset.knowledgeCategory;
+        infrastructureState.knowledgeHighlightId = null;
+        return renderInfrastructureView();
+      }
       if (event.target.closest("[data-scheduled-create]")) {
         return openScheduledTaskBuilder(null, event.target.closest("[data-scheduled-create]"));
       }
@@ -54954,6 +57488,12 @@
               change: handleTaskModalChange,
               click: handleTaskModalClick
             }
+          : isSharedModalKind("experience-confirm")
+            ? {
+                input: null,
+                change: null,
+                click: handleExperienceFeedbackModalClick
+              }
           : null;
       handlers?.[event.type]?.(event);
     }
@@ -55007,7 +57547,11 @@
 
     document.addEventListener("keydown", event => {
       if (event.key === "Escape") {
-        if (newChatState.openMenu && newChatView.classList.contains("active")) {
+        if (experienceCaptureDrawer.classList.contains("show")) {
+          event.preventDefault();
+          event.stopPropagation();
+          closeExperienceDrawer();
+        } else if (newChatState.openMenu && newChatView.classList.contains("active")) {
           event.preventDefault();
           event.stopPropagation();
           newChatCloseOpenMenu(true);
@@ -55035,7 +57579,9 @@
         return;
       }
       if (event.key === "Tab") {
-        if (modal.classList.contains("show")) {
+        if (experienceCaptureDrawer.classList.contains("show")) {
+          trapFocus(event, experienceCaptureDrawer);
+        } else if (modal.classList.contains("show")) {
           // The shared modal trap already ran during capture.
         } else if (askPopover.classList.contains("show")) {
           trapFocus(event, askPopover);
@@ -56072,10 +58618,59 @@
     document.getElementById("backToDashboard").addEventListener("click", exitBudgetCase);
     document.getElementById("preBackToDashboard").addEventListener("click", exitPreCase);
     document.getElementById("budgetCreateTaskTemplate").addEventListener("click", event => {
-      openTaskTemplateFromConversation("budget", event.currentTarget);
+      openExperienceCapture("budget", event.currentTarget);
     });
     document.getElementById("preCreateTaskTemplate").addEventListener("click", event => {
-      openTaskTemplateFromConversation("pre", event.currentTarget);
+      openExperienceCapture("pre", event.currentTarget);
+    });
+    experienceCaptureBackdrop.addEventListener("click", () => closeExperienceDrawer());
+    experienceCaptureDrawer.addEventListener("click", event => {
+      const action = event.target.closest("[data-experience-action]");
+      if (!action) return;
+      const actionType = action.dataset.experienceAction;
+      if (actionType === "close") {
+        closeExperienceDrawer();
+      } else if (actionType === "edit") {
+        experienceCaptureState.editing = true;
+        renderExperienceDrawer();
+        requestAnimationFrame(() => experienceCaptureDrawer.querySelector("[data-experience-field]")?.focus());
+      } else if (actionType === "finish-edit") {
+        collectExperienceEdits();
+        experienceCaptureState.editing = false;
+        renderExperienceDrawer();
+        requestAnimationFrame(() => experienceCaptureDrawer.querySelector('[data-experience-action="edit"]')?.focus());
+      } else if (actionType === "artifact") {
+        openExperienceArtifact(experienceCaptureState.currentKind);
+      } else if (actionType === "conversation") {
+        openExperienceConversation(experienceCaptureState.currentKind);
+      } else if (actionType === "destination") {
+        showToast("当前保存目录为“促销策略 / 优质实践”");
+      } else if (actionType === "confirm-only") {
+        confirmExecutionResultOnly();
+      } else if (actionType === "draft") {
+        saveExperienceCapture({ asDraft: true });
+      } else if (actionType === "save") {
+        saveExperienceCapture();
+      }
+    });
+    experienceCaptureDrawer.addEventListener("change", event => {
+      if (event.target.matches('input[name="experienceScope"]')) {
+        experienceCaptureState.scope = event.target.value;
+        renderExperienceDrawer();
+        requestAnimationFrame(() => {
+          experienceCaptureDrawer
+            .querySelector(`input[name="experienceScope"][value="${CSS.escape(experienceCaptureState.scope)}"]`)
+            ?.focus({ preventScroll: true });
+        });
+        return;
+      }
+      if (event.target.matches("[data-experience-template-toggle]")) {
+        experienceCaptureState.createTemplate = event.target.checked;
+        renderExperienceDrawer();
+        requestAnimationFrame(() => {
+          experienceCaptureDrawer.querySelector("[data-experience-template-toggle]")?.focus({ preventScroll: true });
+        });
+      }
     });
 
     preCaseMainStream.addEventListener("click", event => {
