@@ -12999,28 +12999,6 @@
     }
 
     /* Pre-campaign planning report modules. */
-    .pre-data-boundary {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      margin-bottom: 13px;
-      padding: 9px 11px;
-      border: 1px solid #d8dff3;
-      border-radius: 7px;
-      color: #596b9b;
-      background: #f4f6ff;
-      font-size: 8px;
-      line-height: 1.55;
-    }
-
-    .pre-data-boundary b {
-      padding: 3px 6px;
-      border-radius: 4px;
-      color: #fff;
-      background: #506de0;
-      white-space: nowrap;
-    }
-
     .pre-profile-grid,
     .pre-metric-grid,
     .pre-plan-grid,
@@ -14988,91 +14966,1277 @@
       font-style: normal;
     }
 
-    .lark-resource-tabs {
-      overflow-x: auto;
-      scrollbar-width: none;
+    .lark-assistant-shell {
+      min-height: calc(100vh - 68px);
+      color: #222936;
+      background: #f7f8fa;
     }
 
-    .lark-resource-tabs::-webkit-scrollbar {
-      display: none;
+    .lark-assistant-overview {
+      min-height: calc(100vh - 68px);
+      padding: 34px 36px;
+      background:
+        radial-gradient(circle at 2% 2%, rgba(49, 87, 230, .045), transparent 24%),
+        #f8f9fb;
     }
 
-    .lark-resource-tabs .resource-summary-tab {
-      flex: 0 0 auto;
+    .lark-assistant-overview h2 {
+      margin: 0 0 22px;
+      color: #222a39;
+      font-size: 22px;
+    }
+
+    .lark-assistant-overview-card {
+      display: flex;
+      width: min(420px, 100%);
+      min-height: 94px;
+      align-items: center;
+      gap: 14px;
+      padding: 17px 18px;
+      border: 1px solid #d9dfeb;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .94);
+      box-shadow: 0 8px 24px rgba(35, 45, 67, .04);
+    }
+
+    .lark-assistant-avatar {
+      display: grid;
+      width: 46px;
+      height: 46px;
+      flex: 0 0 46px;
+      place-items: center;
+      overflow: hidden;
+      border: 1px solid #d8edf4;
+      border-radius: 50%;
+      color: #355183;
+      background: linear-gradient(155deg, #d8f7fb 0 42%, #f0f7ff 42% 100%);
+    }
+
+    .lark-assistant-avatar svg {
+      width: 38px;
+      height: 38px;
+      overflow: visible;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.4;
+    }
+
+    .lark-assistant-overview-copy {
+      min-width: 0;
+      flex: 1;
+    }
+
+    .lark-assistant-overview-copy strong,
+    .lark-assistant-overview-copy span {
+      display: block;
+    }
+
+    .lark-assistant-overview-copy strong {
+      overflow: hidden;
+      color: #202838;
+      font-size: 16px;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .lark-resource-toolbar {
-      min-height: 54px;
+    .lark-assistant-overview-copy span {
+      margin-top: 5px;
+      color: #8a93a3;
+      font-size: 12px;
     }
 
-    .lark-group-count {
-      color: #99a0ac;
+    .lark-assistant-overview-copy i {
+      display: inline-grid;
+      width: 17px;
+      height: 17px;
+      margin: 0 5px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: #6f7d9b;
       font-size: 8px;
+      font-style: normal;
+      vertical-align: -3px;
+    }
+
+    .lark-assistant-overview-actions {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+    }
+
+    .lark-assistant-icon-action {
+      position: relative;
+      display: grid;
+      width: 34px;
+      height: 34px;
+      place-items: center;
+      border: 0;
+      border-radius: 8px;
+      color: #596579;
+      background: #f0f2f5;
+      transition: color .16s ease, background .16s ease, transform .16s ease;
+    }
+
+    .lark-assistant-icon-action:hover,
+    .lark-assistant-icon-action:focus-visible {
+      color: #3157e6;
+      background: #e8edff;
+      transform: translateY(-1px);
+    }
+
+    .lark-assistant-icon-action svg {
+      width: 17px;
+      height: 17px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .lark-assistant-icon-action::after {
+      position: absolute;
+      right: 50%;
+      bottom: calc(100% + 10px);
+      z-index: 5;
+      width: max-content;
+      max-width: 120px;
+      padding: 7px 10px;
+      visibility: hidden;
+      border-radius: 6px;
+      color: #fff;
+      background: #272b34;
+      box-shadow: 0 7px 18px rgba(25, 31, 43, .2);
+      content: attr(data-label);
+      font-size: 11px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(50%, 4px);
+      transition: opacity .14s ease, transform .14s ease, visibility .14s;
+    }
+
+    .lark-assistant-icon-action:hover::after,
+    .lark-assistant-icon-action:focus-visible::after {
+      visibility: visible;
+      opacity: 1;
+      transform: translate(50%, 0);
+    }
+
+    .lark-assistant-config-shell {
+      display: grid;
+      min-height: calc(100vh - 68px);
+      grid-template-columns: 202px minmax(0, 1fr);
+      background: #f7f8fa;
+    }
+
+    .lark-assistant-config-nav {
+      position: sticky;
+      top: 0;
+      display: flex;
+      height: calc(100vh - 68px);
+      min-height: 620px;
+      flex-direction: column;
+      padding: 14px 10px;
+      border-right: 1px solid #e3e6eb;
+      background: #fff;
+    }
+
+    .lark-assistant-config-back {
+      display: inline-flex;
+      min-height: 30px;
+      align-items: center;
+      align-self: flex-start;
+      gap: 5px;
+      padding: 0 5px;
+      border: 0;
+      color: #737d8d;
+      background: transparent;
+      font-size: 11px;
+    }
+
+    .lark-assistant-config-back:hover {
+      color: #3157e6;
+    }
+
+    .lark-assistant-config-back svg {
+      width: 14px;
+      height: 14px;
+    }
+
+    .lark-assistant-config-nav h2 {
+      margin: 9px 6px 14px;
+      color: #303745;
+      font-size: 15px !important;
+    }
+
+    .lark-assistant-nav-list {
+      display: grid;
+      gap: 2px;
+    }
+
+    .lark-assistant-nav-list + .lark-assistant-nav-list {
+      margin-top: 10px;
+      padding-top: 10px;
+      border-top: 1px solid #e7e9ed;
+    }
+
+    .lark-assistant-nav-item {
+      display: flex;
+      width: 100%;
+      min-height: 38px;
+      align-items: center;
+      gap: 9px;
+      padding: 0 9px;
+      border: 0;
+      border-radius: 7px;
+      color: #424b5a;
+      text-align: left;
+      background: transparent;
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    .lark-assistant-nav-item svg {
+      width: 15px;
+      height: 15px;
+      flex: 0 0 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.55;
+    }
+
+    .lark-assistant-nav-item:not(:disabled):hover {
+      color: #29354b;
+      background: #f3f5f8;
+    }
+
+    .lark-assistant-nav-item.active {
+      color: #202b40;
+      background: #e9ebef;
+      box-shadow: inset 3px 0 0 #3157e6;
+    }
+
+    .lark-assistant-nav-item:disabled {
+      color: #9ca3af;
+      cursor: default;
+      opacity: .62;
+    }
+
+    .lark-assistant-config-main {
+      min-width: 0;
+      padding: 24px 28px 42px;
+      background: #fff;
+    }
+
+    .lark-assistant-page {
+      width: min(1040px, 100%);
+    }
+
+    .lark-assistant-page-head {
+      margin-bottom: 21px;
+    }
+
+    .lark-assistant-page-head h1 {
+      margin: 0;
+      color: #232b3a;
+      font-size: 22px;
+      line-height: 1.35;
+    }
+
+    .lark-assistant-page-head p {
+      margin: 7px 0 0;
+      color: #8992a1;
+      font-size: 11px;
+    }
+
+    .lark-assistant-section + .lark-assistant-section {
+      margin-top: 21px;
+    }
+
+    .lark-assistant-section-head {
+      display: flex;
+      min-height: 27px;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      margin-bottom: 9px;
+    }
+
+    .lark-assistant-section-head h3 {
+      margin: 0;
+      color: #333a47;
+      font-size: 13px !important;
+    }
+
+    .lark-assistant-section-head p {
+      margin: 2px 0 0;
+      color: #9299a5;
+      font-size: 10px !important;
+    }
+
+    .lark-assistant-link-grid {
+      display: grid;
+      max-width: 660px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .lark-assistant-link-card {
+      display: flex;
+      min-width: 0;
+      min-height: 60px;
+      align-items: center;
+      gap: 11px;
+      padding: 10px 12px;
+      border: 1px solid #e2e5ea;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .lark-assistant-link-icon {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      place-items: center;
+      border: 1px solid #e1e5eb;
+      border-radius: 7px;
+      color: #596579;
+      background: #fafbfc;
+    }
+
+    .lark-assistant-link-icon svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.45;
+    }
+
+    .lark-assistant-link-card strong,
+    .lark-assistant-link-card span {
+      display: block;
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
       white-space: nowrap;
     }
 
-    .lark-resource-description {
-      max-width: 620px;
-      color: #8c929d;
+    .lark-assistant-link-card strong {
+      color: #353c49;
+      font-size: 12px;
+    }
+
+    .lark-assistant-link-card span {
+      margin-top: 3px;
+      color: #8c95a3;
+      font-size: 10px;
+    }
+
+    .lark-assistant-mode-grid {
+      display: grid;
+      max-width: 660px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .lark-assistant-mode-card {
+      position: relative;
+      display: flex;
+      min-height: 218px;
+      flex-direction: column;
+      padding: 13px;
+      overflow: hidden;
+      border: 1px solid #e2e5ea;
+      border-radius: 9px;
+      color: #3b4351;
+      text-align: left;
+      background: #fff;
+      box-shadow: none;
+      transition: border-color .16s ease, box-shadow .16s ease;
+    }
+
+    .lark-assistant-mode-card:hover {
+      border-color: #b8c8e8;
+    }
+
+    .lark-assistant-mode-card.active {
+      border-color: #9eafd0;
+      box-shadow: 0 0 0 1px rgba(49, 87, 230, .06), 0 8px 22px rgba(50, 65, 94, .06);
+    }
+
+    .lark-assistant-mode-radio {
+      display: inline-block;
+      width: 14px;
+      height: 14px;
+      margin-right: 6px;
+      border: 1px solid #c8ced8;
+      border-radius: 50%;
+      background: #fff;
+      vertical-align: -2px;
+    }
+
+    .lark-assistant-mode-card.active .lark-assistant-mode-radio {
+      border: 4px solid #8fb0ea;
+    }
+
+    .lark-assistant-mode-card strong {
+      color: #444b58;
+      font-size: 12px;
+    }
+
+    .lark-assistant-mode-badge {
+      margin-left: 6px;
+      padding: 2px 5px;
+      border-radius: 4px;
+      color: #4f946d;
+      background: #e9f6ee;
       font-size: 9px;
+      font-weight: 650;
+    }
+
+    .lark-assistant-mode-badge.shared {
+      color: #7664ba;
+      background: #f0edfb;
+    }
+
+    .lark-assistant-mode-card > p {
+      min-height: 35px;
+      margin: 8px 0 7px;
+      color: #9097a3;
+      font-size: 10px !important;
       line-height: 1.55;
     }
 
-    .lark-resource-grid {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-    }
-
-    .lark-resource-card {
-      min-height: 164px;
-    }
-
-    .lark-resource-card .resource-card-head {
-      align-items: center;
-    }
-
-    .lark-resource-avatar {
-      width: 30px;
-      height: 30px;
-      flex-basis: 30px;
-      border-radius: 7px;
-      color: #2f73e8;
-      background: #edf4ff;
-      font-size: 10px;
-      font-weight: 750;
-    }
-
-    .lark-resource-card .resource-status {
-      flex: 0 0 auto;
-    }
-
-    .lark-resource-card .resource-card-copy {
-      min-height: 40px;
-    }
-
-    .lark-resource-card .resource-card-actions {
+    .lark-assistant-mode-example {
       display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      min-height: 116px;
+      margin-top: auto;
+      gap: 7px;
+      padding: 10px;
+      border-radius: 8px;
+      background: linear-gradient(145deg, #f4f7ff, #eef3ff);
     }
 
-    .lark-resource-card .resource-action {
-      min-width: 0;
-      padding: 0 5px;
+    .lark-assistant-mode-card[data-lark-task-mode="shared"] .lark-assistant-mode-example {
+      background: linear-gradient(145deg, #f7f3ff, #f1edff);
+    }
+
+    .lark-assistant-mode-example > b {
+      color: #767f8d;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    .lark-assistant-mode-task {
+      display: flex;
+      min-height: 31px;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 8px;
+      border-radius: 6px;
+      color: #747e8d;
+      background: rgba(255, 255, 255, .82);
+      font-size: 9px;
+    }
+
+    .lark-assistant-mode-task em {
+      padding: 3px 6px;
+      border-radius: 4px;
+      color: #fff;
+      background: #83a8ec;
+      font-size: 8px;
+      font-style: normal;
+    }
+
+    .lark-assistant-mode-card[data-lark-task-mode="shared"] .lark-assistant-mode-task em {
+      background: #9b84df;
+    }
+
+    .lark-assistant-member-panel {
+      max-width: 100%;
       overflow: hidden;
+      border: 1px solid #e2e5ea;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .lark-assistant-member-note {
+      padding: 10px 12px;
+      color: #5f6e84;
+      background: #eef4ff;
+      font-size: 10px;
+      line-height: 1.5;
+    }
+
+    .lark-assistant-member-toolbar {
+      display: flex;
+      min-height: 46px;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 0 12px;
+      border-bottom: 1px solid #e7e9ed;
+    }
+
+    .lark-assistant-tabs {
+      display: flex;
+      align-self: stretch;
+      gap: 18px;
+    }
+
+    .lark-assistant-tab {
+      position: relative;
+      border: 0;
+      color: #808997;
+      background: transparent;
+      font-size: 11px;
+    }
+
+    .lark-assistant-tab[aria-selected="true"] {
+      color: #273247;
+      font-weight: 700;
+    }
+
+    .lark-assistant-tab[aria-selected="true"]::after {
+      position: absolute;
+      right: 0;
+      bottom: -1px;
+      left: 0;
+      height: 2px;
+      background: #3157e6;
+      content: "";
+    }
+
+    .lark-assistant-sync {
+      min-height: 30px;
+      margin: 8px 0;
+      padding: 0 10px;
+      border: 1px solid #dfe3e9;
+      border-radius: 6px;
+      color: #596579;
+      background: #fff;
+      font-size: 10px;
+    }
+
+    .lark-assistant-member-list {
+      display: grid;
+    }
+
+    .lark-assistant-member-row {
+      display: flex;
+      min-height: 45px;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-bottom: 1px solid #eceef1;
+    }
+
+    .lark-assistant-member-row:last-child {
+      border-bottom: 0;
+    }
+
+    .lark-assistant-member-avatar {
+      display: grid;
+      width: 25px;
+      height: 25px;
+      flex: 0 0 25px;
+      place-items: center;
+      border-radius: 50%;
+      color: #fff;
+      background: linear-gradient(145deg, #536989, #293953);
+      font-size: 9px;
+      font-weight: 700;
+    }
+
+    .lark-assistant-member-row strong {
+      min-width: 0;
+      flex: 1;
+      color: #3f4755;
+      font-size: 11px;
+    }
+
+    .lark-assistant-member-row span {
+      padding: 3px 6px;
+      border-radius: 4px;
+      color: #657286;
+      background: #f0f2f5;
+      font-size: 9px;
+    }
+
+    .lark-assistant-group-search {
+      position: relative;
+      display: block;
+      width: min(280px, 100%);
+      margin-bottom: 12px;
+    }
+
+    .lark-assistant-group-search svg {
+      position: absolute;
+      top: 50%;
+      left: 11px;
+      width: 15px;
+      height: 15px;
+      color: #8c95a4;
+      transform: translateY(-50%);
+    }
+
+    .lark-assistant-group-search input {
+      width: 100%;
+      height: 34px;
+      padding: 0 12px 0 34px;
+      border: 1px solid #dfe3e9;
+      border-radius: 6px;
+      color: #384151;
+      background: #fff;
+      font: inherit;
+      font-size: 11px;
+    }
+
+    .lark-assistant-group-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 300px));
+      gap: 11px;
+    }
+
+    .lark-assistant-group-card {
+      display: flex;
+      min-height: 145px;
+      flex-direction: column;
+      overflow: hidden;
+      border: 1px solid #e1e5ea;
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .lark-assistant-group-card.connected {
+      border-color: #b6d6be;
+      box-shadow: 0 5px 16px rgba(47, 94, 61, .07);
+    }
+
+    .lark-assistant-group-create {
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      border-style: dashed;
+      color: #8c95a2;
+      background: #f7f8fa;
+    }
+
+    .lark-assistant-group-create:hover {
+      color: #3157e6;
+      border-color: #aebde7;
+      background: #f4f6ff;
+    }
+
+    .lark-assistant-group-create-visual {
+      position: relative;
+      width: 58px;
+      height: 48px;
+    }
+
+    .lark-assistant-group-create-visual::before,
+    .lark-assistant-group-create-visual::after {
+      position: absolute;
+      width: 30px;
+      height: 37px;
+      border: 1px solid #dfe3ea;
+      border-radius: 5px;
+      background: #fff;
+      box-shadow: 0 5px 12px rgba(42, 51, 68, .08);
+      content: "";
+    }
+
+    .lark-assistant-group-create-visual::before {
+      top: 4px;
+      left: 7px;
+      transform: rotate(-7deg);
+    }
+
+    .lark-assistant-group-create-visual::after {
+      right: 5px;
+      bottom: 1px;
+      content: "+";
+      color: #9ea6b3;
+      font-size: 17px !important;
+      line-height: 35px;
+      text-align: center;
+      transform: rotate(7deg);
+    }
+
+    .lark-assistant-group-create strong {
+      font-size: 11px;
+      font-weight: 600;
+    }
+
+    .lark-assistant-group-card-main {
+      display: flex;
+      min-height: 105px;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 16px;
+      text-align: center;
+    }
+
+    .lark-assistant-group-mark {
+      display: grid;
+      width: 38px;
+      height: 38px;
+      flex: 0 0 38px;
+      place-items: center;
+      border: 2px solid #e34a99;
+      border-radius: 50%;
+      color: #d83e91;
+      background: #fff;
+      font-size: 17px;
+    }
+
+    .lark-assistant-group-mark svg {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.55;
+    }
+
+    .lark-assistant-group-card-main strong {
+      max-width: 190px;
+      color: #414956;
+      font-size: 12px;
+      line-height: 1.55;
+    }
+
+    .lark-assistant-group-actions {
+      display: grid;
+      min-height: 39px;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid #e6e9ed;
+      background: #fafbfc;
+    }
+
+    .lark-assistant-group-actions button {
+      display: inline-flex;
+      min-width: 0;
+      align-items: center;
+      justify-content: center;
+      gap: 5px;
+      padding: 0 6px;
+      border: 0;
+      color: #737d8d;
+      background: transparent;
+      font-size: 10px;
       white-space: nowrap;
+    }
+
+    .lark-assistant-group-actions button:hover {
+      color: #3157e6;
+      background: #f1f4fc;
+    }
+
+    .lark-assistant-group-actions svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.45;
+    }
+
+    .lark-assistant-group-empty {
+      display: grid;
+      min-height: 240px;
+      place-items: center;
+      border: 1px dashed #dce1e8;
+      border-radius: 9px;
+      color: #949ca9;
+      background: #fafbfc;
+      font-size: 11px;
+    }
+
+    .lark-assistant-usage-page {
+      width: 100%;
+      max-width: none;
+    }
+
+    .lark-assistant-usage-metrics,
+    .lark-assistant-usage-charts {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .lark-assistant-usage-metric,
+    .lark-assistant-usage-chart {
+      border: 1px solid #e1e5ea;
+      border-radius: 15px;
+      background: #fff;
+    }
+
+    .lark-assistant-usage-metric {
+      min-height: 108px;
+      padding: 23px 28px;
+    }
+
+    .lark-assistant-usage-metric span,
+    .lark-assistant-usage-metric strong {
+      display: block;
+    }
+
+    .lark-assistant-usage-metric span {
+      color: #7f8897;
+      font-size: 11px;
+    }
+
+    .lark-assistant-usage-metric strong {
+      margin-top: 12px;
+      color: #202a3b;
+      font-size: 22px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .lark-assistant-usage-charts {
+      margin-top: 18px;
+    }
+
+    .lark-assistant-usage-chart {
+      position: relative;
+      min-height: 395px;
+      padding: 23px 28px;
+    }
+
+    .lark-assistant-usage-chart span,
+    .lark-assistant-usage-chart strong {
+      display: block;
+    }
+
+    .lark-assistant-usage-chart > span {
+      color: #7f8897;
+      font-size: 11px;
+    }
+
+    .lark-assistant-usage-chart > strong {
+      margin-top: 12px;
+      color: #202a3b;
+      font-size: 22px;
+    }
+
+    .lark-assistant-usage-empty {
+      position: absolute;
+      inset: 105px 28px 28px;
+      display: grid;
+      place-items: center;
+      color: #969eaa;
+      font-size: 11px;
+    }
+
+    .modal-wrap.lark-drawer-open {
+      align-items: stretch;
+      justify-items: end;
+      padding: 0;
+      background: rgba(21, 27, 40, .14);
+      backdrop-filter: none;
+    }
+
+    .modal.lark-drawer-modal {
+      display: grid;
+      width: min(540px, 100vw);
+      height: 100dvh;
+      max-height: none;
+      grid-template-rows: auto minmax(0, 1fr);
+      border-left: 1px solid #dde2e9;
+      border-radius: 12px 0 0 12px;
+      box-shadow: -16px 0 42px rgba(23, 30, 43, .15);
+      animation: lark-assistant-drawer-in .2s ease-out both;
+    }
+
+    @keyframes lark-assistant-drawer-in {
+      from { transform: translateX(28px); }
+      to { transform: translateX(0); }
+    }
+
+    .modal.lark-drawer-modal .modal-head {
+      height: auto;
+      min-height: 58px;
+      align-items: flex-start;
+      padding: 16px 18px 12px;
+      background: #fff;
+    }
+
+    .modal.lark-drawer-modal .modal-head h3 {
+      color: #2c3441;
+      font-size: 15px !important;
+    }
+
+    .modal.lark-drawer-modal .close {
+      flex: 0 0 30px;
+      background: transparent;
+    }
+
+    .modal.lark-drawer-modal .modal-body {
+      min-height: 0;
+      padding: 0 18px 18px;
+      overflow: auto;
+      overscroll-behavior: contain;
+      background: #fff;
+    }
+
+    .modal.lark-drawer-modal .modal-actions {
+      display: none;
+    }
+
+    .lark-assistant-drawer-description {
+      margin: -7px 32px 13px 0;
+      color: #8a93a1;
+      font-size: 10px;
+      line-height: 1.55;
+    }
+
+    .lark-assistant-drawer-tools {
+      display: grid;
+      grid-template-columns: auto minmax(0, 1fr);
+      gap: 10px;
+      margin-bottom: 13px;
+    }
+
+    .lark-assistant-drawer-tabs {
+      display: flex;
+      min-height: 33px;
+      padding: 3px;
+      border-radius: 6px;
+      background: #f0f2f5;
+    }
+
+    .lark-assistant-drawer-tabs button {
+      min-height: 27px;
+      padding: 0 10px;
+      border: 0;
+      border-radius: 5px;
+      color: #717b8b;
+      background: transparent;
+      font-size: 10px;
+      white-space: nowrap;
+    }
+
+    .lark-assistant-drawer-tabs button[aria-selected="true"] {
+      color: #344052;
+      background: #fff;
+      box-shadow: 0 1px 3px rgba(28, 36, 50, .08);
+      font-weight: 650;
+    }
+
+    .lark-assistant-drawer-search {
+      position: relative;
+    }
+
+    .lark-assistant-drawer-search svg {
+      position: absolute;
+      top: 50%;
+      left: 10px;
+      width: 14px;
+      height: 14px;
+      color: #929aa7;
+      transform: translateY(-50%);
+    }
+
+    .lark-assistant-drawer-search input {
+      width: 100%;
+      height: 33px;
+      padding: 0 11px 0 31px;
+      border: 1px solid #dfe3e9;
+      border-radius: 6px;
+      color: #3b4452;
+      background: #fff;
+      font: inherit;
+      font-size: 10px;
+    }
+
+    .lark-assistant-drawer-list {
+      overflow: hidden;
+      border: 1px solid #e3e6ea;
+      border-radius: 7px;
+    }
+
+    .lark-assistant-drawer-row {
+      display: grid;
+      min-height: 54px;
+      grid-template-columns: 27px minmax(0, 1fr) auto;
+      align-items: center;
+      gap: 9px;
+      padding: 9px 10px;
+      border-bottom: 1px solid #eceef1;
+      background: #fff;
+    }
+
+    .lark-assistant-drawer-row:last-child {
+      border-bottom: 0;
+    }
+
+    .lark-assistant-drawer-row-icon {
+      position: relative;
+      display: grid;
+      width: 27px;
+      height: 27px;
+      place-items: center;
+      border: 1px solid #dfe3e8;
+      border-radius: 5px;
+      color: #657084;
+      background: #fafbfc;
+      font-size: 9px;
+    }
+
+    .lark-assistant-drawer-row-icon::after {
+      position: absolute;
+      right: -3px;
+      bottom: -3px;
+      width: 8px;
+      height: 8px;
+      border: 2px solid #fff;
+      border-radius: 50%;
+      background: #42ad69;
+      content: "";
+    }
+
+    .lark-assistant-drawer-row-copy {
+      min-width: 0;
+    }
+
+    .lark-assistant-drawer-row-copy strong,
+    .lark-assistant-drawer-row-copy span {
+      display: block;
+      overflow: hidden;
       text-overflow: ellipsis;
+      white-space: nowrap;
     }
 
-    .lark-config-resource-card {
-      min-height: 142px;
+    .lark-assistant-drawer-row-copy strong {
+      color: #3c4452;
+      font-size: 11px;
     }
 
-    .lark-config-resource-card .resource-card-copy {
-      min-height: 44px;
+    .lark-assistant-drawer-row-copy span {
+      margin-top: 4px;
+      color: #8c95a2;
+      font-size: 9px;
     }
 
-    .lark-config-resource-card .resource-card-actions {
-      justify-content: flex-end;
+    .lark-assistant-drawer-row time {
+      color: #929aa6;
+      font-size: 9px;
+      white-space: nowrap;
+    }
+
+    .lark-assistant-drawer-empty {
+      display: grid;
+      min-height: calc(100vh - 160px);
+      place-items: center;
+      border: 1px solid #e4e7eb;
+      border-radius: 7px;
+      color: #8992a0;
+      background: #fafbfc;
+      font-size: 11px;
+    }
+
+    .lark-assistant-settings-section {
+      padding: 15px 0;
+      border-top: 1px solid #e7e9ed;
+    }
+
+    .lark-assistant-settings-section h4 {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin: 0 0 13px;
+      color: #444c59;
+      font-size: 11px !important;
+    }
+
+    .lark-assistant-settings-section h4 svg {
+      width: 15px;
+      height: 15px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+    }
+
+    .lark-assistant-setting-options {
+      display: grid;
+      gap: 10px;
+    }
+
+    .lark-assistant-setting-option {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      color: #687384;
+      font-size: 10px;
+    }
+
+    .lark-assistant-setting-option input {
+      width: 14px;
+      height: 14px;
+      margin: 0;
+      accent-color: #4f83e6;
+    }
+
+    .lark-assistant-clear-context {
+      display: inline-flex;
+      min-height: 34px;
+      align-items: center;
+      gap: 7px;
+      padding: 0;
+      border: 0;
+      color: #596579;
+      background: transparent;
+      font-size: 10px;
+    }
+
+    .lark-assistant-clear-context:hover {
+      color: #c94752;
+    }
+
+    .lark-assistant-clear-context svg {
+      width: 14px;
+      height: 14px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.5;
+    }
+
+    .lark-assistant-context-state {
+      margin-left: 8px;
+      color: #9aa1ac;
+      font-size: 9px;
+    }
+
+    @media (max-width: 1024px) {
+      .lark-assistant-mode-grid,
+      .lark-assistant-link-grid {
+        max-width: none;
+      }
+
+      .lark-assistant-usage-chart {
+        min-height: 330px;
+      }
+    }
+
+    @media (max-width: 760px) {
+      .lark-assistant-overview {
+        padding: 22px 16px;
+      }
+
+      .lark-assistant-overview-card {
+        align-items: flex-start;
+        flex-wrap: wrap;
+      }
+
+      .lark-assistant-overview-copy {
+        min-width: 170px;
+      }
+
+      .lark-assistant-overview-actions {
+        margin-left: 60px;
+      }
+
+      .lark-assistant-config-shell {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .lark-assistant-config-nav {
+        position: static;
+        height: auto;
+        min-height: 0;
+        padding: 10px 12px 8px;
+        border-right: 0;
+        border-bottom: 1px solid #e3e6eb;
+      }
+
+      .lark-assistant-config-nav h2 {
+        margin: 6px 4px 8px;
+      }
+
+      .lark-assistant-nav-list {
+        display: flex;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+
+      .lark-assistant-nav-list::-webkit-scrollbar {
+        display: none;
+      }
+
+      .lark-assistant-nav-list + .lark-assistant-nav-list {
+        margin-top: 4px;
+        padding-top: 4px;
+        border-top: 0;
+      }
+
+      .lark-assistant-nav-item {
+        width: auto;
+        flex: 0 0 auto;
+        padding: 0 11px;
+      }
+
+      .lark-assistant-config-main {
+        padding: 20px 15px 32px;
+      }
+
+      .lark-assistant-link-grid,
+      .lark-assistant-mode-grid,
+      .lark-assistant-usage-metrics,
+      .lark-assistant-usage-charts {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .lark-assistant-member-toolbar {
+        align-items: stretch;
+        flex-direction: column;
+      }
+
+      .lark-assistant-sync {
+        align-self: flex-end;
+      }
+
+      .lark-assistant-group-grid {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .lark-assistant-usage-chart {
+        min-height: 280px;
+      }
+
+      .modal.lark-drawer-modal {
+        width: 100vw;
+        border-left: 0;
+        border-radius: 0;
+      }
+
+      .lark-assistant-drawer-tools {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .lark-assistant-drawer-tabs button {
+        flex: 1;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .lark-assistant-icon-action,
+      .lark-assistant-icon-action::after,
+      .modal.lark-drawer-modal {
+        animation: none;
+        transition: none;
+      }
     }
 
     @media (max-width: 1320px) {
@@ -28350,6 +29514,1038 @@
       }
     }
 
+    /* Chapter 04: compact, single-turn data insight cases. */
+    .pre-insight-case-showcase {
+      padding: 18px 20px 0;
+    }
+
+    .pre-insight-case-showcase-head {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 9px;
+    }
+
+    .pre-insight-case-showcase-head h3 {
+      margin: 0;
+      color: var(--color-text-heading);
+      font-size: var(--font-size-card);
+    }
+
+    .pre-insight-case-showcase-head span {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-caption);
+    }
+
+    .pre-insight-case-list {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 8px;
+    }
+
+    .pre-insight-case-button {
+      position: relative;
+      display: grid;
+      min-width: 0;
+      min-height: 64px;
+      gap: 4px;
+      align-content: center;
+      padding: 10px 34px 10px 12px;
+      border: 1px solid var(--chapter-line);
+      border-radius: var(--radius-md);
+      color: var(--color-text-primary);
+      text-align: left;
+      background: var(--color-surface-default);
+      box-shadow: var(--shadow-low);
+    }
+
+    .pre-insight-case-button::after {
+      position: absolute;
+      top: 50%;
+      right: 13px;
+      color: var(--chapter-accent);
+      content: "›";
+      font-size: 18px;
+      line-height: 1;
+      transform: translateY(-50%);
+    }
+
+    .pre-insight-case-button:hover,
+    .pre-insight-case-button:focus-visible {
+      border-color: var(--chapter-line-strong);
+      background: var(--chapter-surface);
+      box-shadow: 0 6px 16px var(--chapter-shadow);
+    }
+
+    .pre-insight-case-button b,
+    .pre-insight-case-button span {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .pre-insight-case-button b {
+      color: var(--chapter-accent);
+      font-size: var(--font-size-body);
+    }
+
+    .pre-insight-case-button span {
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-caption);
+    }
+
+    .insight-conversation-answer {
+      display: grid;
+      gap: 12px;
+    }
+
+    .insight-answer-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .insight-answer-head h3 {
+      margin: 4px 0 0;
+      color: var(--color-text-heading);
+      font-size: var(--font-size-subsection-lg);
+      line-height: 1.45;
+    }
+
+    .insight-answer-status {
+      color: #6557b6;
+      font-size: var(--font-size-caption);
+      font-weight: 750;
+    }
+
+    .insight-answer-scope {
+      flex: 0 0 auto;
+      padding: 4px 8px;
+      border: 1px solid #ddd7f4;
+      border-radius: var(--radius-pill);
+      color: #6557b6;
+      background: #f6f4fd;
+      font-size: var(--font-size-micro);
+      font-weight: 700;
+    }
+
+    .insight-answer-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .insight-answer-metrics > div {
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid #e4e0f3;
+      border-radius: var(--radius-md);
+      background: #f8f7fc;
+    }
+
+    .insight-answer-metrics b,
+    .insight-answer-metrics span {
+      display: block;
+    }
+
+    .insight-answer-metrics b {
+      color: #413b67;
+      font-size: var(--font-size-card-lg);
+    }
+
+    .insight-answer-metrics span {
+      margin-top: 2px;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-micro);
+    }
+
+    .insight-answer-table-wrap {
+      max-width: 100%;
+      overflow-x: auto;
+      border: 1px solid var(--color-border-default);
+      border-radius: var(--radius-md);
+    }
+
+    .insight-answer-table {
+      width: 100%;
+      min-width: 660px;
+      border-collapse: collapse;
+      font-size: var(--font-size-caption);
+    }
+
+    .insight-answer-table th,
+    .insight-answer-table td {
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--color-border-default);
+      text-align: left;
+      white-space: nowrap;
+    }
+
+    .insight-answer-table th {
+      color: #59647a;
+      background: var(--color-surface-subtle);
+      font-weight: 720;
+    }
+
+    .insight-answer-table td {
+      color: var(--color-text-secondary);
+    }
+
+    .insight-answer-table td:first-child {
+      color: var(--color-text-primary);
+      font-weight: 680;
+    }
+
+    .insight-answer-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .insight-ai-conclusion {
+      padding: 11px 12px;
+      border-left: 3px solid #6557b6;
+      border-radius: 0 var(--radius-md) var(--radius-md) 0;
+      background: #f6f4fd;
+    }
+
+    .insight-ai-conclusion b,
+    .insight-ai-conclusion strong,
+    .insight-ai-conclusion p {
+      display: block;
+    }
+
+    .insight-ai-conclusion b {
+      color: #6557b6;
+      font-size: var(--font-size-micro);
+      letter-spacing: .04em;
+    }
+
+    .insight-ai-conclusion strong {
+      margin-top: 3px;
+      color: #302b4d;
+      font-size: var(--font-size-card);
+    }
+
+    .insight-ai-conclusion p {
+      margin: 5px 0 0;
+      color: #5d5875;
+      font-size: var(--font-size-caption);
+      line-height: 1.65;
+    }
+
+    .insight-answer-foot {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      gap: 6px 16px;
+      padding-top: 2px;
+      color: var(--color-text-secondary);
+      font-size: var(--font-size-micro);
+    }
+
+    @media (max-width: 900px) {
+      .pre-insight-case-list {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    @media (max-width: 760px) {
+      .pre-insight-case-showcase-head,
+      .insight-answer-head {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+
+      .insight-answer-metrics {
+        grid-template-columns: minmax(0, 1fr);
+      }
+    }
+
+    /* Historical Lark digest: mirror a compact interactive message card. */
+    .message-bubble:has(.lark-daily-summary-card) {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .lark-daily-summary-card {
+      overflow: hidden;
+      border: 1px solid #dce3ef;
+      border-radius: 12px;
+      color: #1f2329;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(31, 35, 41, .08);
+    }
+
+    .lark-summary-header {
+      display: flex;
+      min-height: 68px;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      color: #fff;
+      background:
+        radial-gradient(circle at 88% -20%, rgba(255, 255, 255, .28), transparent 42%),
+        #3370ff;
+    }
+
+    .lark-summary-mark {
+      display: grid;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      place-items: center;
+      border-radius: 9px;
+      color: #3370ff;
+      background: #fff;
+      font-size: 15px;
+      font-weight: 800;
+    }
+
+    .lark-summary-title {
+      min-width: 0;
+    }
+
+    .lark-summary-title h3 {
+      margin: 0;
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.4;
+    }
+
+    .lark-summary-title p {
+      margin: 3px 0 0;
+      color: rgba(255, 255, 255, .82);
+      font-size: 9px;
+    }
+
+    .lark-summary-body {
+      display: grid;
+      gap: 14px;
+      padding: 14px 16px;
+    }
+
+    .lark-summary-stats {
+      display: grid;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .lark-summary-stat {
+      min-width: 0;
+      padding: 9px 10px;
+      border: 1px solid #e7eaf0;
+      border-radius: 8px;
+      background: #f7f8fa;
+    }
+
+    .lark-summary-stat b,
+    .lark-summary-stat span {
+      display: block;
+    }
+
+    .lark-summary-stat b {
+      color: #1f2329;
+      font-size: 14px;
+    }
+
+    .lark-summary-stat span {
+      margin-top: 2px;
+      color: #646a73;
+      font-size: 8px;
+    }
+
+    .lark-summary-section {
+      display: grid;
+      gap: 8px;
+    }
+
+    .lark-summary-section + .lark-summary-section {
+      padding-top: 13px;
+      border-top: 1px solid #eff0f1;
+    }
+
+    .lark-summary-section h4 {
+      margin: 0;
+      color: #1f2329;
+      font-size: 11px;
+    }
+
+    .lark-summary-focus {
+      padding: 10px 11px;
+      border-left: 3px solid #3370ff;
+      border-radius: 0 8px 8px 0;
+      color: #3f4a5a;
+      background: #f3f6ff;
+      font-size: 10px;
+      line-height: 1.65;
+    }
+
+    .lark-summary-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .lark-summary-list li {
+      display: grid;
+      grid-template-columns: 22px minmax(0, 1fr);
+      gap: 8px;
+      align-items: start;
+      color: #3f454f;
+      font-size: 10px;
+      line-height: 1.6;
+    }
+
+    .lark-summary-list li > span:first-child {
+      display: grid;
+      width: 22px;
+      height: 22px;
+      place-items: center;
+      border-radius: 6px;
+      color: #245bdb;
+      background: #edf2ff;
+      font-size: 8px;
+      font-weight: 750;
+    }
+
+    .lark-summary-list strong {
+      color: #1f2329;
+    }
+
+    .lark-summary-todos {
+      display: grid;
+      gap: 6px;
+    }
+
+    .lark-summary-todo {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 12px;
+      align-items: center;
+      padding: 8px 10px;
+      border: 1px solid #e7eaf0;
+      border-radius: 8px;
+      background: #fff;
+    }
+
+    .lark-summary-todo div {
+      min-width: 0;
+    }
+
+    .lark-summary-todo b,
+    .lark-summary-todo span {
+      display: block;
+    }
+
+    .lark-summary-todo b {
+      color: #1f2329;
+      font-size: 10px;
+    }
+
+    .lark-summary-todo span {
+      margin-top: 2px;
+      color: #8f959e;
+      font-size: 8px;
+    }
+
+    .lark-summary-todo em {
+      padding: 3px 7px;
+      border-radius: 999px;
+      color: #d46b08;
+      background: #fff3e0;
+      font-size: 8px;
+      font-style: normal;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .lark-summary-risk {
+      display: flex;
+      gap: 8px;
+      padding: 9px 10px;
+      border-radius: 8px;
+      color: #7a4517;
+      background: #fff7e8;
+      font-size: 9px;
+      line-height: 1.6;
+    }
+
+    .lark-summary-risk b {
+      flex: 0 0 auto;
+      color: #ad5700;
+    }
+
+    .lark-summary-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px;
+      border-top: 1px solid #eff0f1;
+      color: #8f959e;
+      background: #fafafa;
+      font-size: 8px;
+    }
+
+    @media (max-width: 760px) {
+      .lark-summary-stats {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+      }
+
+      .lark-summary-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    .history-item[data-scheduled-history]::before {
+      content: none;
+    }
+
+    .history-scheduled-icon,
+    .history-session-clock {
+      display: inline-grid;
+      place-items: center;
+      border-radius: 6px;
+      color: #aebde9;
+      background: #29334b;
+    }
+
+    .history-scheduled-icon {
+      width: 20px;
+      height: 20px;
+    }
+
+    .history-scheduled-icon svg,
+    .history-session-clock svg {
+      width: 13px;
+      height: 13px;
+      fill: none;
+      stroke: currentColor;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      stroke-width: 1.7;
+    }
+
+    .history-session-title {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+
+    .history-session-title-text {
+      min-width: 0;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .history-session-clock {
+      width: 20px;
+      height: 20px;
+      flex: 0 0 20px;
+      color: #536baf;
+      background: #eef2ff;
+    }
+
+    .message-bubble:has(.experiment-realtime-card) {
+      padding: 0;
+      border: 0;
+      background: transparent;
+      box-shadow: none;
+    }
+
+    .experiment-realtime-card {
+      overflow: hidden;
+      border: 1px solid #d8dfeb;
+      border-radius: 12px;
+      color: #1f2329;
+      background: #fff;
+      box-shadow: 0 8px 24px rgba(31, 35, 41, .08);
+    }
+
+    .experiment-card-header {
+      display: flex;
+      min-height: 60px;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 16px;
+      border-bottom: 1px solid #d7e0f7;
+      color: #2858b8;
+      background: linear-gradient(110deg, #edf3ff, #e3ecff);
+    }
+
+    .experiment-card-header .history-session-clock {
+      width: 28px;
+      height: 28px;
+      flex-basis: 28px;
+      color: #2858b8;
+      background: rgba(255, 255, 255, .78);
+    }
+
+    .experiment-card-header h3 {
+      margin: 0;
+      color: #2858b8;
+      font-size: 15px;
+      line-height: 1.45;
+    }
+
+    .experiment-card-banner {
+      position: relative;
+      height: 210px;
+      margin: 14px 16px 0;
+      overflow: hidden;
+      border-radius: 9px;
+      background:
+        radial-gradient(circle at 50% 72%, rgba(255, 211, 83, .4) 0 7%, transparent 7.5%),
+        repeating-conic-gradient(from 248deg at 50% 72%, rgba(255, 177, 48, .25) 0 4deg, transparent 4deg 11deg),
+        linear-gradient(90deg, #8f1c15, #db451c 50%, #8f1c15);
+    }
+
+    .experiment-card-banner img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .experiment-banner-overlay {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      align-content: center;
+      justify-items: center;
+      padding: 24px;
+      color: #fff9d8;
+      text-align: center;
+      background: linear-gradient(90deg, rgba(91, 17, 10, .5), rgba(130, 25, 11, .08), rgba(91, 17, 10, .5));
+      text-shadow: 0 2px 12px rgba(58, 8, 3, .72);
+    }
+
+    .message-bubble .experiment-banner-overlay strong {
+      color: #fff9d8;
+      font-size: 25px;
+      line-height: 1.25;
+      letter-spacing: .04em;
+    }
+
+    .experiment-banner-overlay > span {
+      margin-top: 7px;
+      padding: 4px 10px;
+      border: 1px solid rgba(255, 255, 255, .46);
+      border-radius: 999px;
+      background: rgba(126, 31, 15, .48);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: .14em;
+    }
+
+    .experiment-banner-signals {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 7px;
+      margin-top: 12px;
+    }
+
+    .experiment-banner-signals span {
+      padding: 4px 9px;
+      border: 1px solid rgba(255, 241, 191, .48);
+      border-radius: 6px;
+      color: #fff6d5;
+      background: rgba(91, 17, 10, .5);
+      font-size: 8px;
+      font-weight: 700;
+      letter-spacing: .04em;
+    }
+
+    .experiment-card-body {
+      display: grid;
+      gap: 18px;
+      padding: 17px 16px 16px;
+    }
+
+    .experiment-card-section {
+      display: grid;
+      gap: 10px;
+    }
+
+    .experiment-card-section + .experiment-card-section {
+      padding-top: 17px;
+      border-top: 1px solid #e9ebef;
+    }
+
+    .experiment-card-section h4 {
+      margin: 0;
+      color: #20242c;
+      font-size: 13px;
+    }
+
+    .experiment-card-section > p {
+      margin: 0;
+      color: #4e5663;
+      font-size: 10px;
+      line-height: 1.75;
+    }
+
+    .experiment-key-list {
+      display: grid;
+      gap: 7px;
+      margin: 0;
+      padding-left: 22px;
+      color: #3e4653;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .experiment-key-list li::marker {
+      color: #3370ff;
+      font-weight: 750;
+    }
+
+    .experiment-chart {
+      padding: 11px 12px 8px;
+      border: 1px solid #e1e5ec;
+      border-radius: 9px;
+      background: #fff;
+    }
+
+    .experiment-chart h5 {
+      margin: 0 0 8px;
+      color: #30343b;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    .experiment-chart svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .experiment-chart-grid {
+      stroke: #e8ebf0;
+      stroke-dasharray: 3 4;
+      stroke-width: 1;
+    }
+
+    .experiment-chart-axis {
+      fill: #777e89;
+      font-size: 9px;
+    }
+
+    .experiment-chart-label {
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .experiment-chart-line {
+      fill: none;
+      stroke-width: 2.3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .experiment-chart-point {
+      stroke: #fff;
+      stroke-width: 1.5;
+    }
+
+    .experiment-chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 16px;
+      margin-top: 5px;
+      color: #59606c;
+      font-size: 8px;
+    }
+
+    .experiment-chart-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .experiment-chart-legend i {
+      width: 14px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--series-color);
+    }
+
+    .experiment-table-wrap {
+      max-width: 100%;
+      overflow-x: auto;
+      border: 1px solid #dfe3e9;
+      border-radius: 9px;
+    }
+
+    .experiment-data-table {
+      width: 100%;
+      min-width: 860px;
+      border-collapse: collapse;
+      font-size: 9px;
+    }
+
+    .experiment-data-table th,
+    .experiment-data-table td {
+      padding: 9px 10px;
+      border-right: 1px solid #e8eaee;
+      border-bottom: 1px solid #e8eaee;
+      text-align: right;
+      white-space: nowrap;
+    }
+
+    .experiment-data-table th {
+      color: #353a43;
+      background: #f5f6f8;
+      font-weight: 720;
+    }
+
+    .experiment-data-table th:first-child,
+    .experiment-data-table td:first-child {
+      text-align: left;
+    }
+
+    .experiment-data-table tr:last-child td {
+      border-bottom: 0;
+    }
+
+    .experiment-data-table :is(th, td):last-child {
+      border-right: 0;
+    }
+
+    .experiment-supply-summary {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 7px;
+    }
+
+    .experiment-supply-summary div {
+      min-width: 0;
+      padding: 10px;
+      border: 1px solid #e2e6ed;
+      border-radius: 8px;
+      background: #f7f8fa;
+    }
+
+    .experiment-supply-summary b,
+    .experiment-supply-summary span {
+      display: block;
+    }
+
+    .experiment-supply-summary b {
+      color: #2c3544;
+      font-size: 12px;
+    }
+
+    .experiment-supply-summary span {
+      margin-top: 3px;
+      color: #737a86;
+      font-size: 8px;
+      line-height: 1.45;
+    }
+
+    .experiment-card-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 10px 16px;
+      border-top: 1px solid #e9ebef;
+      color: #8a9099;
+      background: #fafafa;
+      font-size: 8px;
+    }
+
+    @media (max-width: 760px) {
+      .experiment-card-banner {
+        height: 160px;
+      }
+
+      .experiment-banner-overlay strong {
+        font-size: 19px;
+      }
+
+      .experiment-supply-summary {
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .experiment-card-footer {
+        align-items: flex-start;
+        flex-direction: column;
+      }
+    }
+
+    .water-level-data-answer {
+      display: grid;
+      gap: 12px;
+    }
+
+    .water-level-answer-head {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .water-level-answer-head h3 {
+      margin: 3px 0 0;
+      color: #25324a;
+      font-size: 16px;
+      line-height: 1.4;
+    }
+
+    .water-level-answer-head span {
+      color: #b86f18;
+      font-size: 9px;
+      font-weight: 750;
+    }
+
+    .water-level-answer-head time {
+      flex: 0 0 auto;
+      padding: 4px 8px;
+      border: 1px solid #ead7bd;
+      border-radius: 999px;
+      color: #9d641f;
+      background: #fff8ef;
+      font-size: 8px;
+      font-weight: 680;
+    }
+
+    .water-level-summary {
+      padding: 10px 12px;
+      border-left: 3px solid #c47a20;
+      border-radius: 0 8px 8px 0;
+      color: #5e4a32;
+      background: #fff8ef;
+      font-size: 10px;
+      line-height: 1.7;
+    }
+
+    .water-level-data-answer .insight-answer-metrics > div {
+      border-color: #eadfce;
+      background: #fbf8f4;
+    }
+
+    .water-level-data-answer .insight-answer-metrics b {
+      color: #8f5917;
+    }
+
+    .water-level-detail-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .water-level-detail-head h4 {
+      margin: 0;
+      color: #303a4d;
+      font-size: 11px;
+    }
+
+    .water-level-detail-head span {
+      color: #8991a0;
+      font-size: 8px;
+    }
+
+    .water-level-data-answer .insight-answer-table th {
+      color: #6b5437;
+      background: #faf6f0;
+    }
+
+    .water-level-trend-chart {
+      margin: 10px 0 0;
+      padding: 12px 14px 10px;
+      border: 1px solid #eadfce;
+      border-radius: 9px;
+      background: #fcfaf7;
+    }
+
+    .water-level-trend-chart h5 {
+      margin: 0 0 8px;
+      color: #3d4656;
+      font-size: 10px;
+      text-align: center;
+    }
+
+    .water-level-trend-chart svg {
+      display: block;
+      width: 100%;
+      height: auto;
+      overflow: visible;
+    }
+
+    .water-level-chart-grid {
+      stroke: #e7e0d6;
+      stroke-dasharray: 3 4;
+      stroke-width: 1;
+    }
+
+    .water-level-chart-axis {
+      fill: #7d8490;
+      font-size: 9px;
+    }
+
+    .water-level-chart-line {
+      fill: none;
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .water-level-chart-point {
+      stroke: #fff;
+      stroke-width: 1.5;
+    }
+
+    .water-level-chart-value {
+      font-size: 8px;
+      font-weight: 700;
+    }
+
+    .water-level-chart-legend {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px 18px;
+      margin-top: 5px;
+      color: #646c78;
+      font-size: 8px;
+    }
+
+    .water-level-chart-legend span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+    }
+
+    .water-level-chart-legend i {
+      width: 14px;
+      height: 2px;
+      border-radius: 999px;
+      background: var(--water-level-series);
+    }
+
+    .water-level-data-answer .insight-answer-foot {
+      padding-top: 8px;
+      border-top: 1px solid #ece5db;
+    }
+
+    @media (max-width: 760px) {
+      .water-level-answer-head {
+        flex-direction: column;
+      }
+    }
+
   </style>
 </head>
 <body>
@@ -28418,9 +30614,25 @@
         </div>
       </div>
       <div class="history-list">
-        <button class="history-item" data-history="券业务数据巡检" data-tooltip="券业务数据巡检" aria-label="券业务数据巡检">
+        <button class="history-item" data-history="券业务数据巡检" data-scheduled-history data-tooltip="券业务数据巡检" aria-label="定时任务：券业务数据巡检">
+          <span class="history-scheduled-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 4.7v3.6l2.5 1.5M4 1.8 2.2 3.6M12 1.8l1.8 1.8"/></svg>
+          </span>
           <span class="history-copy">
             <strong>券业务数据巡检</strong>
+          </span>
+        </button>
+        <button class="history-item" data-history="促中实验数据实时通知" data-scheduled-history data-tooltip="促中实验数据实时通知" aria-label="定时任务：促中实验数据实时通知">
+          <span class="history-scheduled-icon" aria-hidden="true">
+            <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 4.7v3.6l2.5 1.5M4 1.8 2.2 3.6M12 1.8l1.8 1.8"/></svg>
+          </span>
+          <span class="history-copy">
+            <strong>促中实验数据实时通知</strong>
+          </span>
+        </button>
+        <button class="history-item" data-history="近期自然水位情况数据查看" data-tooltip="近期自然水位情况数据查看" aria-label="近期自然水位情况数据查看">
+          <span class="history-copy">
+            <strong>近期自然水位情况数据查看</strong>
           </span>
         </button>
         <button class="history-item" data-history="促前券档位设计" data-tooltip="促前券档位设计" aria-label="促前券档位设计">
@@ -28448,16 +30660,26 @@
             <strong>预算消耗异动归因分析</strong>
           </span>
         </div>
-        <div class="history-item is-static" data-tooltip="总结每日群聊消息" aria-label="总结每日群聊消息">
+        <button class="history-item" data-history="总结每日群聊消息" data-tooltip="总结每日群聊消息" aria-label="总结每日群聊消息">
           <span class="history-copy">
             <strong>总结每日群聊消息</strong>
           </span>
-        </div>
-        <div class="history-item is-static" data-tooltip="人群*券档领取核销分析" aria-label="人群*券档领取核销分析">
+        </button>
+        <button class="history-item" data-history="人群 × 券档历史表现" data-tooltip="人群 × 券档历史表现" aria-label="人群 × 券档历史表现">
           <span class="history-copy">
-            <strong>人群*券档领取核销分析</strong>
+            <strong>人群 × 券档历史表现</strong>
           </span>
-        </div>
+        </button>
+        <button class="history-item" data-history="券档 × 行业价格带" data-tooltip="券档 × 行业价格带" aria-label="券档 × 行业价格带">
+          <span class="history-copy">
+            <strong>券档 × 行业价格带</strong>
+          </span>
+        </button>
+        <button class="history-item" data-history="渠道 × 波次历史节奏" data-tooltip="渠道 × 波次历史节奏" aria-label="渠道 × 波次历史节奏">
+          <span class="history-copy">
+            <strong>渠道 × 波次历史节奏</strong>
+          </span>
+        </button>
       </div>
 
       <div class="sidebar-lower">
@@ -28698,6 +30920,13 @@
                 </div>
               </header>
               <div class="pre-chapter-body pre-chapter-history-body">
+                <section class="pre-insight-case-showcase" aria-labelledby="preInsightCaseTitle">
+                  <div class="pre-insight-case-showcase-head">
+                    <h3 id="preInsightCaseTitle">数据洞察会话示例</h3>
+                    <span>3 个单轮示例 · AI 输出数据与结论</span>
+                  </div>
+                  <div class="pre-insight-case-list" id="preInsightConversationCaseList" role="group" aria-label="数据洞察会话示例列表"></div>
+                </section>
                 <h3 class="visually-hidden" id="preHistoricalInsightListTitle">历史洞察卡片</h3>
                 <div class="pre-insight-body" id="preHistoricalInsights" aria-labelledby="preHistoricalInsightListTitle" aria-live="polite"></div>
               </div>
@@ -35484,7 +37713,204 @@
       addPanel: null
     };
 
+    const preInsightConversationCases = Object.freeze([
+      Object.freeze({
+        id: "audience-tier",
+        title: "人群 × 券档历史表现",
+        label: "人群 × 券档",
+        teaser: "哪组历史组合最值得复用？",
+        question: "我现在要做 26 年 618，请回看历史上不同人群 × 券档的数据表现，并告诉我最核心的发现。",
+        scope: "近两年 7 场同口径实验",
+        metrics: Object.freeze([
+          Object.freeze(["50.1%", "高价值高潜领后核销"]),
+          Object.freeze(["6.91", "高价值高潜 ROI"]),
+          Object.freeze(["20.0%", "低价值低潜领后核销"])
+        ]),
+        columns: Object.freeze(["人群", "历史券档", "领后核销", "ROI", "历史动作"]),
+        rows: Object.freeze([
+          Object.freeze(["高价值高潜", "中高门槛 + X", "50.1%", "6.91", "稳定放量"]),
+          Object.freeze(["中价值高潜", "600-80 + X", "43.0%", "6.41", "主力扩量"]),
+          Object.freeze(["新客", "300-40", "32.1%", "5.81", "低门槛拉新"]),
+          Object.freeze(["高潜回流", "600-80 / 未核销催用", "41.1%", "6.31", "持续期召回"]),
+          Object.freeze(["低价值低潜", "低门槛小流量", "20.0%", "4.10", "限制泛发"])
+        ]),
+        conclusionTitle: "价值与类目潜力共同分层，比单一消费等级更稳定",
+        conclusion: "高价值高潜人群能稳定消化中高门槛券，新客更适合 300-40 低门槛拉新；低价值低潜即使降低门槛，核销和 ROI 仍明显落后。26 年 618 建议把“高价值 × 高潜 × 中高门槛/X”作为重点验证组，新客保留低门槛对照，限制低价值低潜泛发。",
+        boundary: "标签覆盖、更新时间、券有效期与实验随机性需一致",
+        source: "消费券实验框架 · 价值 / 潜力 / 新客 / 回流"
+      }),
+      Object.freeze({
+        id: "tier-industry",
+        title: "券档 × 行业价格带",
+        label: "券档 × 行业",
+        teaser: "高门槛券问题出在曝光还是适配？",
+        question: "做 26 年 618 券档设计时，请总结历史上券档 × 行业价格带的数据表现，告诉我哪些档位值得保留、哪些需要谨慎。",
+        scope: "近两年 7 场同口径实验",
+        metrics: Object.freeze([
+          Object.freeze(["49.0%", "食品生鲜 300-40 核销"]),
+          Object.freeze(["47.0%", "数码家电 X 定向核销"]),
+          Object.freeze(["21.0%", "3000-420 整体核销"])
+        ]),
+        columns: Object.freeze(["券档", "匹配行业 / 价格带", "领后核销", "历史表现"]),
+        rows: Object.freeze([
+          Object.freeze(["300-40", "食品生鲜 / ¥0-399", "49.0%", "普惠档稳定"]),
+          Object.freeze(["600-80", "服饰鞋包 / ¥400-999", "42.0%", "主力承接"]),
+          Object.freeze(["3000-420", "数码家电 / ¥1,000+", "34.0%", "行业匹配后改善"]),
+          Object.freeze(["X 定向", "数码家电 / 高意向", "47.0%", "定向效率领先"])
+        ]),
+        conclusionTitle: "高门槛券的主要问题是价格带适配，不是曝光不足",
+        conclusion: "300-40 与 600-80 在低中价格带更稳定；3000-420 整体领后核销仅 21.0%，但匹配数码家电后可提升至 34.0%，说明不应直接停掉高门槛券，而应收敛到高客单行业和高意向人群。26 年 618 建议保留普惠主档，高门槛改为行业定向，并保留未匹配行业的对照组。",
+        boundary: "仅比较门槛、有效期和核销口径一致的券批次",
+        source: "消费券数据看板 · 券属性 / 行业价格带"
+      }),
+      Object.freeze({
+        id: "channel-wave",
+        title: "渠道 × 波次历史节奏",
+        label: "渠道 × 波次",
+        teaser: "不同阶段该由哪个渠道承担什么角色？",
+        question: "26 年 618 想重排投放节奏，请总结历史上渠道 × 波次的数据表现和你的核心发现。",
+        scope: "近两年多波段活动样本",
+        metrics: Object.freeze([
+          Object.freeze(["48.0%", "搜索领后核销"]),
+          Object.freeze(["44.0%", "会场领后核销"]),
+          Object.freeze(["26.1%", "Push 领后核销"])
+        ]),
+        columns: Object.freeze(["波次", "主要渠道", "核心数据", "历史角色"]),
+        rows: Object.freeze([
+          Object.freeze(["预热期", "会场 + 券包", "领取贡献 32%", "建立持券量"]),
+          Object.freeze(["爆发期", "会场 + 搜索", "领后核销 47%", "规模与高意图承接"]),
+          Object.freeze(["持续期", "搜索 + 精准 Push", "搜索核销 48%", "按意图补量"]),
+          Object.freeze(["收官期", "已领未用 Push", "催用核销 43%", "催用与预算回收"])
+        ]),
+        conclusionTitle: "渠道效率必须结合波次目标判断，不能用单一领取率排序",
+        conclusion: "会场负责规模，搜索承担高意图转化，Push 泛触达损耗最高但适合已领未用召回。26 年 618 建议预热和爆发期由会场建立规模、搜索承接高意图；持续期减少泛 Push，收官期把 Push 切换为已领未用催用，而不是继续扩领取。",
+        boundary: "需存在多波段和明确有效期；单日促、资源位样式变化时不直接套用",
+        source: "渠道投放策略 · 搜索 / 会场 / 券包 / Push"
+      })
+    ]);
+
+    const recentNaturalWaterLevelData = Object.freeze({
+      title: "近期自然水位情况数据查看",
+      question: "帮我看一下近期自然水位情况，返回核心摘要和数据明细即可。",
+      window: "活动前 20 天 · 同日历口径",
+      updatedAt: "更新至 D-1",
+      summary: "截至 D-1，GMV 同比为 7.9%，DAC 同比为 7.3%，客单同比为 0.6%。近期自然水位整体上行，增长主要来自支付用户规模扩张，DAC 解释约 92% 的 GMV 同比增幅；客单贡献相对有限。",
+      metrics: Object.freeze([
+        Object.freeze(["7.9%", "GMV 同比"]),
+        Object.freeze(["7.3%", "DAC 同比"]),
+        Object.freeze(["0.6%", "客单同比"])
+      ]),
+      columns: Object.freeze(["观察点", "GMV 同比", "DAC 同比", "客单同比", "数据表现"]),
+      rows: Object.freeze([
+        Object.freeze(["D-20", "+2.4%", "+2.0%", "+0.4%", "自然水位平稳"]),
+        Object.freeze(["D-16", "+3.3%", "+2.8%", "+0.5%", "小幅抬升"]),
+        Object.freeze(["D-12", "+2.7%", "+2.3%", "+0.4%", "短期回落"]),
+        Object.freeze(["D-8", "+5.1%", "+4.6%", "+0.5%", "用户规模扩张"]),
+        Object.freeze(["D-4", "+5.9%", "+5.3%", "+0.6%", "延续上行"]),
+        Object.freeze(["D-1", "+7.9%", "+7.3%", "+0.6%", "当前观察高点"])
+      ]),
+      source: "消费券数据看板 · 大盘 GMV / DAC / 客单",
+      caliber: "活动前同口径窗口；异常流量日已剔除"
+    });
+
+    const dailyGroupMessageSummary = Object.freeze({
+      title: "昨日飞书群消息总结",
+      date: "2026 年 8 月 13 日",
+      window: "昨日 00:00—23:59",
+      stats: Object.freeze([
+        Object.freeze(["3", "个已授权群聊"]),
+        Object.freeze(["46", "条有效消息"]),
+        Object.freeze(["4", "项关键结论"]),
+        Object.freeze(["3", "项待办"])
+      ]),
+      focus: "昨日讨论已从“是否需要补充数据洞察示例”收敛到“如何让历史实验结论可直接进入会话并支持复用”。当前优先级是补齐入口、统一数据口径，并把高门槛券的适配风险前置。",
+      conclusions: Object.freeze([
+        Object.freeze({
+          title: "促前规划",
+          content: "26 年 618 应优先复用人群 × 券档、券档 × 行业、渠道 × 波次三类历史证据，先形成验证假设，再进入具体方案。"
+        }),
+        Object.freeze({
+          title: "人群策略",
+          content: "高价值高潜适合中高门槛与定向券；新客保留低门槛首购对照；低价值低潜不建议扩大泛发。"
+        }),
+        Object.freeze({
+          title: "券档策略",
+          content: "高门槛券的主要风险是行业价格带不匹配，不是曝光不足；建议收敛到高客单行业与高意向人群。"
+        }),
+        Object.freeze({
+          title: "渠道节奏",
+          content: "会场承担规模、搜索承接高意图，Push 在收官期更适合已领未用催用，不继续扩大泛触达。"
+        })
+      ]),
+      todos: Object.freeze([
+        Object.freeze(["补齐 26 年 618 当期人群容量与标签更新时间", "数据分析", "今天"]),
+        Object.freeze(["确认高门槛券适配行业与价格带清单", "策略产品", "今天"]),
+        Object.freeze(["整理预热、爆发、持续、收官的渠道职责", "投放运营", "本周"])
+      ]),
+      risk: "跨期实验的标签覆盖、券有效期和核销窗口必须一致；竞对快照只作为外部压力信号，不能替代自身实验。",
+      source: "券策略 Agent · 已授权群聊汇总"
+    });
+
+    const midExperimentRealtimeNotification = Object.freeze({
+      title: "2026 520&618 大促实验效果播报（截至 20260618）",
+      dates: Object.freeze(["06.14", "06.15", "06.16", "06.17", "06.18"]),
+      exchangeSeries: Object.freeze([
+        Object.freeze({ name: "大盘", color: "#3975d3", values: Object.freeze([6.68, 6.61, 6.63, 6.46, 6.55]) }),
+        Object.freeze({ name: "消费券边际", color: "#d9a53b", values: Object.freeze([7.13, 6.90, 6.59, 6.81, 6.55]) }),
+        Object.freeze({ name: "追补边际", color: "#bf4b6a", values: Object.freeze([2.55, 2.60, 6.97, 2.69, 6.49]) })
+      ]),
+      gmvSeries: Object.freeze([
+        Object.freeze({ name: "大盘", color: "#3975d3", values: Object.freeze([36.93, 48.02, 46.32, 52.84, 71.88]) }),
+        Object.freeze({ name: "消费券边际", color: "#d9a53b", values: Object.freeze([35.52, 46.76, 42.02, 50.93, 63.85]) }),
+        Object.freeze({ name: "追补边际", color: "#bf4b6a", values: Object.freeze([-1.04, 0.86, 3.03, 1.26, 4.90]) })
+      ]),
+      conclusions: Object.freeze([
+        "大盘在 20260618 单日兑换比为 6.55，较 20260617 上升 0.09；单日 GMV 涨幅为 71.88%，较昨日上升 19.04%。",
+        "边际策略对比看，消费券边际在兑换效率上更优，消费券边际兑换比 6.55；追补边际兑换比 6.49，但波动更大。",
+        "追补供给效率方面，A 组与 B 组仍是主要观察对象，B0-B8 基组回层较稳定；B15-跨境出现回落或显著性走弱，当前累计兑换比为 23.46。"
+      ]),
+      exchangeSummary: "20260618 大盘单日兑换比为 6.55，较 20260617 上升 0.09；消费券边际为 6.55，较昨日下降 0.26；追补边际为 6.49，较昨日上升 3.79。整体看，边际策略间分化仍在，追补边际波动更大。",
+      gmvSummary: "20260618 大盘单日 GMV 涨幅为 71.88%，较 20260617 上升 19.04%；消费券边际为 63.85%，较昨日上升 12.92%；追补边际为 4.90%，较昨日上升 3.63%。大盘与消费券边际持续抬升，追补边际在低位修复。",
+      supply: Object.freeze([
+        Object.freeze(["6.55", "A 组当日兑换比", "核心观察组保持稳定"]),
+        Object.freeze(["稳定", "B0-B8 基组", "回层波动处于正常区间"]),
+        Object.freeze(["23.46", "B15-跨境累计兑换比", "显著性走弱，继续观察"])
+      ]),
+      source: "大促实验效果监控 · 定时推送"
+    });
+
     const historySessions = Object.freeze([
+      Object.freeze({
+        id: "mid-experiment-realtime-notification",
+        title: "促中实验数据实时通知",
+        source: "scheduled",
+        sourceLabel: "定时任务",
+        group: "今天",
+        time: "18:30",
+        summary: "2026 520&618 大促实验效果定时播报，包含兑换比、GMV 涨幅、追补供给效率与明细数据。",
+        caseKey: "experiment-notification"
+      }),
+      Object.freeze({
+        id: "recent-natural-water-level",
+        title: "近期自然水位情况数据查看",
+        source: "web",
+        sourceLabel: "Web 端",
+        group: "今天",
+        time: "17:05",
+        summary: "查看活动前 20 天自然水位，返回 GMV、DAC、客单核心摘要与分观察点数据明细。",
+        caseKey: "water-level"
+      }),
+      ...preInsightConversationCases.map((item, index) => Object.freeze({
+        id: `pre-insight-${item.id}`,
+        title: item.title,
+        source: "web",
+        sourceLabel: "Web 端",
+        group: "今天",
+        time: ["16:12", "15:56", "15:41"][index],
+        summary: `${item.question} AI 已输出历史数据表与核心结论。`,
+        caseKey: "insight",
+        insightCaseId: item.id
+      })),
       Object.freeze({
         id: "coupon-inspection-history",
         title: "券业务数据巡检",
@@ -35547,18 +37973,10 @@
         title: "总结每日群聊消息",
         source: "lark",
         sourceLabel: "飞书 Bot",
-        group: "更早",
-        time: "7 月 29 日",
-        summary: "汇总群聊中的策略调整、风险提醒和待跟进事项。"
-      }),
-      Object.freeze({
-        id: "audience-tier-redemption",
-        title: "人群*券档领取核销分析",
-        source: "web",
-        sourceLabel: "Web 端",
-        group: "更早",
-        time: "7 月 28 日",
-        summary: "交叉分析不同人群与券档组合的领取率、核销率和预算效率。"
+        group: "今天",
+        time: "09:00",
+        summary: "昨日飞书群消息总结：汇总关键结论、待办与风险提醒。",
+        caseKey: "lark-summary"
       })
     ]);
 
@@ -35605,6 +38023,7 @@
     const preOpportunityChart = document.getElementById("preOpportunityChart");
     const preOpportunityAsk = document.getElementById("preOpportunityAsk");
     const preDecisionBridge = document.getElementById("preDecisionBridge");
+    const preInsightConversationCaseList = document.getElementById("preInsightConversationCaseList");
     const infraManagement = document.getElementById("infraManagement");
     const strategyInspirationButton = document.getElementById("strategyInspirationButton");
     const newChatButton = document.getElementById("newChatButton");
@@ -35722,35 +38141,49 @@
         {
           id: "lark-group-01",
           name: "策略协作群 A",
+          displayName: "26年618大促冲刺群",
           members: 17,
           tasks: [
-            { icon: "析", title: "预算流速归因", detail: "合成记录 T-A01 · 群内 @助理触发", status: "已完成" },
-            { icon: "券", title: "下一波次券档建议", detail: "合成记录 T-A02 · 保留分析计划门禁", status: "已完成" },
-            { icon: "核", title: "核销链路下钻", detail: "合成记录 T-A03 · 等待补充模拟口径", status: "待输入" }
+            { icon: "任", title: "创建 Meego Story - 电商钱效中心 AI 预算助手二期迭代", detail: "子任务｜已按结构化模板创建并补充背景", status: "已完成", time: "1 个月前" },
+            { icon: "任", title: "创建 Meego Story 并同步需求台账", detail: "子任务｜已同步进需求管理多维表格", status: "已完成", time: "2 个月前" },
+            { icon: "任", title: "MRD 转写 PRD - GMV 结算率 / 复购率显著性校验", detail: "子任务｜已生成 PRD 并完成口径核验", status: "已完成", time: "2 个月前" },
+            { icon: "任", title: "MRD 文档解析与字段校验", detail: "子任务｜等待补充字段映射", status: "待输入", time: "2 个月前" }
           ],
-          schedules: [
-            { icon: "09", title: "钱效早报", detail: "工作日 09:30 · 合成指标快照", status: "运行中" },
-            { icon: "18", title: "活动复盘", detail: "模拟活动日 18:30 · 合成异常归因", status: "运行中" }
-          ],
+          schedules: [],
           replyMode: "仅 @机器人时回复",
-          contextRange: "最近 20 条消息"
+          contextRange: "最近 20 条消息",
+          conversationProfiles: {
+            profile: false,
+            rules: true,
+            persona: true,
+            identity: true,
+            memory: true
+          },
+          contextClearedAt: ""
         },
         {
           id: "lark-group-02",
           name: "预算联调群 B",
+          displayName: "预算联调群 B",
           members: 29,
           tasks: [
-            { icon: "流", title: "预算节奏检查", detail: "合成记录 T-B01 · 模拟预算流速", status: "已完成" },
-            { icon: "档", title: "券档候选比较", detail: "合成记录 T-B02 · 模拟券档对照", status: "已完成" },
-            { icon: "群", title: "人群容量校验", detail: "合成记录 T-B03 · 模拟人群容量", status: "进行中" },
-            { icon: "渠", title: "渠道承接复核", detail: "合成记录 T-B04 · 模拟渠道分配", status: "待输入" },
-            { icon: "险", title: "风险边界检查", detail: "合成记录 T-B05 · 不触发线上配置", status: "已完成" }
+            { icon: "流", title: "预算节奏检查", detail: "已完成预算流速与目标进度对齐", status: "已完成", time: "3 天前" },
+            { icon: "档", title: "券档候选比较", detail: "已输出三套券档候选及对照结论", status: "已完成", time: "5 天前" },
+            { icon: "群", title: "人群容量校验", detail: "正在核对重点人群覆盖与容量", status: "进行中", time: "6 天前" }
           ],
           schedules: [
-            { icon: "10", title: "联调摘要", detail: "每周二 10:00 · 合成协作摘要", status: "运行中" }
+            { icon: "10", title: "联调摘要", detail: "每周二 10:00 · 协作事项摘要", status: "运行中", time: "下周二" }
           ],
           replyMode: "群内问题自动识别",
-          contextRange: "仅当前话题"
+          contextRange: "仅当前话题",
+          conversationProfiles: {
+            profile: false,
+            rules: true,
+            persona: true,
+            identity: true,
+            memory: true
+          },
+          contextClearedAt: ""
         }
       ]
     };
@@ -35764,8 +38197,13 @@
       skillSource: "all",
       skillTags: new Set(),
       modalSelection: null,
-      larkSection: "groups",
+      larkView: "overview",
+      larkSection: "custom",
       larkQuery: "",
+      larkTaskMode: "shared",
+      larkMemberTab: "admins",
+      larkMemberSyncLabel: "尚未同步",
+      larkDrawer: null,
       knowledgeScope: "all",
       knowledgeCategory: "all",
       knowledgeHighlightId: null
@@ -36239,53 +38677,75 @@
       detailReturnRunId: null
     };
 
-    const larkSectionData = {
-      custom: {
-        title: "自定义助理配置",
-        description: "设置券策略 Agent 在飞书中的触发方式、回复边界与默认工作模式。",
-        cards: [["触发方式", "支持 @助理、群内关键词和私聊三种入口。"], ["默认工作模式", "收到策略问题后先澄清目标，再展示计划并等待确认。"], ["消息权限", "仅读取已授权会话，不主动访问其他群聊内容。"]]
-      },
-      profile: {
-        title: "用户档案",
-        description: "管理助理可使用的用户偏好和业务身份信息。",
-        cards: [["业务角色", "识别运营、策略、预算与数据协作角色。"], ["沟通偏好", "默认使用中文，结论优先并保留数据下钻依据。"], ["档案范围", "仅在当前业务协作环境内生效。"]]
-      },
-      identity: {
-        title: "助理身份",
-        description: "统一机器人在群聊中的名称、介绍与服务状态。",
-        cards: [["展示名称", "券策略 Agent"], ["能力介绍", "消费券策略规划、促中调优和活动复盘。"], ["服务状态", "当前连接正常，可在已关联群聊中响应。"]]
-      },
-      persona: {
-        title: "助理人格",
-        description: "定义助理的表达方式和决策协作风格。",
-        cards: [["表达风格", "克制、清晰、先结论后证据。"], ["协作方式", "关键策略必须展示分析计划并由用户确认。"], ["风险态度", "明确数据边界，不把相关性包装成因果。"]]
-      },
-      rules: {
-        title: "工作区规则",
-        description: "配置机器人在当前策略工作区必须遵循的业务规则。",
-        cards: [["计划门禁", "确认计划前不生成右侧正式报告。"], ["数据规范", "默认使用脱敏样例和统一指标口径。"], ["执行边界", "不直接执行发券、预算或线上人群变更。"]]
-      },
-      memory: {
-        title: "长期记忆",
-        description: "查看助理在当前工作区沉淀的稳定偏好和业务约束。",
-        cards: [["策略偏好", "优先使用历史实验和同级别促作为参考。"], ["界面偏好", "保持轻量布局，分析过程分阶段可感知。"], ["记忆状态", "已启用工作区记忆，敏感信息不跨环境共享。"]]
-      },
-      docs: {
-        title: "文档库",
-        description: "管理机器人在飞书会话中可引用的业务文档。",
-        cards: [["已授权文档", "历史活动策略、渠道投放策略、批次及投放计划。"], ["引用方式", "回答中标注来源，支持继续下钻查看依据。"], ["同步状态", "最近一次同步：今天 15:42。"]]
-      },
-      skills: {
-        title: "技能配置",
-        description: "配置机器人在群聊中可调用的 Agent 技能。",
-        cards: [["已启用技能", "预算归因、指标口径查询、消费券策略播报。"], ["调用策略", "先识别意图，再按最小权限选择技能。"], ["审计记录", "每次技能调用均保留会话级执行记录。"]]
-      },
-      usage: {
-        title: "使用情况",
-        description: "查看机器人近期的群聊覆盖和能力使用概况。",
-        cards: []
-      }
-    };
+    const larkAssistantData = Object.freeze({
+      name: "大促消费券助手",
+      creator: "秦娇芸",
+      botName: "大促消费券助手",
+      botCreator: "秦娇芸",
+      admins: Object.freeze([
+        Object.freeze({ name: "秦娇芸", role: "助理所有者" })
+      ]),
+      availableMembers: Object.freeze([
+        Object.freeze({ name: "彭晓芳", role: "可用成员" }),
+        Object.freeze({ name: "林静", role: "可用成员" }),
+        Object.freeze({ name: "周可", role: "可用成员" }),
+        Object.freeze({ name: "陈安", role: "可用成员" })
+      ]),
+      usage: Object.freeze({
+        updatedAt: "8 月 13 日",
+        currentActiveDays: 0,
+        longestActiveDays: 2,
+        messages: 0,
+        tokens: 0
+      })
+    });
+
+    const larkAssistantNavGroups = Object.freeze([
+      Object.freeze([
+        Object.freeze(["custom", "自定义助理配置", "custom", true]),
+        Object.freeze(["groups", "群聊配置", "groups", true])
+      ]),
+      Object.freeze([
+        Object.freeze(["profile", "用户档案", "profile", false]),
+        Object.freeze(["identity", "助理身份", "identity", false]),
+        Object.freeze(["persona", "助理人格", "persona", false]),
+        Object.freeze(["rules", "工作区规则", "rules", false]),
+        Object.freeze(["memory", "长期记忆", "memory", false])
+      ]),
+      Object.freeze([
+        Object.freeze(["docs", "文档库", "docs", false]),
+        Object.freeze(["skills", "技能配置", "skills", false])
+      ]),
+      Object.freeze([
+        Object.freeze(["usage", "使用情况", "usage", true])
+      ])
+    ]);
+
+    function larkAssistantIcon(name) {
+      const paths = {
+        custom: '<path d="M5 3.2h6a1.8 1.8 0 0 1 1.8 1.8v6A1.8 1.8 0 0 1 11 12.8H5A1.8 1.8 0 0 1 3.2 11V5A1.8 1.8 0 0 1 5 3.2Z"/><circle cx="8" cy="8" r="1.7"/><path d="M8 1.8v1.4M8 12.8v1.4M1.8 8h1.4M12.8 8h1.4"/>',
+        groups: '<circle cx="6" cy="6.2" r="2.2"/><circle cx="11.5" cy="7" r="1.7"/><path d="M2.5 13c.4-2.5 1.6-3.7 3.5-3.7S9.1 10.5 9.5 13M9.1 10.2c.7-.8 1.5-1.1 2.5-1.1 1.5 0 2.5 1 2.8 2.9"/>',
+        profile: '<circle cx="8" cy="5.3" r="2.4"/><path d="M3.5 13.5c.5-2.8 2-4.2 4.5-4.2s4 1.4 4.5 4.2"/>',
+        identity: '<rect x="3" y="4" width="10" height="8.5" rx="2"/><path d="M6 4V2.5h4V4M6 7.2h4M6 9.6h2.5"/>',
+        persona: '<rect x="3" y="4.2" width="10" height="8.6" rx="2"/><path d="M6.2 8h.1M9.7 8h.1M6.3 10.3c1.1.7 2.3.7 3.4 0M8 2.2v2"/>',
+        rules: '<path d="M4 2.8h8v10.4H4zM6.2 5.5h3.6M6.2 8h3.6M6.2 10.5h2.3"/>',
+        memory: '<rect x="3.5" y="2.8" width="9" height="10.4" rx="1.5"/><path d="M6 2.8v10.4M8 5.5h2.2M8 8h2.2"/>',
+        docs: '<path d="M3.2 3h7l2.6 2.6V13H3.2z"/><path d="M10.2 3v3.2h2.6M5.5 8h5M5.5 10.5h3.7"/>',
+        skills: '<path d="M8 2.2v11.6M2.2 8h11.6M4 4l8 8M12 4l-8 8"/>',
+        usage: '<path d="M3 12.8V8.5h2.5v4.3M6.8 12.8V5h2.5v7.8M10.5 12.8V2.8H13v10"/>',
+        workspace: '<path d="M2.8 4.5h4l1.2 1.4h5.2v7.3H2.8z"/>',
+        bot: '<rect x="3" y="4.2" width="10" height="8" rx="2"/><path d="M8 2.2v2M5.8 7.7h.1M10.1 7.7h.1M6 10h4"/>',
+        tasks: '<path d="M4 2.8h8v10.4H4zM6 5.5h4M6 8h4M6 10.5h2.5"/>',
+        schedule: '<rect x="2.8" y="3.8" width="10.4" height="9" rx="1.6"/><path d="M5.2 2.3v3M10.8 2.3v3M2.8 6.7h10.4M8 8.5v2.2l1.5.8"/>',
+        settings: '<path d="M3 5h10M3 11h10"/><circle cx="6" cy="5" r="1.5"/><circle cx="10" cy="11" r="1.5"/>',
+        trash: '<path d="M3.5 4.5h9M6 4.5V2.8h4v1.7M5 6.5l.5 6.5h5l.5-6.5M7.2 7.5v3.8M9.8 7.5v3.8"/>'
+      };
+      return `<svg viewBox="0 0 16 16" aria-hidden="true" focusable="false">${paths[name] || paths.custom}</svg>`;
+    }
+
+    function renderLarkAssistantAvatar() {
+      return `<span class="lark-assistant-avatar" aria-hidden="true"><svg viewBox="0 0 48 48"><path d="M13 18.5h22v14H13z"/><path d="M18 18.5v-4M30 18.5v-4"/><circle cx="18" cy="14" r="1.6" fill="currentColor"/><circle cx="30" cy="14" r="1.6" fill="currentColor"/><path d="M16 24h7l-2 5h-7zM25 24h7l2 5h-7z" fill="#6e8fc9" stroke="none"/><path d="M23 26h2M19 32c3.2 2 6.8 2 10 0"/></svg></span>`;
+    }
 
     function infrastructureHeader(title, description, actionLabel, actionType, tone = "") {
       return `<header class="resource-head"><div class="resource-title"><h2>${escapeHTML(title)}</h2><p>${escapeHTML(description)}</p></div><button class="resource-primary ${tone}" data-infra-new="${actionType}">${iconSVG("add")}${escapeHTML(actionLabel)}</button></header>`;
@@ -36436,50 +38896,200 @@
       return `<div class="resource-shell">${infrastructureHeader(title, description, action, isMcp ? "mcp" : "datasource")}<div class="resource-content">${infrastructureStatusTabs(items)}<div class="resource-toolbar"><label class="resource-search"><input data-infra-search value="${escapeHTML(infrastructureState.query)}" placeholder="搜索${isMcp ? " MCP" : "资源"}..."></label><button class="resource-filter active">全部类型</button><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button></div>${filtered.length ? `<div class="resource-card-grid compact">${filtered.map(item => `<article class="resource-card resource-source-card">${isMcp ? `<div class="resource-card-head"><span class="resource-card-icon">⌘</span><div class="resource-card-title"><strong>${escapeHTML(item.name)}</strong><span>${item.transport}</span></div><button class="resource-switch ${item.enabled ? "on" : ""}" data-infra-toggle="mcp" data-resource-id="${item.id}"></button></div>` : `<div class="resource-source-type">${item.type}</div><h3>${escapeHTML(displayValue(item, "name"))}</h3>`}<p>${escapeHTML(displayValue(item, "description"))}</p><div class="resource-code">⌁ ${escapeHTML(isMcp ? item.endpoint : displayValue(item, "uri"))}</div><div class="resource-source-foot"><button class="resource-status ${item.enabled ? "" : "off"}" data-infra-toggle="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${item.enabled ? isMcp ? "已连接" : "已启用" : "已停用"}</button><button data-infra-detail="${isMcp ? "mcp" : "datasource"}" data-resource-id="${item.id}">${isMcp ? `${item.tools} 个工具` : `${item.references} 处引用`} ›</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有符合条件的资源</div>'}</div></div>`;
     }
 
-    function renderLarkTabs() {
-      const sections = [
-        ["groups", "群聊配置"],
-        ["custom", "自定义助理"],
-        ["profile", "用户档案"],
-        ["identity", "助理身份"],
-        ["persona", "助理人格"],
-        ["rules", "工作区规则"],
-        ["memory", "长期记忆"],
-        ["docs", "文档库"],
-        ["skills", "技能配置"],
-        ["usage", "使用情况"]
-      ];
-      return `<div class="resource-summary-tabs lark-resource-tabs" role="tablist" aria-label="飞书机器人配置">${sections.map(section => `<button class="resource-summary-tab ${infrastructureState.larkSection === section[0] ? "active" : ""}" role="tab" aria-selected="${infrastructureState.larkSection === section[0]}" tabindex="${infrastructureState.larkSection === section[0] ? "0" : "-1"}" data-lark-section="${section[0]}">${section[1]}</button>`).join("")}</div>`;
+    function renderLarkAssistantOverview() {
+      return `
+        <div class="lark-assistant-overview">
+          <h2>已关联助理</h2>
+          <article class="lark-assistant-overview-card">
+            ${renderLarkAssistantAvatar()}
+            <div class="lark-assistant-overview-copy">
+              <strong>${escapeHTML(larkAssistantData.name)}</strong>
+              <span>创建人：<i aria-hidden="true">秦</i>${escapeHTML(larkAssistantData.creator)}</span>
+            </div>
+            <div class="lark-assistant-overview-actions" aria-label="助理操作">
+              <button class="lark-assistant-icon-action" type="button" data-lark-go-chat data-label="去对话" aria-label="去对话">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 4.5h12v9H9l-4 3v-3H4z"/><path d="M8 9h4M10 7v4"/></svg>
+              </button>
+              <button class="lark-assistant-icon-action" type="button" data-lark-go-config data-label="去配置" aria-label="去配置">
+                <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="10" cy="10" r="2.4"/><path d="m10 3 .8 1.7 1.9.5 1.6-1 1.5 1.5-1 1.6.5 1.9 1.7.8v2l-1.7.8-.5 1.9 1 1.6-1.5 1.5-1.6-1-1.9.5L10 17l-.8-1.7-1.9-.5-1.6 1-1.5-1.5 1-1.6-.5-1.9L3 10V8l1.7-.8.5-1.9-1-1.6 1.5-1.5 1.6 1 1.9-.5L10 3Z"/></svg>
+              </button>
+            </div>
+          </article>
+        </div>`;
     }
 
-    function renderLarkGroups() {
+    function renderLarkAssistantNav() {
+      return `
+        <aside class="lark-assistant-config-nav" aria-label="助理配置导航">
+          <button class="lark-assistant-config-back" type="button" data-lark-go-chat>${iconSVG("back")}返回助理对话</button>
+          <h2>助理配置</h2>
+          ${larkAssistantNavGroups.map(group => `
+            <div class="lark-assistant-nav-list">
+              ${group.map(([key, label, icon, enabled]) => `
+                <button class="lark-assistant-nav-item ${infrastructureState.larkSection === key ? "active" : ""}"
+                  type="button" ${enabled ? `data-lark-section="${key}"` : "disabled"}
+                  ${enabled && infrastructureState.larkSection === key ? 'aria-current="page"' : ""}
+                  ${enabled ? "" : 'aria-disabled="true"'}>
+                  ${larkAssistantIcon(icon)}<span>${label}</span>
+                </button>`).join("")}
+            </div>`).join("")}
+        </aside>`;
+    }
+
+    function renderLarkAssistantMembers() {
+      const members = infrastructureState.larkMemberTab === "admins"
+        ? larkAssistantData.admins
+        : larkAssistantData.availableMembers;
+      return members.map(member => `
+        <div class="lark-assistant-member-row">
+          <span class="lark-assistant-member-avatar" aria-hidden="true">${escapeHTML(member.name.slice(0, 1))}</span>
+          <strong>${escapeHTML(member.name)}</strong>
+          <span>${escapeHTML(member.role)}</span>
+        </div>`).join("");
+    }
+
+    function renderLarkAssistantModeCard(mode, title, badge, description, suitableFor) {
+      const active = infrastructureState.larkTaskMode === mode;
+      const shared = mode === "shared";
+      return `
+        <button class="lark-assistant-mode-card ${active ? "active" : ""}" type="button"
+          data-lark-task-mode="${mode}" aria-pressed="${active}">
+          <div><span class="lark-assistant-mode-radio" aria-hidden="true"></span><strong>${title}</strong><span class="lark-assistant-mode-badge ${shared ? "shared" : ""}">${badge}</span></div>
+          <p>${description}<br>适合：${suitableFor}</p>
+          <span class="lark-assistant-mode-example" aria-hidden="true">
+            <b>${shared ? "协同推进「同一任务」" : "各自任务，独立推进"}</b>
+            <span class="lark-assistant-mode-task"><em>${shared ? "同一任务" : "任务 A"}</em>用户 A @助理 发起</span>
+            <span class="lark-assistant-mode-task"><em>${shared ? "接力" : "任务 B"}</em>用户 B @助理 ${shared ? "接力" : "发起"}</span>
+          </span>
+        </button>`;
+    }
+
+    function renderLarkAssistantCustom() {
+      return `
+        <section class="lark-assistant-page" aria-labelledby="larkAssistantCustomTitle">
+          <header class="lark-assistant-page-head">
+            <h1 id="larkAssistantCustomTitle">自定义助理配置</h1>
+          </header>
+          <section class="lark-assistant-section" aria-labelledby="larkAssistantRelationTitle">
+            <div class="lark-assistant-section-head"><h3 id="larkAssistantRelationTitle">关联配置</h3></div>
+            <div class="lark-assistant-link-grid">
+              <article class="lark-assistant-link-card">
+                <span class="lark-assistant-link-icon">${larkAssistantIcon("bot")}</span>
+                <div><strong>${escapeHTML(larkAssistantData.botName)}</strong><span>飞书 Bot 创建人：${escapeHTML(larkAssistantData.botCreator)}</span></div>
+              </article>
+            </div>
+          </section>
+          <section class="lark-assistant-section" aria-labelledby="larkAssistantModeTitle">
+            <div class="lark-assistant-section-head">
+              <div><h3 id="larkAssistantModeTitle">群聊任务模式</h3><p>请选择适合团队的群聊协作方式，该设置仅应用于此助理新创建的群聊任务。</p></div>
+            </div>
+            <div class="lark-assistant-mode-grid" role="group" aria-label="群聊任务模式">
+              ${renderLarkAssistantModeCard("independent", "独立模式", "独立", "每位成员 @助理后分别创建任务，他人可以看到群内消息，但不能接着该任务继续执行。", "个人问答、敏感查询")}
+              ${renderLarkAssistantModeCard("shared", "共享模式", "默认", "多人共同推进同一任务，成员可以沿用已有任务进度、中间结果和执行产物。", "团队调研、方案共创")}
+            </div>
+          </section>
+          <section class="lark-assistant-section" aria-labelledby="larkAssistantMembersTitle">
+            <div class="lark-assistant-section-head"><h3 id="larkAssistantMembersTitle">成员管理</h3></div>
+            <div class="lark-assistant-member-panel">
+              <div class="lark-assistant-member-note">可用成员由助理管理员维护；同步后将更新当前成员状态。</div>
+              <div class="lark-assistant-member-toolbar">
+                <div class="lark-assistant-tabs" role="tablist" aria-label="成员范围">
+                  <button class="lark-assistant-tab" type="button" role="tab" data-lark-member-tab="admins"
+                    aria-selected="${infrastructureState.larkMemberTab === "admins"}" tabindex="${infrastructureState.larkMemberTab === "admins" ? "0" : "-1"}">管理员</button>
+                  <button class="lark-assistant-tab" type="button" role="tab" data-lark-member-tab="available"
+                    aria-selected="${infrastructureState.larkMemberTab === "available"}" tabindex="${infrastructureState.larkMemberTab === "available" ? "0" : "-1"}">可用成员</button>
+                </div>
+                <button class="lark-assistant-sync" type="button" data-lark-member-sync>↻ 同步飞书成员状态 · ${escapeHTML(infrastructureState.larkMemberSyncLabel)}</button>
+              </div>
+              <div class="lark-assistant-member-list" role="tabpanel" aria-live="polite">${renderLarkAssistantMembers()}</div>
+            </div>
+          </section>
+        </section>`;
+    }
+
+    function renderLarkAssistantGroupCard(group) {
+      const name = group.displayName || group.name;
+      return `
+        <article class="lark-assistant-group-card connected">
+          <div class="lark-assistant-group-card-main">
+            <span class="lark-assistant-group-mark" aria-hidden="true">${larkAssistantIcon("groups")}</span>
+            <strong>${escapeHTML(name)}</strong>
+          </div>
+          <div class="lark-assistant-group-actions">
+            <button type="button" data-lark-group-action="tasks" data-lark-group-id="${escapeHTML(group.id)}">${larkAssistantIcon("tasks")}独立任务</button>
+            <button type="button" data-lark-group-action="schedules" data-lark-group-id="${escapeHTML(group.id)}">${larkAssistantIcon("schedule")}定时任务</button>
+            <button type="button" data-lark-group-action="settings" data-lark-group-id="${escapeHTML(group.id)}">${larkAssistantIcon("settings")}会话设置</button>
+          </div>
+        </article>`;
+    }
+
+    function renderLarkAssistantGroups() {
       const query = infrastructureState.larkQuery.trim().toLowerCase();
-      const groups = infrastructureData.larkGroups.filter(group => !query || group.name.toLowerCase().includes(query));
-      return `<div class="resource-toolbar lark-resource-toolbar"><label class="resource-search"><input data-lark-group-search value="${escapeHTML(infrastructureState.larkQuery)}" placeholder="搜索飞书群..." aria-label="搜索飞书群"></label><button class="resource-filter active">全部群聊</button><span class="lark-group-count">已关联 ${infrastructureData.larkGroups.length} 个合成群聊</span><span class="resource-toolbar-spacer"></span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button></div>${groups.length ? `<div class="resource-card-grid lark-resource-grid">${groups.map(group => `<article class="resource-card lark-resource-card"><div class="resource-card-head"><span class="resource-card-icon lark-resource-avatar">飞</span><div class="resource-card-title"><strong>${escapeHTML(group.name)}</strong><span>券策略 Agent 已加入</span></div><span class="resource-status">已关联</span></div><p class="resource-card-copy">${group.members} 名合成成员 · ${group.tasks.length} 个独立任务 · ${group.schedules.length} 个定时任务</p><div class="resource-card-meta"><span>${escapeHTML(group.replyMode)}</span><span>合成群聊协作</span></div><div class="resource-card-actions"><button class="resource-action primary-action" data-lark-group-action="tasks" data-lark-group-id="${group.id}">独立任务</button><button class="resource-action" data-lark-group-action="schedules" data-lark-group-id="${group.id}">定时任务</button><button class="resource-action" data-lark-group-action="settings" data-lark-group-id="${group.id}">会话设置</button></div></article>`).join("")}</div>` : '<div class="resource-empty">没有匹配的飞书群聊</div>'}`;
+      const groups = infrastructureData.larkGroups.filter(group => {
+        const searchable = `${group.name} ${group.displayName || ""}`.toLowerCase();
+        return !query || searchable.includes(query);
+      });
+      return `
+        <section class="lark-assistant-page" aria-labelledby="larkAssistantGroupsTitle">
+          <h1 class="visually-hidden" id="larkAssistantGroupsTitle">群聊配置</h1>
+          <label class="lark-assistant-group-search">
+            ${iconSVG("search")}
+            <input type="search" data-lark-group-search value="${escapeFormValue(infrastructureState.larkQuery)}"
+              placeholder="搜索飞书群" aria-label="搜索飞书群">
+          </label>
+          <div class="lark-assistant-group-grid" aria-live="polite">
+            <button class="lark-assistant-group-card lark-assistant-group-create" type="button" data-lark-new-group>
+              <span class="lark-assistant-group-create-visual" aria-hidden="true"></span>
+              <strong>新建飞书群聊</strong>
+            </button>
+            ${groups.map(renderLarkAssistantGroupCard).join("")}
+            ${groups.length ? "" : '<div class="lark-assistant-group-empty" style="grid-column:1/-1">没有匹配的飞书群聊</div>'}
+          </div>
+        </section>`;
     }
 
-    function getLarkSectionCards(sectionKey) {
-      if (sectionKey !== "usage") return larkSectionData[sectionKey].cards;
-      const groupCount = infrastructureData.larkGroups.length;
-      const memberCount = infrastructureData.larkGroups.reduce((total, group) => total + group.members, 0);
-      const taskCount = infrastructureData.larkGroups.reduce((total, group) => total + group.tasks.length, 0);
-      const scheduleCount = infrastructureData.larkGroups.reduce((total, group) => total + group.schedules.length, 0);
-      return [
-        ["群聊覆盖", `${groupCount} 个合成群聊，${memberCount} 名合成成员。`],
-        ["任务概况", `${taskCount} 个独立任务，${scheduleCount} 个定时任务。`],
-        ["近 7 日使用", "37 次合成问答，计划确认率 73%。"]
-      ];
+    function renderLarkAssistantUsage() {
+      const usage = larkAssistantData.usage;
+      return `
+        <section class="lark-assistant-page lark-assistant-usage-page" aria-labelledby="larkAssistantUsageTitle">
+          <header class="lark-assistant-page-head">
+            <h1 id="larkAssistantUsageTitle">${escapeHTML(larkAssistantData.name)}使用情况</h1>
+            <p>数据 T+1 日更新（更新时间：${escapeHTML(usage.updatedAt)}）</p>
+          </header>
+          <div class="lark-assistant-usage-metrics" aria-label="活跃天数">
+            <article class="lark-assistant-usage-metric"><span>当前连续活跃天数 / 天</span><strong>${usage.currentActiveDays}</strong></article>
+            <article class="lark-assistant-usage-metric"><span>最长连续活跃天数 / 天</span><strong>${usage.longestActiveDays}</strong></article>
+          </div>
+          <div class="lark-assistant-usage-charts">
+            <article class="lark-assistant-usage-chart"><span>近 30 天消息数</span><strong>${usage.messages}</strong><div class="lark-assistant-usage-empty">暂无数据</div></article>
+            <article class="lark-assistant-usage-chart"><span>近 30 天 Token 数</span><strong>${usage.tokens}</strong><div class="lark-assistant-usage-empty">暂无数据</div></article>
+          </div>
+        </section>`;
     }
 
-    function renderLarkConfigSection() {
-      const section = larkSectionData[infrastructureState.larkSection] || larkSectionData.custom;
-      const cards = getLarkSectionCards(infrastructureState.larkSection);
-      return `<div class="resource-toolbar lark-resource-toolbar"><p class="lark-resource-description">${escapeHTML(section.description)}</p><span class="resource-toolbar-spacer"></span><span class="resource-status">配置正常</span><button class="resource-filter" data-infra-back>${iconSVG("back")}返回工作台</button></div><div class="resource-card-grid lark-resource-grid">${cards.map((card, index) => `<article class="resource-card lark-config-resource-card"><div class="resource-card-head"><span class="resource-card-icon">${index + 1}</span><div class="resource-card-title"><strong>${escapeHTML(card[0])}</strong><span>${escapeHTML(section.title)}</span></div></div><p class="resource-card-copy">${escapeHTML(card[1])}</p><div class="resource-card-actions"><button class="resource-action" data-lark-config-edit="${escapeHTML(card[0])}">查看配置</button></div></article>`).join("")}</div>`;
+    function renderLarkAssistantConfig() {
+      const content = infrastructureState.larkSection === "groups"
+        ? renderLarkAssistantGroups()
+        : infrastructureState.larkSection === "usage"
+          ? renderLarkAssistantUsage()
+          : renderLarkAssistantCustom();
+      return `
+        <div class="lark-assistant-config-shell">
+          ${renderLarkAssistantNav()}
+          <main class="lark-assistant-config-main">${content}</main>
+        </div>`;
     }
 
     function renderLarkBotView() {
-      const content = infrastructureState.larkSection === "groups" ? renderLarkGroups() : renderLarkConfigSection();
-      return `<div class="resource-shell">${infrastructureHeader("飞书机器人", "管理券策略 Agent 关联的飞书群聊、助理配置与协作能力。", "新建飞书群聊", "lark", "blue")}<div class="resource-content"><div class="pre-data-boundary"><b>使用边界</b>当前群聊、成员和任务统计均为不可反推的合成样本，不对应任何组织或线上数据。</div>${renderLarkTabs()}${content}</div></div>`;
+      const configLabel = {
+        custom: "自定义助理配置",
+        groups: "群聊配置",
+        usage: "使用情况"
+      }[infrastructureState.larkSection] || "自定义助理配置";
+      document.title = infrastructureState.larkView === "config"
+        ? `券策略 Agent · ${configLabel}`
+        : "券策略 Agent · 已关联助理";
+      return `<div class="lark-assistant-shell">${infrastructureState.larkView === "config" ? renderLarkAssistantConfig() : renderLarkAssistantOverview()}</div>`;
     }
 
     function scheduledStatusMarkup(status) {
@@ -36807,6 +39417,7 @@
             : infrastructureState.activeView === "lark"
               ? renderLarkBotView()
               : renderSourceCards("mcps", "MCP", "管理 Agent 可调用的 MCP 服务、传输协议和工具授权。", "新建 MCP");
+      infraManagement.querySelectorAll('[role="tablist"]').forEach(tablist => syncRovingTablist(tablist));
     }
 
     function taskStatusLabel(status) {
@@ -40201,6 +42812,11 @@
       renderScheduledRunDetailModal(run, { focusArtifact: true });
     }
 
+    function renderHistoryScheduledIcon() {
+      return `<span class="history-session-clock" aria-hidden="true">
+        <svg viewBox="0 0 16 16"><circle cx="8" cy="8" r="5.5"/><path d="M8 4.7v3.6l2.5 1.5M4 1.8 2.2 3.6M12 1.8l1.8 1.8"/></svg>
+      </span>`;
+    }
 
     function renderHistoryArchive() {
       const query = historyArchiveState.query.trim().toLowerCase();
@@ -40230,7 +42846,10 @@
                       : ""}
                   >
                     <span class="history-session-main">
-                      <span class="history-session-title">${escapeHTML(session.title)}</span>
+                      <span class="history-session-title">
+                        ${session.source === "scheduled" ? renderHistoryScheduledIcon() : ""}
+                        <span class="history-session-title-text">${escapeHTML(session.title)}</span>
+                      </span>
                       <span class="history-session-meta">
                         <span class="history-session-agent">券策略 Agent</span>
                         <span class="history-session-divider" aria-hidden="true"></span>
@@ -40323,11 +42942,411 @@
       requestAnimationFrame(() => newChatComposerInput.focus({ preventScroll: true }));
     }
 
+    function renderDailyGroupMessageSummaryCard() {
+      const summary = dailyGroupMessageSummary;
+      return `
+        <article class="lark-daily-summary-card" aria-label="${escapeHTML(summary.title)}">
+          <header class="lark-summary-header">
+            <span class="lark-summary-mark" aria-hidden="true">飞</span>
+            <div class="lark-summary-title">
+              <h3>${escapeHTML(summary.title)}</h3>
+              <p>${escapeHTML(`${summary.date} · ${summary.window}`)}</p>
+            </div>
+          </header>
+          <div class="lark-summary-body">
+            <div class="lark-summary-stats" aria-label="昨日群聊概览">
+              ${summary.stats.map(([value, label]) => `
+                <div class="lark-summary-stat"><b>${escapeHTML(value)}</b><span>${escapeHTML(label)}</span></div>`).join("")}
+            </div>
+            <section class="lark-summary-section" aria-labelledby="larkSummaryFocus">
+              <h4 id="larkSummaryFocus">今日必看</h4>
+              <div class="lark-summary-focus">${escapeHTML(summary.focus)}</div>
+            </section>
+            <section class="lark-summary-section" aria-labelledby="larkSummaryConclusions">
+              <h4 id="larkSummaryConclusions">关键结论</h4>
+              <ol class="lark-summary-list">
+                ${summary.conclusions.map((item, index) => `
+                  <li>
+                    <span>${index + 1}</span>
+                    <span><strong>${escapeHTML(item.title)}：</strong>${escapeHTML(item.content)}</span>
+                  </li>`).join("")}
+              </ol>
+            </section>
+            <section class="lark-summary-section" aria-labelledby="larkSummaryTodos">
+              <h4 id="larkSummaryTodos">待办事项</h4>
+              <div class="lark-summary-todos">
+                ${summary.todos.map(([title, owner, deadline]) => `
+                  <div class="lark-summary-todo">
+                    <div><b>${escapeHTML(title)}</b><span>负责人：${escapeHTML(owner)}</span></div>
+                    <em>${escapeHTML(deadline)}</em>
+                  </div>`).join("")}
+              </div>
+            </section>
+            <section class="lark-summary-risk" aria-label="风险提醒">
+              <b>风险提醒</b>
+              <span>${escapeHTML(summary.risk)}</span>
+            </section>
+          </div>
+          <footer class="lark-summary-footer">
+            <span>${escapeHTML(summary.source)}</span>
+            <span>仅汇总已授权群聊</span>
+          </footer>
+        </article>`;
+    }
+
+    function renderDailyGroupMessageSummaryFollowup(question) {
+      const normalized = normalizeDemoQuestion(question);
+      if (/待办|谁负责|负责人|今天|本周/.test(normalized)) {
+        return `<p><strong>昨日共形成 ${dailyGroupMessageSummary.todos.length} 项待办：</strong></p>
+          <ul>${dailyGroupMessageSummary.todos.map(([title, owner, deadline]) =>
+            `<li>${escapeHTML(title)} · ${escapeHTML(owner)} · ${escapeHTML(deadline)}</li>`
+          ).join("")}</ul>`;
+      }
+      if (/风险|注意|阻塞|问题/.test(normalized)) {
+        return `<p><strong>当前风险提醒：</strong>${escapeHTML(dailyGroupMessageSummary.risk)}</p>`;
+      }
+      return `<p><strong>昨日讨论主线：</strong>${escapeHTML(dailyGroupMessageSummary.focus)}</p>
+        <div class="message-callout">当前回答仅基于卡片中已汇总的昨日飞书群消息。</div>`;
+    }
+
+    function enterDailyGroupMessageSummary() {
+      enterNewChat({
+        dailyGroupSummary: true,
+        prompts: [
+          { label: "展开关键结论", prompt: "展开昨日的关键结论。" },
+          { label: "查看待办", prompt: "昨日形成了哪些待办，分别由谁负责？" },
+          { label: "查看风险", prompt: "昨日讨论中有哪些风险提醒？" }
+        ]
+      });
+      const cardMessage = createCaseMessage(
+        "assistant",
+        "text",
+        renderDailyGroupMessageSummaryCard()
+      );
+      cardMessage.timestamp = "09:00";
+      newChatState.messages = [cardMessage];
+      renderNewChat(true);
+      syncWorkspaceEntryState(null);
+      selectHistoryItem("总结每日群聊消息");
+      document.title = "券策略 Agent · 昨日飞书群消息总结";
+      requestAnimationFrame(() => {
+        newChatScroll.scrollTop = 0;
+        newChatComposerInput.focus({ preventScroll: true });
+      });
+    }
+
+    function renderRecentNaturalWaterLevelChart() {
+      const data = recentNaturalWaterLevelData;
+      const series = [
+        { name: "GMV 同比", color: "#bd731c", column: 1 },
+        { name: "DAC 同比", color: "#4f78b8", column: 2 },
+        { name: "客单同比", color: "#8c929d", column: 3 }
+      ].map(item => ({
+        ...item,
+        values: data.rows.map(row => Number.parseFloat(row[item.column]))
+      }));
+      const labels = data.rows.map(row => row[0]);
+      const width = 760;
+      const height = 245;
+      const left = 46;
+      const right = 18;
+      const top = 25;
+      const bottom = 36;
+      const plotWidth = width - left - right;
+      const plotHeight = height - top - bottom;
+      const yMax = 8;
+      const x = index => left + index * plotWidth / (labels.length - 1);
+      const y = value => top + (yMax - value) / yMax * plotHeight;
+      const gridValues = [8, 6, 4, 2, 0];
+      return `
+        <figure class="water-level-trend-chart" aria-label="近期自然水位同比趋势">
+          <h5>近期自然水位同比趋势</h5>
+          <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHTML(
+            series.map(item => `${item.name}：${item.values.map((value, index) => `${labels[index]} ${value.toFixed(1)}%`).join("，")}`).join("；")
+          )}">
+            ${gridValues.map(value => `
+              <line class="water-level-chart-grid" x1="${left}" x2="${width - right}" y1="${y(value)}" y2="${y(value)}"/>
+              <text class="water-level-chart-axis" x="${left - 8}" y="${y(value) + 3}" text-anchor="end">${value}%</text>`).join("")}
+            ${labels.map((label, index) => `
+              <text class="water-level-chart-axis" x="${x(index)}" y="${height - 12}" text-anchor="middle">${escapeHTML(label)}</text>`).join("")}
+            ${series.map(item => `
+              <polyline
+                class="water-level-chart-line"
+                points="${item.values.map((value, index) => `${x(index)},${y(value)}`).join(" ")}"
+                stroke="${item.color}"
+              />
+              ${item.values.map((value, index) => `
+                <circle class="water-level-chart-point" cx="${x(index)}" cy="${y(value)}" r="3.7" fill="${item.color}"/>
+                ${index === item.values.length - 1
+                  ? `<text class="water-level-chart-value" x="${x(index) - 2}" y="${Math.max(12, y(value) - 9)}" text-anchor="end" fill="${item.color}">${value.toFixed(1)}%</text>`
+                  : ""}`).join("")}`).join("")}
+          </svg>
+          <figcaption class="water-level-chart-legend">
+            ${series.map(item => `
+              <span style="--water-level-series:${item.color}"><i></i>${escapeHTML(item.name)}</span>`).join("")}
+          </figcaption>
+        </figure>`;
+    }
+
+    function renderRecentNaturalWaterLevelAnswer() {
+      const data = recentNaturalWaterLevelData;
+      return `
+        <section class="water-level-data-answer" aria-label="${escapeHTML(data.title)}回答">
+          <header class="water-level-answer-head">
+            <div>
+              <span>数据查询完成</span>
+              <h3>${escapeHTML(data.title)}</h3>
+            </div>
+            <time>${escapeHTML(`${data.window} · ${data.updatedAt}`)}</time>
+          </header>
+          <section aria-labelledby="waterLevelSummaryTitle">
+            <div class="water-level-detail-head">
+              <h4 id="waterLevelSummaryTitle">核心摘要</h4>
+            </div>
+            <div class="water-level-summary">${escapeHTML(data.summary)}</div>
+          </section>
+          <div class="insight-answer-metrics" aria-label="自然水位核心指标">
+            ${data.metrics.map(([value, label]) => `
+              <div><b>${escapeHTML(value)}</b><span>${escapeHTML(label)}</span></div>`).join("")}
+          </div>
+          <section aria-labelledby="waterLevelDetailTitle">
+            <div class="water-level-detail-head">
+              <h4 id="waterLevelDetailTitle">数据明细</h4>
+              <span>6 个观察点</span>
+            </div>
+            <div class="insight-answer-table-wrap" tabindex="0" aria-label="近期自然水位数据明细，可横向滚动">
+              <table class="insight-answer-table">
+                <thead><tr>${data.columns.map(column => `<th scope="col">${escapeHTML(column)}</th>`).join("")}</tr></thead>
+                <tbody>${data.rows.map(row => `
+                  <tr>${row.map(cell => `<td>${escapeHTML(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+              </table>
+            </div>
+            ${renderRecentNaturalWaterLevelChart()}
+          </section>
+          <footer class="insight-answer-foot">
+            <span>来源：${escapeHTML(data.source)}</span>
+            <span>口径：${escapeHTML(data.caliber)}</span>
+          </footer>
+        </section>`;
+    }
+
+    function renderRecentNaturalWaterLevelFollowup() {
+      const data = recentNaturalWaterLevelData;
+      return `<p><strong>核心摘要：</strong>${escapeHTML(data.summary)}</p>
+        <div class="message-callout">来源：${escapeHTML(data.source)}；口径：${escapeHTML(data.caliber)}。</div>`;
+    }
+
+    function enterRecentNaturalWaterLevelConversation() {
+      const data = recentNaturalWaterLevelData;
+      enterNewChat({
+        waterLevelData: true,
+        prompts: []
+      });
+      const userMessage = createCaseMessage("user", "text", data.question);
+      const answerMessage = createCaseMessage(
+        "assistant",
+        "text",
+        renderRecentNaturalWaterLevelAnswer()
+      );
+      userMessage.timestamp = "17:05";
+      answerMessage.timestamp = "17:05";
+      newChatState.messages = [userMessage, answerMessage];
+      renderNewChat(true);
+      syncWorkspaceEntryState(null);
+      selectHistoryItem(data.title);
+      document.title = `券策略 Agent · ${data.title}`;
+      requestAnimationFrame(() => {
+        newChatScroll.scrollTop = 0;
+        newChatComposerInput.focus({ preventScroll: true });
+      });
+    }
+
+    function renderExperimentTrendChart(title, series, options) {
+      const width = 760;
+      const height = 250;
+      const left = 48;
+      const right = 18;
+      const top = 24;
+      const bottom = 38;
+      const plotWidth = width - left - right;
+      const plotHeight = height - top - bottom;
+      const yMin = options.min;
+      const yMax = options.max;
+      const y = value => top + (yMax - value) / (yMax - yMin) * plotHeight;
+      const x = index => left + index * plotWidth / (midExperimentRealtimeNotification.dates.length - 1);
+      const format = value => `${value > 0 && options.showPlus ? "+" : ""}${value.toFixed(options.precision)}${options.suffix || ""}`;
+      const gridValues = Array.from({ length: 5 }, (_, index) =>
+        yMin + (yMax - yMin) * index / 4
+      ).reverse();
+      return `
+        <figure class="experiment-chart" aria-label="${escapeHTML(title)}">
+          <h5>${escapeHTML(title)}</h5>
+          <svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${escapeHTML(
+            series.map(item => `${item.name}：${item.values.map((value, index) => `${midExperimentRealtimeNotification.dates[index]} ${format(value)}`).join("，")}`).join("；")
+          )}">
+            ${gridValues.map(value => `
+              <line class="experiment-chart-grid" x1="${left}" x2="${width - right}" y1="${y(value)}" y2="${y(value)}"/>
+              <text class="experiment-chart-axis" x="${left - 8}" y="${y(value) + 3}" text-anchor="end">${escapeHTML(format(value))}</text>`).join("")}
+            ${midExperimentRealtimeNotification.dates.map((date, index) => `
+              <text class="experiment-chart-axis" x="${x(index)}" y="${height - 13}" text-anchor="middle">${escapeHTML(date)}</text>`).join("")}
+            ${series.map(item => {
+              const points = item.values.map((value, index) => `${x(index)},${y(value)}`).join(" ");
+              return `
+                <polyline class="experiment-chart-line" points="${points}" stroke="${item.color}"/>
+                ${item.values.map((value, index) => `
+                  <circle class="experiment-chart-point" cx="${x(index)}" cy="${y(value)}" r="3.6" fill="${item.color}"/>
+                  <text class="experiment-chart-label" x="${x(index)}" y="${Math.max(11, y(value) - 8)}" text-anchor="middle" fill="${item.color}">${escapeHTML(format(value))}</text>`).join("")}`;
+            }).join("")}
+          </svg>
+          <figcaption class="experiment-chart-legend">
+            ${series.map(item => `<span style="--series-color:${item.color}"><i></i>${escapeHTML(item.name)}</span>`).join("")}
+          </figcaption>
+        </figure>`;
+    }
+
+    function renderMidExperimentRealtimeCard() {
+      const report = midExperimentRealtimeNotification;
+      const rows = report.dates.map((date, index) => [
+        `2026${date.replace(".", "")}`,
+        report.exchangeSeries[0].values[index].toFixed(2),
+        report.exchangeSeries[1].values[index].toFixed(2),
+        report.exchangeSeries[2].values[index].toFixed(2),
+        `${report.gmvSeries[0].values[index].toFixed(2)}%`,
+        `${report.gmvSeries[1].values[index].toFixed(2)}%`,
+        `${report.gmvSeries[2].values[index].toFixed(2)}%`
+      ]);
+      const headers = [
+        "日期",
+        "大盘兑换比",
+        "消费券边际兑换比",
+        "追补边际兑换比",
+        "大盘 GMV 涨幅",
+        "消费券边际 GMV 涨幅",
+        "追补边际 GMV 涨幅"
+      ];
+      const bannerPrompt = "premium%203D%20ecommerce%20campaign%20illustration%2C%20energetic%20red%20and%20orange%20stage%2C%20smartphone%20mascot%20holding%20analytics%20chart%2C%20shopping%20bags%2C%20coins%2C%20data%20dashboards%2C%20lightning%20accents%2C%20cinematic%20wide%20banner%2C%20polished%20commercial%20advertising%2C%20no%20text%2C%20no%20logos";
+      return `
+        <article class="experiment-realtime-card" aria-label="${escapeHTML(report.title)}">
+          <header class="experiment-card-header">
+            ${renderHistoryScheduledIcon()}
+            <h3>${escapeHTML(report.title)}</h3>
+          </header>
+          <figure class="experiment-card-banner">
+            <img
+              src="https://copilot-cn.bytedance.net/api/ide/v1/text_to_image?prompt=${bannerPrompt}&image_size=landscape_16_9"
+              alt="电商大促实验数据驱动增长主题横幅"
+              loading="lazy"
+            >
+            <figcaption class="experiment-banner-overlay">
+              <strong>抖音电商大促实验<br>追数据 · 快速调整</strong>
+              <div class="experiment-banner-signals" aria-hidden="true">
+                <span>实时追踪</span><span>快速调整</span><span>实验驱动</span>
+              </div>
+              <span>数据驱动增长 · 实验创造爆发</span>
+            </figcaption>
+          </figure>
+          <div class="experiment-card-body">
+            <section class="experiment-card-section" aria-labelledby="experimentKeyConclusion">
+              <h4 id="experimentKeyConclusion">📌 关键结论</h4>
+              <ol class="experiment-key-list">
+                ${report.conclusions.map(item => `<li>${escapeHTML(item)}</li>`).join("")}
+              </ol>
+            </section>
+            <section class="experiment-card-section" aria-labelledby="experimentTrendMonitor">
+              <h4 id="experimentTrendMonitor">📈 大促分日兑换比 / GMV 涨幅波动监控</h4>
+              <p>${escapeHTML(report.exchangeSummary)}</p>
+              ${renderExperimentTrendChart("大促单日兑换比趋势图", report.exchangeSeries, {
+                min: 2,
+                max: 8,
+                precision: 2,
+                suffix: "",
+                showPlus: false
+              })}
+              <p>${escapeHTML(report.gmvSummary)}</p>
+              ${renderExperimentTrendChart("大促单日 GMV 涨幅趋势图", report.gmvSeries, {
+                min: -5,
+                max: 80,
+                precision: 2,
+                suffix: "%",
+                showPlus: true
+              })}
+              <div class="experiment-table-wrap" tabindex="0" aria-label="大促实验分日明细表，可横向滚动">
+                <table class="experiment-data-table">
+                  <thead><tr>${headers.map(header => `<th scope="col">${escapeHTML(header)}</th>`).join("")}</tr></thead>
+                  <tbody>${rows.map(row => `<tr>${row.map(cell => `<td>${escapeHTML(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+                </table>
+              </div>
+            </section>
+            <section class="experiment-card-section" aria-labelledby="experimentSupplyMonitor">
+              <h4 id="experimentSupplyMonitor">🔍 大促追补分日供给效率监控</h4>
+              <div class="experiment-supply-summary">
+                ${report.supply.map(([value, label, note]) => `
+                  <div><b>${escapeHTML(value)}</b><span>${escapeHTML(label)} · ${escapeHTML(note)}</span></div>`).join("")}
+              </div>
+            </section>
+          </div>
+          <footer class="experiment-card-footer">
+            <span>${escapeHTML(report.source)}</span>
+            <span>数据截止 2026-06-18 · 推送成功 18:30</span>
+          </footer>
+        </article>`;
+    }
+
+    function renderMidExperimentNotificationFollowup(question) {
+      const normalized = normalizeDemoQuestion(question);
+      const report = midExperimentRealtimeNotification;
+      if (/追补|b15|供给|实验组/.test(normalized)) {
+        return `<p><strong>追补供给判断：</strong>A 组与 B 组仍是主要观察对象；B0-B8 基组回层较稳定，B15-跨境累计兑换比 23.46，显著性走弱，建议继续保留观察而不直接扩量。</p>`;
+      }
+      if (/兑换比|钱效|效率/.test(normalized)) {
+        return `<p><strong>兑换比判断：</strong>${escapeHTML(report.exchangeSummary)}</p>`;
+      }
+      if (/gmv|涨幅|增长/.test(normalized)) {
+        return `<p><strong>GMV 涨幅判断：</strong>${escapeHTML(report.gmvSummary)}</p>`;
+      }
+      return `<ol>${report.conclusions.map(item => `<li>${escapeHTML(item)}</li>`).join("")}</ol>
+        <div class="message-callout">当前回答仅引用本次 20260618 定时推送快照。</div>`;
+    }
+
+    function enterMidExperimentRealtimeNotification() {
+      enterNewChat({
+        midExperimentNotification: true,
+        prompts: [
+          { label: "解释兑换比", prompt: "解释 6 月 18 日兑换比变化。" },
+          { label: "解释 GMV 涨幅", prompt: "解释 6 月 18 日 GMV 涨幅变化。" },
+          { label: "查看追补效率", prompt: "追补供给效率目前有什么风险？" }
+        ]
+      });
+      const cardMessage = createCaseMessage(
+        "assistant",
+        "text",
+        renderMidExperimentRealtimeCard()
+      );
+      cardMessage.timestamp = "18:30";
+      newChatState.messages = [cardMessage];
+      renderNewChat(true);
+      syncWorkspaceEntryState(null);
+      selectHistoryItem("促中实验数据实时通知");
+      document.title = "券策略 Agent · 促中实验数据实时通知";
+      requestAnimationFrame(() => {
+        newChatScroll.scrollTop = 0;
+        newChatComposerInput.focus({ preventScroll: true });
+      });
+    }
+
     function openHistorySession(sessionId) {
       const session = historySessions.find(item => item.id === sessionId);
       if (!session?.caseKey) return;
       if (session.caseKey === "inspection") {
         enterCouponInspectionHistory();
+      } else if (session.caseKey === "experiment-notification") {
+        enterMidExperimentRealtimeNotification();
+      } else if (session.caseKey === "water-level") {
+        enterRecentNaturalWaterLevelConversation();
+      } else if (session.caseKey === "lark-summary") {
+        enterDailyGroupMessageSummary();
+      } else if (session.caseKey === "insight") {
+        enterPreInsightConversation(session.insightCaseId);
       } else if (session.caseKey === "pre") {
         restartPreCaseDemo();
       } else if (session.caseKey === "budget") {
@@ -40335,6 +43354,82 @@
       }
       selectHistoryItem(session.title);
       showToast(`已打开历史对话：${session.title}`);
+    }
+
+    function getPreInsightConversationCase(caseId) {
+      return preInsightConversationCases.find(item => item.id === caseId) || null;
+    }
+
+    function renderPreInsightConversationAnswer(item) {
+      return `
+        <section class="insight-conversation-answer" aria-label="${escapeHTML(item.title)}数据洞察答案">
+          <header class="insight-answer-head">
+            <div>
+              <span class="insight-answer-status">已完成 · 单轮数据分析</span>
+              <h3>${escapeHTML(item.title)}</h3>
+            </div>
+            <span class="insight-answer-scope">${escapeHTML(item.scope)}</span>
+          </header>
+          <div class="insight-answer-metrics" aria-label="核心指标">
+            ${item.metrics.map(([value, label]) => `
+              <div><b>${escapeHTML(value)}</b><span>${escapeHTML(label)}</span></div>`).join("")}
+          </div>
+          <div class="insight-answer-table-wrap" tabindex="0" aria-label="${escapeHTML(item.title)}数据表，可横向滚动">
+            <table class="insight-answer-table">
+              <thead><tr>${item.columns.map(column => `<th scope="col">${escapeHTML(column)}</th>`).join("")}</tr></thead>
+              <tbody>${item.rows.map(row => `
+                <tr>${row.map(cell => `<td>${escapeHTML(cell)}</td>`).join("")}</tr>`).join("")}</tbody>
+            </table>
+          </div>
+          <section class="insight-ai-conclusion" aria-label="AI 核心结论">
+            <b>AI 核心结论</b>
+            <strong>${escapeHTML(item.conclusionTitle)}</strong>
+            <p>${escapeHTML(item.conclusion)}</p>
+          </section>
+          <footer class="insight-answer-foot">
+            <span>来源：${escapeHTML(item.source)}</span>
+            <span>适用边界：${escapeHTML(item.boundary)}</span>
+          </footer>
+        </section>`;
+    }
+
+    function renderPreInsightConversationFollowup(context, question) {
+      const item = getPreInsightConversationCase(context?.insightCaseId);
+      if (!item) return "<p>当前历史数据洞察示例不可用。</p>";
+      const normalized = normalizeDemoQuestion(question);
+      if (/口径|边界|来源|样本|限制/.test(normalized)) {
+        return `<p><strong>数据边界：</strong>${escapeHTML(item.boundary)}。</p>
+          <div class="message-callout">来源：${escapeHTML(item.source)}；该历史结论用于形成 26 年 618 的验证假设，不直接替代本期实验。</div>`;
+      }
+      return `<p><strong>${escapeHTML(item.conclusionTitle)}。</strong>${escapeHTML(item.conclusion)}</p>
+        <div class="message-callout">以上回答仍只引用当前单轮示例的历史数据，不补入其他活动或实时数据。</div>`;
+    }
+
+    function enterPreInsightConversation(caseId) {
+      const item = getPreInsightConversationCase(caseId);
+      if (!item) return;
+      enterNewChat({
+        insightConversation: true,
+        insightCaseId: item.id,
+        prompts: []
+      });
+      const userMessage = createCaseMessage("user", "text", item.question);
+      const answerMessage = createCaseMessage(
+        "assistant",
+        "text",
+        renderPreInsightConversationAnswer(item)
+      );
+      userMessage.timestamp = "10:02";
+      answerMessage.timestamp = "10:02";
+      newChatState.messages = [userMessage, answerMessage];
+      renderNewChat(true);
+      syncWorkspaceEntryState(null);
+      selectHistoryItem(item.title);
+      document.title = `券策略 Agent · ${item.title}`;
+      requestAnimationFrame(() => {
+        newChatScroll.scrollTop = 0;
+        newChatComposerInput.focus({ preventScroll: true });
+      });
     }
 
     function syncWorkspaceEntryState(activeEntry) {
@@ -40353,6 +43448,7 @@
     function hideInfrastructureView() {
       const leavingTaskTemplates = infrastructureState.activeView === "task-template";
       const leavingScheduledTasks = infrastructureState.activeView === "scheduled-task";
+      const leavingLarkAssistant = infrastructureState.activeView === "lark";
       if (leavingTaskTemplates) {
         if (modal?.classList.contains("show") && isSharedModalKind("task")) {
           closeModal(false);
@@ -40367,6 +43463,9 @@
           closeModal(false);
         }
         resetScheduledTaskTransientState();
+      }
+      if (leavingLarkAssistant && modal?.classList.contains("show") && isSharedModalKind("lark")) {
+        closeModal(false);
       }
       infrastructureState.activeView = null;
       infraManagement.classList.remove("active");
@@ -40412,8 +43511,12 @@
         status: "all",
         type: "all",
         skillSource: "all",
-        larkSection: "groups",
+        larkView: "overview",
+        larkSection: "custom",
         larkQuery: "",
+        larkTaskMode: "shared",
+        larkMemberTab: "admins",
+        larkDrawer: null,
         knowledgeScope: "all",
         knowledgeCategory: "all",
         knowledgeHighlightId: null
@@ -47811,6 +50914,19 @@
       return keys ? insights.filter(insight => keys.includes(insight.key)) : insights;
     }
 
+    function preRenderInsightConversationExamples() {
+      preInsightConversationCaseList.innerHTML = preInsightConversationCases.map(item => `
+        <button
+          type="button"
+          class="pre-insight-case-button"
+          data-pre-insight-case="${escapeHTML(item.id)}"
+          aria-label="打开单轮会话示例：${escapeHTML(item.title)}"
+        >
+          <b>${escapeHTML(item.label)}</b>
+          <span>${escapeHTML(item.teaser)}</span>
+        </button>`).join("");
+    }
+
     function preRenderInsightCard(insight, index, references) {
       const expanded = preDashboardState.expandedInsightIds.has(insight.key);
       return `
@@ -47850,6 +50966,7 @@
       const activitySelect = document.getElementById("preActivitySelect");
       const referenceSelect = document.getElementById("preReferenceSelect");
 
+      preRenderInsightConversationExamples();
       activitySelect.innerHTML = preInsightHomeData.activities.map(item => `
         <option value="${item.id}" ${item.id === activity.id ? "selected" : ""}>${escapeHTML(item.name)}</option>`).join("");
       document.getElementById("preCurrentActivitySummary").innerHTML = `
@@ -55738,6 +58855,14 @@
       const progress = createCaseMessage("assistant", "progress", "");
       progress.steps = newChatState.context?.historyInspection
         ? ["读取运行快照", "定位异常指标", "形成解释与建议"]
+        : newChatState.context?.midExperimentNotification
+        ? ["读取定时快照", "核对实验趋势", "组织监控结论"]
+        : newChatState.context?.waterLevelData
+        ? ["读取自然水位", "核对指标口径", "返回数据明细"]
+        : newChatState.context?.dailyGroupSummary
+        ? ["读取昨日摘要", "定位结论与待办", "组织回答"]
+        : newChatState.context?.insightConversation
+        ? ["读取历史样本", "核对数据口径", "解释核心结论"]
         : newChatState.context?.dataContext
         ? ["读取当前筛选", "定位结构化证据", "校验数据边界"]
         : newChatState.context?.comparisonContext
@@ -55768,6 +58893,14 @@
         if (progressIndex >= 0) {
           const response = newChatState.context?.historyInspection
             ? renderCouponInspectionHistoryReply(question)
+            : newChatState.context?.midExperimentNotification
+            ? renderMidExperimentNotificationFollowup(question)
+            : newChatState.context?.waterLevelData
+            ? renderRecentNaturalWaterLevelFollowup()
+            : newChatState.context?.dailyGroupSummary
+            ? renderDailyGroupMessageSummaryFollowup(question)
+            : newChatState.context?.insightConversation
+            ? renderPreInsightConversationFollowup(newChatState.context, question)
             : newChatState.context
             ? renderRecommendationReply(newChatState.context, question)
             : `<p>收到。我会先把问题整理成<strong>目标与约束 → 数据口径 → 分析步骤 → 决策输出</strong>，不会直接跳到结论或展开报告。</p>
@@ -55838,13 +58971,49 @@
       document.querySelectorAll(".history-item").forEach(item => item.classList.remove("active"));
       resetNewChat(context);
       const isInspectionHistory = Boolean(context?.historyInspection);
-      newChatView.setAttribute("aria-label", isInspectionHistory ? "券业务数据巡检历史会话" : "新建策略对话");
-      newChatChatPane.setAttribute("aria-label", isInspectionHistory ? "券业务数据巡检历史会话" : "新建策略对话");
-      newChatMainStream.setAttribute("aria-label", isInspectionHistory ? "券业务数据巡检历史会话内容" : "新策略对话内容");
-      newChatComposer.setAttribute("aria-label", isInspectionHistory ? "巡检历史会话追问区" : "新策略对话输入区");
-      newChatComposerInput.setAttribute("aria-label", isInspectionHistory ? "围绕本次巡检继续追问" : "描述策略问题");
+      const isMidExperimentNotification = Boolean(context?.midExperimentNotification);
+      const isWaterLevelData = Boolean(context?.waterLevelData);
+      const isDailyGroupSummary = Boolean(context?.dailyGroupSummary);
+      const conversationLabel = isInspectionHistory
+        ? "券业务数据巡检历史会话"
+        : isMidExperimentNotification
+        ? "促中实验数据实时通知"
+        : isWaterLevelData
+        ? "近期自然水位情况数据查看"
+        : isDailyGroupSummary
+        ? "昨日飞书群消息总结"
+        : "新建策略对话";
+      newChatView.setAttribute("aria-label", conversationLabel);
+      newChatChatPane.setAttribute("aria-label", conversationLabel);
+      newChatMainStream.setAttribute("aria-label", `${conversationLabel}内容`);
+      newChatComposer.setAttribute("aria-label", isInspectionHistory
+        ? "巡检历史会话追问区"
+        : isMidExperimentNotification
+        ? "促中实验数据通知追问区"
+        : isWaterLevelData
+        ? "近期自然水位数据追问区"
+        : isDailyGroupSummary
+        ? "昨日群消息总结追问区"
+        : "新策略对话输入区");
+      newChatComposerInput.setAttribute("aria-label", isInspectionHistory
+        ? "围绕本次巡检继续追问"
+        : isMidExperimentNotification
+        ? "围绕本次实验数据通知继续追问"
+        : isWaterLevelData
+        ? "围绕近期自然水位数据继续追问"
+        : isDailyGroupSummary
+        ? "围绕昨日群消息总结继续追问"
+        : "描述策略问题");
       newChatComposerInput.placeholder = isInspectionHistory
         ? "围绕本次巡检的异常原因、指标或建议动作继续追问…"
+        : isMidExperimentNotification
+        ? "围绕兑换比、GMV 涨幅或追补效率继续追问…"
+        : isWaterLevelData
+        ? "围绕 GMV、DAC、客单或观察点继续追问…"
+        : isDailyGroupSummary
+        ? "围绕昨日结论、待办或风险继续追问…"
+        : context?.insightConversation
+        ? "围绕本次历史数据与 AI 结论继续追问…"
         : context?.comparisonContext
         ? "对比三套方案，或继续微调券档、人群、渠道与预算…"
         : context?.candidateContext
@@ -55994,6 +59163,7 @@
       "template-detail-modal",
       "task-modal",
       "scheduled-task-modal",
+      "lark-drawer-modal",
       "experience-success-modal",
       "experience-confirmation-modal"
     ]);
@@ -56249,6 +59419,7 @@
       const modalKind = panel.dataset.modalKind || "";
       const taskModalOpen = modalKind === "task";
       const scheduledModalOpen = modalKind === "scheduled";
+      const larkModalOpen = modalKind === "lark";
       const preGovernanceConfirmationOpen = modalKind === "pre-governance-confirm";
       if (
         scheduledModalOpen
@@ -56271,7 +59442,7 @@
       );
       const scheduledBuilderTrigger = scheduledTaskState.returnFocus;
       deactivateStrategyModalFocusBoundary();
-      modal.classList.remove("show", "scheduled-drawer-open");
+      modal.classList.remove("show", "scheduled-drawer-open", "lark-drawer-open");
       panel.classList.remove(...sharedModalKindClasses);
       delete panel.dataset.modalKind;
       document.body.classList.remove("template-detail-modal-open");
@@ -56279,6 +59450,7 @@
       modalReturnFocus = null;
       if (taskModalOpen) resetTaskTemplateTransientState();
       if (scheduledModalOpen && !preserveScheduledDraft) resetScheduledTaskTransientState();
+      if (larkModalOpen) infrastructureState.larkDrawer = null;
       if (preGovernanceConfirmationOpen) {
         modalBody.innerHTML = "";
         modalActions.innerHTML = "";
@@ -56548,11 +59720,20 @@
         infrastructureData.larkGroups.push({
           id: `lark-group-${Date.now()}`,
           name: selected.name,
+          displayName: selected.name,
           members: selected.members,
           tasks: [],
           schedules: [],
           replyMode: "仅 @机器人时回复",
-          contextRange: "最近 20 条消息"
+          contextRange: "最近 20 条消息",
+          conversationProfiles: {
+            profile: false,
+            rules: true,
+            persona: true,
+            identity: true,
+            memory: true
+          },
+          contextClearedAt: ""
         });
         closeModal();
         renderInfrastructureView();
@@ -56567,43 +59748,183 @@
       });
     }
 
-    function renderLarkGroupItems(items, emptyLabel) {
-      if (!items.length) return `<div class="resource-empty">${escapeHTML(emptyLabel)}</div>`;
-      return `<div class="lark-group-detail">${items.map(item => `<div class="lark-group-detail-row"><span>${escapeHTML(item.icon)}</span><div><b>${escapeHTML(item.title)}</b><small>${escapeHTML(item.detail)}</small></div><em>${escapeHTML(item.status)}</em></div>`).join("")}</div>`;
+    function larkDrawerGroup() {
+      return infrastructureData.larkGroups.find(item =>
+        item.id === infrastructureState.larkDrawer?.groupId
+      ) || null;
+    }
+
+    function ensureLarkConversationProfiles(group) {
+      if (!group.conversationProfiles) {
+        group.conversationProfiles = {
+          profile: false,
+          rules: true,
+          persona: true,
+          identity: true,
+          memory: true
+        };
+      }
+      return group.conversationProfiles;
+    }
+
+    function larkDrawerTaskItems(type) {
+      const state = infrastructureState.larkDrawer;
+      const group = larkDrawerGroup();
+      if (!state || !group) return [];
+      const key = type === "tasks" ? "tasks" : "schedules";
+      const sourceGroups = state.scope === "all" ? infrastructureData.larkGroups : [group];
+      const query = state.query.trim().toLowerCase();
+      return sourceGroups.flatMap(item =>
+        item[key].map(task => ({
+          ...task,
+          groupName: item.displayName || item.name
+        }))
+      ).filter(item => {
+        const searchable = `${item.title} ${item.detail} ${item.status} ${item.groupName}`.toLowerCase();
+        return !query || searchable.includes(query);
+      });
+    }
+
+    function renderLarkDrawerTaskRows(type) {
+      const items = larkDrawerTaskItems(type);
+      if (!items.length) {
+        return `<div class="lark-assistant-drawer-empty"><div><strong>暂无内容</strong><br><span>再看看其他内容吧</span></div></div>`;
+      }
+      return `<div class="lark-assistant-drawer-list">${items.map(item => `
+        <article class="lark-assistant-drawer-row">
+          <span class="lark-assistant-drawer-row-icon" aria-hidden="true">${escapeHTML(item.icon || "任")}</span>
+          <div class="lark-assistant-drawer-row-copy">
+            <strong>${escapeHTML(item.title)}</strong>
+            <span>${escapeHTML(item.status)} · ${escapeHTML(item.detail)}${infrastructureState.larkDrawer.scope === "all" ? ` · ${escapeHTML(item.groupName)}` : ""}</span>
+          </div>
+          <time>${escapeHTML(item.time || "刚刚")}</time>
+        </article>`).join("")}</div>`;
+    }
+
+    function renderLarkTaskDrawer(type) {
+      const state = infrastructureState.larkDrawer;
+      const label = type === "tasks" ? "独立任务" : "定时任务";
+      return `
+        <div class="lark-assistant-drawer-tools">
+          <div class="lark-assistant-drawer-tabs" role="tablist" aria-label="${label}范围">
+            <button type="button" role="tab" data-lark-drawer-scope="current"
+              aria-selected="${state.scope === "current"}" tabindex="${state.scope === "current" ? "0" : "-1"}">当前会话任务</button>
+            <button type="button" role="tab" data-lark-drawer-scope="all"
+              aria-selected="${state.scope === "all"}" tabindex="${state.scope === "all" ? "0" : "-1"}">助理全部任务</button>
+          </div>
+          <label class="lark-assistant-drawer-search">
+            ${iconSVG("search")}
+            <input type="search" data-lark-drawer-search value="${escapeFormValue(state.query)}"
+              placeholder="搜索任务名称" aria-label="搜索任务名称">
+          </label>
+        </div>
+        ${renderLarkDrawerTaskRows(type)}`;
+    }
+
+    function renderLarkSettingsDrawer(group) {
+      const profiles = ensureLarkConversationProfiles(group);
+      const options = [
+        ["profile", "用户档案"],
+        ["rules", "工作区规则"],
+        ["persona", "助理人格"],
+        ["identity", "助理身份"],
+        ["memory", "长期记忆"]
+      ];
+      return `
+        <p class="lark-assistant-drawer-description">你的设置仅生效于你在此群聊中的会话，不影响他人与助理的协作。</p>
+        <section class="lark-assistant-settings-section" aria-labelledby="larkProfileSettingsTitle">
+          <h4 id="larkProfileSettingsTitle">${larkAssistantIcon("rules")}助理配置文件</h4>
+          <div class="lark-assistant-setting-options">
+            ${options.map(([key, label]) => `
+              <label class="lark-assistant-setting-option">
+                <input type="checkbox" data-lark-profile="${key}" ${profiles[key] ? "checked" : ""}>
+                <span>${label}</span>
+              </label>`).join("")}
+          </div>
+        </section>
+        <section class="lark-assistant-settings-section" aria-labelledby="larkClearContextTitle">
+          <h4 class="visually-hidden" id="larkClearContextTitle">清理上下文</h4>
+          <button class="lark-assistant-clear-context" type="button" data-lark-clear-context>
+            ${larkAssistantIcon("trash")}清理上下文
+          </button>
+          ${group.contextClearedAt ? `<span class="lark-assistant-context-state">${escapeHTML(group.contextClearedAt)}</span>` : ""}
+        </section>`;
+    }
+
+    function renderLarkDrawerContent() {
+      const state = infrastructureState.larkDrawer;
+      const group = larkDrawerGroup();
+      if (!state || !group) return;
+      const title = state.type === "tasks"
+        ? "独立任务"
+        : state.type === "schedules"
+          ? "定时任务"
+          : "会话设置";
+      modalTitle.textContent = title;
+      modalBody.innerHTML = state.type === "settings"
+        ? renderLarkSettingsDrawer(group)
+        : renderLarkTaskDrawer(state.type);
+      modalActions.innerHTML = "";
+      modalBody.querySelectorAll('[role="tablist"]').forEach(tablist => syncRovingTablist(tablist));
     }
 
     function openLarkGroupDetail(action, groupId, trigger) {
       const group = infrastructureData.larkGroups.find(item => item.id === groupId);
+      if (!group || !["tasks", "schedules", "settings"].includes(action)) return;
+      modalReturnFocus = trigger || document.activeElement;
+      infrastructureState.larkDrawer = {
+        type: action,
+        groupId,
+        scope: "current",
+        query: ""
+      };
+      setSharedModalKind("lark", "lark-drawer-modal");
+      modal.classList.add("show", "lark-drawer-open");
+      document.body.classList.remove("template-detail-modal-open");
+      renderLarkDrawerContent();
+      activateStrategyModalFocusBoundary();
+      requestAnimationFrame(() => document.getElementById("modalClose")?.focus({ preventScroll: true }));
+    }
+
+    function handleLarkModalInput(event) {
+      if (!event.target.matches("[data-lark-drawer-search]")) return;
+      infrastructureState.larkDrawer.query = event.target.value;
+      const cursor = event.target.selectionStart;
+      renderLarkDrawerContent();
+      requestAnimationFrame(() => {
+        const input = modalBody.querySelector("[data-lark-drawer-search]");
+        input?.focus({ preventScroll: true });
+        input?.setSelectionRange(cursor, cursor);
+      });
+    }
+
+    function handleLarkModalChange(event) {
+      const profile = event.target.closest("[data-lark-profile]");
+      if (!profile) return;
+      const group = larkDrawerGroup();
       if (!group) return;
-      const actionTitle = action === "tasks" ? "独立任务" : action === "schedules" ? "定时任务" : "会话设置";
-      beginResourceModal(`${group.name} · ${actionTitle}`, trigger);
-      if (action === "tasks") {
-        modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">查看由该合成群聊独立触发的 Agent 任务。</p>${renderLarkGroupItems(group.tasks, "该合成群聊暂无独立任务")}</div>`;
-        modalActions.append(actionButton("关闭", "resource-primary", closeModal));
+      ensureLarkConversationProfiles(group)[profile.dataset.larkProfile] = profile.checked;
+      showToast(`已${profile.checked ? "启用" : "停用"}${profile.parentElement.textContent.trim()}`);
+    }
+
+    function handleLarkModalClick(event) {
+      const scope = event.target.closest("[data-lark-drawer-scope]");
+      if (scope) {
+        infrastructureState.larkDrawer.scope = scope.dataset.larkDrawerScope;
+        infrastructureState.larkDrawer.query = "";
+        renderLarkDrawerContent();
+        requestAnimationFrame(() => {
+          modalBody.querySelector(`[data-lark-drawer-scope="${scope.dataset.larkDrawerScope}"]`)?.focus({ preventScroll: true });
+        });
         return;
       }
-      if (action === "schedules") {
-        modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">查看该合成群聊已配置的定时任务。</p>${renderLarkGroupItems(group.schedules, "该合成群聊暂无定时任务")}</div>`;
-        modalActions.append(actionButton("关闭", "resource-primary", closeModal));
-        return;
+      if (event.target.closest("[data-lark-clear-context]")) {
+        const group = larkDrawerGroup();
+        if (!group) return;
+        group.contextClearedAt = "刚刚已清理";
+        renderLarkDrawerContent();
+        showToast("当前会话上下文已清理");
       }
-      modalBody.innerHTML = `<div class="resource-form"><p class="resource-form-note">管理机器人在该合成群聊中的响应范围和上下文读取方式。</p><div class="resource-field"><label for="larkReplyMode">回复方式</label><select id="larkReplyMode"><option ${group.replyMode === "仅 @机器人时回复" ? "selected" : ""}>仅 @机器人时回复</option><option ${group.replyMode === "群内问题自动识别" ? "selected" : ""}>群内问题自动识别</option><option ${group.replyMode === "暂停群内回复" ? "selected" : ""}>暂停群内回复</option></select></div><div class="resource-field"><label for="larkContextRange">会话上下文</label><select id="larkContextRange"><option ${group.contextRange === "最近 20 条消息" ? "selected" : ""}>最近 20 条消息</option><option ${group.contextRange === "仅当前话题" ? "selected" : ""}>仅当前话题</option><option ${group.contextRange === "不读取历史消息" ? "selected" : ""}>不读取历史消息</option></select></div><div class="resource-field"><label>安全边界</label><div class="resource-code">不执行线上发券、预算或人群配置变更</div></div></div>`;
-      modalActions.append(
-        actionButton("解除关联", "ghost", () => {
-          const index = infrastructureData.larkGroups.findIndex(item => item.id === group.id);
-          if (index >= 0) infrastructureData.larkGroups.splice(index, 1);
-          closeModal(false);
-          renderInfrastructureView();
-          showToast(`已解除群聊“${group.name}”的机器人关联`);
-        }),
-        actionButton("保存设置", "resource-primary", () => {
-          group.replyMode = document.getElementById("larkReplyMode").value;
-          group.contextRange = document.getElementById("larkContextRange").value;
-          closeModal();
-          renderInfrastructureView();
-          showToast(`“${group.name}”的会话设置已更新`);
-        })
-      );
     }
 
     function openResourceCreate(type, trigger) {
@@ -57200,6 +60521,45 @@
         renderNewChat(true);
         return;
       }
+      if (event.target.closest("[data-lark-go-chat]")) {
+        return enterNewChat();
+      }
+      if (event.target.closest("[data-lark-go-config]")) {
+        infrastructureState.larkView = "config";
+        infrastructureState.larkSection = "custom";
+        infrastructureState.larkQuery = "";
+        renderInfrastructureView();
+        requestAnimationFrame(() => {
+          infraManagement.querySelector('[data-lark-section="custom"]')?.focus({ preventScroll: true });
+        });
+        return;
+      }
+      const larkMode = event.target.closest("[data-lark-task-mode]");
+      if (larkMode) {
+        infrastructureState.larkTaskMode = larkMode.dataset.larkTaskMode;
+        renderInfrastructureView();
+        requestAnimationFrame(() => {
+          infraManagement.querySelector(`[data-lark-task-mode="${larkMode.dataset.larkTaskMode}"]`)?.focus({ preventScroll: true });
+        });
+        return;
+      }
+      const larkMemberTab = event.target.closest("[data-lark-member-tab]");
+      if (larkMemberTab) {
+        infrastructureState.larkMemberTab = larkMemberTab.dataset.larkMemberTab;
+        renderInfrastructureView();
+        requestAnimationFrame(() => {
+          infraManagement.querySelector(`[data-lark-member-tab="${larkMemberTab.dataset.larkMemberTab}"]`)?.focus({ preventScroll: true });
+        });
+        return;
+      }
+      if (event.target.closest("[data-lark-member-sync]")) {
+        infrastructureState.larkMemberSyncLabel = "刚刚";
+        renderInfrastructureView();
+        requestAnimationFrame(() => {
+          infraManagement.querySelector("[data-lark-member-sync]")?.focus({ preventScroll: true });
+        });
+        return showToast("飞书成员状态已同步");
+      }
       const larkSection = event.target.closest("[data-lark-section]");
       if (larkSection) {
         if (infrastructureState.larkSection === larkSection.dataset.larkSection) return;
@@ -57211,8 +60571,6 @@
       if (larkNewGroup) return openLarkGroupCreate(larkNewGroup);
       const larkGroupAction = event.target.closest("[data-lark-group-action]");
       if (larkGroupAction) return openLarkGroupDetail(larkGroupAction.dataset.larkGroupAction, larkGroupAction.dataset.larkGroupId, larkGroupAction);
-      const larkConfigEdit = event.target.closest("[data-lark-config-edit]");
-      if (larkConfigEdit) return showToast(`${larkConfigEdit.dataset.larkConfigEdit}为静态演示配置`);
       const create = event.target.closest("[data-infra-new]");
       if (create) return openResourceCreate(create.dataset.infraNew, create);
       if (event.target.closest("[data-infra-back]")) return exitInfrastructureView();
@@ -57488,6 +60846,12 @@
               change: handleTaskModalChange,
               click: handleTaskModalClick
             }
+          : isSharedModalKind("lark")
+            ? {
+                input: handleLarkModalInput,
+                change: handleLarkModalChange,
+                click: handleLarkModalClick
+              }
           : isSharedModalKind("experience-confirm")
             ? {
                 input: null,
@@ -57899,6 +61263,12 @@
       const askButton = event.target.closest('[data-workbench-ask="pre"]');
       if (askButton) {
         openAskPanel(askButton);
+        return;
+      }
+
+      const insightCaseButton = event.target.closest("[data-pre-insight-case]");
+      if (insightCaseButton) {
+        enterPreInsightConversation(insightCaseButton.dataset.preInsightCase);
         return;
       }
 
@@ -58606,12 +61976,27 @@
         if (button.dataset.history === "券业务数据巡检") {
           enterCouponInspectionHistory();
           showToast("已打开券业务数据巡检历史会话");
+        } else if (button.dataset.history === "促中实验数据实时通知") {
+          enterMidExperimentRealtimeNotification();
+          showToast("已打开促中实验数据实时通知");
+        } else if (button.dataset.history === "近期自然水位情况数据查看") {
+          enterRecentNaturalWaterLevelConversation();
+          showToast("已打开近期自然水位情况数据查看");
+        } else if (button.dataset.history === "总结每日群聊消息") {
+          enterDailyGroupMessageSummary();
+          showToast("已打开昨日飞书群消息总结");
         } else if (button.dataset.history === "促中预算紧张") {
           restartBudgetCaseDemo();
           showToast("已进入促中预算紧张案例");
         } else if (button.dataset.history === "促前券档位设计") {
           restartPreCaseDemo();
           showToast("已进入促前券档位设计案例");
+        } else {
+          const insightCase = preInsightConversationCases.find(item => item.title === button.dataset.history);
+          if (insightCase) {
+            enterPreInsightConversation(insightCase.id);
+            showToast(`已打开${insightCase.title}单轮会话`);
+          }
         }
       });
     });
